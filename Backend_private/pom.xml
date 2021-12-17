@@ -111,6 +111,21 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>gulp sassCompilator</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+
+                        <!-- optional: the default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+
+                        <configuration>
+                            <!-- optional: if not specified, it will run gulp's default
+                            task (and you can remove this whole <configuration> section.) -->
+                            <arguments>sassCompilator</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
                 <configuration>
                     <nodeVersion>v12.22.7</nodeVersion>
