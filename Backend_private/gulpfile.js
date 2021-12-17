@@ -9,4 +9,12 @@ function sassCompilator(cb) {
     cb();
 }
 
+function copy(cb) {
+    return gulp.src('./node_modules/bootstrap/dist/js/*.js')
+        .pipe(gulp.dest('./src/main/resources/static/js'));
+    cb();
+}
+
 exports.sassCompilator = sassCompilator
+exports.copy = copy
+exports.build = series(copy, sassCompilator)
