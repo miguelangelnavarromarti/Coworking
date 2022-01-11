@@ -14,6 +14,7 @@
             <thead class="table-dark">
             <tr>
                 <th scope="col">Código</th>
+                <th scope="col">Nombre Usuario</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Primer Apellido</th>
                 <th scope="col">Segundo Apellido</th>
@@ -29,6 +30,7 @@
             <tbody>
             <tr th:each="cl:${clientes}" class="align-middle">
                 <th scope="row" th:text="${cl.codigo}"></th>
+                <td th:text="${cl.nombreUsuario}"></td>
                 <td th:text="${cl.nombre}"></td>
                 <td th:text="${cl.apellido1}"></td>
                 <td th:text="${cl.apellido2}"></td>
@@ -41,11 +43,13 @@
                     <button type="button" class="btn btn-primary">Modificar</button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary">Eliminar</button>
+                    <button type="button" class="btn btn-primary">Dar de baja</button>
                 </td>
             </tr>
             </tbody>
         </table>
+
+        <a class="btn btn-primary" th:href="@{/clientes/crear}">Nuevo Cliente</a>
     </div>
 </main>
 
