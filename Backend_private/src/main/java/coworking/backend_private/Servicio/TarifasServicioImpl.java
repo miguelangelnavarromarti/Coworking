@@ -1,6 +1,6 @@
 package coworking.backend_private.Servicio;
 
-import coworking.backend_private.Entidad.Tarifas;
+import coworking.backend_private.Entidad.Tarifa;
 import coworking.backend_private.Repositorio.TarifasRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +16,17 @@ public class TarifasServicioImpl implements ITarifasServicio{
 
 
     @Override
-    public List<Tarifas> listarTodo() {
-        return (List<Tarifas>) tarifasRepositorio.findAll();
+    public List<Tarifa> listarTodo() {
+        return (List<Tarifa>) tarifasRepositorio.findAll();
     }
 
     @Override
-    public void guardar(Tarifas tarifa) {
+    public void guardar(Tarifa tarifa) {
         tarifasRepositorio.save(tarifa);
     }
 
     @Override
-    public Tarifas buscarPorId(Integer id) {
+    public Tarifa buscarPorId(Integer id) {
         return tarifasRepositorio.findById(id).orElse(null);
     }
 }

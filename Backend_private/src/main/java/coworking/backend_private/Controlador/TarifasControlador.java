@@ -1,7 +1,7 @@
 package coworking.backend_private.Controlador;
 
 
-import coworking.backend_private.Entidad.Tarifas;
+import coworking.backend_private.Entidad.Tarifa;
 import coworking.backend_private.Servicio.ITarifasServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +20,17 @@ public class TarifasControlador {
 
     @GetMapping("/")
     public String listarTarifas(Model model){
-        List<Tarifas> listarTarifas = tarifasServicio.listarTodo();
+        List<Tarifa> listarTarifas = tarifasServicio.listarTodo();
         model.addAttribute("tituloLista","Lista de tarifas");
         model.addAttribute("tabla",listarTarifas);
-        return "tarifas/lista";
+        return "tarifas/ver";
+    }
+
+    @GetMapping("/crear")
+    public String crear(Model model){
+        Tarifa tarifa = new Tarifa();
+        model.addAttribute("titulo","Insertar Tarifa");
+        model.addAttribute("tarifa", tarifa);
+        return "tarifas/crear";
     }
 }

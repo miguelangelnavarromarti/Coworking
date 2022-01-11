@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "TARIFAS")
-public class Tarifas {
+public class Tarifa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Tarifas {
     private boolean porDefecto = false;
 
 
-    public Tarifas(int codigo, double precio, Date dataInicio, Date dataFin, boolean porDefecto) {
+    public Tarifa(int codigo, double precio, Date dataInicio, Date dataFin, boolean porDefecto) {
         this.codigo = codigo;
         this.precio = precio;
         this.dataInicio = dataInicio;
@@ -26,11 +26,11 @@ public class Tarifas {
         this.porDefecto = porDefecto;
     }
 
-    public Tarifas(int codigo) {
+    public Tarifa(int codigo) {
         this.codigo = codigo;
     }
 
-    public Tarifas() {
+    public Tarifa() {
 
     }
 
