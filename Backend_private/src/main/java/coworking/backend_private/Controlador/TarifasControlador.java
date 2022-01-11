@@ -23,6 +23,6 @@ public class TarifasControlador {
         List<Tarifas> listarTarifas = tarifasServicio.listarTodo();
         model.addAttribute("tituloLista","Lista de tarifas");
         model.addAttribute("tabla",listarTarifas);
-        return "lista";
+        return "tarifas/lista";
     }
 }

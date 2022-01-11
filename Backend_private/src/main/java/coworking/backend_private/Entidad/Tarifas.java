@@ -1,8 +1,7 @@
 package coworking.backend_private.Entidad;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "TARIFAS")
@@ -10,35 +9,37 @@ public class Tarifas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int codigo;
     private double precio;
-    private LocalDateTime dataInicio;
-    private LocalDateTime dataFin;
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
+    @Temporal(TemporalType.DATE)
+    private Date dataFin;
     private boolean porDefecto = false;
 
 
-    public Tarifas(int id, double precio, LocalDateTime dataInicio, LocalDateTime dataFin, boolean porDefecto) {
-        this.id = id;
+    public Tarifas(int codigo, double precio, Date dataInicio, Date dataFin, boolean porDefecto) {
+        this.codigo = codigo;
         this.precio = precio;
         this.dataInicio = dataInicio;
         this.dataFin = dataFin;
         this.porDefecto = porDefecto;
     }
 
-    public Tarifas(int id) {
-        this.id = id;
+    public Tarifas(int codigo) {
+        this.codigo = codigo;
     }
 
     public Tarifas() {
 
     }
 
-    public int getId() {
-        return id;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public double getPrecio() {
@@ -49,19 +50,19 @@ public class Tarifas {
         this.precio = precio;
     }
 
-    public LocalDateTime getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDateTime dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDateTime getDataFin() {
+    public Date getDataFin() {
         return dataFin;
     }
 
-    public void setDataFin(LocalDateTime dataFin) {
+    public void setDataFin(Date dataFin) {
         this.dataFin = dataFin;
     }
 
@@ -76,7 +77,7 @@ public class Tarifas {
     @Override
     public String toString() {
         return "Tarifas{" +
-                "id=" + id +
+                "id=" + codigo +
                 ", precio=" + precio +
                 ", dataInicio=" + dataInicio +
                 ", dataFin=" + dataFin +
