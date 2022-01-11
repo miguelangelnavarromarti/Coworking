@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
+</head>
+<body>
+<header th:replace="plantilla :: header"></header>
+
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center" th:text="${titulo}"></h1>
+    </div>
+    <div class="container my-5">
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Primer Apellido</th>
+                <th scope="col">Segundo Apellido</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Email</th>
+                <th scope="col">Codigo Postal</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Alta</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cl:${clientes}" class="align-middle">
+                <th scope="row" th:text="${cl.codigo}"></th>
+                <td th:text="${cl.nombre}"></td>
+                <td th:text="${cl.apellido1}"></td>
+                <td th:text="${cl.apellido2}"></td>
+                <td th:text="${cl.telefono}"></td>
+                <td th:text="${cl.email}"></td>
+                <td th:text="${cl.codigoPostal}"></td>
+                <td th:text="${cl.rol}"></td>
+                <td th:text="${cl.alta}"></td>
+                <td>
+                    <button type="button" class="btn btn-primary">Modificar</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary">Eliminar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="plantilla :: footer"></footer>
+</body>
+</html>
