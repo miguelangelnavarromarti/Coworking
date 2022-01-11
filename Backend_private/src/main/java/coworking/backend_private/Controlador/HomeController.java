@@ -1,4 +1,4 @@
-package coworking.backend_private.Controller;
+package coworking.backend_private.Controlador;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
