@@ -1,14 +1,11 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Clientes;
+import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Servicio.IClientesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class ClientesControlador {
 
     @GetMapping("")
     public String getClientes(Model model){
-        List<Clientes> verClientes = clientesServicio.verTodos();
+        List<Cliente> verClientes = clientesServicio.verTodos();
 
         model.addAttribute("titulo", "Listado de Clientes");
         model.addAttribute("clientes", verClientes);
@@ -32,7 +29,7 @@ public class ClientesControlador {
     @GetMapping("/crear")
     public String crearCliente(Model model) {
 
-        Clientes cliente = new Clientes();
+        Cliente cliente = new Cliente();
 
         model.addAttribute("titulo", "Crear cliente");
         model.addAttribute("cliente", cliente);
@@ -41,10 +38,23 @@ public class ClientesControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarCliente(@ModelAttribute Clientes cliente) {
+    public String guardarCliente(@ModelAttribute Cliente cliente) {
 
         clientesServicio.guardar(cliente);
         System.out.println("Cliente guardado con éxito");
         return "redirect:/clientes";
+    }
+
+    @GetMapping("/modificar/{codigo}")
+    public String modificarCliente(@PathVariable("codigo") Integer codigo, Model model) {
+
+        //CONTINUAR AQUÍ
+
+        Cliente cliente = new Cliente();
+
+        model.addAttribute("titulo", "Crear cliente");
+        model.addAttribute("cliente", cliente);
+
+        return "clientes/crear";
     }
 }

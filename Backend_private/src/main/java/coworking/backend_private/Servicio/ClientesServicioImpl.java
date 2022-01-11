@@ -1,6 +1,6 @@
 package coworking.backend_private.Servicio;
 
-import coworking.backend_private.Entidad.Clientes;
+import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Repositorio.ClientesRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,21 @@ public class ClientesServicioImpl implements IClientesServicio{
     private ClientesRepositorio clientesRepositorio;
 
     @Override
-    public List<Clientes> verTodos() {
-        return (List<Clientes>)clientesRepositorio.findAll();
+    public List<Cliente> verTodos() {
+        return (List<Cliente>)clientesRepositorio.findAll();
     }
 
     @Override
-    public void guardar(Clientes cliente) {
+    public void guardar(Cliente cliente) {
         clientesRepositorio.save(cliente);
-        return;
+    }
+
+    public Cliente buscarPorCodigo(Integer codigo) {
+        return clientesRepositorio.findById(codigo).orElse(null);
+    }
+
+    @Override
+    public Cliente darDeBaja(Integer codigo) {
+        return clientesRepositorio.findById(codigo).orElse(null);
     }
 }
