@@ -10,34 +10,34 @@
     <div class="container mt-5">
         <h1 class="text-center" th:text="${titulo}"></h1>
     </div>
-    <div class="container my-5 p-5 shadow bg-body rounded">
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
         <table class="table nowrap" id="visualizationTable">
             <thead class="table">
             <tr>
-                <th scope="col">Código</th>
-                <th scope="col">Nombre Usuario</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Primer Apellido</th>
-                <th scope="col">Segundo Apellido</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Email</th>
-                <th scope="col">Codigo Postal</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Alta</th>
+                <th scope="col" class="text-center">Código</th>
+                <th scope="col" class="text-center">Usuario</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Primer Apellido</th>
+                <th scope="col" class="text-center">Segundo Apellido</th>
+                <th scope="col" class="text-center">Teléfono</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Codigo Postal</th>
+                <th scope="col" class="text-center">Rol</th>
+                <th scope="col" class="text-center">Alta</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="cl:${clientes}" class="align-middle">
-                <th scope="row" th:text="${cl.codigo}"></th>
-                <td th:text="${cl.nombreUsuario}"></td>
-                <td th:text="${cl.nombre}"></td>
-                <td th:text="${cl.apellido1}"></td>
-                <td th:text="${cl.apellido2}"></td>
-                <td th:text="${cl.telefono}"></td>
-                <td th:text="${cl.email}"></td>
-                <td th:text="${cl.codigoPostal}"></td>
-                <td th:text="${cl.rol}"></td>
-                <td th:text="${cl.alta}"></td>
+            <tr th:each="cl:${clientes}">
+                <th scope="row" th:text="${cl.codigo}" class="py-3 text-center bg-white"></th>
+                <td th:text="${cl.nombreUsuario}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.nombre}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.apellido1}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.apellido2}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.telefono}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.email}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.codigoPostal}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.rol}" class="py-3 text-center bg-white"></td>
+                <td th:text="${cl.alta}" class="py-3 text-center bg-white"></td>
             </tr>
             </tbody>
         </table>

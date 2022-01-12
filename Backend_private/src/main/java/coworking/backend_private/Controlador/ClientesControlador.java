@@ -50,11 +50,11 @@ public class ClientesControlador {
 
         //CONTINUAR AQUÍ - AFEGIR ANAR A RESERVES DEL CLIENT I A LES SEVES FACTURES
 
-        Cliente cliente = new Cliente();
+        Cliente cliente = clientesServicio.buscarPorCodigo(codigo);
 
-        model.addAttribute("titulo", "Crear cliente");
+        model.addAttribute("titulo", "Modificar cliente");
         model.addAttribute("cliente", cliente);
 
-        return "clientes/crear";
+        return "clientes/modificar";
     }
 }
