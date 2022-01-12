@@ -48,7 +48,7 @@ public class ClientesControlador {
     @GetMapping("/modificar/{codigo}")
     public String modificarCliente(@PathVariable("codigo") Integer codigo, Model model) {
 
-        //CONTINUAR AQUÍ
+        //CONTINUAR AQUÍ - AFEGIR ANAR A RESERVES DEL CLIENT I A LES SEVES FACTURES
 
         Cliente cliente = new Cliente();
 
