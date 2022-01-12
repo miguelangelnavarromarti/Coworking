@@ -10,6 +10,7 @@ public class Tarifa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
+    private String codigoTipoEspacio;
     private double precio;
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
@@ -18,8 +19,9 @@ public class Tarifa {
     private boolean porDefecto = false;
 
 
-    public Tarifa(int codigo, double precio, Date dataInicio, Date dataFin, boolean porDefecto) {
+    public Tarifa(int codigo, String codigoTipoEspacio, double precio, Date dataInicio, Date dataFin, boolean porDefecto) {
         this.codigo = codigo;
+        this.codigoTipoEspacio = codigoTipoEspacio;
         this.precio = precio;
         this.dataInicio = dataInicio;
         this.dataFin = dataFin;
@@ -40,6 +42,14 @@ public class Tarifa {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public String getCodigoTipoEspacio() {
+        return codigoTipoEspacio;
+    }
+
+    public void setCodigoTipoEspacio(String codigoTipoEspacio) {
+        this.codigoTipoEspacio = codigoTipoEspacio;
     }
 
     public double getPrecio() {
