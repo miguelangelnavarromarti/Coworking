@@ -68,7 +68,7 @@
                       <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
                     </svg>
                 </span>
-              <input type="date" th:field="*{dataFin}" class="form-control" id="dataFin" aria-describedby="dataFinHelp">
+              <input type="date" th:field="*{dataFin}" class="form-control" id="dataFin" aria-describedby="dataFinHelp" required>
           </div>
           <div id="dataFinHelp" class="form-text">Indica la fecha de finalización</div>
         </div>
@@ -89,15 +89,13 @@
     <script>
         $(document).ready(function(){
 
-            $("#comprovar").click(function(){
+            $("#insertar").click(function(){
                 if ($("#dataFin").val() < $("#dataInicio").val()){
                     alert("Error data!!!");
                     //location.reload();
-                    $("#dataFin").clearQueue();
-                }else {
-                    alert("Tot be");
+                    $("#dataInicio").val('');
+                    $("#dataFin").val('');
                 }
-
             })
         });
 
