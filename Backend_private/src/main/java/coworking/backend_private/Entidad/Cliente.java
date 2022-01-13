@@ -1,9 +1,11 @@
 package coworking.backend_private.Entidad;
 
 import lombok.Data;
+import org.springframework.util.DigestUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.security.MessageDigest;
 
 
 @Data
@@ -24,5 +26,4 @@ public class Cliente implements Serializable {
     private String codigoPostal;
     private String rol = "cliente";
     private boolean alta = true;
-
 }

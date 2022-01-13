@@ -10,6 +10,4 @@ public interface IClientesServicio {
     public void guardar(Cliente cliente);
 
     public Cliente buscarPorCodigo(Integer codigo);
-
-    public Cliente darDeBaja(Integer codigo);
 }

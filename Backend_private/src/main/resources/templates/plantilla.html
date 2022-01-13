@@ -244,31 +244,8 @@
                 $("#visualizationTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
             },
             fixedColumns: {
-                leftColumns: 2
-            },
-            select: {
-                style: 'multi'
-            }
-        });
-
-        $('#deleteConfirmation').click(function() {
-            let myModal = new bootstrap.Modal($('#deleteModal'));
-            let count = $('.selected').length;
-            if (count === 0) {
-                alert("No hay ninguna fila seleccionada.");
-            } else {
-                myModal.toggle();
-            }
-        });
-
-        $('#deleteRow').click( function () {
-            table.rows('.selected').remove().draw( false );
-        } );
-
-        $('#modifyRow').click(function() {
-            let count = $('.selected').length;
-            if (count !== 1) {
-                alert("Solo puedes modificar una fila.");
+                leftColumns: 2,
+                rightColumns: 1
             }
         });
     } );

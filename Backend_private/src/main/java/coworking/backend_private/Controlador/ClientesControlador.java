@@ -42,13 +42,12 @@ public class ClientesControlador {
 
         clientesServicio.guardar(cliente);
         System.out.println("Cliente guardado con éxito");
+
         return "redirect:/clientes";
     }
 
     @GetMapping("/modificar/{codigo}")
     public String modificarCliente(@PathVariable("codigo") Integer codigo, Model model) {
-
-        //CONTINUAR AQUÍ - AFEGIR ANAR A RESERVES DEL CLIENT I A LES SEVES FACTURES
 
         Cliente cliente = clientesServicio.buscarPorCodigo(codigo);
 
@@ -57,4 +56,8 @@ public class ClientesControlador {
 
         return "clientes/modificar";
     }
+
+    // CONTINUAR AQUÍ
+    // SI SOBRA TEMPS, AFEGIR DATA DE NAIXEMENT I GÈNERE DE L'USUARI
+    // AFEGIR ANAR A RESERVES DEL CLIENT I A LES SEVES FACTURES
 }

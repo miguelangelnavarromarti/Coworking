@@ -23,12 +23,8 @@ public class ClientesServicioImpl implements IClientesServicio{
         clientesRepositorio.save(cliente);
     }
 
-    public Cliente buscarPorCodigo(Integer codigo) {
-        return clientesRepositorio.findById(codigo).orElse(null);
-    }
-
     @Override
-    public Cliente darDeBaja(Integer codigo) {
+    public Cliente buscarPorCodigo(Integer codigo) {
         return clientesRepositorio.findById(codigo).orElse(null);
     }
 }
