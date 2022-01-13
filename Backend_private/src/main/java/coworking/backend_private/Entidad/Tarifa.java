@@ -1,8 +1,15 @@
 package coworking.backend_private.Entidad;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
+//@Data
 @Entity
 @Table(name = "TARIFAS")
 public class Tarifa {
@@ -12,14 +19,16 @@ public class Tarifa {
     private int codigo;
     private String codigoTipoEspacio;
     private double precio;
-    @Temporal(TemporalType.DATE)
-    private Date dataInicio;
-    @Temporal(TemporalType.DATE)
-    private Date dataFin;
+    //@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataInicio;
+    //@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataFin;
     private boolean porDefecto = false;
 
 
-    public Tarifa(int codigo, String codigoTipoEspacio, double precio, Date dataInicio, Date dataFin, boolean porDefecto) {
+    public Tarifa(String codigoTipoEspacio, double precio, LocalDate dataInicio, LocalDate dataFin, boolean porDefecto) {
         this.codigo = codigo;
         this.codigoTipoEspacio = codigoTipoEspacio;
         this.precio = precio;
@@ -60,19 +69,30 @@ public class Tarifa {
         this.precio = precio;
     }
 
-    public Date getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
+        /*try {
+            this.dataInicio = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFin() {
+    public LocalDate getDataFin() {
         return dataFin;
     }
 
-    public void setDataFin(Date dataFin) {
+    public void setDataFin(LocalDate dataFin) {
+        /*try {
+            this.dataFin = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
         this.dataFin = dataFin;
     }
 

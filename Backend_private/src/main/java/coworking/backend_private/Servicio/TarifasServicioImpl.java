@@ -22,6 +22,7 @@ public class TarifasServicioImpl implements ITarifasServicio{
 
     @Override
     public void guardar(Tarifa tarifa) {
+
         tarifasRepositorio.save(tarifa);
     }
 

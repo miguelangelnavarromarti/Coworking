@@ -6,9 +6,10 @@ import coworking.backend_private.Servicio.ITarifasServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,4 +34,22 @@ public class TarifasControlador {
         model.addAttribute("tarifa", tarifa);
         return "tarifas/crear";
     }
+
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute Tarifa tarifa){
+
+        tarifasServicio.guardar(tarifa);
+
+        return "redirect:/tarifas/";
+    }
+
+    @GetMapping("/editar/{codigo}")
+    public String editar(@PathVariable("codigo") Integer codigo,  Model model){
+        Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+
+        model.addAttribute("titulo","Editar Tarifa");
+        model.addAttribute("tarifa", tarifa);
+        return "tarifas/crear";
+    }
+
 }
