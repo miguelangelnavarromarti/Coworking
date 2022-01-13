@@ -35,11 +35,11 @@ public class TarifasControlador {
         return "tarifas/crear";
     }
 
+
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Tarifa tarifa){
 
         tarifasServicio.guardar(tarifa);
-
         return "redirect:/tarifas/";
     }
 
@@ -50,6 +50,15 @@ public class TarifasControlador {
         model.addAttribute("titulo","Editar Tarifa");
         model.addAttribute("tarifa", tarifa);
         return "tarifas/crear";
+    }
+
+    @GetMapping("/editarDefecto/{codigo}")
+    public String editarDefecto(@PathVariable("codigo") Integer codigo,  Model model){
+        Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+
+        model.addAttribute("titulo","Editar Tarifa por defecto");
+        model.addAttribute("tarifa", tarifa);
+        return "tarifas/editarDefecto";
     }
 
 }

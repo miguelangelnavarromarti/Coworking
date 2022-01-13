@@ -32,9 +32,9 @@
                     <td th:text="${tarifa.precio}" class="py-3 text-center bg-white"></td>
                     <td th:text="${tarifa.dataInicio}" class="py-3 text-center bg-white"></td>
                     <td th:text="${tarifa.dataFin}" class="py-3 text-center bg-white"></td>
-                    <td th:text="${tarifa.porDefecto}" class="py-3 text-center bg-white"></td>
+                    <td th:text="${tarifa.porDefecto}" th:id="tarifa+${tarifa.codigo}"class="py-3 text-center bg-white"></td>
                     <td>
-                        <a th:href="@{/tarifas/editar/} + ${tarifa.codigo}" th:text="Modificar" title="Modificar Seleccionado" class="btn btn-warning" id="modifyRow"></a>
+                        <a th:href="@{/tarifas/editar/} + ${tarifa.codigo}" th:id="modificar+${tarifa.codigo}" th:text="Modificar" th:title="${tarifa.codigo}" class="btn btn-warning"></a>
                     </td>
                 </tr>
                 </tbody>
@@ -45,38 +45,35 @@
                 <div>
                     <a class="btn btn-primary" th:href="@{/tarifas/crear}">Nueva Tarifa</a>
                 </div>
-                <div class="d-flex gap-5">
-
-
-                    <!-- Button trigger Delete Modal -->
-                    <!--button type="button" class="btn btn-danger" data-bs-target="#deleteModal" id="deleteConfirmation">
-                        Eliminar selección
-                    </button-->
-                </div>
             </div>
         </div>
 
-        <!-- Delete Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Eliminar</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ¿Estás seguro de que quieres eliminar las filas seleccionadas? Los datos eliminados no se podran recuperar.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger text-dark" id="deleteRow" data-bs-dismiss="modal">Eliminar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </main>
     <footer th:replace="plantilla :: footer"></footer>
-    <script th:replace="plantilla :: script">
+    <script>
+        $(document).ready(function(){
+
+            $(".btn-warning").click(function(){
+                //Seleccion per sa classe que te es boto, per tant s'aplica a tots.
+                var id = $(this).attr("id");
+                var codigo = $(this).attr("title");
+                var modificable = $(this).parent().prev().text();
+                //alert(id+", "+modificable);
+
+                if(modificable=="true"){
+                    //window.href = "/tarifas/editarDefecto/"+ codigo;
+                    $(this).attr("href","/tarifas/editarDefecto/"+ codigo);
+                }
+                else {
+                    window.href = "/tarifas/editar/"+ codigo;
+                }
+            });
+
+
+        });
     </script>
+    <script th:replace="plantilla :: script"></script>
 </body>
 </html>
