@@ -257,8 +257,8 @@
             return hoy;
         }
 
-        function crearDataTable (numeroBloqueoInicio, numeroBloqueoFinal, nombreExcel) {
-            return $('#visualizationTable').DataTable({
+        function crearDataTable (idDataTable, numeroBloqueoInicio, numeroBloqueoFinal, nombreExcel) {
+            return $('#'+idDataTable).DataTable({
                 "initComplete": function (settings, json) {
                     $("#visualizationTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
