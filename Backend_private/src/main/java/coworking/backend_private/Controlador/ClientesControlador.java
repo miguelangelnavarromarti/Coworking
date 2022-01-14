@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/clientes")
@@ -44,6 +45,38 @@ public class ClientesControlador {
         System.out.println("Cliente guardado con éxito");
 
         return "redirect:/clientes";
+    }
+
+    @PostMapping("/comprobacionNombreUsuarioYEmail")
+    public String comprobacionNombreUsuarioYEmail(@ModelAttribute Cliente cliente, Model model) {
+
+        List<String> listaNombresUsuarios = clientesServicio.listarNombresUsuarios();
+        List<String> listaEmails = clientesServicio.listarEmails();
+
+        boolean comprobacionNombreUsuario = true;
+        boolean comprobacionEmail = true;
+
+        for (String nombreUsuario : listaNombresUsuarios) {
+            if (Objects.equals(cliente.getNombreUsuario(), nombreUsuario)) {
+                model.addAttribute("errorNombreUsuario", "Este nombre de Usuario '" + cliente.getNombreUsuario() + "' ya existe.");
+                comprobacionNombreUsuario = false;
+                break;
+            }
+        }
+
+        for (String emails : listaEmails) {
+            if (Objects.equals(cliente.getNombreUsuario(), emails)) {
+                model.addAttribute("errorEmail", "Este email '" + cliente.getEmail() + "' ya está en uso.");
+                comprobacionEmail = false;
+                break;
+            }
+        }
+
+        if (comprobacionNombreUsuario && comprobacionEmail) {
+            return guardarCliente(cliente);
+        } else {
+            return "redirect:/clientes/crear";
+        }
     }
 
     @GetMapping("/modificar/{codigo}")

@@ -10,4 +10,8 @@ public interface IClientesServicio {
     public void guardar(Cliente cliente);
 
     public Cliente buscarPorCodigo(Integer codigo);
+
+    public List<String> listarNombresUsuarios();
+
+    public List<String> listarEmails();
 }
