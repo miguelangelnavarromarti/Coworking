@@ -10,7 +10,7 @@
     <div class="mt-5">
         <h1 class="text-center" th:text="${titulo}"></h1>
     </div>
-    <form class="row my-5" th:action="@{/tarifas/guardar}" th:object="${tarifa}" method="post">
+    <form class="row my-5" th:action="@{/tarifas/guardarPorDefecto}" th:object="${tarifa}" method="post">
         <div class="mb-3 col-6">
             <input type="hidden" th:field="*{codigo}">
             <div style="display: none">
@@ -24,7 +24,7 @@
                   <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
                 </svg>
             </span>
-                <select th:field="*{codigoTipoEspacio}" id="codigoTipoEspacio" class="form-select" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
+                <select th:field="*{codigoTipoEspacio}" readonly="readonly" id="codigoTipoEspacio" class="form-select" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
                     <option th:value="'SGR'">Sala Grande Reunión</option>
                     <option th:value="'SPQ'">Sala Pequeña</option>
                     <option th:value="'DCH'">Despacho</option>
@@ -56,7 +56,7 @@
                           <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
                         </svg>
                     </span>
-                <input type="date" th:field="*{dataInicio}" class="form-control" id="dataInicio" aria-describedby="dataInicioHelp" required>
+                <input readonly="readonly" type="date" th:field="*{dataInicio}" class="form-control" id="dataInicio" aria-describedby="dataInicioHelp" required>
             </div>
             <div id="dataInicioHelp" class="form-text">Indica la fecha de inicio</div>
         </div>
@@ -71,7 +71,7 @@
                       <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
                     </svg>
                 </span>
-                <input type="date" th:field="*{dataFin}" class="form-control" id="dataFin" aria-describedby="dataFinHelp">
+                <input readonly="readonly" type="date" th:field="*{dataFin}" class="form-control" id="dataFin" aria-describedby="dataFinHelp">
             </div>
             <div id="dataFinHelp" class="form-text">Indica la fecha de finalización</div>
         </div>
@@ -86,5 +86,10 @@
 
 <footer th:replace="plantilla :: footer"></footer>
 <script th:replace="plantilla :: script"></script>
+<script>
+    $(document).ready(function () {
+       $('option:not(:selected)').attr('disabled', true);
+    });
+</script>
 </body>
 </html>

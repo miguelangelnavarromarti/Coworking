@@ -30,4 +30,11 @@ public class TarifasServicioImpl implements ITarifasServicio{
     public Tarifa buscarPorId(Integer id) {
         return tarifasRepositorio.findById(id).orElse(null);
     }
+
+    @Override
+    public int comprobar(Tarifa tarifa) {
+        return tarifasRepositorio.findTarifaByDataInicioAndDataFin(tarifa.getCodigoTipoEspacio(),tarifa.getDataInicio(), tarifa.getDataFin());
+    }
+
+
 }

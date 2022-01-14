@@ -35,12 +35,44 @@ public class TarifasControlador {
         return "tarifas/crear";
     }
 
-
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Tarifa tarifa){
 
         tarifasServicio.guardar(tarifa);
         return "redirect:/tarifas/";
+    }
+
+    /*@PostMapping("/guardarPorDefecto")
+    public String guardarPorDefecto(@ModelAttribute Integer codigo, @ModelAttribute double precio){
+
+        Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+        tarifa.setPrecio(precio);
+        tarifasServicio.guardar(tarifa);
+
+        return "redirect:/tarifas/";
+
+    }*/
+
+    @PostMapping("/guardarPorDefecto")
+    public String guardarPorDefecto(@ModelAttribute Tarifa tarifa){
+
+        Tarifa tarifaPrecioModificado = tarifasServicio.buscarPorId(tarifa.getCodigo());
+        tarifaPrecioModificado.setPrecio(tarifa.getPrecio());
+        tarifasServicio.guardar(tarifaPrecioModificado);
+
+        return "redirect:/tarifas/";
+    }
+
+    @PostMapping("/comprobar")
+    public String comprobar (@ModelAttribute Tarifa tarifa){
+
+        //FICAR UN @TRNSACTIONAL EN ES METODE GUARDAR, aixo diu que o se fa tot o torna atras
+
+        if (tarifasServicio.comprobar(tarifa) == 0){
+            return guardar(tarifa);
+        }else {
+            return "redirect:/tarifas/crear";
+        }
     }
 
     @GetMapping("/editar/{codigo}")

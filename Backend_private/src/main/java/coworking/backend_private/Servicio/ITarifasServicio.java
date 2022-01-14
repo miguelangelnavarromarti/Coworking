@@ -9,5 +9,5 @@ public interface ITarifasServicio {
     public List<Tarifa> listarTodo();
     public void guardar(Tarifa tarifa);
     public Tarifa buscarPorId(Integer id);
-
+    public int comprobar(Tarifa tarifa);
 }
