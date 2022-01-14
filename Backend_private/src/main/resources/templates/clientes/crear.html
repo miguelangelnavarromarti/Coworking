@@ -8,7 +8,7 @@
 
 <main class="container my-5 p-5 shadow bg-body rounded-3">
     <div class="mt-3">
-        <h1 class="text-center" th:text="${titulo}"></h1>
+        <h1 class="text-center">Crear <span th:text="${nombre}"></span></h1>
     </div>
     <form class="row my-5" th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
         <div class="mb-3 col-6">

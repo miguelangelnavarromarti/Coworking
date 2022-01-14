@@ -20,7 +20,7 @@ public class ClientesControlador {
     public String getClientes(Model model){
         List<Cliente> verClientes = clientesServicio.verTodos();
 
-        model.addAttribute("titulo", "Listado de Clientes");
+        model.addAttribute("nombre", "Clientes");
         model.addAttribute("clientes", verClientes);
 
         return "clientes/ver";
@@ -31,7 +31,7 @@ public class ClientesControlador {
 
         Cliente cliente = new Cliente();
 
-        model.addAttribute("titulo", "Crear cliente");
+        model.addAttribute("nombre", "Cliente");
         model.addAttribute("cliente", cliente);
 
         return "clientes/crear";
@@ -51,14 +51,14 @@ public class ClientesControlador {
 
         Cliente cliente = clientesServicio.buscarPorCodigo(codigo);
 
-        model.addAttribute("titulo", "Modificar cliente");
+        model.addAttribute("nombre", "Cliente");
         model.addAttribute("cliente", cliente);
 
         return "clientes/modificar";
     }
 
     // CONTINUAR AQUÍ
-    // ENCRIPTAR CONTRASENYA QUAN REGISTRES CLIENT NOU
+    // COMPROVAR ERRORES FORMULARIO
     // SI SOBRA TEMPS, AFEGIR DATA DE NAIXEMENT I GÈNERE DE L'USUARI
     // AFEGIR ANAR A RESERVES DEL CLIENT I A LES SEVES FACTURES
 }

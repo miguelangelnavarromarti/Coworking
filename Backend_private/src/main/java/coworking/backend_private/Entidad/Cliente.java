@@ -1,6 +1,7 @@
 package coworking.backend_private.Entidad;
 
 import lombok.Data;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.util.DigestUtils;
 
 import javax.persistence.*;
@@ -26,4 +27,12 @@ public class Cliente implements Serializable {
     private String codigoPostal;
     private String rol = "cliente";
     private boolean alta = true;
+
+    private String hashPassword(String passwordNotEncrypted) {
+        return BCrypt.hashpw(passwordNotEncrypted, BCrypt.gensalt());
+    }
+
+    public void setPassword(String password) {
+        this.password = hashPassword(password);
+    }
 }
