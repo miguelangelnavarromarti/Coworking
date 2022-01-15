@@ -22,10 +22,10 @@ public class TarifasControlador {
     @Autowired
     private ITipoEspaciosServicio tipoEspacioServicio;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String listarTarifas(Model model){
         List<Tarifa> listarTarifas = tarifasServicio.listarTodo();
-        model.addAttribute("tituloLista","Lista de tarifas");
+        model.addAttribute("nombre","Tarifas");
         model.addAttribute("tabla",listarTarifas);
         return "tarifas/ver";
     }
