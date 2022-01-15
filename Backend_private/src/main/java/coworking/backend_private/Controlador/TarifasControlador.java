@@ -4,14 +4,12 @@ package coworking.backend_private.Controlador;
 import coworking.backend_private.Entidad.Tarifa;
 import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Servicio.ITarifasServicio;
-import coworking.backend_private.Servicio.ITipoEspacioServicio;
+import coworking.backend_private.Servicio.ITipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,7 +20,7 @@ public class TarifasControlador {
     private ITarifasServicio tarifasServicio;
 
     @Autowired
-    private ITipoEspacioServicio tipoEspacioServicio;
+    private ITipoEspaciosServicio tipoEspacioServicio;
 
     @GetMapping("/")
     public String listarTarifas(Model model){

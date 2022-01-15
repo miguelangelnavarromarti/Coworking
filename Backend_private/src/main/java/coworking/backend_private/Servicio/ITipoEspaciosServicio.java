@@ -4,6 +4,6 @@ import coworking.backend_private.Entidad.TipoEspacio;
 
 import java.util.List;
 
-public interface ITipoEspacioServicio {
+public interface ITipoEspaciosServicio {
     List<TipoEspacio> listaTipoEspacio();
 }
