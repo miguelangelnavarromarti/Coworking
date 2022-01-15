@@ -2,7 +2,9 @@ package coworking.backend_private.Controlador;
 
 
 import coworking.backend_private.Entidad.Tarifa;
+import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Servicio.ITarifasServicio;
+import coworking.backend_private.Servicio.ITipoEspacioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class TarifasControlador {
     @Autowired
     private ITarifasServicio tarifasServicio;
 
+    @Autowired
+    private ITipoEspacioServicio tipoEspacioServicio;
+
     @GetMapping("/")
     public String listarTarifas(Model model){
         List<Tarifa> listarTarifas = tarifasServicio.listarTodo();
@@ -30,8 +35,12 @@ public class TarifasControlador {
     @GetMapping("/crear")
     public String crear(Model model){
         Tarifa tarifa = new Tarifa();
+
+        List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
+
         model.addAttribute("titulo","Insertar Tarifa");
         model.addAttribute("tarifa", tarifa);
+        model.addAttribute("listaTipoEspacio",listaTipoEspacio);
         return "tarifas/crear";
     }
 
@@ -66,7 +75,7 @@ public class TarifasControlador {
     @PostMapping("/comprobar")
     public String comprobar (@ModelAttribute Tarifa tarifa){
 
-        //FICAR UN @TRNSACTIONAL EN ES METODE GUARDAR, aixo diu que o se fa tot o torna atras
+
 
         if (tarifasServicio.comprobar(tarifa) == 0){
             return guardar(tarifa);
@@ -78,18 +87,22 @@ public class TarifasControlador {
     @GetMapping("/editar/{codigo}")
     public String editar(@PathVariable("codigo") Integer codigo,  Model model){
         Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+        List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
         model.addAttribute("titulo","Editar Tarifa");
         model.addAttribute("tarifa", tarifa);
+        model.addAttribute("listaTipoEspacio",listaTipoEspacio);
         return "tarifas/crear";
     }
 
     @GetMapping("/editarDefecto/{codigo}")
     public String editarDefecto(@PathVariable("codigo") Integer codigo,  Model model){
         Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+        List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
         model.addAttribute("titulo","Editar Tarifa por defecto");
         model.addAttribute("tarifa", tarifa);
+        model.addAttribute("listaTipoEspacio",listaTipoEspacio);
         return "tarifas/editarDefecto";
     }
 

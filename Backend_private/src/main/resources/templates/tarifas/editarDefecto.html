@@ -25,9 +25,11 @@
                 </svg>
             </span>
                 <select th:field="*{codigoTipoEspacio}" readonly="readonly" id="codigoTipoEspacio" class="form-select" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
-                    <option th:value="'SGR'">Sala Grande Reunión</option>
-                    <option th:value="'SPQ'">Sala Pequeña</option>
-                    <option th:value="'DCH'">Despacho</option>
+                    <option
+                            th:each="tipoEspacio:${listaTipoEspacio}"
+                            th:value="${tipoEspacio.codigo}"
+                            th:text="${tipoEspacio.nombre}"
+                    />
                 </select>
             </div>
             <div id="codigoTipoEspacioHelp" class="form-text">Indica el tipo de espacio para la tarifa</div>
@@ -80,6 +82,10 @@
         <div class="mb-3 col-1">
             <br>
             <input type="submit" class="btn btn-primary" th:value="Insertar">
+        </div>
+        <div class="mb-3 col-1">
+            <br>
+            <a th:href="@{/tarifas/}" class="btn btn-danger">Cancelar</a>
         </div>
     </form>
 </main>
