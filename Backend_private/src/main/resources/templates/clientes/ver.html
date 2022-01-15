@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="plantilla :: head"></head>
+<body>
+<header th:replace="plantilla :: header"></header>
+
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+    </div>
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <table class="table nowrap" id="visualizationTable">
+            <thead class="table">
+            <tr>
+                <th scope="col" class="text-center">Código</th>
+                <th scope="col" class="text-center" style="box-shadow: 5px 0 5px -5px #333;">Usuario</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Primer Apellido</th>
+                <th scope="col" class="text-center">Segundo Apellido</th>
+                <th scope="col" class="text-center">Teléfono</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Codigo Postal</th>
+                <th scope="col" class="text-center">Rol</th>
+                <th scope="col" class="text-center">Alta</th>
+                <th scope="col" class="text-center" style="box-shadow: -5px 0 5px -5px #333;">Modificar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cl:${clientes}">
+                <th scope="row" th:text="${cl.codigo}" class="py-3 text-center align-middle bg-light"></th>
+                <td th:text="${cl.nombreUsuario}" class="py-3 text-center align-middle bg-light fw-bold" style="box-shadow: 5px 0 5px -5px #333;"></td>
+                <td th:text="${cl.nombre}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.apellido1}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.apellido2}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.telefono}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.email}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.codigoPostal}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.rol}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${cl.alta}" class="py-3 text-center align-middle bg-white"></td>
+                <td class="py-3 text-center bg-light" style="box-shadow: -5px 0 5px -5px #333;">
+                    <a class="btn border border-primary text-primary" th:href="@{/clientes/modificar/} + ${cl.codigo}" title="Modificar Cliente">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex mt-5 justify-content-between" id="botones">
+            <a class="btn btn-primary" th:href="@{/clientes/crear}">Nuevo Cliente</a>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <!--div th:each="cl:${clientes}" class="modal fade" th:id="deleteModal + ${cl.codigo}" tabindex="-1" th:aria-labelledby="deleteModalLabel + ${cl.codigo}" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="deleteModalLabel + ${cl.codigo}">Eliminar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres eliminar las filas seleccionadas? Los datos eliminados no se podran recuperar.
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/clientes/eliminar/} + ${cl.codigo}" class="btn btn-danger text-dark" id="deleteRow" data-bs-dismiss="modal">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div-->
+</main>
+
+<footer th:replace="plantilla :: footer"></footer>
+
+<script type="text/javascript" th:replace="plantilla :: script"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var nombre = $('h1 span').text();
+
+        crearDataTable('visualizationTable',2,1,nombre);
+
+        var botoExcel = $('.dt-buttons button');
+
+        $('#visualizationTable_wrapper').remove(botoExcel);
+        $('#botones').append(botoExcel);
+
+        botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success');
+    } );
+</script>
+</body>
+</html>
