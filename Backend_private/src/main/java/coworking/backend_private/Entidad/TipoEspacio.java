@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TIPOS_ESPACIOS")
 public class TipoEspacio {
+
     @Id
     private String codigo;
     private String nombre;

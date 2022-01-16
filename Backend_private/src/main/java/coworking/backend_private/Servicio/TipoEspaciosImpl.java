@@ -15,7 +15,6 @@ public class TipoEspaciosImpl implements ITipoEspaciosServicio {
 
     @Override
     public List<TipoEspacio> listaTipoEspacio() {
-
         return (List<TipoEspacio>) tipoEspacioRepositorio.findAll();
     }
 }
