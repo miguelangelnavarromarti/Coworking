@@ -76,6 +76,7 @@
           <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:1.2.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.3.13" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.13" />
+          <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.3m" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -24,7 +24,7 @@ public class TarifasControlador {
 
     @GetMapping("")
     public String listarTarifas(Model model){
-        List<Tarifa> listarTarifas = tarifasServicio.listarTodo();
+        List<Tarifa> listarTarifas = tarifasServicio.verTodo();
         model.addAttribute("nombre","Tarifas");
         model.addAttribute("tabla",listarTarifas);
         return "tarifas/ver";
@@ -63,7 +63,7 @@ public class TarifasControlador {
     @PostMapping("/guardarPorDefecto")
     public String guardarPorDefecto(@ModelAttribute Tarifa tarifa){
 
-        Tarifa tarifaPrecioModificado = tarifasServicio.buscarPorId(tarifa.getCodigo());
+        Tarifa tarifaPrecioModificado = tarifasServicio.buscarPorCodigo(tarifa.getCodigo());
         tarifaPrecioModificado.setPrecio(tarifa.getPrecio());
         tarifasServicio.guardar(tarifaPrecioModificado);
 
@@ -84,7 +84,7 @@ public class TarifasControlador {
 
     @GetMapping("/editar/{codigo}")
     public String editar(@PathVariable("codigo") Integer codigo,  Model model){
-        Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+        Tarifa tarifa = tarifasServicio.buscarPorCodigo(codigo);
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
         model.addAttribute("titulo","Editar Tarifa");
@@ -95,7 +95,7 @@ public class TarifasControlador {
 
     @GetMapping("/editarDefecto/{codigo}")
     public String editarDefecto(@PathVariable("codigo") Integer codigo,  Model model){
-        Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
+        Tarifa tarifa = tarifasServicio.buscarPorCodigo(codigo);
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
         model.addAttribute("titulo","Editar Tarifa por defecto");

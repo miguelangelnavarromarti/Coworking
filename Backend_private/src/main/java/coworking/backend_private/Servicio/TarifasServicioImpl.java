@@ -16,7 +16,7 @@ public class TarifasServicioImpl implements ITarifasServicio{
 
 
     @Override
-    public List<Tarifa> listarTodo() {
+    public List<Tarifa> verTodo() {
         return (List<Tarifa>) tarifasRepositorio.findAll();
     }
 
@@ -27,7 +27,7 @@ public class TarifasServicioImpl implements ITarifasServicio{
     }
 
     @Override
-    public Tarifa buscarPorId(Integer id) {
+    public Tarifa buscarPorCodigo(Integer id) {
         return tarifasRepositorio.findById(id).orElse(null);
     }
 

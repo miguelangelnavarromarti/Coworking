@@ -1,13 +1,14 @@
 package coworking.backend_private.Servicio;
 
+import coworking.backend_private.Entidad.GestionOferta;
 import coworking.backend_private.Entidad.Tarifa;
 
 import java.util.List;
 
-public interface ITarifasServicio {
+public interface IGestionOfertasServicio {
 
     public List<Tarifa> verTodo();
-    public void guardar(Tarifa tarifa);
+    public void guardar(GestionOferta gestionOferta);
     public Tarifa buscarPorCodigo(Integer id);
-    public int comprobar(Tarifa tarifa);
+
 }
