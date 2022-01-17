@@ -46,7 +46,7 @@ public class TarifasControlador {
     public String guardar(@ModelAttribute Tarifa tarifa){
 
         tarifasServicio.guardar(tarifa);
-        return "redirect:/tarifas/";
+        return "redirect:/tarifas";
     }
 
     /*@PostMapping("/guardarPorDefecto")

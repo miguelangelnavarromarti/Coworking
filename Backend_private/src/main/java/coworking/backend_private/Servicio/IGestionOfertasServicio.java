@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IGestionOfertasServicio {
 
-    public List<Tarifa> verTodo();
+    public List<GestionOferta> verTodo();
     public void guardar(GestionOferta gestionOferta);
-    public Tarifa buscarPorCodigo(Integer id);
+    public GestionOferta buscarPorCodigo(Integer id);
 
 }
