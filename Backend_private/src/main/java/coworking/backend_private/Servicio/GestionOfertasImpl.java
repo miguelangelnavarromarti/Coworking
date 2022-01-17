@@ -27,4 +27,9 @@ public class GestionOfertasImpl implements IGestionOfertasServicio{
     public GestionOferta buscarPorCodigo(Integer codigo) {
         return gestionOfertasRepositorio.getById(codigo);
     }
+
+    @Override
+    public void eliminar(Integer codigo) {
+        gestionOfertasRepositorio.deleteById(codigo);
+    }
 }

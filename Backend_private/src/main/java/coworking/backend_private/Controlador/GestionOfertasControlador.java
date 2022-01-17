@@ -46,6 +46,12 @@ public class GestionOfertasControlador {
         return "gestionOfertas/crear";
     }
 
+    @GetMapping("/eliminar/{codigo}")
+    public String editar(@PathVariable("codigo") Integer codigo){
+        gestionOfertasServicio.eliminar(codigo);
+        return "redirect:/gestionOfertas";
+    }
+
 }
 
 

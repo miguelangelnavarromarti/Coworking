@@ -9,6 +9,7 @@ public interface IGestionOfertasServicio {
 
     public List<GestionOferta> verTodo();
     public void guardar(GestionOferta gestionOferta);
-    public GestionOferta buscarPorCodigo(Integer id);
+    public GestionOferta buscarPorCodigo(Integer codigo);
+    public void eliminar(Integer codigo);
 
 }
