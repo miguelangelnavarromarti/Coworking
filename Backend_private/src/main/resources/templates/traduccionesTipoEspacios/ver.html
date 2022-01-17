@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th ="http://www.thymeleaf.org">
 <head th:replace="plantilla :: head">
-    <title>TipoEspacios</title>">
+    <title>TraduccionesTipoEspacios</title>">
 </head>
 <body>
 
@@ -9,28 +9,25 @@
 
 <main>
     <div class="container mt-5">
-        <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+        <h1 class="text-center">Listado de <span th:text="${nombre}"></span> <span th:text="${codigoTipoEspacio}"></span></h1>
     </div>
 
     <div class="container my-5 p-5 shadow bg-body rounded-3">
         <table class="table nowrap" id="visualizationTable">
             <thead class="table">
             <tr>
-                <th scope="col" class="text-center">Codigo</th>
-                <th scope="col" class="text-center">Nombre</th>
+
+                <th scope="col" class="text-center">Código Idioma</th>
+                <th scope="col" class="text-center">Traducción</th>
                 <th scope="col" class="text-center">Editar</th>
-                <th scope="col" class="text-center">Ver Traducciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="te:${tipoEspacios}">
-                <th scope="row" th:text="${te.codigo}" class="py-3 text-center bg-white"></th>
-                <td th:text="${te.nombre}" class="py-3 text-center bg-white"></td>
-                <td class="text-center bg-white">
-                    <a th:href="@{/tipoEspacios/modificar/} + ${te.codigo}" th:id="modificar+${te.codigo}" th:text="Modificar" th:title="${te.codigo}" class="btn btn-warning"></a>
-                </td>
-                <td class="text-center bg-white">
-                    <a th:href="@{/traduccionesTipoEspacios/} + ${te.codigo}" th:id="ver+${te.codigo}" th:text="Traducciones" th:title="${te.codigo}" class="btn btn-warning"></a>
+            <tr th:each="tr:${traduccionesTipoEspacios}">
+                <th scope="row" th:text="${tr.codigoIdioma.getCodigo()}" class="py-3 text-center bg-white"></th>
+                <td th:text="${tr.traduccionDescripcion}" class="py-3 text-center bg-white"></td>
+                <td>
+                    <a th:href="@{/traduccionesTipoEspacios/modificar/} + ${tr.codigoIdioma.getCodigo()}" th:id="modificar+${tr.codigoIdioma.getCodigo()}" th:text="Modificar" th:title="${tr.codigoIdioma.getCodigo()}" class="btn btn-warning"></a>
                 </td>
             </tr>
             </tbody>

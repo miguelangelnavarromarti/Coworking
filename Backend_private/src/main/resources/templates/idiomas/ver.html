@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th ="http://www.thymeleaf.org">
 <head th:replace="plantilla :: head">
-    <title>TipoEspacios</title>">
+    <title>Idiomas</title>">
 </head>
 <body>
 
@@ -17,20 +17,16 @@
             <thead class="table">
             <tr>
                 <th scope="col" class="text-center">Codigo</th>
-                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Descripción</th>
                 <th scope="col" class="text-center">Editar</th>
-                <th scope="col" class="text-center">Ver Traducciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="te:${tipoEspacios}">
-                <th scope="row" th:text="${te.codigo}" class="py-3 text-center bg-white"></th>
-                <td th:text="${te.nombre}" class="py-3 text-center bg-white"></td>
-                <td class="text-center bg-white">
-                    <a th:href="@{/tipoEspacios/modificar/} + ${te.codigo}" th:id="modificar+${te.codigo}" th:text="Modificar" th:title="${te.codigo}" class="btn btn-warning"></a>
-                </td>
-                <td class="text-center bg-white">
-                    <a th:href="@{/traduccionesTipoEspacios/} + ${te.codigo}" th:id="ver+${te.codigo}" th:text="Traducciones" th:title="${te.codigo}" class="btn btn-warning"></a>
+            <tr th:each="id:${idiomas}">
+                <th scope="row" th:text="${id.codigo}" class="py-3 text-center bg-white"></th>
+                <td th:text="${id.descripcion}" class="py-3 text-center bg-white"></td>
+                <td>
+                    <a th:href="@{/idiomas/modificar/} + ${id.codigo}" th:id="modificar+${id.codigo}" th:text="Modificar" th:title="${id.codigo}" class="btn btn-warning"></a>
                 </td>
             </tr>
             </tbody>
@@ -39,7 +35,7 @@
 
         <div class="d-flex mt-5 justify-content-between" id="botones">
             <div>
-                <a class="btn btn-primary" th:href="@{/tipoEspacios/crear}">Nuevo Tipo Espacio</a>
+                <a class="btn btn-primary" th:href="@{/idiomas/crear}">Nuevo Idioma</a>
             </div>
         </div>
     </div>

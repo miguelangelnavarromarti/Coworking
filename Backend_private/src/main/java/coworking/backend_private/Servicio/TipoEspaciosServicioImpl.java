@@ -1,6 +1,5 @@
 package coworking.backend_private.Servicio;
 
-import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Repositorio.TipoEspaciosRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TipoEspaciosImpl implements ITipoEspaciosServicio {
+public class TipoEspaciosServicioImpl implements ITipoEspaciosServicio {
 
     @Autowired
     private TipoEspaciosRepositorio tipoEspacioRepositorio;

@@ -1,8 +1,13 @@
 package coworking.backend_private.Controlador;
 
 import coworking.backend_private.Entidad.Cliente;
+import coworking.backend_private.Entidad.Idioma;
 import coworking.backend_private.Entidad.TipoEspacio;
+import coworking.backend_private.Entidad.TraduccionTipoEspacio;
+import coworking.backend_private.Servicio.IIdiomasServicio;
 import coworking.backend_private.Servicio.ITipoEspaciosServicio;
+import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
+import coworking.backend_private.Servicio.TraduccionesTipoEspaciosServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +26,18 @@ public class TipoEspaciosControlador {
     @Autowired
     private ITipoEspaciosServicio tipoEspaciosServicio;
 
+    @Autowired
+    private ITraduccionesTipoEspaciosServicio traduccionesTipoEspaciosServicio;
+
+    @Autowired
+    private IIdiomasServicio idiomasServicio;
+
     @GetMapping("")
     public String getTipoEspacios(Model model){
-        List<TipoEspacio> verTipoEspacio = tipoEspaciosServicio.listaTipoEspacio();
+        List<TipoEspacio> verTipoEspacios = tipoEspaciosServicio.listaTipoEspacio();
 
         model.addAttribute("nombre", "TipoEspacios");
-        model.addAttribute("tipoEspacios", verTipoEspacio);
+        model.addAttribute("tipoEspacios", verTipoEspacios);
 
         return "tipoEspacios/ver";
     }
@@ -35,9 +46,11 @@ public class TipoEspaciosControlador {
     public String crearTipoEspacio(Model model) {
 
         TipoEspacio tipoEspacio = new TipoEspacio();
+        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
 
         model.addAttribute("nombre", "Cliente");
         model.addAttribute("tipoEspacio", tipoEspacio);
+        model.addAttribute("idiomas", idiomas);
 
         return "tipoEspacios/crear";
     }
