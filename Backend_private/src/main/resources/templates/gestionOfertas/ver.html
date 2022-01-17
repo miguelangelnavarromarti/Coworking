@@ -59,10 +59,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ¿Estás seguro de que quieres eliminar la fila seleccionada? Los datos eliminados no se podran recuperar.
+                        ¿Estás seguro de que quieres eliminar la fila seleccionada?<br>Los datos eliminados no se podran recuperar.
                     </div>
                     <div class="modal-footer">
-                        <a th:href="@{/gestionOfertas/eliminar/} + ${go.codigo}" class="btn btn-danger text-dark" id="deleteRow" data-bs-dismiss="modal">Eliminar</a>
+                        <a class="btn btn-danger text-white" th:id="'deleteRow' + ${go.codigo}" th:href="@{/gestionOfertas/eliminar/} + ${go.codigo}" title="Eliminar Oferta">Eliminar</a>
                     </div>
                 </div>
             </div>
