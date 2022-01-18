@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface TraduccionesTipoEspaciosRepositorio  extends CrudRepository<TraduccionTipoEspacio, String> {
+public interface TraduccionesTipoEspaciosRepositorio extends CrudRepository<TraduccionTipoEspacio, String> {
     TraduccionTipoEspacio findTraduccionTipoEspaciosByCodigoIdiomaAndCodigoTipoEspacio(Idioma codigoIdioma, TipoEspacio codigoTipoEspacio);
     @Query(value = "SELECT * FROM TRADUCCIONES_TIPOS_ESPACIOS WHERE codigoTipoEspacio = ?1", nativeQuery = true)
     List<TraduccionTipoEspacio> findTraduccionTipoEspaciosByCodigoTipoEspacio(String codigoTipoEspacio);

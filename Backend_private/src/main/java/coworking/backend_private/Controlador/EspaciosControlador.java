@@ -1,11 +1,11 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Cliente;
+import coworking.backend_private.Entidad.Espacio;
 import coworking.backend_private.Entidad.Idioma;
 import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Entidad.TraduccionTipoEspacio;
+import coworking.backend_private.Servicio.IEspaciosServicio;
 import coworking.backend_private.Servicio.IIdiomasServicio;
-import coworking.backend_private.Servicio.ITipoEspaciosServicio;
 import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,29 +16,28 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("/tipoEspacios")
-public class TipoEspaciosControlador {
-
+@RequestMapping("/espacios")
+public class EspaciosControlador {
     @Autowired
-    private ITipoEspaciosServicio tipoEspaciosServicio;
+    private IEspaciosServicio espaciosServicio;
 
-    @Autowired
-    private ITraduccionesTipoEspaciosServicio traduccionesTipoEspaciosServicio;
+    //@Autowired
+    //private ITraduccionesEspaciosServicio traduccionesEspaciosServicio;
 
     @Autowired
     private IIdiomasServicio idiomasServicio;
 
     @GetMapping("")
-    public String getTipoEspacios(Model model){
-        List<TipoEspacio> verTipoEspacios = tipoEspaciosServicio.listaTipoEspacio();
+    public String getEspacios(Model model){
+        List<Espacio> verEspacios = espaciosServicio.listaEspacio();
 
-        model.addAttribute("nombre", "TipoEspacios");
-        model.addAttribute("tipoEspacios", verTipoEspacios);
+        model.addAttribute("nombre", "Espacios");
+        model.addAttribute("espacios", verEspacios);
 
-        return "tipoEspacios/ver";
+        return "espacios/ver";
     }
 
-    @GetMapping("/crear")
+    /*@GetMapping("/crear")
     public String crearTipoEspacio(Model model) {
 
         TipoEspacio tipoEspacio = new TipoEspacio();
@@ -87,5 +86,5 @@ public class TipoEspaciosControlador {
         model.addAttribute("tipoEspacio", tipoEspacio);
 
         return "tipoEspacio/modificar";
-    }
+    }*/
 }
