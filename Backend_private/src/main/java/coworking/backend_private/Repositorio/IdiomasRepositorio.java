@@ -9,4 +9,5 @@ import javax.persistence.Id;
 
 @Repository
 public interface IdiomasRepositorio  extends CrudRepository<Idioma, String> {
+    Idioma getIdiomaByCodigo(String codigo);
 }

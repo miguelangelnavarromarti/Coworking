@@ -35,4 +35,9 @@ public class TipoEspaciosServicioImpl implements ITipoEspaciosServicio {
 
         return listaCodigos;
     }
+
+    @Override
+    public TipoEspacio verTipoEspacio(String codigo) {
+        return tipoEspacioRepositorio.getTipoEspacioByCodigo(codigo);
+    }
 }

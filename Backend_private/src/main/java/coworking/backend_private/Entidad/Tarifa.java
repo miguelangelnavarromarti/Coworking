@@ -18,6 +18,7 @@ public class Tarifa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
     private String codigoTipoEspacio;
+    @Column(columnDefinition = "DECIMAL")
     private double precio;
     //@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")

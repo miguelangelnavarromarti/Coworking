@@ -16,7 +16,6 @@
         <table class="table nowrap" id="visualizationTable">
             <thead class="table">
             <tr>
-
                 <th scope="col" class="text-center">Código Idioma</th>
                 <th scope="col" class="text-center">Traducción</th>
                 <th scope="col" class="text-center">Editar</th>
@@ -26,8 +25,8 @@
             <tr th:each="tr:${traduccionesTipoEspacios}">
                 <th scope="row" th:text="${tr.codigoIdioma.getCodigo()}" class="py-3 text-center bg-white"></th>
                 <td th:text="${tr.traduccionDescripcion}" class="py-3 text-center bg-white"></td>
-                <td>
-                    <a th:href="@{/traduccionesTipoEspacios/modificar/} + ${tr.codigoIdioma.getCodigo()}" th:id="modificar+${tr.codigoIdioma.getCodigo()}" th:text="Modificar" th:title="${tr.codigoIdioma.getCodigo()}" class="btn btn-warning"></a>
+                <td class="text-center">
+                    <a th:href="@{/traduccionesTipoEspacios/modificar/} + ${tr.codigoIdioma.getCodigo()} + @{/} + ${tr.codigoTipoEspacio.getCodigo()}" th:id="'modificar'+${tr.codigoIdioma.getCodigo()}+ ${tr.codigoTipoEspacio.getCodigo()}" th:text="Modificar" th:title="${tr.codigoIdioma.getCodigo()}+${tr.codigoTipoEspacio.getCodigo()}" class="btn btn-warning"></a>
                 </td>
             </tr>
             </tbody>

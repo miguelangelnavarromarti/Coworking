@@ -1,13 +1,11 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Entidad.Idioma;
 import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Entidad.TraduccionTipoEspacio;
 import coworking.backend_private.Servicio.IIdiomasServicio;
 import coworking.backend_private.Servicio.ITipoEspaciosServicio;
 import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
-import coworking.backend_private.Servicio.TraduccionesTipoEspaciosServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,11 +44,9 @@ public class TipoEspaciosControlador {
     public String crearTipoEspacio(Model model) {
 
         TipoEspacio tipoEspacio = new TipoEspacio();
-        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
 
-        model.addAttribute("nombre", "Cliente");
+        model.addAttribute("nombre", "Tipo Espacio");
         model.addAttribute("tipoEspacio", tipoEspacio);
-        model.addAttribute("idiomas", idiomas);
 
         return "tipoEspacios/crear";
     }
@@ -59,9 +55,14 @@ public class TipoEspaciosControlador {
     public String guardarTipoEspacio(@ModelAttribute TipoEspacio tipoEspacio) {
 
         tipoEspaciosServicio.guardar(tipoEspacio);
-        System.out.println("Cliente guardado con éxito");
 
-        return "redirect:/tipoEspacios";
+        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
+        for (int i = 0; i < idiomas.size(); i++) {
+            TraduccionTipoEspacio traduccionTipoEspacio = new TraduccionTipoEspacio(tipoEspacio,idiomas.get(i),"");
+            traduccionesTipoEspaciosServicio.guardar(traduccionTipoEspacio);
+        }
+
+        return "redirect:/traduccionesTipoEspacios/" + tipoEspacio.getCodigo();
     }
 
     @PostMapping("/comprobacionCodigo")

@@ -37,4 +37,9 @@ public class IdiomasServicioImpl implements IIdiomasServicio{
 
         return listaCodigos;
     }
+
+    @Override
+    public Idioma verIdioma(String codigo) {
+        return idiomasRepositorio.getIdiomaByCodigo(codigo);
+    }
 }

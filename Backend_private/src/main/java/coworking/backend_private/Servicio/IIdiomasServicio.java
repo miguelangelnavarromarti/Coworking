@@ -8,4 +8,5 @@ public interface IIdiomasServicio {
     public List<Idioma> listaIdiomas();
     public void guardar(Idioma idioma);
     public List<String> listaCodigos();
+    public Idioma verIdioma(String codigo);
 }
