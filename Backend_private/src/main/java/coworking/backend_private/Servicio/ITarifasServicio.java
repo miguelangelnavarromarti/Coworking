@@ -10,4 +10,5 @@ public interface ITarifasServicio {
     public void guardar(Tarifa tarifa);
     public Tarifa buscarPorCodigo(Integer id);
     public int comprobar(Tarifa tarifa);
+    public int comprobarConCodigo(Tarifa tarifa);
 }

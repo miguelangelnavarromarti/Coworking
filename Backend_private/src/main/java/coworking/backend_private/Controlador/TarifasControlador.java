@@ -73,27 +73,36 @@ public class TarifasControlador {
     @PostMapping("/comprobar")
     public String comprobar (@ModelAttribute Tarifa tarifa){
 
+            if (tarifasServicio.comprobar(tarifa) == 0) {
+                return guardar(tarifa);
+            } else {
+                return "redirect:/tarifas/crear";
+            }
 
+    }
 
-        if (tarifasServicio.comprobar(tarifa) == 0){
+    @PostMapping("/comprobarConCodigo")
+    public String comprobarConCodigo(@ModelAttribute Tarifa tarifa){
+
+        if (tarifasServicio.comprobarConCodigo(tarifa) == 0){
             return guardar(tarifa);
         }else {
-            return "redirect:/tarifas/crear";
+            return "redirect:/tarifas";
         }
     }
 
-    @GetMapping("/editar/{codigo}")
-    public String editar(@PathVariable("codigo") Integer codigo,  Model model){
+    @GetMapping("/modificar/{codigo}")
+    public String modificar(@PathVariable("codigo") Integer codigo,  Model model){
         Tarifa tarifa = tarifasServicio.buscarPorCodigo(codigo);
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
         model.addAttribute("titulo","Editar Tarifa");
         model.addAttribute("tarifa", tarifa);
         model.addAttribute("listaTipoEspacio",listaTipoEspacio);
-        return "tarifas/crear";
+        return "tarifas/modificar";
     }
 
-    @GetMapping("/editarDefecto/{codigo}")
+    @GetMapping("/modificarDefecto/{codigo}")
     public String editarDefecto(@PathVariable("codigo") Integer codigo,  Model model){
         Tarifa tarifa = tarifasServicio.buscarPorCodigo(codigo);
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
@@ -101,7 +110,7 @@ public class TarifasControlador {
         model.addAttribute("titulo","Editar Tarifa por defecto");
         model.addAttribute("tarifa", tarifa);
         model.addAttribute("listaTipoEspacio",listaTipoEspacio);
-        return "tarifas/editarDefecto";
+        return "/tarifas/modificarDefecto";
     }
 
 }

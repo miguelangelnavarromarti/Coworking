@@ -22,7 +22,7 @@
                     <th scope="col" class="text-center">Data Inicio</th>
                     <th scope="col" class="text-center">Data Fin</th>
                     <th scope="col" class="text-center">Por Defecto</th>
-                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Modificar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,7 +34,7 @@
                     <td th:text="${tarifa.dataFin}" class="py-3 text-center bg-white"></td>
                     <td th:text="${tarifa.porDefecto}" th:id="tarifa+${tarifa.codigo}"class="py-3 text-center bg-white"></td>
                     <td>
-                        <a th:href="@{/tarifas/editar/} + ${tarifa.codigo}" th:id="modificar+${tarifa.codigo}" th:text="Modificar" th:title="${tarifa.codigo}" class="btn btn-warning"></a>
+                        <a th:href="@{/tarifas/modificar/} + ${tarifa.codigo}" th:id="modificar+${tarifa.codigo}" th:text="Modificar" th:title="${tarifa.codigo}" class="btn btn-warning"></a>
                     </td>
                 </tr>
                 </tbody>
@@ -64,10 +64,10 @@
 
                 if(modificable=="true"){
                     //window.href = "/tarifas/editarDefecto/"+ codigo;
-                    $(this).attr("href","/tarifas/editarDefecto/"+ codigo);
+                    $(this).attr("href","/tarifas/modificarDefecto/"+ codigo);
                 }
                 else {
-                    window.href = "/tarifas/editar/"+ codigo;
+                    window.href = "/tarifas/modificar/"+ codigo;
                 }
             });
 

@@ -36,5 +36,8 @@ public class TarifasServicioImpl implements ITarifasServicio{
         return tarifasRepositorio.findTarifaByDataInicioAndDataFin(tarifa.getCodigoTipoEspacio(),tarifa.getDataInicio(), tarifa.getDataFin());
     }
 
-
+    @Override
+    public int comprobarConCodigo(Tarifa tarifa) {
+        return tarifasRepositorio.comprobarFechasConCodigo(tarifa.getCodigoTipoEspacio(),tarifa.getDataInicio(), tarifa.getDataFin(), tarifa.getCodigo());
+    }
 }
