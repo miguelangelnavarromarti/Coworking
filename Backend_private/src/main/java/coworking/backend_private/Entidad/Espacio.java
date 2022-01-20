@@ -10,14 +10,20 @@ import javax.persistence.*;
 public class Espacio {
 
     @Id
-    private int codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "Integer")
+    private Integer codigo;
     @ManyToOne(optional = false)
     @JoinColumn(name="codigoTipoEspacio")
     private TipoEspacio tipoEspacio;
+    @Column(unique=true)
     private String nombre;
     private String descripcion;
-    private int capacidad;
-    private int numeroSillas;
-    private int metrosCuadrados;
-    private boolean activo;
+    @Column(columnDefinition = "Integer")
+    private Integer capacidad;
+    @Column(columnDefinition = "Integer")
+    private Integer numeroSillas;
+    @Column(columnDefinition = "Integer")
+    private Integer metrosCuadrados;
+    private boolean activo = true;
 }

@@ -1,9 +1,6 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Cliente;
-import coworking.backend_private.Entidad.Idioma;
-import coworking.backend_private.Entidad.TipoEspacio;
-import coworking.backend_private.Entidad.TraduccionTipoEspacio;
+import coworking.backend_private.Entidad.*;
 import coworking.backend_private.Servicio.IIdiomasServicio;
 import coworking.backend_private.Servicio.ITipoEspaciosServicio;
 import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
@@ -37,20 +34,45 @@ public class TipoEspaciosControlador {
 
         return "tipoEspacios/ver";
     }
+    /*
+    @GetMapping("/{codigo}")
+    public String getTipoEspacio(@PathVariable("codigo") String codigo, Model model){
+
+        model.addAttribute("nombre", "TipoEspacios");
+        model.addAttribute("codigo", codigo);
+
+        TipoEspacio tipoEspacio = tipoEspaciosServicio.verTipoEspacio(codigo);
+        model.addAttribute("tipoEspacio", tipoEspacio);
+
+        List<TraduccionTipoEspacio> verTraduccionesTipoEspacios = traduccionesTipoEspaciosServicio.verTraduccionesPorCodigoTipoEspacio(codigo);
+        model.addAttribute("traduccionTipoEspacio", verTraduccionesTipoEspacios);
+
+        return "tipoEspacios/ficha";
+    }*/
 
     @GetMapping("/crear")
     public String crearTipoEspacio(Model model) {
 
         TipoEspacio tipoEspacio = new TipoEspacio();
+        Tarifa tarifa = new Tarifa();
 
         model.addAttribute("nombre", "Tipo Espacio");
         model.addAttribute("tipoEspacio", tipoEspacio);
+        model.addAttribute("tarifa", tarifa);
 
         return "tipoEspacios/crear";
     }
 
     @PostMapping("/guardar")
     public String guardarTipoEspacio(@ModelAttribute TipoEspacio tipoEspacio) {
+        List<String> lista = tipoEspaciosServicio.listaCodigos();
+
+        for (String codigo : lista) {
+            if(Objects.equals(codigo, tipoEspacio.getCodigo())) {
+                tipoEspaciosServicio.guardar(tipoEspacio);
+                return "redirect:/tipoEspacios";
+            }
+        }
 
         tipoEspaciosServicio.guardar(tipoEspacio);
 
@@ -86,6 +108,6 @@ public class TipoEspaciosControlador {
         model.addAttribute("nombre", "Tipo Espacio");
         model.addAttribute("tipoEspacio", tipoEspacio);
 
-        return "tipoEspacio/modificar";
+        return "tipoEspacios/modificar";
     }
 }

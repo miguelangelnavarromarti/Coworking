@@ -1,9 +1,5 @@
 package coworking.backend_private.Entidad.PrimaryKeysCompuestas;
 
-import coworking.backend_private.Entidad.Idioma;
-import coworking.backend_private.Entidad.TipoEspacio;
-
-
 import java.io.Serializable;
 
 public class TraduccionTipoEspacioPK implements Serializable {

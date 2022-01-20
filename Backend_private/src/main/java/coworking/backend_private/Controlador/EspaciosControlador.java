@@ -1,12 +1,7 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Espacio;
-import coworking.backend_private.Entidad.Idioma;
-import coworking.backend_private.Entidad.TipoEspacio;
-import coworking.backend_private.Entidad.TraduccionTipoEspacio;
-import coworking.backend_private.Servicio.IEspaciosServicio;
-import coworking.backend_private.Servicio.IIdiomasServicio;
-import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
+import coworking.backend_private.Entidad.*;
+import coworking.backend_private.Servicio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +13,15 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/espacios")
 public class EspaciosControlador {
+
     @Autowired
     private IEspaciosServicio espaciosServicio;
 
-    //@Autowired
-    //private ITraduccionesEspaciosServicio traduccionesEspaciosServicio;
+    @Autowired
+    private ITipoEspaciosServicio tipoEspacioServicio;
+
+    @Autowired
+    private ITraduccionesEspaciosServicio traduccionesEspaciosServicio;
 
     @Autowired
     private IIdiomasServicio idiomasServicio;
@@ -37,54 +36,56 @@ public class EspaciosControlador {
         return "espacios/ver";
     }
 
-    /*@GetMapping("/crear")
-    public String crearTipoEspacio(Model model) {
+    @GetMapping("/crear")
+    public String crearEspacio(Model model) {
 
-        TipoEspacio tipoEspacio = new TipoEspacio();
+        Espacio espacio = new Espacio();
 
-        model.addAttribute("nombre", "Tipo Espacio");
-        model.addAttribute("tipoEspacio", tipoEspacio);
+        model.addAttribute("nombre", "Espacio");
+        model.addAttribute("espacio", espacio);
 
-        return "tipoEspacios/crear";
+        List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
+        model.addAttribute("listaTipoEspacio",listaTipoEspacio);
+
+        return "espacios/crear";
     }
+
 
     @PostMapping("/guardar")
-    public String guardarTipoEspacio(@ModelAttribute TipoEspacio tipoEspacio) {
+    public String guardarEspacio(@ModelAttribute Espacio espacio) {
+        List<Integer> lista = espaciosServicio.listaCodigos();
 
-        tipoEspaciosServicio.guardar(tipoEspacio);
-
-        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
-        for (int i = 0; i < idiomas.size(); i++) {
-            TraduccionTipoEspacio traduccionTipoEspacio = new TraduccionTipoEspacio(tipoEspacio,idiomas.get(i),"");
-            traduccionesTipoEspaciosServicio.guardar(traduccionTipoEspacio);
-        }
-
-        return "redirect:/traduccionesTipoEspacios/" + tipoEspacio.getCodigo();
-    }
-
-    @PostMapping("/comprobacionCodigo")
-    public String comprobacionCodigo(@ModelAttribute TipoEspacio tipoEspacio, Model model) {
-
-        List<String> listaCodigos = tipoEspaciosServicio.listaCodigos();
-
-        for (String codigo : listaCodigos) {
-            if (Objects.equals(tipoEspacio.getCodigo(), codigo)) {
-                model.addAttribute("errorCodigo", "Este codigo de Tipo Espacio '" + tipoEspacio.getCodigo() + "' ya existe.");
-                return "redirect:/tipoEspacios/crear";
+        for (Integer codigo : lista) {
+            if(Objects.equals(codigo, espacio.getCodigo())) {
+                espaciosServicio.guardar(espacio);
+                return "redirect:/espacios";
             }
         }
 
-        return guardarTipoEspacio(tipoEspacio);
+        Integer codigo = espacio.getCodigo();
+        espaciosServicio.guardar(espacio);
+
+        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
+        for (Idioma idioma : idiomas) {
+            TraduccionEspacio traduccionEspacio = new TraduccionEspacio(espacio, idioma, "", "");
+            traduccionesEspaciosServicio.guardar(traduccionEspacio);
+        }
+
+        return "redirect:/traduccionesEspacios/" + espacio.getCodigo();
     }
 
     @GetMapping("/modificar/{codigo}")
-    public String modificarTipoEspacio(@PathVariable("codigo") String codigo, Model model) {
+    public String modificarEspacio(@PathVariable("codigo") Integer codigo, Model model) {
 
-        TipoEspacio tipoEspacio = tipoEspaciosServicio.verTipoEspacio(codigo);
+        Espacio espacio = espaciosServicio.verEspacio(codigo);
 
-        model.addAttribute("nombre", "Tipo Espacio");
-        model.addAttribute("tipoEspacio", tipoEspacio);
+        model.addAttribute("nombre", "Espacio");
+        model.addAttribute("nombreEspacio", espacio.getNombre());
+        model.addAttribute("espacio", espacio);
 
-        return "tipoEspacio/modificar";
-    }*/
+        List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
+        model.addAttribute("listaTipoEspacio",listaTipoEspacio);
+
+        return "espacios/modificar";
+    }
 }

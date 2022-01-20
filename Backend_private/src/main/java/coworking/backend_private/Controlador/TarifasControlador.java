@@ -70,6 +70,12 @@ public class TarifasControlador {
         return "redirect:/tarifas/";
     }
 
+    @PostMapping("/guardarCrearTipoEspacio")
+    public void guardarCrearTipoEspacio(@ModelAttribute Tarifa tarifa){
+
+        tarifasServicio.guardar(tarifa);
+    }
+
     @PostMapping("/comprobar")
     public String comprobar (@ModelAttribute Tarifa tarifa){
 

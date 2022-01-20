@@ -57,4 +57,16 @@ public class TraduccionesTipoEspaciosControlador {
 
         return "redirect:/traduccionesTipoEspacios/" + traduccionTipoEspacio.getCodigoTipoEspacio().getCodigo();
     }
+
+    @PostMapping("/guardarPorTipoEspacio")
+    public String guardarTraduccionesPTipoEspacio(@ModelAttribute TraduccionTipoEspacio[] listaTraduccionTipoEspacio) {
+
+        for (int i = 0; i < listaTraduccionTipoEspacio.length; i++) {
+            traduccionesTipoEspaciosServicio.guardar(listaTraduccionTipoEspacio[i]);
+        }
+
+        System.out.println("Cliente guardado con éxito");
+
+        return "redirect:/tipoEspacios";
+    }
 }
