@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head"></head>
+
+</head>
+    <body>
+        <main>
+            <div class="container my-2 p-2 shadow bg-body rounded-3">
+                <h1>Ir a formulario para subir imagenes</h1>
+                <a class="btn btn-danger" th:href="@{/imagenes/formulario}">Subir Imagen</a>
+                <br>
+                <div class="container">
+                    <br>
+                    <p>Galeria con fotos aqui</p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

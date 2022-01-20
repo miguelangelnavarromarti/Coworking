@@ -12,7 +12,7 @@ public class GestionOferta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
-    private int minimoHora;
-    private int descuento;
+    private Integer minimoHora;
+    private Integer descuento;
 
 }

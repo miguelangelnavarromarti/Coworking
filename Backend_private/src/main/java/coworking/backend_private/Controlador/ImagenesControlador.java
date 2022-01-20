@@ -1,9 +1,7 @@
 package coworking.backend_private.Controlador;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Part;
@@ -13,6 +11,16 @@ import java.io.*;
 @RequestMapping("/imagenes")
 public class ImagenesControlador {
 
+    @GetMapping("")
+    public String ver(){
+        return "imagenes/ver";
+    }
+
+    @GetMapping("/formulario")
+    public String formulario (){
+        return "imagenes/subir";
+    }
+
     @PostMapping("/subir")
     public String imatges(@RequestParam("file") MultipartFile img) throws IOException {
 
@@ -20,6 +28,8 @@ public class ImagenesControlador {
 
         InputStream is = img.getInputStream();
         String nomImatge = img.getOriginalFilename();
+        //Posar un @PathVariable per agafar es valor de name des formulari
+        //String nomImatge = nombre;
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         byte[] readBuf = new byte[4096];
@@ -34,6 +44,6 @@ public class ImagenesControlador {
         OutputStream outputStream = new FileOutputStream(fileName);
         os.writeTo(outputStream);
 
-        return "redirect:imagenes/subir";
+        return "imagenes/ver";
     }
 }

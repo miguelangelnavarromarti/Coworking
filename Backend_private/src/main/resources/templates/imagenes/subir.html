@@ -1,14 +1,106 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
 </head>
 <body>
+<div class="container">
+    <br>
+    <h1 class="text-center my-3">Introducir Imagen</h1>
+    <form th:action="@{/imagenes/subir}" class="row my-5" enctype="multipart/form-data" method="post">
 
-    <form>
-        <input type="file" formenctype="multipart/form-data" name="file">
-        <input type="submit">
+        <div class="mb-3 col-6">
+            <label for="name" class="form-label">Introduce el nombre del archivo *</label>
+            <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                          <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                          <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </span>
+                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" required>
+            </div>
+            <div id="nameHelp" class="form-text">Introduce el nombre que va a tener el archivo</div>
+        </div>
+        <div class="mb-3 col-6">
+            <label for="file" class="form-label">Introduce el nombre del archivo *</label>
+            <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                          <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                          <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"/>
+                        </svg>
+                    </span>
+                <input type="file" id="file" name="file" class="form-label">
+            </div>
+            <div id="fileHelp" class="form-text">Introduce el archivo que quiere subir</div>
+        </div>
+
+        <div class="mb-3 col-1">
+            <br>
+            <input type="submit" class="btn btn-primary" th:value="Insertar">
+        </div>
+        <div class="mb-3 col-1">
+            <br>
+            <a th:href="@{/tarifas/}" class="btn btn-danger">Cancelar</a>
+        </div>
     </form>
+</div>
 </body>
 </html>
+
+
+<!--
+
+<input type="file" id="file" name="file" class="form-label">
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h1 class="text-center my-3">Introducir Imagen</h1>
+        <form th:action="@{/imagenes/subir}" class="row my-5" enctype="multipart/form-data" method="post">
+
+            <div class="mb-3 col-6">
+                <label for="name" class="form-label">Introduce el nombre del archivo *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                          <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                          <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control" id="name" aria-describedby="nameHelp" required>
+                </div>
+                <div id="nameHelp" class="form-text">Introduce el nombre que va a tener el archivo</div>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="file" class="form-label">Introduce el nombre del archivo *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                          <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                          <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"/>
+                        </svg>
+                    </span>
+                    <input type="file" class="form-control" id="file" aria-describedby="fileHelp" required>
+                </div>
+                <div id="fileHelp" class="form-text">Introduce el archivo que quiere subir</div>
+            </div>
+
+            <div class="mb-3 col-1">
+                <br>
+                <input type="submit" class="btn btn-primary" th:value="Insertar">
+            </div>
+            <div class="mb-3 col-1">
+                <br>
+                <a th:href="@{/tarifas/}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+-->
