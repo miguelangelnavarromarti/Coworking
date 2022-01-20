@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Part;
 import java.io.*;
 
 @Controller
 @RequestMapping("/imagenes")
 public class ImagenesControlador {
+    private int contador;
 
     @GetMapping("")
     public String ver(){
@@ -27,9 +27,11 @@ public class ImagenesControlador {
         //Part filePart = request.getPart("file");
 
         InputStream is = img.getInputStream();
-        String nomImatge = img.getOriginalFilename();
-        //Posar un @PathVariable per agafar es valor de name des formulari
-        //String nomImatge = nombre;
+        //String nomImatge = img.getOriginalFilename();
+
+        contador++;
+        String nombreImagen = contador + ".jpg";
+
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         byte[] readBuf = new byte[4096];
@@ -39,7 +41,7 @@ public class ImagenesControlador {
         }
         // Passam l'arxiu a dins una carpeta
         String ruta = "E://DAW//imgCoworking/";
-        String fileName = ruta + nomImatge;
+        String fileName = ruta + nombreImagen;
 
         OutputStream outputStream = new FileOutputStream(fileName);
         os.writeTo(outputStream);

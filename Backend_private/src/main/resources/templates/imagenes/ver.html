@@ -5,13 +5,34 @@
 </head>
     <body>
         <main>
-            <div class="container my-2 p-2 shadow bg-body rounded-3">
-                <h1>Ir a formulario para subir imagenes</h1>
-                <a class="btn btn-danger" th:href="@{/imagenes/formulario}">Subir Imagen</a>
-                <br>
-                <div class="container">
-                    <br>
-                    <p>Galeria con fotos aqui</p>
+            <div class="container my-3 p-2 shadow bg-body rounded-3">
+                <h1 class="text-center">Imagenes Disponibles</h1>
+                <a class="btn btn-primary mt-3" th:href="@{/imagenes/formulario}">Subir Imagen</a>
+                <br><br>
+                <hr>
+                <div class="container d-md-flex flex-row justify-content-between flex-wrap">
+
+                    <!--
+                    Aqui hi haura un each que fara tants Cards com fotos tenguem,
+                    juntament d'agafar es nom de s'arxiu i ses rutes per eliminar i alomillor editar
+                    -->
+
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://i.blogs.es/4f0662/consejos-foto-movil-01/840_560.jpg" class="card-img-top rounded" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre Archivo</h5>
+                            <a href="#" class="btn btn-warning">Editar</a>
+                            <a href="#" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://i.blogs.es/4f0662/consejos-foto-movil-01/840_560.jpg" class="card-img-top rounded" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre Archivo</h5>
+                            <a href="#" class="btn btn-warning">Editar</a>
+                            <a href="#" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
