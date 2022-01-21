@@ -2,13 +2,17 @@ package coworking.backend_private.Controlador;
 
 import coworking.backend_private.Entidad.*;
 import coworking.backend_private.Servicio.IIdiomasServicio;
+import coworking.backend_private.Servicio.ITarifasServicio;
 import coworking.backend_private.Servicio.ITipoEspaciosServicio;
 import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
+import org.hibernate.tool.schema.extract.spi.TableInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +28,9 @@ public class TipoEspaciosControlador {
 
     @Autowired
     private IIdiomasServicio idiomasServicio;
+
+    @Autowired
+    private ITarifasServicio tarifasServicio;
 
     @GetMapping("")
     public String getTipoEspacios(Model model){
@@ -75,6 +82,37 @@ public class TipoEspaciosControlador {
         }
 
         tipoEspaciosServicio.guardar(tipoEspacio);
+
+        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
+        for (int i = 0; i < idiomas.size(); i++) {
+            TraduccionTipoEspacio traduccionTipoEspacio = new TraduccionTipoEspacio(tipoEspacio,idiomas.get(i),"");
+            traduccionesTipoEspaciosServicio.guardar(traduccionTipoEspacio);
+        }
+
+        return "redirect:/traduccionesTipoEspacios/" + tipoEspacio.getCodigo();
+    }
+
+    @PostMapping("/guardarConTarifa")
+    public String guardarTipoEspacioConTarifa(@ModelAttribute TipoEspacio tipoEspacio, @RequestParam(required = false) double precio, @RequestParam(required = false) String hoy) {
+        List<String> lista = tipoEspaciosServicio.listaCodigos();
+
+        for (String codigo : lista) {
+            if(Objects.equals(codigo, tipoEspacio.getCodigo())) {
+                tipoEspaciosServicio.guardar(tipoEspacio);
+                return "redirect:/tipoEspacios";
+            }
+        }
+
+        tipoEspaciosServicio.guardar(tipoEspacio);
+        Tarifa tarifa = new Tarifa(
+                tipoEspacio.getCodigo(),
+                precio,
+                LocalDate.parse(hoy),
+                null,
+                true
+        );
+        tarifasServicio.guardar(tarifa);
+
 
         List<Idioma> idiomas = idiomasServicio.listaIdiomas();
         for (int i = 0; i < idiomas.size(); i++) {
