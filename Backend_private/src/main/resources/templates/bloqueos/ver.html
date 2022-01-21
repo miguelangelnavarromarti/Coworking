@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
+    <title>Bloqueos</title>">
+</head>
+<body>
+
+<header th:replace="plantilla :: header"></header>
+
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+    </div>
+
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <table class="table nowrap" id="visualizationTable">
+            <thead class="table">
+            <tr>
+                <th scope="col" class="text-center">Código Espacio</th>
+                <th scope="col" class="text-center">Hora</th>
+                <th scope="col" class="text-center">Día de Bloqueo</th>
+                <th scope="col" class="text-center">Día y Hora de Creación</th>
+                <th scope="col" class="text-center">Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bl:${bloqueos}">
+                <th scope="row" th:text="${bl.codigoEspacio.getNombre()}" class="py-3 text-center bg-white"></th>
+                <td th:text="${bl.hora.getHora()}" class="py-3 text-center bg-white"></td>
+                <td th:text="${bl.diaBloqueo}" class="py-3 text-center bg-white"></td>
+                <td th:text="${bl.diaHoraCreacion}" class="py-3 text-center bg-white"></td>
+                <td>
+                    <a th:href="@{/bloqueos/modificar/} + ${bl.codigoEspacio}"
+                       th:id="modificar+${bl.codigoEspacio}" th:text="Modificar"
+                       th:title="${bl.codigoEspacio}" class="btn btn-warning"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div class="d-flex mt-5 justify-content-between" id="botones">
+            <div>
+                <a class="btn btn-primary" th:href="@{/bloqueos/crear}">Nuevo Bloqueo</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<footer th:replace="plantilla :: footer"></footer>
+<script>
+    $(document).ready(function(){
+
+        var nombre = $('h1 span').text();
+
+        crearDataTable('visualizationTable',0,0,nombre);
+
+        var botoExcel = $('.dt-buttons button');
+
+        $('#visualizationTable_wrapper').remove(botoExcel);
+        $('#botones').append(botoExcel);
+
+        botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success');
+
+        /* Añadir formato a la hora */
+        $("tbody tr td:nth-child(2)").append(":00");
+    });
+</script>
+<script th:replace="plantilla :: script"></script>
+</body>
+</html>
