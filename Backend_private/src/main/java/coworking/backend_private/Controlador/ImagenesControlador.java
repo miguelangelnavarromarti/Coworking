@@ -1,6 +1,9 @@
 package coworking.backend_private.Controlador;
 
+import coworking.backend_private.Entidad.Imagen;
 import coworking.backend_private.Entidad.TipoEspacio;
+import coworking.backend_private.Repositorio.ImagenesRepositorio;
+import coworking.backend_private.Servicio.IImagenesServicio;
 import coworking.backend_private.Servicio.ITipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,28 +22,38 @@ public class ImagenesControlador {
     @Autowired
     private ITipoEspaciosServicio tipoEspacioServicio;
 
+    @Autowired
+    private IImagenesServicio imagenesServicio;
+
     @GetMapping("")
-    public String ver(){
+    public String ver(Model model){
+        List<Imagen> listaImagenes = imagenesServicio.verTodo();
+        model.addAttribute("listaImagenes",listaImagenes);
         return "imagenes/ver";
     }
 
     @GetMapping("/formulario")
     public String formulario (Model model){
+        Imagen imagen = new Imagen();
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
         model.addAttribute("listaTipoEspacio",listaTipoEspacio);
+        model.addAttribute("imagen",imagen);
         return "imagenes/subir";
     }
 
     @PostMapping("/subir")
-    public String imatges(@RequestParam("file") MultipartFile img, String name) throws IOException {
+    public String imatges(Imagen imagen, @RequestParam("file") MultipartFile img, String codigoTipoEspacio) throws IOException {
 
-        //Part filePart = request.getPart("file");
 
         InputStream is = img.getInputStream();
-        //String nomImatge = img.getOriginalFilename();
 
         contador++;
-        String nombreImagen = name + "-" + contador + ".jpg";
+        String nombreImagen = codigoTipoEspacio + "-" + contador + ".jpg";
+
+        imagen.setNombreImagen(nombreImagen);
+        imagen.setCodigoTipoEspacio(codigoTipoEspacio);
+
+        imagenesServicio.guardar(imagen);
 
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -51,6 +64,7 @@ public class ImagenesControlador {
         }
         // Passam l'arxiu a dins una carpeta
         String ruta = "E://DAW//imgCoworking/";
+        //String ruta = "C://imgCoworking";         //Sa que vulguis tu MIKI
         String fileName = ruta + nombreImagen;
 
         OutputStream outputStream = new FileOutputStream(fileName);
