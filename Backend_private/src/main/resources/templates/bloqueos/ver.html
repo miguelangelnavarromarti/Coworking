@@ -21,6 +21,7 @@
                 <th scope="col" class="text-center">Día de Bloqueo</th>
                 <th scope="col" class="text-center">Día y Hora de Creación</th>
                 <th scope="col" class="text-center">Editar</th>
+                <th scope="col" class="text-center">Eliminar</th>
             </tr>
             </thead>
             <tbody>
@@ -30,9 +31,14 @@
                 <td th:text="${bl.diaBloqueo}" class="py-3 text-center bg-white"></td>
                 <td th:text="${bl.diaHoraCreacion}" class="py-3 text-center bg-white"></td>
                 <td>
-                    <a th:href="@{/bloqueos/modificar/} + ${bl.codigoEspacio}"
-                       th:id="modificar+${bl.codigoEspacio}" th:text="Modificar"
-                       th:title="${bl.codigoEspacio}" class="btn btn-warning"></a>
+                    <a th:href="@{/bloqueos/modificar/} + ${bl.codigo}"
+                       th:id="modificar+${bl.codigo}" th:text="Modificar"
+                       th:title="${bl.codigo}" class="btn btn-warning"></a>
+                </td>
+                <td>
+                    <a th:href="@{/bloqueos/eliminar/} + ${bl.codigo}"
+                       th:id="eliminar+${bl.codigo}" th:text="Eliminar"
+                       th:title="${bl.codigo}" class="btn btn-danger"></a>
                 </td>
             </tr>
             </tbody>

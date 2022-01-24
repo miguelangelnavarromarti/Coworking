@@ -17,4 +17,19 @@ public class BloqueosEspaciosHorasServicioImpl implements IBloqueosEspaciosHoras
     public List<BloqueoEspacioHora> verBloqueos() {
         return (List<BloqueoEspacioHora>) bloqueosEspaciosHorasRepositorio.findAll();
     }
+
+    @Override
+    public void guardar (BloqueoEspacioHora bloqueoEspacioHora) {
+        bloqueosEspaciosHorasRepositorio.save(bloqueoEspacioHora);
+    }
+
+    @Override
+    public BloqueoEspacioHora buscarPorCodigo(Integer codigo) {
+        return bloqueosEspaciosHorasRepositorio.findByCodigo(codigo);
+    }
+
+    @Override
+    public void eliminarPorCodigo(Integer codigo){
+        bloqueosEspaciosHorasRepositorio.deleteById(codigo);
+    }
 }

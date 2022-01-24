@@ -8,7 +8,7 @@
     <div class="mt-5">
         <h1 class="text-center"> Crear <span th:text="${nombre}"></span></h1>
     </div>
-    <form class="row my-5" th:action="@{/bloqueos/comprobar}" th:object="${bloqueo}" method="post">
+    <form class="row my-5" th:action="@{/bloqueos/guardar}" th:object="${bloqueo}" method="post">
         <div class="mb-3 col-4">
             <label for="codigoEspacio" class="form-label">Espacio *</label>
             <div class="input-group">
@@ -70,7 +70,7 @@
         </div>
         <div class="mb-3 col-1">
             <br>
-            <a th:href="@{/tarifas/}" class="btn btn-danger">Cancelar</a>
+            <a th:href="@{/bloqueos/}" class="btn btn-danger">Cancelar</a>
         </div>
     </form>
 </main>
@@ -78,20 +78,6 @@
 
 
 <footer th:replace="plantilla :: footer"></footer>
-<script>
-    $(document).ready(function(){
-
-        $("#insertar").click(function(){
-            if ($("#dataFin").val() < $("#dataInicio").val()){
-                alert("Error data!!!");
-                //location.reload();
-                $("#dataInicio").val('');
-                $("#dataFin").val('');
-            }
-        })
-    });
-
-</script>
 <script th:replace="plantilla :: script"></script>
 </body>
 </html>
