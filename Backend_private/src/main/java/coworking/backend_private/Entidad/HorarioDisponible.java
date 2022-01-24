@@ -8,10 +8,9 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "TIPOS_ESPACIOS")
-public class TipoEspacio {
+@Table(name="HORARIOS_DISPONIBLES")
+public class HorarioDisponible {
 
     @Id
-    private String codigo;
-    private String nombre;
+    Integer hora;
 }

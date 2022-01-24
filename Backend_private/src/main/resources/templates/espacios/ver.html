@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
+    <title>TipoEspacios</title>">
+</head>
+<body>
+
+<header th:replace="plantilla :: header"></header>
+
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+    </div>
+
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <table class="table nowrap" id="visualizationTable">
+            <thead class="table">
+            <tr>
+                <th scope="col" class="text-center">Código T.Espacio</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Capacidad</th>
+                <th scope="col" class="text-center">Número de Sillas</th>
+                <th scope="col" class="text-center">Metros Cuadrados</th>
+                <th scope="col" class="text-center">Activo</th>
+                <th scope="col" class="text-center">Editar</th>
+                <th scope="col" class="text-center">Ver Traducciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="es:${espacios}">
+                <th scope="row" th:text="${es.tipoEspacio.getCodigo()}" class="py-3 text-center bg-white"></th>
+                <td th:text="${es.nombre}" class="py-3 text-center bg-white" data-bs-toggle="tooltip" data-bs-placement="top" th:title="${es.descripcion}"></td>
+                <td th:text="${es.capacidad} + ' Pax'" class="py-3 text-center bg-white"></td>
+                <td th:text="${es.numeroSillas} + ' Sillas'" class="py-3 text-center bg-white"></td>
+                <td th:text="${es.metrosCuadrados} + ' m2'" class="py-3 text-center bg-white"></td>
+                <td th:text="${es.activo}" class="py-3 text-center bg-white"></td>
+                <td class="text-center bg-white">
+                    <a th:href="@{/espacios/modificar/} + ${es.codigo}" th:id="modificar+${es.codigo}" th:text="Modificar" th:title="${es.codigo}" class="btn btn-warning"></a>
+                </td>
+                <td class="text-center bg-white">
+                    <a th:href="@{/traduccionesEspacios/} + ${es.codigo}" th:id="ver+${es.codigo}" th:text="Traducciones" th:title="${es.codigo}" class="btn btn-warning"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div class="d-flex mt-5 justify-content-between" id="botones">
+            <div>
+                <a class="btn btn-primary" th:href="@{/espacios/crear}">Nuevo Espacio</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<footer th:replace="plantilla :: footer"></footer>
+<script>
+    $(document).ready(function(){
+
+        var nombre = $('h1 span').text();
+
+        crearDataTable('visualizationTable',0,0,nombre);
+
+        var botoExcel = $('.dt-buttons button');
+
+        $('#visualizationTable_wrapper').remove(botoExcel);
+        $('#botones').append(botoExcel);
+
+        botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success');
+
+        /* Inicializar tooltips */
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
+<script th:replace="plantilla :: script"></script>
+</body>
+</html>

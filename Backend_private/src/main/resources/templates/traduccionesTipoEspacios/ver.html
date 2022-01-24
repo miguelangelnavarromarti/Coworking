@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
+    <title>TraduccionesTipoEspacios</title>">
+</head>
+<body>
+
+<header th:replace="plantilla :: header"></header>
+
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center">Listado de <span th:text="${nombre}"></span> <span th:text="${codigoTipoEspacio}"></span></h1>
+    </div>
+
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <table class="table nowrap" id="visualizationTable">
+            <thead class="table">
+            <tr>
+                <th scope="col" class="text-center">Código Idioma</th>
+                <th scope="col" class="text-center">Traducción</th>
+                <th scope="col" class="text-center">Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tr:${traduccionesTipoEspacios}">
+                <th scope="row" th:text="${tr.codigoIdioma.getCodigo()}" class="py-3 text-center bg-white"></th>
+                <td th:text="${tr.traduccionDescripcion}" class="py-3 text-center bg-white"></td>
+                <td class="text-center">
+                    <a th:href="@{/traduccionesTipoEspacios/modificar/} + ${tr.codigoIdioma.getCodigo()} + @{/} + ${tr.codigoTipoEspacio.getCodigo()}" th:id="'modificar'+${tr.codigoIdioma.getCodigo()}+ ${tr.codigoTipoEspacio.getCodigo()}" th:text="Modificar" th:title="${tr.codigoIdioma.getCodigo()}+${tr.codigoTipoEspacio.getCodigo()}" class="btn btn-warning"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div class="d-flex mt-5 justify-content-between" id="botones">
+            <div>
+                <a type="button" class="btn btn-primary" th:href="@{/tipoEspacios}">Volver</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<footer th:replace="plantilla :: footer"></footer>
+<script>
+    $(document).ready(function(){
+
+        var nombre = $('h1 span').text();
+
+        crearDataTable('visualizationTable',0,0,nombre);
+
+        var botoExcel = $('.dt-buttons button');
+
+        $('#visualizationTable_wrapper').remove(botoExcel);
+        $('#botones').append(botoExcel);
+
+        botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success');
+    });
+</script>
+<script th:replace="plantilla :: script"></script>
+</body>
+</html>

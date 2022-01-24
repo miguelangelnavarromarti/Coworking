@@ -2,11 +2,9 @@ package coworking.backend_private.Entidad;
 
 import lombok.Data;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.util.DigestUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.security.MessageDigest;
 
 
 @Data

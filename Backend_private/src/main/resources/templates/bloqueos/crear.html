@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head"></head>
+<body>
+<header th:replace="plantilla :: header"></header>
+
+<main class="container">
+    <div class="mt-5">
+        <h1 class="text-center"> Crear <span th:text="${nombre}"></span></h1>
+    </div>
+    <form class="row my-5" th:action="@{/bloqueos/guardar}" th:object="${bloqueo}" method="post">
+        <div class="mb-3 col-4">
+            <label for="codigoEspacio" class="form-label">Espacio *</label>
+            <div class="input-group">
+            <span class="input-group-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+                  <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                  <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                </svg>
+            </span>
+                <select th:field="*{codigoEspacio}" id="codigoEspacio" class="form-select" aria-label="Default select example" aria-describedby="codigoEspacioHelp" required>
+                    <option
+                            th:each="espacio:${espacios}"
+                            th:value="${espacio.codigo}"
+                            th:text="${espacio.nombre}"
+                    ></option>
+                </select>
+            </div>
+            <div id="codigoEspacioHelp" class="form-text">Indica el espacio que quieres bloquear</div>
+        </div>
+
+        <div class="mb-3 col-4">
+            <label for="hora" class="form-label">Hora *</label>
+            <div class="input-group">
+            <span class="input-group-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                  <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                </svg>
+            </span>
+                <select th:field="*{hora}" id="hora" class="form-select" aria-label="Default select example" aria-describedby="horaHelp" required>
+                    <option
+                            th:each="horas:${horario}"
+                            th:value="${horas.hora}"
+                            th:text="${horas.hora}+ ':00'"
+                    ></option>
+                </select>
+            </div>
+            <div id="horaHelp" class="form-text">Indica la hora que quieres bloquear</div>
+        </div>
+
+        <div class="mb-3 col-4">
+            <label for="diaBloqueo" class="form-label">Día de Bloqueo *</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                      <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                    </svg>
+                </span>
+                <input type="date" th:field="*{diaBloqueo}" class="form-control" id="diaBloqueo" aria-describedby="diaBloqueoHelp" required>
+            </div>
+            <div id="diaBloqueoHelp" class="form-text">Indica el día de bloqueo</div>
+        </div>
+
+
+        <div class="mb-3 col-1">
+            <br>
+            <input id="insertar" type="submit" class="btn btn-primary" th:value="Insertar">
+        </div>
+        <div class="mb-3 col-1">
+            <br>
+            <a th:href="@{/bloqueos/}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+
+
+<footer th:replace="plantilla :: footer"></footer>
+<script th:replace="plantilla :: script"></script>
+</body>
+</html>
