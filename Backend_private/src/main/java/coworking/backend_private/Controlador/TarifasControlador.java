@@ -3,8 +3,8 @@ package coworking.backend_private.Controlador;
 
 import coworking.backend_private.Entidad.Tarifa;
 import coworking.backend_private.Entidad.TipoEspacio;
-import coworking.backend_private.Servicio.ITarifasServicio;
-import coworking.backend_private.Servicio.ITipoEspaciosServicio;
+import coworking.backend_private.Servicio.Interficie.ITarifasServicio;
+import coworking.backend_private.Servicio.Interficie.ITipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

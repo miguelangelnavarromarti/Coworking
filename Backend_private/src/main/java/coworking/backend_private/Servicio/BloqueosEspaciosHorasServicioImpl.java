@@ -2,13 +2,14 @@ package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.BloqueoEspacioHora;
 import coworking.backend_private.Repositorio.BloqueosEspaciosHorasRepositorio;
+import coworking.backend_private.Servicio.Interficie.IBloqueosEspaciosHorasServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BloqueosEspaciosHorasServicioImpl implements IBloqueosEspaciosHorasServicio{
+public class BloqueosEspaciosHorasServicioImpl implements IBloqueosEspaciosHorasServicio {
 
     @Autowired
     BloqueosEspaciosHorasRepositorio bloqueosEspaciosHorasRepositorio;

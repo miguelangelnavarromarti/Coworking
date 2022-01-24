@@ -2,13 +2,14 @@ package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.GestionOferta;
 import coworking.backend_private.Repositorio.GestionOfertasRepositorio;
+import coworking.backend_private.Servicio.Interficie.IGestionOfertasServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class GestionOfertasImpl implements IGestionOfertasServicio{
+public class GestionOfertasImpl implements IGestionOfertasServicio {
 
     @Autowired
     private GestionOfertasRepositorio gestionOfertasRepositorio;

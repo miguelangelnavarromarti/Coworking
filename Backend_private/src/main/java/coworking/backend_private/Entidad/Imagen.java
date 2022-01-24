@@ -9,8 +9,9 @@ import javax.persistence.*;
 @Table(name = "IMAGENES")
 public class Imagen {
 
-    @Id
+
     private String codigoTipoEspacio;
+    @Id
     @Column(nullable = false, length = 64)
     private String nombreImagen;
 

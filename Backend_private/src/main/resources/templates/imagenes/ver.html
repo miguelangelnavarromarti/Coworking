@@ -17,7 +17,7 @@
                     juntament d'agafar es nom de s'arxiu i ses rutes per eliminar i alomillor editar
                     -->
                     <div class="card" th:each="fotos : ${listaImagenes}" style="width: 18rem;">
-                        <img th:src="@{${fotos.getNombreImagen}}" class="card-img-top rounded" alt="...">
+                        <img th:src="'/recursos/ '+ @{${fotos.getNombreImagen}}" class="card-img-top rounded" alt="...">
                         <div class="card-body">
                             <h5 th:text="${fotos.getNombreImagen()}" class="card-title"></h5>
                             <a href="#" class="btn btn-danger">

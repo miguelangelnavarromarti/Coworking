@@ -2,6 +2,7 @@ package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Repositorio.TipoEspaciosRepositorio;
+import coworking.backend_private.Servicio.Interficie.ITipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
