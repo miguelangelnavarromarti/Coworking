@@ -14,7 +14,9 @@ public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
-    private Integer codigoCliente;
+    @ManyToOne(optional = false)
+    @JoinColumn(name="codigoCliente")
+    private Cliente codigoCliente;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate diaFactura;
     @Column(columnDefinition = "DECIMAL")
