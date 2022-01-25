@@ -30,6 +30,11 @@ public class ImagenesServicioImpl implements IImagenesServicio {
     }
 
     @Override
+    public int numImagenes() {
+        return imagenesRepositorio.numImagenes();
+    }
+
+    @Override
     public void eliminar(String codigo) {
         imagenesRepositorio.deleteById(codigo);
     }

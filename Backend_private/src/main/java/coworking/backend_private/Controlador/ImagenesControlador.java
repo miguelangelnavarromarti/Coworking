@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/imagenes")
 public class ImagenesControlador {
-    private int contador;
+
 
     @Autowired
     private ITipoEspaciosServicio tipoEspacioServicio;
@@ -46,7 +46,7 @@ public class ImagenesControlador {
 
         InputStream is = img.getInputStream();
 
-        contador++;
+        int contador = imagenesServicio.numImagenes() +1;
         String nombreImagen = codigoTipoEspacio + "-" + contador + ".jpg";
 
         imagen.setNombreImagen(nombreImagen);
