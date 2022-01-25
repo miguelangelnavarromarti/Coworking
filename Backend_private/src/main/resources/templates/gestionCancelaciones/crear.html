@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head"></head>
+
+<body class="bg-light">
+
+<!-- <header th:replace="plantilla :: header"></header> -->
+
+<main class="container">
+    <div class="mt-5">
+        <h1 class="text-center" th:text="${titulo}"></h1>
+    </div>
+    <form class="row my-5" th:action="@{/gestionCancelaciones/guardar}" th:object="${cancelacion}" method="post">
+
+
+        <div class="mb-3 col-6">
+            <input type="hidden" th:field="*{codigo}">
+            <label for="diasAntelacion" class="form-label">Dias de Antelación *</label>
+            <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
+                          <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
+                        </svg>
+                    </span>
+                <input type="number" th:field="*{diasAntelacion}" class="form-control" id="diasAntelacion" aria-describedby="diasAntelacionHelp" min="1" required>
+            </div>
+            <div id="diasAntelacionHelp" class="form-text">Indica los dias de antelación</div>
+        </div>
+
+
+        <div class="mb-3 col-6">
+            <label for="devolucion" class="form-label">Devolución *</label>
+            <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                          <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                        </svg>
+                    </span>
+                <input type="number" th:field="*{devolucion}" class="form-control" id="devolucion" aria-describedby="devolucionHelp" min="0" max="100" required>
+            </div>
+            <div id="devolucionHelp" class="form-text">Indica el % de devolución</div>
+        </div>
+
+
+        <div class="mb-3 col-1">
+            <br>
+            <input id="guardar" type="submit" class="btn btn-primary" th:value="Guardar">
+        </div>
+        <div class="mb-3 col-1">
+            <br>
+            <a th:href="@{/gestionCancelaciones/}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+
+
+<!--footer th:replace="plantilla :: footer"></footer-->
+<script>
+    $(document).ready(function(){
+
+        $("#insertar").click(function(){
+            if ($("#minimoHora").val() <= 0) {
+                alert("Minimo de horas insuficiente!!!");
+                $("#minimoHora").val('');
+
+            }
+            if ($("#descuento").val() <= 0){
+                alert("Minimo de descuento insuficiente!!!");
+                $("#descuento").val('');
+            }
+        })
+    });
+
+</script>
+<script th:replace="plantilla :: script"></script>
+</body>
+</html>

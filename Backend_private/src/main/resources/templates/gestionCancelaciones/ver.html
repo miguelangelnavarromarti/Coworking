@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http://www.thymeleaf.org">
-<head th:replace="plantilla :: head">
-    <title>Tarifas</title>">
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="plantilla :: head"></head>
+
 <body class="bg-light">
 
-    <!-- <header th:replace="plantilla :: header"></header> -->
+<!-- <header th:replace="plantilla :: header"></header> -->
 
     <main>
         <div class="container my-2 p-2 shadow bg-body rounded-3">
@@ -15,11 +14,11 @@
                 <a class="text-center nav-link" href="#">Facturas</a>
                 <a class="text-center nav-link" href="#">Facturas Canceladas</a>
                 <a class="text-center nav-link" href="#">Reservas</a>
-                <a class="text-center nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a>
+                <a class="text-center nav-link active" aria-current="page" th:href="@{/gestionCancelaciones/}">Cancelaciones</a>
                 <a class="text-center nav-link" href="#">Disponibilidad</a>
                 <a class="text-center nav-link" href="#">Tipo Espacios</a>
                 <a class="text-center nav-link" href="#">Espacios</a>
-                <a class="text-center nav-link active" th:href="@{/tarifas/}"  aria-current="page">Tarifas</a>
+                <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
                 <a class="text-center nav-link" th:href="@{/gestionOfertas/}">Ofertas</a>
             </nav>
         </div>
@@ -32,25 +31,19 @@
             <table class="table nowrap" id="visualizationTable">
                 <thead class="table">
                 <tr>
-                    <th scope="col" class="text-center">ID</th>
-                    <th scope="col" class="text-center">Tipo Espacio</th>
-                    <th scope="col" class="text-center">Precio</th>
-                    <th scope="col" class="text-center">Data Inicio</th>
-                    <th scope="col" class="text-center">Data Fin</th>
-                    <th scope="col" class="text-center">Por Defecto</th>
-                    <th scope="col" class="text-center">Modificar</th>
+                    <th scope="col" class="text-center">Código</th>
+                    <th scope="col" class="text-center">Dias Antelación</th>
+                    <th scope="col" class="text-center">Devolución</th>
+                    <th scope="col" class="text-center" style="box-shadow: -5px 0 5px -5px #333;">Modificar</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="tarifa:${tabla}">
-                    <th scope="row" th:text="${tarifa.codigo}" class="py-3 text-center bg-white"></th>
-                    <td th:text="${tarifa.codigoTipoEspacio.nombre}" class="py-3 text-center bg-white"></td>
-                    <td th:text="${tarifa.precio}" class="py-3 text-center bg-white"></td>
-                    <td th:text="${tarifa.dataInicio}" class="py-3 text-center bg-white"></td>
-                    <td th:text="${tarifa.dataFin}" class="py-3 text-center bg-white"></td>
-                    <td th:text="${tarifa.porDefecto}" th:id="tarifa+${tarifa.codigo}"class="py-3 text-center bg-white"></td>
+                <tr th:each="go:${tabla}">
+                    <th scope="row" th:text="${go.codigo}" class="py-3 text-center align-middle bg-white fw-bold"></th>
+                    <td th:text="${go.diasAntelacion}" class="py-3 text-center align-middle bg-white"></td>
+                    <td th:text="${go.devolucion}" class="py-3 text-center align-middle bg-white"></td>
                     <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
-                        <a class="btn btn-warning text-dark" th:href="@{/tarifas/modificar/} + ${tarifa.codigo}" th:title="${tarifa.codigo}">
+                        <a class="btn btn-warning text-dark" th:href="@{/gestionCancelaciones/editar/} + ${go.codigo}" title="Modificar Cancelación">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -61,46 +54,30 @@
                 </tbody>
             </table>
         </div>
-    </main>
 
-    <!--footer th:replace="plantilla :: footer"></footer-->
 
-    <script>
-        $(document).ready(function(){
 
-            $(".btn-warning").click(function(){
-                //Seleccion per sa classe que te es boto, per tant s'aplica a tots.
-                var id = $(this).attr("id");
-                var codigo = $(this).attr("title");
-                var modificable = $(this).parent().prev().text();
-                //alert(id+", "+modificable);
+<!--footer th:replace="plantilla :: footer"></footer-->
 
-                if(modificable=="true"){
-                    //window.href = "/tarifas/editarDefecto/"+ codigo;
-                    $(this).attr("href","/tarifas/modificarDefecto/"+ codigo);
-                }
-                else {
-                    window.href = "/tarifas/modificar/"+ codigo;
-                }
-            });
-
+    <script type="text/javascript" th:replace="plantilla :: script"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
             var nombre = $('h1 span').text();
 
-            crearDataTable('visualizationTable',0,0,nombre);
+            crearDataTable('visualizationTable',2,1,nombre);
 
             var botoExcel = $('.dt-buttons button');
 
             var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" fill=\"currentColor\" class=\"bi bi-table me-2\" viewBox=\"0 0 16 16\">\n" +
                 "  <path d=\"M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z\"/>\n" +
                 "</svg>";
-            var a = "<a class=\"btn btn-primary me-2\" href=\"/tarifas/crear\">Nueva Tarifa</a>"
+            var a = "<a class=\"btn btn-primary me-2\" href=\"/gestionCancelaciones/crear\">Nueva Cancelación</a>"
 
 
             $('button span').addClass('align-middle');
             botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success me-2').prepend(svg);
             $('div .dt-buttons').prepend(a);
-        });
+        } );
     </script>
-    <script th:replace="plantilla :: script"></script>
-</body>
+    </body>
 </html>

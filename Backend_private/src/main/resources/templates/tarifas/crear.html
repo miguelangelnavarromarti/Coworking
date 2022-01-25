@@ -21,7 +21,7 @@
                   <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
                 </svg>
             </span>
-              <select th:field="*{codigoTipoEspacio}" id="codigoTipoEspacio" class="form-select" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
+              <select th:field="*{codigoTipoEspacio.codigo}" id="codigoTipoEspacio" class="form-select" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
                   <option
                           th:each="tipoEspacio:${listaTipoEspacio}"
                           th:value="${tipoEspacio.codigo}"

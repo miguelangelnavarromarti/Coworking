@@ -62,9 +62,10 @@ public class ImagenesControlador {
             os.write(readBuf, 0, bytesRead);
         }
         // Passam l'arxiu a dins una carpeta
-        String ruta = "E:/DAW/imgCoworking/";
+        //String ruta = "E:/DAW/imgCoworking/";
         //String ruta = "C://imgCoworking";         //Sa que vulguis tu MIKI
-        String fileName = ruta + nombreImagen;
+        //String fileName = ruta + nombreImagen;
+        String fileName = nombreImagen;
 
         OutputStream outputStream = new FileOutputStream(fileName);
         os.writeTo(outputStream);

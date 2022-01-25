@@ -19,14 +19,15 @@ public class Imagen {
     public String getNombreImagen() {
         if (nombreImagen == null || codigoTipoEspacio == null) return null;
 
-        return "E://DAW//imgCoworking/" + nombreImagen;
+        //return "E:/DAW/imgCoworking/" + nombreImagen;
+        return nombreImagen;
     }
 
 /*
     CREATE TABLE IMAGENES (
     codigoTipoEspacio varchar(3) not null,
     nombreImagen varchar(64) not null,
-    PRIMARY KEY (codigoTipoEspacio)
+    PRIMARY KEY (nombreImagen)
     );
      */
 }

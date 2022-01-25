@@ -11,9 +11,9 @@ public class GestionCancelacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
-    private int diasAntelacion;
-    private int devolucion;
+    private Integer codigo;
+    private Integer diasAntelacion;
+    private Integer devolucion;
 
 
 }

@@ -34,11 +34,11 @@ public class TarifasServicioImpl implements ITarifasServicio {
 
     @Override
     public int comprobar(Tarifa tarifa) {
-        return tarifasRepositorio.findTarifaByDataInicioAndDataFin(tarifa.getCodigoTipoEspacio(),tarifa.getDataInicio(), tarifa.getDataFin());
+        return tarifasRepositorio.findTarifaByDataInicioAndDataFin(tarifa.getCodigoTipoEspacio().getCodigo(),tarifa.getDataInicio(), tarifa.getDataFin());
     }
 
     @Override
     public int comprobarConCodigo(Tarifa tarifa) {
-        return tarifasRepositorio.comprobarFechasConCodigo(tarifa.getCodigoTipoEspacio(),tarifa.getDataInicio(), tarifa.getDataFin(), tarifa.getCodigo());
+        return tarifasRepositorio.comprobarFechasConCodigo(tarifa.getCodigoTipoEspacio().getCodigo(),tarifa.getDataInicio(), tarifa.getDataFin(), tarifa.getCodigo());
     }
 }

@@ -103,7 +103,7 @@ public class TipoEspaciosControlador {
 
         tipoEspaciosServicio.guardar(tipoEspacio);
         Tarifa tarifa = new Tarifa(
-                tipoEspacio.getCodigo(),
+                tipoEspacio,
                 precio,
                 LocalDate.parse(hoy),
                 null,
