@@ -30,8 +30,8 @@ public class ImagenesServicioImpl implements IImagenesServicio {
     }
 
     @Override
-    public int numImagenes() {
-        return imagenesRepositorio.numImagenes();
+    public int numImagenes(String tipoEspacio) {
+        return imagenesRepositorio.numImagenes(tipoEspacio);
     }
 
     @Override

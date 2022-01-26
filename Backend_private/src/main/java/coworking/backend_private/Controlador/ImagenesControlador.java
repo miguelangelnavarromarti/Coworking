@@ -5,6 +5,7 @@ import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Servicio.Interficie.IImagenesServicio;
 import coworking.backend_private.Servicio.Interficie.ITipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import java.util.List;
 @RequestMapping("/imagenes")
 public class ImagenesControlador {
 
+    @Value("${rutes.fotos.controlador}")
+    String ruta;
 
     @Autowired
     private ITipoEspaciosServicio tipoEspacioServicio;
@@ -46,7 +49,7 @@ public class ImagenesControlador {
 
         InputStream is = img.getInputStream();
 
-        int contador = imagenesServicio.numImagenes() +1;
+        int contador = imagenesServicio.numImagenes(codigoTipoEspacio) +1;
         String nombreImagen = codigoTipoEspacio + "-" + contador + ".jpg";
 
         imagen.setNombreImagen(nombreImagen);
@@ -61,10 +64,8 @@ public class ImagenesControlador {
             int bytesRead = is.read(readBuf);
             os.write(readBuf, 0, bytesRead);
         }
-        // Passam l'arxiu a dins una carpeta
-        String ruta = "E://DAW/imgCoworking/";
-        //String ruta = "C://imgCoworking";         //Sa que vulguis tu MIKI
-        //String fileName = ruta + nombreImagen;
+
+
         String fileName = ruta + nombreImagen;
 
         OutputStream outputStream = new FileOutputStream(fileName);

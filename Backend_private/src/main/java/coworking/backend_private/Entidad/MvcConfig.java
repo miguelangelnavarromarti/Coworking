@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
 
     //@Value("${<rutes.fotos>}")
+
     //@Value("${rutes.fotos}")
     @Value("${rutes.fotos}")
     String rutaProperties;

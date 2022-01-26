@@ -9,6 +9,6 @@ public interface IImagenesServicio {
     public List<Imagen> verTodo();
     public void guardar(Imagen imagen);
     public Imagen buscarPorCodigo(String codigo);
-    public int numImagenes();
+    public int numImagenes(String tipoEspacio);
     public void eliminar(String codigo);
 }

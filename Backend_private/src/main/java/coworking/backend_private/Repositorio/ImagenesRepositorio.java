@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
 
 public interface ImagenesRepositorio extends JpaRepository<Imagen, String> {
-    @Query(value = "SELECT COUNT(`nombreImagen`) FROM IMAGENES",nativeQuery = true)
-    int numImagenes();
+    @Query(value = "SELECT COUNT(`nombreImagen`) FROM IMAGENES WHERE codigoTipoEspacio = ?1",nativeQuery = true)
+    int numImagenes(String tipoEspacio);
 }
