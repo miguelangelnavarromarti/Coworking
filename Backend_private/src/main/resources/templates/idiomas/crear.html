@@ -4,11 +4,11 @@
     <title>Crear Idioma</title>
 </head>
 <body>
-<header th:replace="plantilla :: header"></header>
 
-<main class="container my-5 p-5 shadow bg-body rounded-3">
-    <div class="mt-3">
-        <h1 class="text-center">Crear <span th:text="${nombre}"></span></h1>
+
+<main class="container">
+    <div class="mt-5">
+        <h1 class="text-center" th:text="${nombre}"></h1>
     </div>
     <form class="row my-5" th:action="@{/idiomas/comprobacionCodigo}" th:object="${idioma}" method="post">
 
@@ -39,12 +39,17 @@
         </div>
 
         <div class="mb-3 col-1">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <br>
+            <input id="modificar" type="submit" class="btn btn-primary" th:value="Guardar">
+        </div>
+        <div class="mb-3 col-1">
+            <br>
+            <a th:href="@{/idiomas/}" class="btn btn-danger">Cancelar</a>
         </div>
     </form>
 </main>
 
-<footer th:replace="plantilla :: footer"></footer>
+
 <script>
 
 </script>

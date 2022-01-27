@@ -43,8 +43,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="tarifa:${tabla}">
-                    <th scope="row" th:text="${tarifa.codigo}" class="py-3 text-center bg-white"></th>
-                    <td th:text="${tarifa.codigoTipoEspacio.nombre}" class="py-3 text-center bg-white"></td>
+                    <th scope="row" th:text="${tarifa.codigo}" class="py-3 text-center align-middle bg-white fw-bold"></th>
+                    <td th:text="${tarifa.codigoTipoEspacio.nombre}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
                     <td th:text="${tarifa.precio}" class="py-3 text-center bg-white"></td>
                     <td th:text="${tarifa.dataInicio}" class="py-3 text-center bg-white"></td>
                     <td th:text="${tarifa.dataFin}" class="py-3 text-center bg-white"></td>

@@ -4,7 +4,7 @@
     <title>Crear Espacio</title>
 </head>
 <body>
-<header th:replace="plantilla :: header"></header>
+
 
 <main class="container my-5 p-5 shadow bg-body rounded-3">
     <div class="mt-3">
@@ -26,7 +26,7 @@
                             th:each="tipoEspacio:${listaTipoEspacio}"
                             th:value="${tipoEspacio.codigo}"
                             th:text="${tipoEspacio.nombre}"
-                    />
+                    ></option>
                 </select>
             </div>
             <div id="tipoEspacioHelp" class="form-text">Selecciona el Tipo de Espacio</div>
@@ -99,12 +99,17 @@
 
 
         <div class="mb-3 col-1">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <br>
+            <input id="modificar" type="submit" class="btn btn-primary" th:value="Modificar">
+        </div>
+        <div class="mb-3 col-1">
+            <br>
+            <a th:href="@{/bloqueos/}" class="btn btn-danger">Cancelar</a>
         </div>
     </form>
 </main>
 
-<footer th:replace="plantilla :: footer"></footer>
+
 <script>
 
 </script>

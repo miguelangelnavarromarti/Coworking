@@ -5,14 +5,28 @@
 </head>
 <body>
 
-<header th:replace="plantilla :: header"></header>
-
 <main>
-    <div class="container mt-5">
-        <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+    <div class="container my-2 p-2 shadow bg-body rounded-3">
+        <nav class="nav nav-pills nav-fill">
+            <a class="text-center nav-link" th:href="@{/clientes/}">Clientes</a>
+            <a class="text-center nav-link" href="#">Opiniones</a>
+            <a class="text-center nav-link" href="#">Facturas</a>
+            <a class="text-center nav-link" href="#">Facturas Canceladas</a>
+            <a class="text-center nav-link" href="#">Reservas</a>
+            <a class="text-center nav-link" href="#">Cancelaciones</a>
+            <a class="text-center nav-link" href="#">Disponibilidad</a>
+            <a class="text-center nav-link" href="#">Tipo Espacios</a>
+            <a class="text-center nav-link" href="#">Espacios</a>
+            <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+            <a class="text-center nav-link active" aria-current="page" th:href="@{/gestionOfertas/}">Ofertas</a>
+        </nav>
     </div>
 
-    <div class="container my-5 p-5 shadow bg-body rounded-3">
+
+    <div class="container my-5 p-4 shadow bg-body rounded-3">
+        <div class="container mb-5">
+            <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+        </div>
         <table class="table nowrap" id="visualizationTable">
             <thead class="table">
             <tr>
@@ -20,42 +34,61 @@
                 <th scope="col" class="text-center">Hora</th>
                 <th scope="col" class="text-center">Día de Bloqueo</th>
                 <th scope="col" class="text-center">Día y Hora de Creación</th>
-                <th scope="col" class="text-center">Editar</th>
+                <th scope="col" class="text-center">Modificar</th>
                 <th scope="col" class="text-center">Eliminar</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="bl:${bloqueos}">
-                <th scope="row" th:text="${bl.codigoEspacio.getNombre()}" class="py-3 text-center bg-white"></th>
-                <td th:text="${bl.hora.getHora()}" class="py-3 text-center bg-white"></td>
-                <td th:text="${bl.diaBloqueo}" class="py-3 text-center bg-white"></td>
-                <td th:text="${bl.diaHoraCreacion}" class="py-3 text-center bg-white"></td>
-                <td>
-                    <a th:href="@{/bloqueos/modificar/} + ${bl.codigo}"
-                       th:id="modificar+${bl.codigo}" th:text="Modificar"
-                       th:title="${bl.codigo}" class="btn btn-warning"></a>
+                <th scope="row" th:text="${bl.codigoEspacio.getNombre()}" class="py-3 text-center align-middle bg-white fw-bold"></th>
+                <td th:text="${bl.hora.getHora()}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
+                <td th:text="${bl.diaBloqueo}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${bl.diaHoraCreacion}" class="py-3 text-center align-middle bg-white"></td>
+                <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
+                    <a class="btn btn-warning text-dark" th:href="@{/bloqueos/modificar/} + ${bl.codigo}"  th:title="${bl.codigo}" th:id="modificar+${bl.codigo}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </a>
                 </td>
-                <td>
-                    <a th:href="@{/bloqueos/eliminar/} + ${bl.codigo}"
-                       th:id="eliminar+${bl.codigo}" th:text="Eliminar"
-                       th:title="${bl.codigo}" class="btn btn-danger"></a>
+                <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
+                    <a class="btn btn-danger text-dark" th:id="eliminar+${bl.codigo}" th:href="@{/bloqueos/eliminar/} + ${bl.codigo}"  th:title="${bl.codigo}" data-bs-toggle="modal" th:data-bs-target="'#deleteModal' + ${bl.codigo}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </a>
                 </td>
             </tr>
             </tbody>
         </table>
 
 
-        <div class="d-flex mt-5 justify-content-between" id="botones">
-            <div>
-                <a class="btn btn-primary" th:href="@{/bloqueos/crear}">Nuevo Bloqueo</a>
+        <!-- Delete Modal -->
+        <div th:each="bl:${bloqueos}" class="modal fade" th:id="deleteModal + ${bl.codigo}" tabindex="-1" th:aria-labelledby="deleteModalLabel + ${bl.codigo}" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:id="deleteModalLabel + ${bl.codigo}">Eliminar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar la fila seleccionada?<br>Los datos eliminados no se podran recuperar.
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-danger text-white" th:id="'deleteRow' + ${bl.codigo}" th:href="@{/bloqueos/eliminar/} + ${bl.codigo}" title="Eliminar Oferta">Eliminar</a>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 
 
 
 </main>
-<footer th:replace="plantilla :: footer"></footer>
+
 <script>
     $(document).ready(function(){
 
@@ -65,13 +98,15 @@
 
         var botoExcel = $('.dt-buttons button');
 
-        $('#visualizationTable_wrapper').remove(botoExcel);
-        $('#botones').append(botoExcel);
+        var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" fill=\"currentColor\" class=\"bi bi-table me-2\" viewBox=\"0 0 16 16\">\n" +
+            "  <path d=\"M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z\"/>\n" +
+            "</svg>";
+        var a = "<a class=\"btn btn-primary me-2\" href=\"/bloqueos/crear\">Nuevo Bloqueo</a>"
 
-        botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success');
 
-        /* Añadir formato a la hora */
-        $("tbody tr td:nth-child(2)").append(":00");
+        $('button span').addClass('align-middle');
+        botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success me-2').prepend(svg);
+        $('div .dt-buttons').prepend(a);
     });
 </script>
 <script th:replace="plantilla :: script"></script>
