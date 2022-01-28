@@ -1,17 +1,15 @@
 package coworking.backend_private.Controlador;
 
 import coworking.backend_private.Entidad.*;
-import coworking.backend_private.Servicio.IIdiomasServicio;
-import coworking.backend_private.Servicio.ITarifasServicio;
-import coworking.backend_private.Servicio.ITipoEspaciosServicio;
-import coworking.backend_private.Servicio.ITraduccionesTipoEspaciosServicio;
-import org.hibernate.tool.schema.extract.spi.TableInformation;
+import coworking.backend_private.Servicio.Interficie.IIdiomasServicio;
+import coworking.backend_private.Servicio.Interficie.ITarifasServicio;
+import coworking.backend_private.Servicio.Interficie.ITipoEspaciosServicio;
+import coworking.backend_private.Servicio.Interficie.ITraduccionesTipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package coworking.backend_private.Servicio;
+package coworking.backend_private.Servicio.Interficie;
 
 import coworking.backend_private.Entidad.Espacio;
 import coworking.backend_private.Entidad.TipoEspacio;

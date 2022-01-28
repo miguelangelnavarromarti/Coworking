@@ -1,7 +1,7 @@
 package coworking.backend_private.Controlador;
 
 import coworking.backend_private.Entidad.Cliente;
-import coworking.backend_private.Servicio.IClientesServicio;
+import coworking.backend_private.Servicio.Interficie.IClientesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

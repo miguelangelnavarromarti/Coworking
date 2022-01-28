@@ -2,13 +2,14 @@ package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.Imagen;
 import coworking.backend_private.Repositorio.ImagenesRepositorio;
+import coworking.backend_private.Servicio.Interficie.IImagenesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ImagenesServicioImpl implements IImagenesServicio{
+public class ImagenesServicioImpl implements IImagenesServicio {
 
     @Autowired
     private ImagenesRepositorio imagenesRepositorio;

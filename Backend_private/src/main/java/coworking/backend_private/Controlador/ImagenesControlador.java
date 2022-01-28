@@ -2,9 +2,8 @@ package coworking.backend_private.Controlador;
 
 import coworking.backend_private.Entidad.Imagen;
 import coworking.backend_private.Entidad.TipoEspacio;
-import coworking.backend_private.Repositorio.ImagenesRepositorio;
-import coworking.backend_private.Servicio.IImagenesServicio;
-import coworking.backend_private.Servicio.ITipoEspaciosServicio;
+import coworking.backend_private.Servicio.Interficie.IImagenesServicio;
+import coworking.backend_private.Servicio.Interficie.ITipoEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

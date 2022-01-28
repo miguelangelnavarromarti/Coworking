@@ -1,0 +1,14 @@
+package coworking.backend_private.Servicio.Interficie;
+
+import coworking.backend_private.Entidad.Espacio;
+import coworking.backend_private.Entidad.Reserva;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public interface IReservasServicio {
+    public List<Reserva> verReservas();
+    public Reserva verReservaPorCodigo(Integer codigo);
+    public void guardar(Reserva reserva);
+    public List<Reserva> verReservasEspacioYDia(Espacio espacio, LocalDate dia);
+}

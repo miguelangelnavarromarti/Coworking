@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head">
+    <title>Disponibilidad</title>">
+</head>
+<body>
+
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center">Disponibilidad</span></h1>
+    </div>
+
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <div class="row">
+            <div class="col-6" id="datepicker">
+
+            </div>
+            <div class="col-6">
+                <div id="horasDisponibles" class="row"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<script>
+
+    $(document).ready(function () {
+        var codigoEspacio = [[${codigoEspacio}]];
+        var dia = "[[${stringDia}]]";
+
+        $.getJSON("/disponibilidadJson/" + codigoEspacio + "/" + dia, function (result) {
+            $.each(result, function (hora, nombreUsuario) {
+                var informacionHora = "<p class='m-auto'>" + hora + ":00</p><p class='m-auto'>" + nombreUsuario +"</p>";
+                var divHora = $("<div />").addClass("col-3 border border-1 rounded-pill text-center").append(informacionHora);
+                $("#horasDisponibles").append(divHora);
+
+                $("#horasDisponibles .col-3 p:nth-child(2)").each(function(){
+                    if ($(this).text() === "VACIO") {
+                        $(this).parent().addClass("bg-success");
+                    } else if ($(this).text() === "BLOQUEADO"){
+                        $(this).parent().addClass("bg-danger");
+                    } else {
+                        $(this).parent().addClass("bg-warning");
+                    }
+                })
+            });
+        });
+
+        var dateDia = new Date(dia);
+        $("#datepicker").datepicker({
+            dateformat: "yyyy-mm-dd",
+            defaultDate: dateDia,
+            onSelect: function (date, datepicker) {
+                if (date != "") {
+                    let arrayDate = date.split("/");
+                    let year = arrayDate[2];
+                    let month = arrayDate[0];
+                    let day = arrayDate[1];
+                    let realDate = year + "-" + month + "-" + day;
+
+                    var url = document.location.origin;
+                    var urlComplete = url + "/disponibilidad/" + codigoEspacio + "/" + realDate;
+                    window.location.href = urlComplete;
+                }
+            }
+        });
+
+        <!-- Calendari -->
+        $("#datepicker div").css("width", "80%").addClass("m-auto");
+
+        <!-- Barra superior -->
+        $("#datepicker div div").addClass("w-100 bg-secondary text-darl");
+
+        <!-- Hoy -->
+        $(".ui-state-highlight").removeClass("ui-state-highlight");
+
+    });
+
+</script>
+<script th:replace="plantilla :: script"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@ package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Repositorio.ClientesRepositorio;
+import coworking.backend_private.Servicio.Interficie.IClientesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientesServicioImpl implements IClientesServicio{
+public class ClientesServicioImpl implements IClientesServicio {
 
     @Autowired
     private ClientesRepositorio clientesRepositorio;

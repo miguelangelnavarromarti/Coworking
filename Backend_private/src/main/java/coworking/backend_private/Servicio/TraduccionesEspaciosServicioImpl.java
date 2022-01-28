@@ -4,13 +4,14 @@ import coworking.backend_private.Entidad.Idioma;
 import coworking.backend_private.Entidad.Espacio;
 import coworking.backend_private.Entidad.TraduccionEspacio;
 import coworking.backend_private.Repositorio.TraduccionesEspaciosRepositorio;
+import coworking.backend_private.Servicio.Interficie.ITraduccionesEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TraduccionesEspaciosServicioImpl implements ITraduccionesEspaciosServicio{
+public class TraduccionesEspaciosServicioImpl implements ITraduccionesEspaciosServicio {
 
     @Autowired
     private TraduccionesEspaciosRepositorio traduccionesEspaciosRepositorio;
