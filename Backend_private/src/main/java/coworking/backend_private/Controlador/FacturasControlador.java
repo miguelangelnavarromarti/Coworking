@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,5 +26,13 @@ public class FacturasControlador {
         model.addAttribute("facturas",verFacturas);
 
         return "facturas/ver";
+    }
+
+    @GetMapping("/modificar/{codigo}")
+    public String modificar (@PathVariable("codigo") Integer codigo, Model model){
+        Factura factura = facturasServicio.buscarPorCodigo(codigo);
+        model.addAttribute("nombre","Factura");
+        model.addAttribute("factura",factura);
+        return "facturas/modificar";
     }
 }
