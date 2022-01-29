@@ -27,7 +27,7 @@ public class GestionCancelacionesControlador {
     @GetMapping("/crear")
     public String crear (Model model){
         GestionCancelacion gestionCancelacion = new GestionCancelacion();
-        model.addAttribute("titulo","Insertar Cancelación");
+        model.addAttribute("titulo","Cancelación");
         model.addAttribute("cancelacion", gestionCancelacion);
         return "gestionCancelaciones/crear";
     }

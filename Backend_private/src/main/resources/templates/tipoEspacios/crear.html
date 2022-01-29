@@ -1,68 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="plantilla :: head">
-    <title>Crear Tipo Espacio</title>
-</head>
+<head th:replace="plantilla :: head"></head>
 <body>
 
-<main class="container my-5 p-5 shadow bg-body rounded-3">
-    <div class="mt-3">
-        <h1 class="text-center">Crear <span th:text="${nombre}"></span></h1>
+<main>
+    <div class="container my-2 p-2 shadow bg-body rounded-3">
+        <nav class="nav nav-pills nav-fill">
+            <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+            <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="disponibilidadDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
+            <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/bloqueos/}">Bloqueos</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+            <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="espaciosDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+            <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button"
+               id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+            <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+            </ul>
+        </nav>
     </div>
-    <form class="row my-5" id="formTipoEspacio" th:action="@{/tipoEspacios/guardarConTarifa}" th:object="${tipoEspacio}" method="post">
 
-        <div class="mb-3 col-6">
-            <label for="codigo" class="form-label">Codigo *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{codigo}" class="form-control" id="codigo" aria-describedby="codigoHelp" minlength="3" maxlength="3" required>
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <div class="mt-3">
+            <h1 class="text-center">Crear <span th:text="${nombre}"></span></h1>
+        </div>
+        <form class="row my-5" id="formTipoEspacio" th:action="@{/tipoEspacios/guardarConTarifa}" th:object="${tipoEspacio}" method="post">
+
+            <div class="mb-3 col-6">
+                <label for="codigo" class="form-label">Codigo *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{codigo}" class="form-control" id="codigo" aria-describedby="codigoHelp" minlength="3" maxlength="3" required>
+                </div>
+                <div id="codigoHelp" class="form-text">Escribe el código del Tipo Espacio</div>
             </div>
-            <div id="codigoHelp" class="form-text">Escribe el código del Tipo Espacio</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="nombre" class="form-label">Nombre *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" aria-describedby="nombreHelp" required>
+            <div class="mb-3 col-6">
+                <label for="nombre" class="form-label">Nombre *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" aria-describedby="nombreHelp" required>
+                </div>
+                <div id="nombreHelp" class="form-text">Escribe el nombre del Tipo Espacio</div>
             </div>
-            <div id="nombreHelp" class="form-text">Escribe el nombre del Tipo Espacio</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="precio" class="form-label">Precio *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="number" name="precio" class="form-control" id="precio" aria-describedby="precioHelp" step=".01" min="0" required>
+            <div class="mb-3 col-6">
+                <label for="precio" class="form-label">Precio *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="number" name="precio" class="form-control" id="precio" aria-describedby="precioHelp" step=".01" min="0" required>
+                </div>
+                <div id="precioHelp" class="form-text">Escribe el precio del Tipo Espacio</div>
             </div>
-            <div id="precioHelp" class="form-text">Escribe el precio del Tipo Espacio</div>
-        </div>
 
-        <input type="hidden" name="hoy" class="form-control" id="hoy" required>
+            <input type="hidden" name="hoy" class="form-control" id="hoy" required>
 
-        <div class="row">
-        <div class="mb-3 col-1">
-            <br>
-            <input id="modificar" type="submit" class="btn btn-primary" th:value="Guardar">
-        </div>
-        <div class="mb-3 col-1">
-            <br>
-            <a th:href="@{/tipoEspacios/}" class="btn btn-danger">Cancelar</a>
-        </div>
-        </div>
-    </form>
+            <div class="row">
+            <div class="mb-3 col-1">
+                <br>
+                <input id="modificar" type="submit" class="btn btn-primary" th:value="Guardar">
+            </div>
+            <div class="mb-3 col-1">
+                <br>
+                <a th:href="@{/tipoEspacios/}" class="btn btn-danger">Cancelar</a>
+            </div>
+            </div>
+        </form>
+    </div>
 </main>
 
 

@@ -27,7 +27,7 @@ public class GestionOfertasControlador {
     @GetMapping("/crear")
     public String crear(Model model){
         GestionOferta gestionOferta = new GestionOferta();
-        model.addAttribute("titulo", "Insertar Oferta");
+        model.addAttribute("titulo", "Crear Oferta");
         model.addAttribute("oferta",gestionOferta);
         return "gestionOfertas/crear";
     }

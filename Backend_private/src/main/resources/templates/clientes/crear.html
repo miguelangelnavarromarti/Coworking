@@ -4,121 +4,171 @@
 
 <body class="bg-light">
 
-<!-- <header th:replace="plantilla :: header"></header> -->
 
-<main class="container my-5 p-5 shadow bg-body rounded-3">
-    <div class="mt-3">
-        <h1 class="text-center">Crear <span th:text="${nombre}"></span></h1>
+<main>
+    <div class="container my-2 p-2 shadow bg-body rounded-3">
+        <nav class="nav nav-pills nav-fill">
+            <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="clientesDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+            <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="disponibilidadDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
+            <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/bloqueos/}">Bloqueos</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+            <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="espaciosDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+            <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button"
+               id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+            <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+            </ul>
+        </nav>
     </div>
-    <form class="row my-5" th:action="@{/clientes/comprobacionNombreUsuarioYEmail}" th:object="${cliente}" method="post">
-        <div class="mb-3 col-6">
-            <label for="nombreUsuario" class="form-label">Nombre Usuario *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{nombreUsuario}" class="form-control" id="nombreUsuario" aria-describedby="nombreUsuarioHelp" required>
-            </div>
-            <div id="nombreUsuarioHelp" class="form-text">Escribe tu nombre de usuario</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="password" class="form-label">Contraseña *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="password" th:field="*{password}" class="form-control" id="password" aria-describedby="passwordHelp" required>
+    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        <div class="container mb-5">
+            <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+        </div>
+        <form class="row my-5" th:action="@{/clientes/comprobacionNombreUsuarioYEmail}" th:object="${cliente}" method="post">
+            <div class="mb-3 col-6">
+                <label for="nombreUsuario" class="form-label">Nombre Usuario *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{nombreUsuario}" class="form-control" id="nombreUsuario" aria-describedby="nombreUsuarioHelp" required>
+                </div>
+                <div id="nombreUsuarioHelp" class="form-text">Escribe tu nombre de usuario</div>
             </div>
-            <div id="passwordHelp" class="form-text">Escribe tu contraseña</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="nombre" class="form-label">Nombre *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" aria-describedby="nombreHelp" required>
+            <div class="mb-3 col-6">
+                <label for="password" class="form-label">Contraseña *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="password" th:field="*{password}" class="form-control" id="password" aria-describedby="passwordHelp" required>
+                </div>
+                <div id="passwordHelp" class="form-text">Escribe tu contraseña</div>
             </div>
-            <div id="nombreHelp" class="form-text">Escribe tu nombre</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="primerApellido" class="form-label">Primer apellido *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{apellido1}" class="form-control" id="primerApellido" aria-describedby="primerApellidoHelp" required>
+            <div class="mb-3 col-6">
+                <label for="nombre" class="form-label">Nombre *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" aria-describedby="nombreHelp" required>
+                </div>
+                <div id="nombreHelp" class="form-text">Escribe tu nombre</div>
             </div>
-            <div id="primerApellidoHelp" class="form-text">Escribe tu primer apellido</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="segundoApellido" class="form-label">Segundo apellido</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{apellido2}" class="form-control" id="segundoApellido" aria-describedby="segundoApellidoHelp">
+            <div class="mb-3 col-6">
+                <label for="primerApellido" class="form-label">Primer apellido *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{apellido1}" class="form-control" id="primerApellido" aria-describedby="primerApellidoHelp" required>
+                </div>
+                <div id="primerApellidoHelp" class="form-text">Escribe tu primer apellido</div>
             </div>
-            <div id="segundoApellidoHelp" class="form-text">Escribe tu segundo apellido</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="telefono" class="form-label">Teléfono *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                    </svg>
-                </span>
-                <input type="tel" th:field="*{telefono}" class="form-control" id="telefono" aria-describedby="telefonoHelp" pattern="[0-9]{9}" required>
+            <div class="mb-3 col-6">
+                <label for="segundoApellido" class="form-label">Segundo apellido</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{apellido2}" class="form-control" id="segundoApellido" aria-describedby="segundoApellidoHelp">
+                </div>
+                <div id="segundoApellidoHelp" class="form-text">Escribe tu segundo apellido</div>
             </div>
-            <div id="telefonoHelp" class="form-text">Escribe tu número de teléfono. Ejemplo: 971555453</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="email" class="form-label">Email *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                    </svg>
-                </span>
-                <input type="email" th:field="*{email}" class="form-control" id="email" aria-describedby="emailHelp" required>
+            <div class="mb-3 col-6">
+                <label for="telefono" class="form-label">Teléfono *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                        </svg>
+                    </span>
+                    <input type="tel" th:field="*{telefono}" class="form-control" id="telefono" aria-describedby="telefonoHelp" pattern="[0-9]{9}" required>
+                </div>
+                <div id="telefonoHelp" class="form-text">Escribe tu número de teléfono. Ejemplo: 971555453</div>
             </div>
-            <div id="emailHelp" class="form-text">Escribe tu email</div>
-        </div>
 
-        <div class="mb-3 col-6">
-            <label for="codigoPostal" class="form-label">Código Postal *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost" viewBox="0 0 16 16">
-                        <path d="M7 1.414V4H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v6h2v-6h3.532a1 1 0 0 0 .768-.36l1.933-2.32a.5.5 0 0 0 0-.64L13.3 4.36a1 1 0 0 0-.768-.36H9V1.414a1 1 0 0 0-2 0zM12.532 5l1.666 2-1.666 2H2V5h10.532z"/>
-                    </svg>
-                </span>
-                <input type="number" th:field="*{codigoPostal}" class="form-control" id="codigoPostal" aria-describedby="codigoPostalHelp" pattern="[0-9]{5}" required>
+            <div class="mb-3 col-6">
+                <label for="email" class="form-label">Email *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                        </svg>
+                    </span>
+                    <input type="email" th:field="*{email}" class="form-control" id="email" aria-describedby="emailHelp" required>
+                </div>
+                <div id="emailHelp" class="form-text">Escribe tu email</div>
             </div>
-            <div id="codigoPostalHelp" class="form-text">Escribe tu código postal. Ejemplo: 07500</div>
-        </div>
 
-        <div class="mb-3 col-1">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
-    </form>
+            <div class="mb-3 col-6">
+                <label for="codigoPostal" class="form-label">Código Postal *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost" viewBox="0 0 16 16">
+                            <path d="M7 1.414V4H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v6h2v-6h3.532a1 1 0 0 0 .768-.36l1.933-2.32a.5.5 0 0 0 0-.64L13.3 4.36a1 1 0 0 0-.768-.36H9V1.414a1 1 0 0 0-2 0zM12.532 5l1.666 2-1.666 2H2V5h10.532z"/>
+                        </svg>
+                    </span>
+                    <input type="number" th:field="*{codigoPostal}" class="form-control" id="codigoPostal" aria-describedby="codigoPostalHelp" pattern="[0-9]{5}" required>
+                </div>
+                <div id="codigoPostalHelp" class="form-text">Escribe tu código postal. Ejemplo: 07500</div>
+            </div>
+
+            <div class="mb-3 col-1">
+                <br>
+                <input id="guardar" type="submit" class="btn btn-primary" th:value="Guardar">
+            </div>
+            <div class="mb-3 col-1">
+                <br>
+                <a th:href="@{/clientes/}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </main>
 
 <!--footer th:replace="plantilla :: footer"></footer-->

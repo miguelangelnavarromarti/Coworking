@@ -1,24 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http://www.thymeleaf.org">
-<head th:replace="plantilla :: head">
-    <title>Bloqueos</title>">
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: head"></head>
+<body class="bg-light">
 
 <main>
     <div class="container my-2 p-2 shadow bg-body rounded-3">
         <nav class="nav nav-pills nav-fill">
-            <a class="text-center nav-link" th:href="@{/clientes/}">Clientes</a>
-            <a class="text-center nav-link" href="#">Opiniones</a>
-            <a class="text-center nav-link" href="#">Facturas</a>
-            <a class="text-center nav-link" href="#">Facturas Canceladas</a>
-            <a class="text-center nav-link" href="#">Reservas</a>
-            <a class="text-center nav-link" href="#">Cancelaciones</a>
-            <a class="text-center nav-link" href="#">Disponibilidad</a>
-            <a class="text-center nav-link" href="#">Tipo Espacios</a>
-            <a class="text-center nav-link" href="#">Espacios</a>
+            <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+            <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="disponibilidadDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
+            <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/bloqueos/}">Bloqueos</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+            <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="espaciosDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+            <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+            </ul>
+
             <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
-            <a class="text-center nav-link active" aria-current="page" th:href="@{/gestionOfertas/}">Ofertas</a>
+
+            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button"
+               id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+            <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+            </ul>
         </nav>
     </div>
 
@@ -40,23 +67,32 @@
             </thead>
             <tbody>
             <tr th:each="bl:${bloqueos}">
-                <th scope="row" th:text="${bl.codigoEspacio.getNombre()}" class="py-3 text-center align-middle bg-white fw-bold"></th>
-                <td th:text="${bl.hora.getHora()}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
+                <th scope="row" th:text="${bl.codigoEspacio.getNombre()}"
+                    class="py-3 text-center align-middle bg-white fw-bold"></th>
+                <td th:text="${bl.hora.getHora()}" class="py-3 text-center align-middle bg-white"
+                    style="box-shadow: -5px 0 5px -5px #333;"></td>
                 <td th:text="${bl.diaBloqueo}" class="py-3 text-center align-middle bg-white"></td>
                 <td th:text="${bl.diaHoraCreacion}" class="py-3 text-center align-middle bg-white"></td>
                 <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
-                    <a class="btn btn-warning text-dark" th:href="@{/bloqueos/modificar/} + ${bl.codigo}"  th:title="${bl.codigo}" th:id="modificar+${bl.codigo}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <a class="btn btn-warning text-dark" th:href="@{/bloqueos/modificar/} + ${bl.codigo}"
+                       th:title="${bl.codigo}" th:id="modificar+${bl.codigo}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            <path fill-rule="evenodd"
+                                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                         </svg>
                     </a>
                 </td>
                 <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
-                    <a class="btn btn-danger text-dark" th:id="eliminar+${bl.codigo}" th:href="@{/bloqueos/eliminar/} + ${bl.codigo}"  th:title="${bl.codigo}" data-bs-toggle="modal" th:data-bs-target="'#deleteModal' + ${bl.codigo}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <a class="btn btn-danger text-dark" th:id="eliminar+${bl.codigo}"
+                       th:href="@{/bloqueos/eliminar/} + ${bl.codigo}" th:title="${bl.codigo}" data-bs-toggle="modal"
+                       th:data-bs-target="'#deleteModal' + ${bl.codigo}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            <path fill-rule="evenodd"
+                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                         </svg>
                     </a>
                 </td>
@@ -66,7 +102,8 @@
 
 
         <!-- Delete Modal -->
-        <div th:each="bl:${bloqueos}" class="modal fade" th:id="deleteModal + ${bl.codigo}" tabindex="-1" th:aria-labelledby="deleteModalLabel + ${bl.codigo}" aria-hidden="true" data-bs-backdrop="static">
+        <div th:each="bl:${bloqueos}" class="modal fade" th:id="deleteModal + ${bl.codigo}" tabindex="-1"
+             th:aria-labelledby="deleteModalLabel + ${bl.codigo}" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -74,10 +111,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ¿Estás seguro de que quieres eliminar la fila seleccionada?<br>Los datos eliminados no se podran recuperar.
+                        ¿Estás seguro de que quieres eliminar la fila seleccionada?<br>Los datos eliminados no se podran
+                        recuperar.
                     </div>
                     <div class="modal-footer">
-                        <a class="btn btn-danger text-white" th:id="'deleteRow' + ${bl.codigo}" th:href="@{/bloqueos/eliminar/} + ${bl.codigo}" title="Eliminar Oferta">Eliminar</a>
+                        <a class="btn btn-danger text-white" th:id="'deleteRow' + ${bl.codigo}"
+                           th:href="@{/bloqueos/eliminar/} + ${bl.codigo}" title="Eliminar Oferta">Eliminar</a>
                     </div>
                 </div>
             </div>
@@ -86,15 +125,14 @@
     </div>
 
 
-
 </main>
-
+<script th:replace="plantilla :: script1"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         var nombre = $('h1 span').text();
 
-        crearDataTable('visualizationTable',0,0,nombre);
+        crearDataTable('visualizationTable', 0, 0, nombre,4,5);
 
         var botoExcel = $('.dt-buttons button');
 
@@ -109,6 +147,6 @@
         $('div .dt-buttons').prepend(a);
     });
 </script>
-<script th:replace="plantilla :: script"></script>
+
 </body>
 </html>
