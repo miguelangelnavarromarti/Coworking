@@ -5,9 +5,7 @@ import coworking.backend_private.Servicio.Interficie.IFacturasServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +26,13 @@ public class FacturasControlador {
         return "facturas/ver";
     }
 
+    @PostMapping("/guardar")
+    public String guardarFactura(@ModelAttribute Factura factura){
+
+        facturasServicio.guardar(factura);
+        return "redirect:/facturas";
+    }
+
     @GetMapping("/modificar/{codigo}")
     public String modificar (@PathVariable("codigo") Integer codigo, Model model){
         Factura factura = facturasServicio.buscarPorCodigo(codigo);
@@ -35,4 +40,6 @@ public class FacturasControlador {
         model.addAttribute("factura",factura);
         return "facturas/modificar";
     }
+
+
 }
