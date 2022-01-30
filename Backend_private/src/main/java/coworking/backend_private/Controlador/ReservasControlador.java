@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -39,6 +40,20 @@ public class ReservasControlador {
         model.addAttribute("reservas", verReservas);
 
         return "reservas/ver";
+    }
+
+    @GetMapping("/{codigoEspacio}/{dia}/{hora}")
+    public String getReserves(Model model, @PathVariable("codigoEspacio") Integer codigoEspacio, @PathVariable("dia") String dia, @PathVariable("hora") Integer hora){
+        model.addAttribute("nombre", "Reservas");
+
+        Espacio espacio = espaciosServicio.verEspacio(codigoEspacio);
+        LocalDate diaLocalDate = LocalDate.parse(dia);
+        HorarioDisponible horario = horariosDisponiblesServicio.verHora(hora);
+
+        Reserva verReserva = reservasServicio.verReservaEspacioDiaYHora(espacio, diaLocalDate, horario);
+        model.addAttribute("reserva", verReserva);
+
+        return "reservas/modificar";
     }
 
     @GetMapping("/modificar/{codigo}")

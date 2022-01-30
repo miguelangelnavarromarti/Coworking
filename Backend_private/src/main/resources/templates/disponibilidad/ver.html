@@ -33,7 +33,7 @@
         $.getJSON("/disponibilidadJson/" + codigoEspacio + "/" + dia, function (result) {
             $.each(result, function (hora, nombreUsuario) {
                 var informacionHora = "<p class='m-auto'>" + hora + ":00</p><p class='m-auto'>" + nombreUsuario +"</p>";
-                var divHora = $("<div />").addClass("col-3 border border-1 rounded-pill text-center").append(informacionHora);
+                var divHora = $("<a />").addClass("col-3 border border-1 rounded-pill text-center text-decoration-none text-dark").append(informacionHora);
                 $("#horasDisponibles").append(divHora);
 
                 $("#horasDisponibles .col-3 p:nth-child(2)").each(function(){
@@ -42,9 +42,12 @@
                     } else if ($(this).text() === "BLOQUEADO"){
                         $(this).parent().addClass("bg-danger");
                     } else {
-                        $(this).parent().addClass("bg-warning");
+                        var horaUrl = $(this).siblings("p").text().slice(0,2);
+                        var url = document.location.origin;
+                        var urlComplete = url + "/reservas/" + codigoEspacio + "/" + dia + "/" + horaUrl;
+                        $(this).parent().addClass("bg-warning").attr("href", urlComplete);
                     }
-                })
+                });
             });
         });
 

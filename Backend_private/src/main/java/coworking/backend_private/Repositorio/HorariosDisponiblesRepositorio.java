@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HorariosDisponiblesRepositorio extends CrudRepository<HorarioDisponible, Integer> {
+    HorarioDisponible findByHora(Integer hora);
 }

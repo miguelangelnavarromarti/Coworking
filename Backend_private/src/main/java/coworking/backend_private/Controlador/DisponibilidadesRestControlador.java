@@ -49,7 +49,9 @@ public class DisponibilidadesRestControlador {
     Espacio espacio = espaciosServicio.verEspacio(codigoEspacio);
     List<Reserva> listaReservas = reservasServicio.verReservasEspacioYDia(espacio, dia);
     for (Reserva reserva : listaReservas) {
-        disponibilidad.put(reserva.getHorarioDisponible().getHora(), reserva.getCliente().getNombreUsuario());
+        if (!reserva.getEstado().equals("cancelado")) {
+            disponibilidad.put(reserva.getHorarioDisponible().getHora(), reserva.getCliente().getNombreUsuario());
+        }
     }
 
     List<BloqueoEspacioHora> listaBloqueos = bloqueosEspaciosHorasServicio.verPorEspacioYDia(espacio, dia);

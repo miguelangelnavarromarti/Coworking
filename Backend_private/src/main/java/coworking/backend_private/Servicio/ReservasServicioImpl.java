@@ -1,6 +1,7 @@
 package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.Espacio;
+import coworking.backend_private.Entidad.HorarioDisponible;
 import coworking.backend_private.Entidad.Reserva;
 import coworking.backend_private.Repositorio.ReservasRespositorio;
 import coworking.backend_private.Servicio.Interficie.IReservasServicio;
@@ -34,5 +35,10 @@ public class ReservasServicioImpl implements IReservasServicio {
     @Override
     public List<Reserva> verReservasEspacioYDia(Espacio espacio, LocalDate dia) {
         return reservasRespositorio.findByEspacioAndDia(espacio, dia);
+    }
+
+    @Override
+    public Reserva verReservaEspacioDiaYHora(Espacio espacio, LocalDate dia, HorarioDisponible hora) {
+        return reservasRespositorio.findByEspacioAndDiaAndHorarioDisponible(espacio, dia, hora);
     }
 }
