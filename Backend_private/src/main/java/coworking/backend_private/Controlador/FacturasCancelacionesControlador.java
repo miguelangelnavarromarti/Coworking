@@ -45,7 +45,7 @@ public class FacturasCancelacionesControlador {
     }
 
     @GetMapping("/crear/{codigoFactura}")
-    public String crearFacturaCancelada(Model model, @PathVariable("codigoFactura") Integer codigoFactura){
+    public String crearFacturaCancelada(@PathVariable("codigoFactura") Integer codigoFactura){
         Factura factura = facturasServicio.buscarPorCodigo(codigoFactura);
         List<GestionCancelacion> politicaCancelacion = gestionCancelacionesServicio.verTodoOrdenadoPorDiaAntelacionAsc();
 
@@ -55,7 +55,7 @@ public class FacturasCancelacionesControlador {
         Integer descuentoCancelacion = 0;
 
         for (GestionCancelacion gc : politicaCancelacion) {
-            if(hoy.compareTo(factura.getDiaFactura()) > gc.getDiasAntelacion()) {
+            if(hoy.compareTo(factura.getDiaFactura()) >= gc.getDiasAntelacion()) {
                 diasAntelacionCancelacion = gc.getDiasAntelacion();
                 descuentoCancelacion = gc.getDevolucion();
             } else {
@@ -63,9 +63,9 @@ public class FacturasCancelacionesControlador {
             }
         }
 
-        devolucion = - (factura.getPrecioTotal() + descuentoCancelacion) / 100;
+        devolucion = (factura.getPrecioTotal() * ((float)descuentoCancelacion / 100));
 
-        // ALGO FALLA QUAN GARDAM
+        // ALGO FALLA QUAN GUARDAM
         FacturaCancelacion facturaCancelacion = new FacturaCancelacion(
                 factura,
                 factura.getCodigoCliente(),
