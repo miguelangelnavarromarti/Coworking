@@ -18,4 +18,9 @@ public class HorariosDisponiblesServicioImpl implements IHorariosDisponiblesServ
     public List<HorarioDisponible> verHorarioDisponible() {
         return (List<HorarioDisponible>) horariosDisponiblesRepositorio.findAll();
     }
+
+    @Override
+    public HorarioDisponible verHora(Integer hora) {
+        return horariosDisponiblesRepositorio.findByHora(hora);
+    }
 }
