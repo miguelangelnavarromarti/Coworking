@@ -10,4 +10,6 @@ public interface IGestionCancelacionesServicio {
     public void guardar(GestionCancelacion gestionCancelacion);
     public GestionCancelacion buscarPorCodigo(Integer codigo);
     public void eliminar(Integer codigo);
+
+    public List<GestionCancelacion> verTodoOrdenadoPorDiaAntelacionAsc();
 }

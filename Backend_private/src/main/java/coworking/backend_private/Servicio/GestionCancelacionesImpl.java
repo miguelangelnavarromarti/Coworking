@@ -33,4 +33,9 @@ public class GestionCancelacionesImpl implements IGestionCancelacionesServicio {
     public void eliminar(Integer codigo) {
         gestionCancelacionesRepositorio.deleteById(codigo);
     }
+
+    @Override
+    public List<GestionCancelacion> verTodoOrdenadoPorDiaAntelacionAsc() {
+        return gestionCancelacionesRepositorio.ordenaPorDiasAntelacionAsc();
+    }
 }
