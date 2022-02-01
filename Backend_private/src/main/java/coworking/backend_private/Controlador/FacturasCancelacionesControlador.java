@@ -1,6 +1,5 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Entidad.Factura;
 import coworking.backend_private.Entidad.FacturaCancelacion;
 import coworking.backend_private.Entidad.GestionCancelacion;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Controller
 @RequestMapping("/facturasCanceladas")
@@ -55,7 +56,7 @@ public class FacturasCancelacionesControlador {
         Integer descuentoCancelacion = 0;
 
         for (GestionCancelacion gc : politicaCancelacion) {
-            if(hoy.compareTo(factura.getDiaFactura()) >= gc.getDiasAntelacion()) {
+            if(DAYS.between(factura.getDiaFactura(), hoy) >= gc.getDiasAntelacion()) {
                 diasAntelacionCancelacion = gc.getDiasAntelacion();
                 descuentoCancelacion = gc.getDevolucion();
             } else {
@@ -65,17 +66,24 @@ public class FacturasCancelacionesControlador {
 
         devolucion = (factura.getPrecioTotal() * ((float)descuentoCancelacion / 100));
 
-        // ALGO FALLA QUAN GUARDAM
-        FacturaCancelacion facturaCancelacion = new FacturaCancelacion(
-                factura,
-                factura.getCodigoCliente(),
-                devolucion,
-                diasAntelacionCancelacion,
-                descuentoCancelacion
-        );
+        FacturaCancelacion facturaCancelacion = new FacturaCancelacion();
+        facturaCancelacion.setCodigoFactura(factura);
+        facturaCancelacion.setCodigoCliente(factura.getCodigoCliente());
+        facturaCancelacion.setDevolucion(devolucion);
+        facturaCancelacion.setDiasAntelacionCancelacion(diasAntelacionCancelacion);
+        facturaCancelacion.setDescuentoCancelacion(descuentoCancelacion);
 
         facturasCancelacionesServicio.guardar(facturaCancelacion);
 
         return "redirect:/facturasCanceladas";
+    }
+
+    @GetMapping("/verFactura/{codigo}")
+    public String modificar (@PathVariable("codigo") Integer codigo, Model model){
+        FacturaCancelacion facturaCancelacion = facturasCancelacionesServicio.verFacturaCanceladaPorCodigo(codigo);
+        model.addAttribute("nombre","FacturaCancelada");
+        model.addAttribute("facturaCancelada", facturaCancelacion);
+
+        return "facturasCanceladas/verFactura";
     }
 }

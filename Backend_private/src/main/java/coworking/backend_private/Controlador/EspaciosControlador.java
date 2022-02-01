@@ -39,6 +39,18 @@ public class EspaciosControlador {
         return "espacios/ver";
     }
 
+    @GetMapping("{codigo}")
+    public String getEspacioPorTipoEspacio(Model model, @PathVariable("codigo") String codigo){
+        TipoEspacio tipoEspacio = tipoEspacioServicio.verTipoEspacio(codigo);
+
+        List<Espacio> verEspacios = espaciosServicio.verEspaciosPorTipoEspacio(tipoEspacio);
+
+        model.addAttribute("nombre", "Espacios");
+        model.addAttribute("espacios", verEspacios);
+
+        return "espacios/ver";
+    }
+
     @GetMapping("/crear")
     public String crearEspacio(Model model) {
 

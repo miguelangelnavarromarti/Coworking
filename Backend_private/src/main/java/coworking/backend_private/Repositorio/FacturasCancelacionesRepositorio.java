@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FacturasCancelacionesRepositorio extends JpaRepository<FacturaCancelacion, Integer> {
     FacturaCancelacion findByCodigoFactura(Factura factura);
+    FacturaCancelacion findAllByCodigo(Integer codigo);
 }

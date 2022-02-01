@@ -62,6 +62,7 @@
                     <th scope="col" class="text-center">Precio Total</th>
                     <th scope="col" class="text-center">Min Hora Oferta</th>
                     <th scope="col" class="text-center">Descuento Oferta</th>
+                    <th scope="col" class="text-center">Cancelada</th>
                     <th scope="col" class="text-center">Modificar</th>
                 </tr>
                 </thead>
@@ -73,6 +74,7 @@
                     <td th:text="${fac.precioTotal} + ' €'" class="py-3 text-center align-middle bg-white"></td>
                     <td th:text="${fac.minimoHoraOferta} + ' h'" class="py-3 text-center align-middle bg-white"></td>
                     <td th:text="${fac.descuentoOferta} + ' %'" class="py-3 text-center align-middle bg-white"></td>
+                    <td class="py-3 text-center align-middle bg-white"></td>
                     <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
                         <a class="btn btn-warning text-dark" th:href="@{/facturas/modificar/} + ${fac.codigo}" title="Modificar Factura">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -106,7 +108,30 @@
 
             $('button span').addClass('align-middle');
             botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success me-2').prepend(svg);
+
+
+
         } );
+
+        var listaFacturasCanceladas = [[${facturasConFacturasCanceladas}]];
+
+        for (let i = 0; i < listaFacturasCanceladas.length; i++) {
+            $("tbody tr").each(function () {
+                if ($(this).children("th").text() == listaFacturasCanceladas[i].toString()) {
+                    $(this).children("td:nth-child(7)").text("Sí").css({"color": "red", "font-weight": "bold"});
+                }
+            });
+        }
+
+        $("tbody tr").each(function() {
+            if ($(this).children("td:nth-child(7)").text() == "") {
+                $(this).children("td:nth-child(7)").text("No");
+            }
+
+        });
+    </script>
+    <script th:inline="javascript">
+
     </script>
     </body>
 </html>

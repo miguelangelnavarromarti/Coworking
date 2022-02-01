@@ -60,11 +60,12 @@
                 <th scope="col" class="text-center">Código T.Espacio</th>
                 <th scope="col" class="text-center">Nombre</th>
                 <th scope="col" class="text-center">Capacidad</th>
-                <th scope="col" class="text-center">Número de Sillas</th>
-                <th scope="col" class="text-center">Metros Cuadrados</th>
+                <th scope="col" class="text-center">N. Sillas</th>
+                <th scope="col" class="text-center">M. Cuadrados</th>
                 <th scope="col" class="text-center">Activo</th>
                 <th scope="col" class="text-center">Modificar</th>
-                <th scope="col" class="text-center">Ver Traducciones</th>
+                <th scope="col" class="text-center">Ver Trad.</th>
+                <th scope="col" class="text-center">Ver Dispo.</th>
             </tr>
             </thead>
             <tbody>
@@ -91,6 +92,14 @@
                         </svg>
                     </a>
                 </td>
+                <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
+                    <a class="btn btn-warning text-dark" th:href='@{/disponibilidad/} + ${es.codigo}' href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
+                            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                        </svg>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -106,7 +115,7 @@
 
         var nombre = $('h1 span').text();
 
-        crearDataTable('visualizationTable',1,2,nombre,6,7);
+        crearDataTable('visualizationTable',1,2,nombre,7,8);
 
         var botoExcel = $('.dt-buttons button');
 
@@ -125,6 +134,25 @@
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+
+        /* Redirect Disponibilidad */
+        function returnHoy() {
+            var d = new Date();
+
+            var mes = d.getMonth() + 1;
+            var dia = d.getDate();
+
+            var hoy = d.getFullYear() + '-' +
+                (mes < 10 ? '0' : '') + mes + '-' +
+                (dia < 10 ? '0' : '') + dia;
+            return hoy;
+        }
+
+        $("tbody tr").each(function() {
+            let a = $(this).children("td:nth-child(9)").children("a");
+            let href = a.attr("href");
+            a.attr("href", href + "/" +  returnHoy());
+        });
     });
 </script>
 <script th:replace="plantilla :: script1"></script>

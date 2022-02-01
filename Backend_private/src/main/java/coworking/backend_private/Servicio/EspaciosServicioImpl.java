@@ -1,6 +1,7 @@
 package coworking.backend_private.Servicio;
 
 import coworking.backend_private.Entidad.Espacio;
+import coworking.backend_private.Entidad.TipoEspacio;
 import coworking.backend_private.Repositorio.EspaciosRepositorio;
 import coworking.backend_private.Servicio.Interficie.IEspaciosServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,10 @@ public class EspaciosServicioImpl implements IEspaciosServicio {
         }
 
         return  listaCodigos;
+    }
+
+    @Override
+    public List<Espacio> verEspaciosPorTipoEspacio(TipoEspacio tipoEspacio) {
+        return espaciosRepositorio.getEspacioByTipoEspacio(tipoEspacio);
     }
 }

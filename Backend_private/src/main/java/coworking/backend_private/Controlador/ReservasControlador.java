@@ -33,7 +33,7 @@ public class ReservasControlador {
     private ClientesServicioImpl clientesServicio;
 
     @GetMapping("")
-    public String getReserves(Model model){
+    public String getReservas(Model model){
         List<Reserva> verReservas = reservasServicio.verReservas();
 
         model.addAttribute("nombre", "Reservas");
@@ -42,8 +42,19 @@ public class ReservasControlador {
         return "reservas/ver";
     }
 
+    @GetMapping("{codigo}")
+    public String getReservasPorCodigoCliente(Model model, @PathVariable("codigo") Integer codigo){
+        Cliente cliente = clientesServicio.buscarPorCodigo(codigo);
+        List<Reserva> verReservas = reservasServicio.verReservasPorCliente(cliente);
+
+        model.addAttribute("nombre", "Reservas");
+        model.addAttribute("reservas", verReservas);
+
+        return "reservas/ver";
+    }
+
     @GetMapping("/{codigoEspacio}/{dia}/{hora}")
-    public String getReserves(Model model, @PathVariable("codigoEspacio") Integer codigoEspacio, @PathVariable("dia") String dia, @PathVariable("hora") Integer hora){
+    public String getReserva(Model model, @PathVariable("codigoEspacio") Integer codigoEspacio, @PathVariable("dia") String dia, @PathVariable("hora") Integer hora){
         model.addAttribute("nombre", "Reservas");
 
         Espacio espacio = espaciosServicio.verEspacio(codigoEspacio);

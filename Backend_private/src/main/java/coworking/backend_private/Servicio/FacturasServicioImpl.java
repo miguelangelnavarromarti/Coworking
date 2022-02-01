@@ -28,4 +28,9 @@ public class FacturasServicioImpl implements IFacturasServicio {
     public Factura buscarPorCodigo(Integer codigo) {
         return facturasRepositorio.findById(codigo).orElse(null);
     }
+
+    @Override
+    public List<Integer> verFacturasConFacturaCancelada() {
+        return facturasRepositorio.verFacturasConFacturaCancelada();
+    }
 }

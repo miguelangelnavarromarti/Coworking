@@ -13,4 +13,6 @@ public interface IFacturasServicio {
     public void guardar(Factura factura);
 
     public Factura buscarPorCodigo(Integer codigo);
+
+    public List<Integer> verFacturasConFacturaCancelada();
 }

@@ -30,6 +30,15 @@ public class TarifasControlador {
         return "tarifas/ver";
     }
 
+    @GetMapping("{codigo}")
+    public String getTarifaPorTipoEspacio(Model model, @PathVariable("codigo") String codigo){
+        TipoEspacio tipoEspacio = tipoEspacioServicio.verTipoEspacio(codigo);
+        List<Tarifa> listarTarifas = tarifasServicio.verTarifasPorTipoEspacio(tipoEspacio);
+        model.addAttribute("nombre","Tarifas");
+        model.addAttribute("tabla",listarTarifas);
+        return "tarifas/ver";
+    }
+
     @GetMapping("/crear")
     public String crear(Model model){
         Tarifa tarifa = new Tarifa();

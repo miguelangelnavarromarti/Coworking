@@ -10,4 +10,5 @@ public interface IEspaciosServicio {
     public void guardar(Espacio espacio);
     public Espacio verEspacio(Integer codigo);
     public List<Integer> listaCodigos();
+    public List<Espacio> verEspaciosPorTipoEspacio(TipoEspacio tipoEspacio);
 }

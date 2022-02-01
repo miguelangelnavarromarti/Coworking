@@ -28,6 +28,9 @@ public class FacturasControlador {
         model.addAttribute("nombre","Facturas");
         model.addAttribute("facturas",verFacturas);
 
+        List<Integer> facturasConFacturasCanceladas = facturasServicio.verFacturasConFacturaCancelada();
+        model.addAttribute("facturasConFacturasCanceladas", facturasConFacturasCanceladas);
+
         return "facturas/ver";
     }
 
@@ -59,6 +62,7 @@ public class FacturasControlador {
         Factura factura = facturasServicio.buscarPorCodigo(codigo);
         model.addAttribute("nombre","Factura");
         model.addAttribute("factura",factura);
+
         return "facturas/verFactura";
     }
 }

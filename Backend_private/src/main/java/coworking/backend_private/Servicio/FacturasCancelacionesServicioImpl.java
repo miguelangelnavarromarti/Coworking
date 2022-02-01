@@ -29,4 +29,9 @@ public class FacturasCancelacionesServicioImpl implements IFacturasCancelaciones
     public void guardar(FacturaCancelacion facturaCancelacion) {
         facturasCancelacionesRepositorio.save(facturaCancelacion);
     }
+
+    @Override
+    public FacturaCancelacion verFacturaCanceladaPorCodigo(Integer codigo) {
+        return facturasCancelacionesRepositorio.findAllByCodigo(codigo);
+    }
 }

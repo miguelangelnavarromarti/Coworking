@@ -9,4 +9,5 @@ public interface IFacturasCancelacionesServicio {
     public List<FacturaCancelacion> verFacturasCancelaciones();
     public FacturaCancelacion verFacturaCancelacionPorFactura(Factura factura);
     public void guardar(FacturaCancelacion facturaCancelacion);
+    public FacturaCancelacion verFacturaCanceladaPorCodigo(Integer codigo);
 }
