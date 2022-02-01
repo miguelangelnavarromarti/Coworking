@@ -84,6 +84,28 @@
         </table>
     </div>
 
+    <!-- Delete Modal -->
+    <div th:each="op:${opiniones}" class="modal fade" th:id="deleteModal + ${op.codigo}" tabindex="-1"
+         th:aria-labelledby="deleteModalLabel + ${op.codigo}" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="deleteModalLabel + ${op.codigo}">Eliminar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres eliminar la fila seleccionada?<br>Los datos eliminados no se podran
+                    recuperar.
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger text-white" th:id="'deleteRow' + ${op.codigo}"
+                       th:href="@{/opiniones/eliminar/} + ${op.codigo}" title="Eliminar Oferta">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
 
     <script type="text/javascript" th:replace="plantilla :: script1"></script>
     <script type="text/javascript">

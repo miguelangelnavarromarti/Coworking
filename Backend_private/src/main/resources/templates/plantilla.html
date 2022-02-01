@@ -332,7 +332,7 @@
             "columnDefs": [{"width": "10%", "targets": editar}, {"width": "10%", "targets": eliminar},
                 {render: function ( data, type, row ) {
                     return type === 'display' && data.length > 10 ?
-                        data.substr( 0, 40 ) +'…' :
+                        data.substr( 0, 50 ) +'…' :
                         data;
                 },"targets":render}],
             fixedColumns: {
