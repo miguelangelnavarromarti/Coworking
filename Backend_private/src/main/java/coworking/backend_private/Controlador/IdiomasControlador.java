@@ -7,10 +7,7 @@ import coworking.backend_private.Servicio.IdiomasServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,10 +43,18 @@ public class IdiomasControlador {
     @PostMapping("/guardar")
     public String guardarIdioma(@ModelAttribute Idioma idioma) {
 
-        //idioma.guardar(idioma);
+        idiomasServicio.guardar(idioma);
         System.out.println("Idioma guardado con éxito");
 
         return "redirect:/idiomas";
+    }
+
+    @GetMapping("/editar/{codigo}")
+    public String editar(@PathVariable("codigo") String codigo, Model model){
+        Idioma idioma = idiomasServicio.verIdioma(codigo);
+        model.addAttribute("nombre","Idioma");
+        model.addAttribute("idioma",idioma);
+        return "idiomas/editar";
     }
 
     @PostMapping("/comprobacionCodigo")
@@ -60,7 +65,7 @@ public class IdiomasControlador {
         for (String codigo : listaCodigos) {
             if (Objects.equals(idioma.getCodigo(), codigo)) {
                 model.addAttribute("errorCodigo", "Este código de Idioma '" + idioma.getCodigo() + "' ya existe.");
-                return "redirect:/tipoEspacios/crear";
+                return "redirect:idiomas/ver";
             }
         }
 

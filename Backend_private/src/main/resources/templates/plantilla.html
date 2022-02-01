@@ -324,12 +324,17 @@
         return hoy;
     }
 
-    function crearDataTable(idDataTable, numeroBloqueoInicio, numeroBloqueoFinal, nombreExcel, editar, eliminar) {
+    function crearDataTable(idDataTable, numeroBloqueoInicio, numeroBloqueoFinal, nombreExcel, editar, eliminar, render=false) {
         return $('#' + idDataTable).DataTable({
             "initComplete": function (settings, json) {
                 $("#visualizationTable").wrap("<div style='overflow:visible; width:100%;position:relative;'></div>");
             },
-            "columnDefs": [{"width": "10%", "targets": editar}, {"width": "10%", "targets": eliminar}],
+            "columnDefs": [{"width": "10%", "targets": editar}, {"width": "10%", "targets": eliminar},
+                {render: function ( data, type, row ) {
+                    return type === 'display' && data.length > 10 ?
+                        data.substr( 0, 40 ) +'…' :
+                        data;
+                },"targets":render}],
             fixedColumns: {
                 leftColumns: numeroBloqueoInicio,
                 rightColumns: numeroBloqueoFinal
