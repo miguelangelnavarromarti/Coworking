@@ -41,4 +41,11 @@ public class ReservasServicioImpl implements IReservasServicio {
     public Reserva verReservaEspacioDiaYHora(Espacio espacio, LocalDate dia, HorarioDisponible hora) {
         return reservasRespositorio.findByEspacioAndDiaAndHorarioDisponible(espacio, dia, hora);
     }
+
+    @Override
+    public List<Integer> verReservaFactura(Integer codigo) {
+        List codigoReserves = reservasRespositorio.verReservaFactura(codigo);
+
+        return codigoReserves;
+    }
 }

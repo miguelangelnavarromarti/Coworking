@@ -1,111 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="plantilla :: head">
-    <title>Ver Reserva</title>
-</head>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:insert="plantilla :: head"></head>
 
 <body class="bg-light">
 
-<!-- <header th:replace="plantilla :: header"></header> -->
+    <main>
+        <div class="container my-2 p-2 shadow bg-body rounded-3">
+            <nav class="nav nav-pills nav-fill">
+                <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+                   data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+                <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                    <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                    <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+                </ul>
 
-<main class="container my-5 p-5 shadow bg-body rounded-3">
-    <div class="mt-3">
-        <h1 class="text-center"><span th:text="${nombre}"></span></h1>
-    </div>
-    <form class="row my-5" th:action="@{/reservas/cancelar}" th:object="${reserva}" method="post">
-        <input type="hidden" th:field="*{codigo}">
-        <div class="mb-3 col-6">
-            <label for="codigoCliente" class="form-label">Nombre Cliente *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input th:field="*{cliente}" th:value="*{cliente.nombreUsuario}" id="codigoCliente" readonly="readonly" class="form-control" aria-label="Default select example" aria-describedby="codigoClienteHelp" required>
+                <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+                <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="facturasDropDown"
+                   data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+                <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                    <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                    <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+                </ul>
+
+                <a class="text-center nav-link dropdown-toggle" type="button" id="espaciosDropDown"
+                   data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+                <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                    <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                    <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+                </ul>
+
+                <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
+                <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+                <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+                <a class="text-center nav-link dropdown-toggle" type="button"
+                   id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+                <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                    <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                    <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+            <div class="container mb-5">
+                <h1 class="text-center">Listado de <span th:text="${nombre} + ' de la Factura ' + ${factura.codigo}"></span></h1>
             </div>
-            <div id="codigoClienteHelp" class="form-text">Escribe el código del cliente de la reserva</div>
+            <table class="table nowrap" id="visualizationTable">
+                <thead class="table">
+                <tr>
+                    <th scope="col" class="text-center">Código</th>
+                    <th scope="col" class="text-center" style="box-shadow: -5px 0 5px -5px #333;">Nombre Cliente</th>
+                    <th scope="col" class="text-center">Espacio</th>
+                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Dia</th>
+                    <th scope="col" class="text-center">Hora Reserva</th>
+                    <th scope="col" class="text-center">Precio</th>
+                    <th scope="col" class="text-center">Creación</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="res:${reservas}">
+                    <th scope="row" th:text="${res.codigo}" class="py-3 text-center align-middle bg-white fw-bold"></th>
+                    <td th:text="${res.cliente.nombreUsuario}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
+                    <td th:text="${res.espacio.nombre}" class="py-3 text-center align-middle bg-white"></td>
+                    <td th:text="${res.estado}" class="py-3 text-center align-middle bg-white"></td>
+                    <td th:text="${res.dia}" class="py-3 text-center align-middle bg-white"></td>
+                    <td th:text="${res.horarioDisponible.hora} + ' h'" class="py-3 text-center align-middle bg-white"></td>
+                    <td th:text="${res.precio} + ' €'" class="py-3 text-center align-middle bg-white"></td>
+                    <td th:text="${res.diaHoraCreacion}" class="py-3 text-center align-middle bg-white"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </main>
 
-        <div class="mb-3 col-6">
-            <label for="codigoEspacio" class="form-label">Espacio *</label>
-            <div class="input-group">
-            <span class="input-group-text">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
-                  <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                  <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
-                </svg>
-            </span>
-                <input th:field="*{espacio}" th:value="*{espacio.nombre}" id="codigoEspacio" readonly="readonly" class="form-control" aria-label="Default select example" aria-describedby="codigoEspacioHelp" required>
-            </div>
-            <div id="codigoEspacioHelp" class="form-text">Selecciona el espacio de la reserva</div>
-        </div>
+    <script type="text/javascript" th:replace="plantilla :: script1"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var nombre = $('h1 span').text();
 
-        <div class="mb-3 col-6">
-            <label for="hora" class="form-label">Hora Disponible *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input th:field="*{horarioDisponible}" id="hora" readonly="readonly" class="form-control" aria-label="Default select example" aria-describedby="horaHelp" required>
-            </div>
-            <div id="horaHelp" class="form-text">Elige la hora de la reserva</div>
-        </div>
+            crearDataTable('visualizationTable',2,1,nombre);
 
-        <div class="mb-3 col-6">
-            <label for="estado" class="form-label">Estado *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input th:field="*{estado}" id="estado" readonly="readonly" class="form-control" aria-label="Default select example" aria-describedby="estadoHelp" required>
-            </div>
-            <div id="estadoHelp" class="form-text">Elige el estado de la reserva</div>
-        </div>
+            var botoExcel = $('.dt-buttons button');
 
-        <div class="mb-3 col-6">
-            <label for="dia" class="form-label">Día *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                      <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                      <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                    </svg>
-                </span>
-                <input type="date" th:field="*{dia}" readonly="readonly" class="form-control" id="dia" aria-describedby="diaHelp" pattern="[0-9]{9}" required>
-            </div>
-            <div id="diaHelp" class="form-text">Elige el día de la reserva</div>
-        </div>
+            var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" fill=\"currentColor\" class=\"bi bi-table me-2\" viewBox=\"0 0 16 16\">\n" +
+                "  <path d=\"M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z\"/>\n" +
+                "</svg>";
 
-        <div class="mb-3 col-6">
-            <label for="precio" class="form-label">Precio *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
-                      <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
-                    </svg>
-                </span>
-                <input type="number" th:field="*{precio}" readonly="readonly" class="form-control" id="precio" aria-describedby="precioHelp" step=".01" min="0" required>
-            </div>
-            <div id="precioHelp" class="form-text">Escribe el precio de la reserva</div>
-        </div>
 
-        <div class="mt-3 col-1">
-            <a class="btn btn-primary" th:href="@{/reservas}">Volver</a>
-        </div>
-        <div class="mt-3 col-10">
-            <a class="btn btn-success" th:href="@{/facturas/codigo}">Ver Factura</a>
-        </div>
-    </form>
-</main>
 
-<!--footer th:replace="plantilla :: footer"></footer-->
-<script>
-
-</script>
+            $('button span').addClass('align-middle');
+            botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success me-2').prepend(svg);
+        } );
+    </script>
 </body>
 </html>

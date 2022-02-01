@@ -56,7 +56,8 @@
                     <th scope="col" class="text-center">Precio Total</th>
                     <th scope="col" class="text-center">Min Hora Oferta</th>
                     <th scope="col" class="text-center">Descuento Oferta</th>
-                    <th scope="col" class="text-center" style="box-shadow: -5px 0 5px -5px #333;">Modificar</th>
+                    <th scope="col" class="text-center">Modificar</th>
+                    <th scope="col" class="text-center">Ver Reservas</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,6 +76,13 @@
                             </svg>
                         </a>
                     </td>
+                    <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
+                        <a class="btn btn-warning text-dark" th:href="@{/reservas/verReserva/} + ${fac.codigo}" title="Modificar Factura">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -88,7 +96,7 @@
         $(document).ready(function() {
             var nombre = $('h1 span').text();
 
-            crearDataTable('visualizationTable',2,1,nombre,6,6);
+            crearDataTable('visualizationTable',2,1,nombre,6,7);
 
             var botoExcel = $('.dt-buttons button');
 
