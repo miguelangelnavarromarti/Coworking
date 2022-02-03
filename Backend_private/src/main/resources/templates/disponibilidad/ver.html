@@ -3,7 +3,7 @@
 <head th:replace="plantilla :: head">
     <title>Disponibilidad</title>">
 </head>
-<body>
+<body class="bg-light">
 
 <main>
     <div class="container my-2 p-2 shadow bg-body rounded-3">
@@ -43,17 +43,41 @@
             </ul>
         </nav>
     </div>
-    <div class="container mt-5">
-        <h1 class="text-center">Disponibilidad</span></h1>
-    </div>
+    <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+        <div class="container mb-5">
+            <h1 class="text-center">Disponibilidad</span></h1>
+        </div>
+        <div class="mb-3 col-12">
+            <div class="input-group">
+                <div class="d-flex align-items-center me-5">
+                    <label for="espacios">Espacio :</label>
+                </div>
+                <span class="input-group-text bg-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+                      <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                      <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                    </svg>
+                </span>
+                <div class="col-3">
+                <select id="espacios" class="form-select" aria-describedby="espacioHelp" required>
+                    <option
+                            th:each="listaEspacios:${espacios}"
+                            th:value="${listaEspacios.codigo}"
+                            th:text="${listaEspacios.nombre}">
+                    </option>
+                </select>
+                </div>
+                <div class="d-flex align-items-center ms-5"><span>Selecciona otro espacio para ver su disponibilidad</span></div>
+            </div>
 
-    <div class="container my-5 p-5 shadow bg-body rounded-3">
+        </div>
+
         <div class="row">
             <div class="col-6" id="datepicker">
 
             </div>
             <div class="col-6">
-                <div id="horasDisponibles" class="row"></div>
+                <div id="horasDisponibles" class="d-flex flex-wrap gap-2 mt-2"></div>
             </div>
         </div>
     </div>
@@ -70,19 +94,20 @@
         $.getJSON("/disponibilidadJson/" + codigoEspacio + "/" + dia, function (result) {
             $.each(result, function (hora, nombreUsuario) {
                 var informacionHora = "<p class='m-auto'>" + hora + ":00</p><p class='m-auto'>" + nombreUsuario +"</p>";
-                var divHora = $("<a />").addClass("col-3 border border-1 rounded-pill text-center text-decoration-none text-dark").append(informacionHora);
+                var divHora = $("<a />").addClass("border border-dark border-1 rounded-pill text-center text-decoration-none px-3 p-1").append(informacionHora);
+                divHora.css("width","130px");
                 $("#horasDisponibles").append(divHora);
 
-                $("#horasDisponibles .col-3 p:nth-child(2)").each(function(){
+                $("#horasDisponibles a p:nth-child(2)").each(function(){
                     if ($(this).text() === "VACIO") {
-                        $(this).parent().addClass("bg-success");
+                        $(this).parent().addClass("bg-success text-white");
                     } else if ($(this).text() === "BLOQUEADO"){
-                        $(this).parent().addClass("bg-danger");
+                        $(this).parent().addClass("bg-danger text-white");
                     } else {
                         var horaUrl = $(this).siblings("p").text().slice(0,2);
                         var url = document.location.origin;
                         var urlComplete = url + "/reservas/" + codigoEspacio + "/" + dia + "/" + horaUrl;
-                        $(this).parent().addClass("bg-warning").attr("href", urlComplete);
+                        $(this).parent().addClass("bg-warning text-dark").attr("href", urlComplete);
                     }
                 });
             });
@@ -107,14 +132,50 @@
             }
         });
 
+        <!-- Select Espacio -->
+        $("#espacios option[value=" + codigoEspacio + "]").attr("selected",true);
+
+        $("#espacios").change(function (){
+            let nuevoCodigoEspacio = $("#espacios").val();
+            var url = document.location.origin;
+            var urlComplete = url + "/disponibilidad/" + nuevoCodigoEspacio + "/" + dia;
+            window.location.href = urlComplete;
+        });
+
+
+
+
+
         <!-- Calendari -->
-        $("#datepicker div").css("width", "80%").addClass("m-auto");
+        $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
 
         <!-- Barra superior -->
-        $("#datepicker div div").addClass("w-100 bg-secondary text-darl");
+        $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
+        $("#datepicker div div div").addClass("bg-info text-dark");
 
         <!-- Hoy -->
         $(".ui-state-highlight").removeClass("ui-state-highlight");
+
+        $(".ui-state-active").addClass("bg-info text-dark border-dark");
+
+        <!-- Findes -->
+        $(".ui-datepicker-week-end a").addClass("text-danger");
+
+
+        $("#datepicker div div a").click(function (){
+            <!-- Calendari -->
+            $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
+            <!-- Barra superior -->
+            $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
+            $("#datepicker div div div").addClass("bg-warning text-dark");
+            <!-- Hoy -->
+            $(".ui-state-highlight").removeClass("ui-state-highlight");
+            $(".ui-state-active").addClass("bg-info text-dark border-dark");
+            <!-- Findes -->
+            $(".ui-datepicker-week-end a").addClass("text-danger");
+        });
+
+        $("#datapicker").datepicker("refresh");
 
     });
 
