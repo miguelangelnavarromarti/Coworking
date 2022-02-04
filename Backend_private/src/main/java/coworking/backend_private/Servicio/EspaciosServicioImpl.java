@@ -47,4 +47,9 @@ public class EspaciosServicioImpl implements IEspaciosServicio {
     public List<Espacio> verEspaciosPorTipoEspacio(TipoEspacio tipoEspacio) {
         return espaciosRepositorio.getEspacioByTipoEspacio(tipoEspacio);
     }
+
+    @Override
+    public List<String> listaNombres() {
+        return espaciosRepositorio.findAllNombres();
+    }
 }

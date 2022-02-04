@@ -7,19 +7,53 @@
 <main>
     <div class="container my-2 p-2 shadow bg-body rounded-3">
         <nav class="nav nav-pills nav-fill">
-            <a class="text-center nav-link" th:href="@{/clientes/}">Clientes</a>
-            <a class="text-center nav-link" href="#">Opiniones</a>
-            <a class="text-center nav-link" href="#">Facturas</a>
-            <a class="text-center nav-link" href="#">Facturas Canceladas</a>
-            <a class="text-center nav-link active" aria-current="page" href="#">Reservas</a>
-            <a class="text-center nav-link" href="#">Cancelaciones</a>
-            <a class="text-center nav-link" href="#">Disponibilidad</a>
-            <a class="text-center nav-link" th:href="@{/tipoEspacios/}">Tipo Espacios</a>
-            <a class="text-center nav-link" th:href="@{/espacios/}">Espacios</a>
+            <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+            <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="disponibilidadDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
+            <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/bloqueos/}">Bloqueos</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
+            </ul>
+
+            <a class="text-center nav-link active" aria-current="page"  th:href="@{/reservas/}">Reservas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+            <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="espaciosDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+            <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+            </ul>
+
             <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
-            <a class="text-center nav-link"th:href="@{/gestionOfertas/}">Ofertas</a>
+            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button"
+               id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+            <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+            </ul>
         </nav>
     </div>
+
+    <!-- Alerts -->
+
+    <div th:replace="plantilla :: alerts"></div>
+
+    <!-- Contingut -->
 
     <div class="container my-5 p-5 shadow bg-body rounded-3">
         <div class="container mb-5">
@@ -36,7 +70,7 @@
                 <th scope="col" class="text-center">Día Reserva</th>
                 <th scope="col" class="text-center">Precio Total</th>
                 <th scope="col" class="text-center">Fecha de creación</th>
-                <th scope="col" class="text-center" style="box-shadow: -5px 0 5px -5px #333;">Modificar</th>
+                <th scope="col" class="text-center" style="box-shadow: -5px 0 5px -5px #333;">Ver</th>
             </tr>
             </thead>
             <tbody>
@@ -50,7 +84,7 @@
                 <td th:text="${rv.precio}" class="py-3 text-center align-middle bg-white"></td>
                 <td th:text="${rv.diaHoraCreacion}" class="py-3 text-center align-middle bg-white"></td>
                 <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
-                    <a class="btn btn-warning text-dark" th:href="@{/reservas/modificar/} + ${rv.codigo}" title="Modificar Reserva">
+                    <a class="btn btn-warning text-dark" th:href="@{/reservas/reserva/} + ${rv.codigo}" title="Modificar Reserva">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>

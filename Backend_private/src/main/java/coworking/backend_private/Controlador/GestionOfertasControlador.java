@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -33,12 +34,13 @@ public class GestionOfertasControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardar (@ModelAttribute GestionOferta gestionOferta){
+    public String guardar (@ModelAttribute GestionOferta gestionOferta, RedirectAttributes attribute){
         gestionOfertasServicio.guardar(gestionOferta);
+        attribute.addFlashAttribute("success", "Se ha guardado la Oferta con éxito");
         return "redirect:/gestionOfertas";
     }
 
-    @GetMapping("/editar/{codigo}")
+    @GetMapping("/modificar/{codigo}")
     public String editar(@PathVariable("codigo") Integer codigo, Model model){
         GestionOferta gestionOferta = gestionOfertasServicio.buscarPorCodigo(codigo);
         model.addAttribute("titulo", "Editar Oferta");
@@ -47,8 +49,9 @@ public class GestionOfertasControlador {
     }
 
     @GetMapping("/eliminar/{codigo}")
-    public String editar(@PathVariable("codigo") Integer codigo){
+    public String editar(@PathVariable("codigo") Integer codigo, RedirectAttributes attribute){
         gestionOfertasServicio.eliminar(codigo);
+        attribute.addFlashAttribute("success", "Se ha eliminado la Oferta con éxito");
         return "redirect:/gestionOfertas";
     }
 

@@ -11,4 +11,5 @@ public interface IEspaciosServicio {
     public Espacio verEspacio(Integer codigo);
     public List<Integer> listaCodigos();
     public List<Espacio> verEspaciosPorTipoEspacio(TipoEspacio tipoEspacio);
+    public List<String> listaNombres();
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,13 +41,14 @@ public class FacturasControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarFactura(@ModelAttribute Factura factura){
+    public String guardarFactura(@ModelAttribute Factura factura, RedirectAttributes attribute){
 
         facturasServicio.guardar(factura);
+        attribute.addFlashAttribute("success", "Se ha guardado la Factura con éxito");
         return "redirect:/facturas";
     }
 
-    @GetMapping("/modificar/{codigo}")
+    @GetMapping("/{codigo}")
     public String modificar (@PathVariable("codigo") Integer codigo, Model model){
         Factura factura = facturasServicio.buscarPorCodigo(codigo);
         model.addAttribute("nombre","Factura");
@@ -59,15 +61,6 @@ public class FacturasControlador {
         } else {
             model.addAttribute("booleanFacturaCancelada", false);
         }
-        return "facturas/modificar";
-    }
-
-    @GetMapping("/{codigo}")
-    public String getFactura (@PathVariable("codigo") Integer codigo, Model model){
-        Factura factura = facturasServicio.buscarPorCodigo(codigo);
-        model.addAttribute("nombre","Factura");
-        model.addAttribute("factura",factura);
-
         return "facturas/verFactura";
     }
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,23 +68,22 @@ public class EspaciosControlador {
 
 
     @PostMapping("/guardar")
-    public String guardarEspacio(@ModelAttribute Espacio espacio) {
-        List<Integer> lista = espaciosServicio.listaCodigos();
+    public String guardarEspacio(@ModelAttribute Espacio espacio, RedirectAttributes attribute) {
 
-        for (Integer codigo : lista) {
-            if(Objects.equals(codigo, espacio.getCodigo())) {
-                espaciosServicio.guardar(espacio);
-                return "redirect:/espacios";
-            }
+        if(comprobarCodigo(espacio)) {
+            attribute.addFlashAttribute("success", "Espacio guardado con éxito");
+            espaciosServicio.guardar(espacio);
+            return "redirect:/espacios";
         }
 
-        Integer codigo = espacio.getCodigo();
-        espaciosServicio.guardar(espacio);
-
-        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
-        for (Idioma idioma : idiomas) {
-            TraduccionEspacio traduccionEspacio = new TraduccionEspacio(espacio, idioma, "", "");
-            traduccionesEspaciosServicio.guardar(traduccionEspacio);
+        if(comprobarNombre(espacio.getNombre())) {
+            attribute.addFlashAttribute("error", "El nombre '" + espacio.getNombre() + "' ya existe");
+            return "redirect:/espacios/crear";
+        } else {
+            espaciosServicio.guardar(espacio);
+            crearTraducciones(espacio);
+            attribute.addFlashAttribute("success", "Espacio guardado con éxito");
+            attribute.addFlashAttribute("warning", "Se han generado traducciones por defecto por cada idioma existente");
         }
 
         return "redirect:/traduccionesEspacios/" + espacio.getCodigo();
@@ -102,5 +102,34 @@ public class EspaciosControlador {
         model.addAttribute("listaTipoEspacio",listaTipoEspacio);
 
         return "espacios/modificar";
+    }
+
+    private boolean comprobarCodigo(Espacio espacio) {
+        List<Integer> lista = espaciosServicio.listaCodigos();
+
+        for (Integer codigo : lista) {
+            if(Objects.equals(codigo, espacio.getCodigo())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean comprobarNombre(String nombre) {
+        List<String> listaNombres = espaciosServicio.listaNombres();
+        for (String n : listaNombres) {
+            if(Objects.equals(n, nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void crearTraducciones(Espacio espacio) {
+        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
+        for (Idioma idioma : idiomas) {
+            TraduccionEspacio traduccionEspacio = new TraduccionEspacio(espacio, idioma, espacio.getNombre(), espacio.getDescripcion());
+            traduccionesEspaciosServicio.guardar(traduccionEspacio);
+        }
     }
 }

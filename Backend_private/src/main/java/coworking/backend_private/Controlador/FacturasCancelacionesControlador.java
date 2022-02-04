@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,7 +48,7 @@ public class FacturasCancelacionesControlador {
     }
 
     @GetMapping("/crear/{codigoFactura}")
-    public String crearFacturaCancelada(@PathVariable("codigoFactura") Integer codigoFactura){
+    public String crearFacturaCancelada(@PathVariable("codigoFactura") Integer codigoFactura, RedirectAttributes attribute){
         Factura factura = facturasServicio.buscarPorCodigo(codigoFactura);
         List<GestionCancelacion> politicaCancelacion = gestionCancelacionesServicio.verTodoOrdenadoPorDiaAntelacionAsc();
 
@@ -56,6 +57,7 @@ public class FacturasCancelacionesControlador {
         Integer diasAntelacionCancelacion = 0;
         Integer descuentoCancelacion = 0;
 
+        /* Comprueba que política de cancelación aplicar */
         for (GestionCancelacion gc : politicaCancelacion) {
             if(DAYS.between(factura.getDiaFactura(), hoy) >= gc.getDiasAntelacion()) {
                 diasAntelacionCancelacion = gc.getDiasAntelacion();
@@ -67,6 +69,7 @@ public class FacturasCancelacionesControlador {
 
         devolucion = (factura.getPrecioTotal() * ((float)descuentoCancelacion / 100));
 
+        /* Generamos la factura de cancelación (lo hacemos así porque con el constructor no funciona) */
         FacturaCancelacion facturaCancelacion = new FacturaCancelacion();
         facturaCancelacion.setCodigoFactura(factura);
         facturaCancelacion.setCodigoCliente(factura.getCodigoCliente());
@@ -74,7 +77,9 @@ public class FacturasCancelacionesControlador {
         facturaCancelacion.setDiasAntelacionCancelacion(diasAntelacionCancelacion);
         facturaCancelacion.setDescuentoCancelacion(descuentoCancelacion);
 
+        attribute.addFlashAttribute("success", "Se ha generado la factura de cancelación con éxito");
         facturasCancelacionesServicio.guardar(facturaCancelacion);
+
 
         List<Integer> reservas = reservasServicio.verCodigoReservasPorCodigoFactura(factura.getCodigo());
 
@@ -83,6 +88,7 @@ public class FacturasCancelacionesControlador {
             reserva.setEstado("cancelado");
             reservasServicio.guardar(reserva);
         }
+        attribute.addFlashAttribute("info", "Se han cancelado las reservas asociadas automáticamente");
 
         return "redirect:/facturasCanceladas";
     }

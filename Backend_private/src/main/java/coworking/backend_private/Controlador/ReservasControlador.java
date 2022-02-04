@@ -67,7 +67,7 @@ public class ReservasControlador {
         return "reservas/modificar";
     }
 
-    @GetMapping("/modificar/{codigo}")
+    @GetMapping("/reserva/{codigo}")
     public String modificarReserva(@PathVariable("codigo") Integer codigo, Model model) {
 
         Reserva reserva = reservasServicio.verReservaPorCodigo(codigo);

@@ -49,6 +49,11 @@
                 </nav>
             </div>
 
+            <!-- Alerts -->
+
+            <div th:replace="plantilla :: alerts"></div>
+
+            <!-- Contingut -->
 
             <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
                 <div class="container mb-5">
@@ -71,7 +76,7 @@
                             style="box-shadow: -5px 0 5px -5px #333;"></td>
                         <td th:text="${go.descuento} + ' %'" class="py-3 text-center align-middle bg-white"></td>
                         <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
-                            <a class="btn btn-warning text-dark" th:href="@{/gestionOfertas/editar/} + ${go.codigo}"
+                            <a class="btn btn-warning text-dark" th:href="@{/gestionOfertas/modificar/} + ${go.codigo}"
                                title="Modificar Oferta">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                      class="bi bi-pencil-square" viewBox="0 0 16 16">
