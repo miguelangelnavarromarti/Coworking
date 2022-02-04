@@ -1,7 +1,9 @@
 package coworking.backend_private.Controlador;
 
+import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Entidad.Factura;
 import coworking.backend_private.Entidad.FacturaCancelacion;
+import coworking.backend_private.Servicio.Interficie.IClientesServicio;
 import coworking.backend_private.Servicio.Interficie.IFacturasCancelacionesServicio;
 import coworking.backend_private.Servicio.Interficie.IFacturasServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,13 @@ import java.util.List;
 public class FacturasControlador {
 
     @Autowired
-    private IFacturasServicio facturasServicio;
+    IFacturasServicio facturasServicio;
 
     @Autowired
     IFacturasCancelacionesServicio facturasCancelacionesServicio;
+
+    @Autowired
+    IClientesServicio clientesServicio;
 
     @GetMapping("")
     public String getFacturas(Model model){
@@ -64,5 +69,18 @@ public class FacturasControlador {
         model.addAttribute("factura",factura);
 
         return "facturas/verFactura";
+    }
+
+    @GetMapping("/usuario/{nombreUsuario}")
+    public String getFacturaPorCliente (@PathVariable("nombreUsuario") String nombreUsuario, Model model){
+        Cliente cliente = clientesServicio.verClientePorNombreUsuario(nombreUsuario);
+        List<Factura> facturas = facturasServicio.verFacturaPorCliente(cliente);
+        model.addAttribute("nombre","Factura");
+        model.addAttribute("facturas",facturas);
+
+        List<Integer> facturasConFacturasCanceladas = facturasServicio.verFacturasConFacturaCancelada();
+        model.addAttribute("facturasConFacturasCanceladas", facturasConFacturasCanceladas);
+
+        return "facturas/ver";
     }
 }

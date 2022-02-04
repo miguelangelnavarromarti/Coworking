@@ -1,5 +1,6 @@
 package coworking.backend_private.Servicio.Interficie;
 
+import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Entidad.Factura;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +16,6 @@ public interface IFacturasServicio {
     public Factura buscarPorCodigo(Integer codigo);
 
     public List<Integer> verFacturasConFacturaCancelada();
+
+    public List<Factura> verFacturaPorCliente(Cliente cliente);
 }

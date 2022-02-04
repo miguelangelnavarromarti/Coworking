@@ -1,5 +1,6 @@
 package coworking.backend_private.Servicio;
 
+import coworking.backend_private.Entidad.Cliente;
 import coworking.backend_private.Entidad.Factura;
 import coworking.backend_private.Repositorio.FacturasRepositorio;
 import coworking.backend_private.Servicio.Interficie.IFacturasServicio;
@@ -32,5 +33,10 @@ public class FacturasServicioImpl implements IFacturasServicio {
     @Override
     public List<Integer> verFacturasConFacturaCancelada() {
         return facturasRepositorio.verFacturasConFacturaCancelada();
+    }
+
+    @Override
+    public List<Factura> verFacturaPorCliente(Cliente cliente) {
+        return facturasRepositorio.findAllByCodigoCliente(cliente);
     }
 }

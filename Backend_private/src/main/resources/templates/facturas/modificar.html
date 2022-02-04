@@ -80,7 +80,7 @@
                               <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
                             </svg>
                         </span>
-                    <input type="date" th:field="*{diaFactura}" class="form-control" id="diaFactura" aria-describedby="diaFacturaHelp" required>
+                    <input readonly="readonly" type="date" th:field="*{diaFactura}" class="form-control" id="diaFactura" aria-describedby="diaFacturaHelp" required>
                 </div>
                 <div id="diaFacturaHelp" class="form-text">Indica la fecha de la factura</div>
             </div>
@@ -93,7 +93,7 @@
                               <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
                             </svg>
                         </span>
-                    <input type="number" th:field="*{precioTotal}" class="form-control" id="precioTotal" aria-describedby="precioTotalHelp" min="1" required>
+                    <input readonly="readonly" type="number" th:field="*{precioTotal}" class="form-control" id="precioTotal" aria-describedby="precioTotalHelp" min="1" required>
                 </div>
                 <div id="precioTotalHelp" class="form-text">Precio total de la factura</div>
             </div>
@@ -106,7 +106,7 @@
                               <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
                             </svg>
                         </span>
-                    <input type="number" th:field="*{minimoHoraOferta}" class="form-control" id="minimoHoraOferta" aria-describedby="minimoHoraOfertaHelp" min="1" required>
+                    <input readonly="readonly" type="number" th:field="*{minimoHoraOferta}" class="form-control" id="minimoHoraOferta" aria-describedby="minimoHoraOfertaHelp" min="1" required>
                 </div>
                 <div id="minimoHoraOfertaHelp" class="form-text">Minimo de horas para oferta</div>
             </div>
@@ -119,7 +119,7 @@
                               <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                             </svg>
                         </span>
-                    <input type="number" th:field="*{descuentoOferta}" class="form-control" id="descuentoOferta" aria-describedby="descuentoOfertaHelp" min="1" max="100" required>
+                    <input readonly="readonly" type="number" th:field="*{descuentoOferta}" class="form-control" id="descuentoOferta" aria-describedby="descuentoOfertaHelp" min="1" max="100" required>
                 </div>
                 <div id="descuentoOfertaHelp" class="form-text">Descuento oferta</div>
             </div>

@@ -57,7 +57,7 @@
                 <thead class="table">
                 <tr>
                     <th scope="col" class="text-center">Código</th>
-                    <th scope="col" class="text-center">Código Cliente</th>
+                    <th scope="col" class="text-center">Cliente</th>
                     <th scope="col" class="text-center">Dia Factura</th>
                     <th scope="col" class="text-center">Precio Total</th>
                     <th scope="col" class="text-center">Min Hora Oferta</th>
@@ -69,7 +69,7 @@
                 <tbody>
                 <tr th:each="fac:${facturas}">
                     <th scope="row" th:text="${fac.codigo}" class="py-3 text-center align-middle bg-white fw-bold"></th>
-                    <td th:text="${fac.codigoCliente.nombre}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
+                    <td th:text="${fac.codigoCliente.nombreUsuario}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
                     <td th:text="${fac.diaFactura}" class="py-3 text-center align-middle bg-white"></td>
                     <td th:text="${fac.precioTotal} + ' €'" class="py-3 text-center align-middle bg-white"></td>
                     <td th:text="${fac.minimoHoraOferta} + ' h'" class="py-3 text-center align-middle bg-white"></td>
@@ -96,7 +96,7 @@
         $(document).ready(function() {
             var nombre = $('h1 span').text();
 
-            crearDataTable('visualizationTable',2,1,nombre,6,6);
+            var table = crearDataTable('visualizationTable',2,1,nombre,6,6);
 
             var botoExcel = $('.dt-buttons button');
 
@@ -109,26 +109,26 @@
             $('button span').addClass('align-middle');
             botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success me-2').prepend(svg);
 
+            var listaFacturasCanceladas = [[${facturasConFacturasCanceladas}]];
 
+            table.on('draw', function () {
+                table.rows().every(function( x, y, m) {
+                    var row = $(this.node());
+                    for (let i = 0; i < listaFacturasCanceladas.length; i++) {
+                        if (row.find('th').text() === listaFacturasCanceladas[i].toString()) {
+                            row.find('td:nth-child(7)').text("Sí").css({'background-color': 'red', 'color': 'red', 'font-weight': 'bold'});
+                            break;
+                        } else {
+                            row.find('td:nth-child(7)').text("No");
+                        }
+                    }
+                })
+            });
+
+            table.draw();
 
         } );
 
-        var listaFacturasCanceladas = [[${facturasConFacturasCanceladas}]];
-
-        for (let i = 0; i < listaFacturasCanceladas.length; i++) {
-            $("tbody tr").each(function () {
-                if ($(this).children("th").text() == listaFacturasCanceladas[i].toString()) {
-                    $(this).children("td:nth-child(7)").text("Sí").css({"color": "red", "font-weight": "bold"});
-                }
-            });
-        }
-
-        $("tbody tr").each(function() {
-            if ($(this).children("td:nth-child(7)").text() == "") {
-                $(this).children("td:nth-child(7)").text("No");
-            }
-
-        });
     </script>
     <script th:inline="javascript">
 

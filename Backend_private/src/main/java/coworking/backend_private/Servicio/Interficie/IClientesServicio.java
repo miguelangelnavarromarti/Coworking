@@ -14,4 +14,8 @@ public interface IClientesServicio {
     public List<String> listarNombresUsuarios();
 
     public List<String> listarEmails();
+
+    public Cliente verClientePorNombreUsuario(String nombreUsuario);
+
+    public List<Integer> verCodigos();
 }

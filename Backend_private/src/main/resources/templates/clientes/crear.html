@@ -50,11 +50,17 @@
         </nav>
     </div>
 
+    <!-- Alerts -->
+
+    <div th:replace="plantilla :: alerts"></div>
+
+    <!-- Contingut -->
+
     <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
         <div class="container mb-5">
             <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
         </div>
-        <form class="row my-5" th:action="@{/clientes/comprobacionNombreUsuarioYEmail}" th:object="${cliente}" method="post">
+        <form class="row my-5" th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
             <div class="mb-3 col-6">
                 <label for="nombreUsuario" class="form-label">Nombre Usuario *</label>
                 <div class="input-group">

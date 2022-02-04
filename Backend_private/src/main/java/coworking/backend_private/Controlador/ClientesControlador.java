@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,44 +40,41 @@ public class ClientesControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarCliente(@ModelAttribute Cliente cliente) {
+    public String guardarCliente(@ModelAttribute Cliente cliente, RedirectAttributes attribute) {
 
-        clientesServicio.guardar(cliente);
-        System.out.println("Cliente guardado con éxito");
-
-        return "redirect:/clientes";
-    }
-
-    @PostMapping("/comprobacionNombreUsuarioYEmail")
-    public String comprobacionNombreUsuarioYEmail(@ModelAttribute Cliente cliente, Model model) {
-
+        List<Integer> listaCodigos = clientesServicio.verCodigos();
         List<String> listaNombresUsuarios = clientesServicio.listarNombresUsuarios();
         List<String> listaEmails = clientesServicio.listarEmails();
 
-        boolean comprobacionNombreUsuario = true;
-        boolean comprobacionEmail = true;
+        boolean exist = false;
 
-        for (String nombreUsuario : listaNombresUsuarios) {
-            if (Objects.equals(cliente.getNombreUsuario(), nombreUsuario)) {
-                model.addAttribute("errorNombreUsuario", "Este nombre de Usuario '" + cliente.getNombreUsuario() + "' ya existe.");
-                comprobacionNombreUsuario = false;
+        for (Integer codigo : listaCodigos) {
+            if (Objects.equals(codigo, cliente.getCodigo())) {
+                exist = true;
                 break;
             }
         }
 
-        for (String emails : listaEmails) {
-            if (Objects.equals(cliente.getNombreUsuario(), emails)) {
-                model.addAttribute("errorEmail", "Este email '" + cliente.getEmail() + "' ya está en uso.");
-                comprobacionEmail = false;
-                break;
+        if (!exist) {
+            for (String nombreUsuario : listaNombresUsuarios) {
+                if (Objects.equals(cliente.getNombreUsuario(), nombreUsuario)) {
+                    attribute.addFlashAttribute("error", "Este nombre de Usuario '" + cliente.getNombreUsuario() + "' ya existe");
+                    return "redirect:/clientes/crear";
+                }
+            }
+            for (String emails : listaEmails) {
+                if (Objects.equals(cliente.getEmail(), emails)) {
+                    attribute.addFlashAttribute("error", "Este email '" + cliente.getEmail() + "' ya está en uso");
+                    return "redirect:/clientes/crear";
+                }
             }
         }
 
-        if (comprobacionNombreUsuario && comprobacionEmail) {
-            return guardarCliente(cliente);
-        } else {
-            return "redirect:/clientes/crear";
-        }
+        clientesServicio.guardar(cliente);
+        attribute.addFlashAttribute("success", "Cliente guardado con éxito");
+
+        return "redirect:/clientes";
+        /* SEGUIR AQUÍ, si es codi esta dins sa llista, guardar. Si no esta dins sa llista, entrar a ses comprovacions */
     }
 
     @GetMapping("/modificar/{codigo}")
@@ -89,9 +87,4 @@ public class ClientesControlador {
 
         return "clientes/modificar";
     }
-
-    // CONTINUAR AQUÍ
-    // COMPROVAR ERRORES FORMULARIO
-    // SI SOBRA TEMPS, AFEGIR DATA DE NAIXEMENT I GÈNERE DE L'USUARI
-    // AFEGIR ANAR A RESERVES DEL CLIENT I A LES SEVES FACTURES
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
 import java.util.List;
@@ -69,13 +70,15 @@ public class BloqueosEspaciosHorasControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarBloqueo(@ModelAttribute BloqueoEspacioHora bloqueo) {
+    public String guardarBloqueo(@ModelAttribute BloqueoEspacioHora bloqueo, RedirectAttributes attribute) {
 
         BloqueoEspacioHora bloqueoValido = comprobacion(bloqueo);
 
         if (bloqueoValido == null) {
-            return "redirect:/bloqueos";
+            attribute.addFlashAttribute("error", "El bloqueo ya existe");
+            return "redirect:/bloqueos/crear";
         } else {
+            attribute.addFlashAttribute("success", "Bloqueo guardado con éxito");
             bloqueosEspaciosHorasServicio.guardar(bloqueoValido);
             return "redirect:/bloqueos";
         }

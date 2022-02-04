@@ -47,4 +47,9 @@ public class ReservasServicioImpl implements IReservasServicio {
     public List<Reserva> verReservasPorCliente(Cliente cliente) {
         return reservasRespositorio.findAllByCliente(cliente);
     }
+
+    @Override
+    public List<Integer> verCodigoReservasPorCodigoFactura(Integer codigoFactura) {
+        return reservasRespositorio.findAllByCodigoFactura(codigoFactura);
+    }
 }

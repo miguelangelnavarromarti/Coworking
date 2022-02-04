@@ -3,10 +3,8 @@ package coworking.backend_private.Controlador;
 import coworking.backend_private.Entidad.Factura;
 import coworking.backend_private.Entidad.FacturaCancelacion;
 import coworking.backend_private.Entidad.GestionCancelacion;
-import coworking.backend_private.Servicio.Interficie.IClientesServicio;
-import coworking.backend_private.Servicio.Interficie.IFacturasCancelacionesServicio;
-import coworking.backend_private.Servicio.Interficie.IFacturasServicio;
-import coworking.backend_private.Servicio.Interficie.IGestionCancelacionesServicio;
+import coworking.backend_private.Entidad.Reserva;
+import coworking.backend_private.Servicio.Interficie.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +32,9 @@ public class FacturasCancelacionesControlador {
 
     @Autowired
     IClientesServicio clientesServicio;
+
+    @Autowired
+    IReservasServicio reservasServicio;
 
     @GetMapping("")
     public String getFacturasCanceladas(Model model){
@@ -74,6 +75,14 @@ public class FacturasCancelacionesControlador {
         facturaCancelacion.setDescuentoCancelacion(descuentoCancelacion);
 
         facturasCancelacionesServicio.guardar(facturaCancelacion);
+
+        List<Integer> reservas = reservasServicio.verCodigoReservasPorCodigoFactura(factura.getCodigo());
+
+        for(Integer codigoReserva : reservas) {
+            Reserva reserva = reservasServicio.verReservaPorCodigo(codigoReserva);
+            reserva.setEstado("cancelado");
+            reservasServicio.guardar(reserva);
+        }
 
         return "redirect:/facturasCanceladas";
     }

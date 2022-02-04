@@ -51,4 +51,14 @@ public class ClientesServicioImpl implements IClientesServicio {
         }
         return listaEmails;
     }
+
+    @Override
+    public Cliente verClientePorNombreUsuario(String nombreUsuario) {
+        return clientesRepositorio.findByNombreUsuario(nombreUsuario);
+    }
+
+    @Override
+    public List<Integer> verCodigos() {
+        return clientesRepositorio.findAllCodigos();
+    }
 }
