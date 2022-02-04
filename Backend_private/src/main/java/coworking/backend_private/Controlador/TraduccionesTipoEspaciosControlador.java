@@ -30,6 +30,9 @@ public class TraduccionesTipoEspaciosControlador {
     public String getTraduccionesTipoEspacios(@PathVariable("codigoTipoEspacio") String codigoTipoEspacio, Model model){
         List<TraduccionTipoEspacio> verTraduccionesTipoEspacios = traduccionesTipoEspaciosServicio.verTraduccionesPorCodigoTipoEspacio(codigoTipoEspacio);
 
+        List<Idioma> idiomaList = idiomasServicio.listaIdiomas();
+        model.addAttribute("listaIdiomas",idiomaList);
+
         model.addAttribute("nombre", "TraduccionesTipoEspacios");
         model.addAttribute("codigoTipoEspacio", codigoTipoEspacio);
         model.addAttribute("traduccionesTipoEspacios", verTraduccionesTipoEspacios);

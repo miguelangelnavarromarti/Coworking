@@ -1,9 +1,8 @@
 package coworking.backend_private.Controlador;
 
 
-import coworking.backend_private.Entidad.Idioma;
-import coworking.backend_private.Entidad.TipoEspacio;
-import coworking.backend_private.Servicio.IdiomasServicioImpl;
+import coworking.backend_private.Entidad.*;
+import coworking.backend_private.Servicio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +17,15 @@ public class IdiomasControlador {
 
     @Autowired
     private IdiomasServicioImpl idiomasServicio;
+
+    @Autowired
+    private EspaciosServicioImpl espaciosServicio;
+    @Autowired
+    private TipoEspaciosServicioImpl tipoEspaciosServicio;
+    @Autowired
+    private TraduccionesEspaciosServicioImpl traduccionesEspaciosServicio;
+    @Autowired
+    TraduccionesTipoEspaciosServicioImpl traduccionesTipoEspaciosServicio;
 
     @GetMapping("")
     public String getIdiomas(Model model){
@@ -44,6 +52,8 @@ public class IdiomasControlador {
     public String guardarIdioma(@ModelAttribute Idioma idioma) {
 
         idiomasServicio.guardar(idioma);
+        generarTraduccionesEspacio(idioma);
+        generarTraduccionesTipoEspacio(idioma);
         System.out.println("Idioma guardado con éxito");
 
         return "redirect:/idiomas";
@@ -70,5 +80,20 @@ public class IdiomasControlador {
         }
 
         return guardarIdioma(idioma);
+    }
+    private void generarTraduccionesEspacio(Idioma idioma){
+        List<Espacio> espacioList = espaciosServicio.listaEspacio();
+        for (Espacio e : espacioList){
+            TraduccionEspacio tre = new TraduccionEspacio(e, idioma, e.getNombre(), e.getDescripcion());
+            traduccionesEspaciosServicio.guardar(tre);
+        }
+    }
+
+    private void generarTraduccionesTipoEspacio(Idioma idioma){
+        List<TipoEspacio> tipoEspacioList = tipoEspaciosServicio.listaTipoEspacio();
+        for (TipoEspacio te : tipoEspacioList){
+            TraduccionTipoEspacio tre = new TraduccionTipoEspacio(te, idioma, te.getNombre());
+            traduccionesTipoEspaciosServicio.guardar(tre);
+        }
     }
 }
