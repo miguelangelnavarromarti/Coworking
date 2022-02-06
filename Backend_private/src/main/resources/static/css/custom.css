@@ -17993,3 +17993,52 @@ textarea.form-control-lg {
 .iesmanacor {
   background-color: #ffcd39;
 }
+
+
+.ui-datepicker {
+  width: 616px;
+  margin: auto ;
+  border-color: #212529 ;
+}
+
+.ui-datepicker a {
+  text-decoration: none;
+  font: 16pt Arial, sans-serif;
+}
+
+.ui-datepicker table {
+  width: 100%;
+}
+
+.ui-datepicker-header {
+  margin: auto ;
+  border-color: #212529;
+  color: #212529 ;
+  background-color: #0dcaf0;
+}
+
+.ui-state-active {
+  border-color: #212529 ;
+  color: #212529 ;
+  background-color: #0dcaf0 ;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 600%;
+  overflow: hidden;
+}
+
+.ui-datepicker-title {
+  margin: auto;
+  color: #212529;
+  background-color: #0dcaf0 ;
+}
+
+.ui-datepicker-week-end {
+  color: #dc3545 ;
+}
