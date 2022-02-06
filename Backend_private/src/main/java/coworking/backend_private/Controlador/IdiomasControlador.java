@@ -92,7 +92,7 @@ public class IdiomasControlador {
     private void generarTraduccionesTipoEspacio(Idioma idioma){
         List<TipoEspacio> tipoEspacioList = tipoEspaciosServicio.listaTipoEspacio();
         for (TipoEspacio te : tipoEspacioList){
-            TraduccionTipoEspacio tre = new TraduccionTipoEspacio(te, idioma, te.getNombre());
+            TraduccionTipoEspacio tre = new TraduccionTipoEspacio(te,idioma,te.getNombre());
             traduccionesTipoEspaciosServicio.guardar(tre);
         }
     }
