@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="plantilla :: head"></head>
+
+<body class="bg-light">
+
+<main>
+    <div class="container my-2 p-2 shadow bg-body rounded-3">
+        <nav class="nav nav-pills nav-fill">
+            <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+            <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+            <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="espaciosDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+            <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
+            <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+            <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button"
+               id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+            <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+        <div class="container mb-5">
+            <h1 class="text-center">Listado de <span th:text="${nombre}"></span></h1>
+        </div>
+        <table class="table nowrap" id="visualizationTable">
+            <thead class="table">
+            <tr>
+                <th scope="col" class="text-center">Código</th>
+                <th scope="col" class="text-center">Cliente</th>
+                <th scope="col" class="text-center">Reserva</th>
+                <th scope="col" class="text-center">Titulo</th>
+                <th scope="col" class="text-center">Opinión</th>
+                <th scope="col" class="text-center">Puntuación</th>
+                <th scope="col" class="text-center">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="op:${opiniones}">
+                <th scope="row" th:text="${op.codigo}" class="py-3 text-center align-middle bg-white fw-bold"></th>
+                <td th:text="${op.codigoCliente.nombreUsuario}" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
+                <td th:text="${op.codigoReserva.codigo}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${op.titulo}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${op.opinion}" class="py-3 text-center align-middle bg-white" data-bs-toggle="tooltip" data-bs-placement="top" th:title="${op.opinion}"></td>
+                <td th:text="${op.puntuacion}" class="py-3 text-center align-middle bg-white"></td>
+                <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
+                    <a class="btn btn-danger text-dark" th:id="eliminar + ${op.codigo}"
+                       th:href="@{/opiniones/eliminar/} + ${op.codigo}" title="Eliminar Oferta"
+                       data-bs-toggle="modal" th:data-bs-target="'#deleteModal' + ${op.codigo}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd"
+                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Delete Modal -->
+    <div th:each="op:${opiniones}" class="modal fade" th:id="deleteModal + ${op.codigo}" tabindex="-1"
+         th:aria-labelledby="deleteModalLabel + ${op.codigo}" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:id="deleteModalLabel + ${op.codigo}">Eliminar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres eliminar la fila seleccionada?<br>Los datos eliminados no se podran
+                    recuperar.
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger text-white" th:id="'deleteRow' + ${op.codigo}"
+                       th:href="@{/opiniones/eliminar/} + ${op.codigo}" title="Eliminar Oferta">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <script type="text/javascript" th:replace="plantilla :: script1"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var nombre = $('h1 span').text();
+
+            crearDataTable('visualizationTable',2,1,nombre,3,3,4);
+
+            var botoExcel = $('.dt-buttons button');
+
+            var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" fill=\"currentColor\" class=\"bi bi-table me-2\" viewBox=\"0 0 16 16\">\n" +
+                "  <path d=\"M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z\"/>\n" +
+                "</svg>";
+
+
+            $('button span').addClass('align-middle');
+            botoExcel.removeClass('dt-button buttons-excel buttons-html5').addClass('btn btn-success me-2').prepend(svg);
+
+            /* Inicializar tooltips */
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+/*
+https://datatables.net/blog/2016-02-26
+
+            $('#visualizationTable').DataTable( {
+                columnDefs: [ {
+                    targets: 0,
+                    render: function ( data, type, row ) {
+                        return type === 'display' && data.length > 10 ?
+                            data.substr( 3, 10 ) +'…' :
+                            data;
+                    }
+                } ]
+            } );
+*/
+
+        } );
+    </script>
+</body>
+</html>

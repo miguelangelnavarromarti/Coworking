@@ -26,7 +26,20 @@
 // 6. Add additional custom code here
 // Create your own map
 $colors-personalitzats: (
-        "iesmanacor": orange
+      "orange":       rgb(255, 153, 51),
+      "orange-soft":  rgb(255, 204, 153),
+
+      "ambar":        rgb(255, 255, 0),
+      "ambar-soft":   rgb(255, 255, 153),
+
+      "primary-soft":     rgb(102, 176, 255),   //Amb aixo modific sa classe primary de bootstrap per es color que jo vull i amb aixo totes ses seves variant
+      "secondary-soft":   rgb(177, 193, 206),
+      "success-soft":     rgb(116, 216, 149),
+      "info-soft":        rgb(179, 246, 255),
+      "warning-soft":     rgb(255, 226, 153),
+      "danger-soft":      rgb(238, 145, 154),
+      //"light-soft":       rgb(182, 182, 182),
+      //"dark-soft":        rgb(36, 36, 36)
 );
 
 // Merge the maps
@@ -34,6 +47,7 @@ $theme-colors: map-merge($theme-colors, $colors-personalitzats);
 $theme-colors-rgb: map-merge($theme-colors-rgb, $colors-personalitzats);
 $utilities-bg-colors: map-merge($utilities-bg-colors, $colors-personalitzats);
 $utilities-text-colors: map-merge($utilities-text-colors, $colors-personalitzats);
+
 
 
 // Importam tot el bootstrap

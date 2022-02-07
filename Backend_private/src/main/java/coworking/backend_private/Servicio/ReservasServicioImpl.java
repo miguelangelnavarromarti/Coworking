@@ -52,4 +52,8 @@ public class ReservasServicioImpl implements IReservasServicio {
     public List<Integer> verCodigoReservasPorCodigoFactura(Integer codigoFactura) {
         return reservasRespositorio.findAllByCodigoFactura(codigoFactura);
     }
+    @Override
+    public List<Integer> verReservaFactura(Integer codigo) {
+        return reservasRespositorio.verReservaFactura(codigo);
+    }
 }

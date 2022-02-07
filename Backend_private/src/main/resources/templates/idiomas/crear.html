@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="plantilla :: head">
-    <title>Crear Idioma</title>
-</head>
-<body>
+<head th:replace="plantilla :: head"></head>
+
+<body class="bg-light">
 
 
-<main class="container">
+<main>
     <div class="container my-2 p-2 shadow bg-body rounded-3">
         <nav class="nav nav-pills nav-fill">
             <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
@@ -14,13 +13,6 @@
             <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
                 <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
                 <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
-            </ul>
-
-            <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="disponibilidadDropDown"
-               data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
-            <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
-                <li><a class="dropdown-item nav-link" th:href="@{/bloqueos/}">Bloqueos</a></li>
-                <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
             </ul>
 
             <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
@@ -39,8 +31,9 @@
                 <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
             </ul>
 
+            <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
             <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
-            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+            <a class="text-center nav-link active" aria-current="page" th:href="@{/idiomas/}">Idiomas</a>
 
             <a class="text-center nav-link dropdown-toggle" type="button"
                id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
@@ -50,46 +43,48 @@
             </ul>
         </nav>
     </div>
-    <div class="mt-5">
-        <h1 class="text-center" th:text="${nombre}"></h1>
+    <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+        <div class="mt-3">
+            <h1 class="text-center">Crear <span th:text="${nombre}"></span></h1>
+        </div>
+        <form class="row my-5" th:action="@{/idiomas/comprobacionCodigo}" th:object="${idioma}" method="post">
+
+            <div class="mb-3 col-6">
+                <label for="codigo" class="form-label">Codigo *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{codigo}" class="form-control" id="codigo" aria-describedby="codigoHelp" pattern="[A-Za-z]{2}" title="Sólo se admiten dos letras" onkeyup="this.value = this.value.toUpperCase();" required>
+                </div>
+                <div id="codigoHelp" class="form-text">Escribe el código del idioma</div>
+            </div>
+
+            <div class="mb-3 col-6">
+                <label for="descripcion" class="form-label">Descripcion *</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </span>
+                    <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" aria-describedby="descripcionHelp" required>
+                </div>
+                <div id="descripcionHelp" class="form-text">Escribe la descripción del idioma</div>
+            </div>
+
+            <div class="mb-3 col-1">
+                <br>
+                <input id="modificar" type="submit" class="btn btn-primary" th:value="Guardar">
+            </div>
+            <div class="mb-3 col-1">
+                <br>
+                <a th:href="@{/idiomas/}" class="btn btn-danger">Volver</a>
+            </div>
+        </form>
     </div>
-    <form class="row my-5" th:action="@{/idiomas/comprobacionCodigo}" th:object="${idioma}" method="post">
-
-        <div class="mb-3 col-6">
-            <label for="codigo" class="form-label">Codigo *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{codigo}" class="form-control" id="codigo" aria-describedby="codigoHelp" pattern="[A-Za-z]{2}" title="Sólo se admiten dos letras" required>
-            </div>
-            <div id="codigoHelp" class="form-text">Escribe el código del idioma</div>
-        </div>
-
-        <div class="mb-3 col-6">
-            <label for="descripcion" class="form-label">Descripcion *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </span>
-                <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" aria-describedby="descripcionHelp" required>
-            </div>
-            <div id="descripcionHelp" class="form-text">Escribe la descripción del idioma</div>
-        </div>
-
-        <div class="mb-3 col-1">
-            <br>
-            <input id="modificar" type="submit" class="btn btn-primary" th:value="Guardar">
-        </div>
-        <div class="mb-3 col-1">
-            <br>
-            <a th:href="@{/idiomas/}" class="btn btn-danger">Cancelar</a>
-        </div>
-    </form>
 </main>
 
 

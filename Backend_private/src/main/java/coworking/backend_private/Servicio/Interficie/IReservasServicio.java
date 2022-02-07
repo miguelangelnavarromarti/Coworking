@@ -16,4 +16,5 @@ public interface IReservasServicio {
     public Reserva verReservaEspacioDiaYHora(Espacio espacio, LocalDate dia, HorarioDisponible hora);
     public List<Reserva> verReservasPorCliente(Cliente cliente);
     public List<Integer> verCodigoReservasPorCodigoFactura(Integer codigoFactura);
+    public List<Integer> verReservaFactura(Integer codigo);
 }

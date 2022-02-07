@@ -1,19 +1,14 @@
 package coworking.backend_private.Controlador;
 
-import coworking.backend_private.Entidad.Cliente;
-import coworking.backend_private.Entidad.Espacio;
-import coworking.backend_private.Entidad.HorarioDisponible;
-import coworking.backend_private.Entidad.Reserva;
-import coworking.backend_private.Servicio.ClientesServicioImpl;
-import coworking.backend_private.Servicio.EspaciosServicioImpl;
-import coworking.backend_private.Servicio.HorariosDisponiblesServicioImpl;
-import coworking.backend_private.Servicio.ReservasServicioImpl;
+import coworking.backend_private.Entidad.*;
+import coworking.backend_private.Servicio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,6 +26,9 @@ public class ReservasControlador {
 
     @Autowired
     private ClientesServicioImpl clientesServicio;
+
+    @Autowired
+    private FacturasServicioImpl facturasServicio;
 
     @GetMapping("")
     public String getReservas(Model model){
@@ -96,5 +94,30 @@ public class ReservasControlador {
         System.out.println("Reserva cancelada con éxito");
 
         return "redirect:/reservas";
+    }
+
+    @GetMapping("/verReserva/{codigo}")
+    public String verReservaFactura(@PathVariable("codigo") Integer codigo,Model model){
+        List<Integer> codigoReservas = reservasServicio.verReservaFactura(codigo);
+
+        List<Reserva> listaReservas = new ArrayList();
+
+/*
+        for (Integer codigos : codigoReservas){
+            Reserva reserva = reservasServicio.verReservaPorCodigo(codigoReservas.get(codigos));
+            listaReservas.add(reserva);
+        }
+ */
+        for (int i=0; i < codigoReservas.size(); i++){
+            Reserva reserva = reservasServicio.verReservaPorCodigo(codigoReservas.get(i));
+            listaReservas.add(reserva);
+        }
+
+        Factura factura = facturasServicio.buscarPorCodigo(codigo);
+        model.addAttribute("factura", factura);
+        model.addAttribute("nombre","Reservas");
+        model.addAttribute("reservas",listaReservas);
+
+        return "reservas/verReserva";
     }
 }

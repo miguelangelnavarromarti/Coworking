@@ -1,6 +1,10 @@
 package coworking.backend_private.Repositorio;
 
+
 import coworking.backend_private.Entidad.*;
+import coworking.backend_private.Entidad.Espacio;
+import coworking.backend_private.Entidad.HorarioDisponible;
+import coworking.backend_private.Entidad.Reserva;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +21,7 @@ public interface ReservasRespositorio extends CrudRepository<Reserva, Integer> {
 
     @Query(value = "SELECT codigoReserva FROM FACTURAS_RESERVAS WHERE codigoFactura = ?1",nativeQuery = true)
     List<Integer> findAllByCodigoFactura(Integer codigoFactura);
+
+    @Query(value = "SELECT codigoReserva FROM FACTURAS_RESERVAS WHERE codigoFactura =?1",nativeQuery = true)
+    List<Integer> verReservaFactura(Integer codigo);
 }

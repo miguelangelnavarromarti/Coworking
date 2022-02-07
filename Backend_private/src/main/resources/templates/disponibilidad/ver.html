@@ -2,29 +2,103 @@
 <html lang="en" xmlns:th ="http://www.thymeleaf.org">
 <head th:replace="plantilla :: head">
     <title>Disponibilidad</title>">
+
 </head>
-<body>
+<link rel="stylesheet" href="../../static/css/custom.css" type="text/css">
+<body class="bg-light">
 
 <main>
-    <div class="container mt-5">
-        <h1 class="text-center">Disponibilidad</span></h1>
-    </div>
+    <div class="container my-2 p-2 shadow bg-body rounded-3">
+        <nav class="nav nav-pills nav-fill">
+            <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+            <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+            </ul>
 
-    <div class="container my-5 p-5 shadow bg-body rounded-3">
-        <div class="row">
+            <a class="text-center nav-link active" aria-current="page" th:href="@{/reservas/}">Reservas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+            <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+            </ul>
+
+            <a class="text-center nav-link dropdown-toggle" type="button" id="espaciosDropDown"
+               data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+            <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+            </ul>
+
+            <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
+            <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+            <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+            <a class="text-center nav-link dropdown-toggle" type="button"
+               id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+            <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+        <div class="container mb-5">
+            <h1 class="text-center">Disponibilidad<span id="disponibilidadEspacio"></span></h1>
+        </div>
+        <div class="mb-5 col-12">
+            <div class="d-flex justify-content-evenly">
+                <div class="d-flex align-items-center me-5">
+
+                    <span class="fw-bold ">Espacio :</span>
+                </div>
+                <div class="d-flex bd-highlight">
+                    <span class="input-group-text bg-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+                          <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                          <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <select id="espacios" class="form-select" aria-describedby="espacioHelp" required>
+                            <option
+                                    th:each="listaEspacios:${espacios}"
+                                    th:value="${listaEspacios.codigo}"
+                                    th:text="${listaEspacios.nombre}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center ms-5"><span class="fst-italic">Selecciona otro espacio para ver toda su disponibilidad</span></div>
+            </div>
+        </div>
+
+
+        <div class="row mb-5">
             <div class="col-6" id="datepicker">
 
             </div>
             <div class="col-6">
-                <div id="horasDisponibles" class="row"></div>
+                <div id="horasDisponibles" class="d-flex flex-wrap gap-2 mt-2"></div>
             </div>
         </div>
     </div>
 
-
-
 </main>
+
+<button class="btn-ambar">Hola</button>
+<button class="btn-warning-soft">Hola</button>
+<div class="alert-ambar">Hola</div>
+<div class="iesmanacor">Hola</div>
+
+
+
 <script>
+
+    var dt;
 
     $(document).ready(function () {
         var codigoEspacio = [[${codigoEspacio}]];
@@ -33,26 +107,27 @@
         $.getJSON("/disponibilidadJson/" + codigoEspacio + "/" + dia, function (result) {
             $.each(result, function (hora, nombreUsuario) {
                 var informacionHora = "<p class='m-auto'>" + hora + ":00</p><p class='m-auto'>" + nombreUsuario +"</p>";
-                var divHora = $("<a />").addClass("col-3 border border-1 rounded-pill text-center text-decoration-none text-dark").append(informacionHora);
+                var divHora = $("<a />").addClass("border border-dark border-1 rounded-pill text-center text-decoration-none px-3 p-1").append(informacionHora);
+                divHora.css("width","130px");
                 $("#horasDisponibles").append(divHora);
 
-                $("#horasDisponibles .col-3 p:nth-child(2)").each(function(){
+                $("#horasDisponibles a p:nth-child(2)").each(function(){
                     if ($(this).text() === "VACIO") {
-                        $(this).parent().addClass("bg-success");
+                        $(this).parent().addClass("bg-success text-white");
                     } else if ($(this).text() === "BLOQUEADO"){
-                        $(this).parent().addClass("bg-danger");
+                        $(this).parent().addClass("bg-danger text-white");
                     } else {
                         var horaUrl = $(this).siblings("p").text().slice(0,2);
                         var url = document.location.origin;
                         var urlComplete = url + "/reservas/" + codigoEspacio + "/" + dia + "/" + horaUrl;
-                        $(this).parent().addClass("bg-warning").attr("href", urlComplete);
+                        $(this).parent().addClass("bg-warning text-dark").attr("href", urlComplete);
                     }
                 });
             });
         });
 
         var dateDia = new Date(dia);
-        $("#datepicker").datepicker({
+        dt = $("#datepicker").datepicker({
             dateformat: "yyyy-mm-dd",
             defaultDate: dateDia,
             onSelect: function (date, datepicker) {
@@ -67,21 +142,72 @@
                     var urlComplete = url + "/disponibilidad/" + codigoEspacio + "/" + realDate;
                     window.location.href = urlComplete;
                 }
+            },
+            onChangeMonthYear: function(year, month, inst) {
+                $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
+                <!-- Barra superior -->
+                $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
+                $("#datepicker div div div").addClass("bg-warning text-dark");
+                <!-- Hoy -->
+                $(".ui-state-highlight").removeClass("ui-state-highlight");
+                $(".ui-state-active").addClass("bg-info text-dark border-dark");
+                <!-- Findes -->
+                $(".ui-datepicker-week-end a").addClass("text-danger");
             }
         });
 
-        <!-- Calendari -->
-        $("#datepicker div").css("width", "80%").addClass("m-auto");
+        <!-- Select Espacio -->
+        $("#espacios option[value=" + codigoEspacio + "]").attr("selected",true);
 
-        <!-- Barra superior -->
-        $("#datepicker div div").addClass("w-100 bg-secondary text-darl");
+        $("#espacios").change(function (){
+            let nuevoCodigoEspacio = $("#espacios").val();
+            var url = document.location.origin;
+            var urlComplete = url + "/disponibilidad/" + nuevoCodigoEspacio + "/" + dia;
+            window.location.href = urlComplete;
+        });
 
-        <!-- Hoy -->
-        $(".ui-state-highlight").removeClass("ui-state-highlight");
+        <!-- Span NombreEspacio -->
+        let nombreEspacio =  $("#espacios option[value=" + codigoEspacio + "]").text();
+        $("#disponibilidadEspacio").text(" de " + nombreEspacio);
+
+
+        /*
+
+                <!-- Calendari -->
+                $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
+
+                <!-- Barra superior -->
+                $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
+                $("#datepicker div div div").addClass("bg-info text-dark");
+
+                <!-- Hoy -->
+                $(".ui-state-highlight").removeClass("ui-state-highlight");
+
+                $(".ui-state-active").addClass("bg-info text-dark border-dark");
+
+                <!-- Findes -->
+                $(".ui-datepicker-week-end a").addClass("text-danger");
+
+
+                $("#datepicker div div a").click(function (){
+                    <!-- Calendari -->
+                    $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
+                    <!-- Barra superior -->
+                    $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
+                    $("#datepicker div div div").addClass("bg-warning text-dark");
+                    <!-- Hoy -->
+                    $(".ui-state-highlight").removeClass("ui-state-highlight");
+                    $(".ui-state-active").addClass("bg-info text-dark border-dark");
+                    <!-- Findes -->
+                    $(".ui-datepicker-week-end a").addClass("text-danger");
+                });
+
+        */
+        $("#datapicker").datepicker("refresh");
 
     });
 
 </script>
-<script th:replace="plantilla :: script"></script>
+<script th:replace="plantilla :: script1"></script>
 </body>
 </html>

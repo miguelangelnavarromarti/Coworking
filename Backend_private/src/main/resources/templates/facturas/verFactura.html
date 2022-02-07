@@ -16,13 +16,6 @@
                 <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
             </ul>
 
-            <a class="text-center nav-link dropdown-toggle" type="button" id="disponibilidadDropDown"
-               data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
-            <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
-                <li><a class="dropdown-item nav-link" th:href="@{/bloqueos/}">Bloqueos</a></li>
-                <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
-            </ul>
-
             <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
 
             <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="facturasDropDown"
@@ -39,6 +32,7 @@
                 <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
             </ul>
 
+            <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
             <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
             <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
 
@@ -137,7 +131,7 @@
                 </div>
                 <div class="mb-3 col-1">
                     <br>
-                    <a th:href="@{/facturas/}" class="btn btn-danger">Cancelar</a>
+                    <a th:href="@{/facturas/}" class="btn btn-danger">Volver</a>
                 </div>
             </div>
         </form>
