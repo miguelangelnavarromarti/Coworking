@@ -49,11 +49,17 @@
             </nav>
 </div>
 
+        <!-- Alerts -->
+
+        <div th:replace="plantilla :: alerts"></div>
+
+        <!-- Contingut -->
+
         <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
             <div class="mt-5">
                 <h1 class="text-center" th:text="${titulo}"></h1>
             </div>
-            <form class="row my-5" th:action="@{/tarifas/comprobar}" th:object="${tarifa}" method="post">
+            <form class="row my-5" th:action="@{/tarifas/guardar}" th:object="${tarifa}" method="post">
             <div class="mb-3 col-6">
                 <input type="hidden" th:field="*{codigo}">
               <label for="codigoTipoEspacio" class="form-label">Tipo de Espacio *</label>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -69,36 +70,19 @@ public class TipoEspaciosControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarTipoEspacio(@ModelAttribute TipoEspacio tipoEspacio) {
-        List<String> lista = tipoEspaciosServicio.listaCodigos();
-
-        for (String codigo : lista) {
-            if(Objects.equals(codigo, tipoEspacio.getCodigo())) {
-                tipoEspaciosServicio.guardar(tipoEspacio);
-                return "redirect:/tipoEspacios";
-            }
-        }
+    public String guardarTipoEspacio(@ModelAttribute TipoEspacio tipoEspacio, RedirectAttributes attribute) {
 
         tipoEspaciosServicio.guardar(tipoEspacio);
 
-        List<Idioma> idiomas = idiomasServicio.listaIdiomas();
-        for (int i = 0; i < idiomas.size(); i++) {
-            TraduccionTipoEspacio traduccionTipoEspacio = new TraduccionTipoEspacio(tipoEspacio,idiomas.get(i),"");
-            traduccionesTipoEspaciosServicio.guardar(traduccionTipoEspacio);
-        }
-
-        return "redirect:/traduccionesTipoEspacios/" + tipoEspacio.getCodigo();
+        attribute.addFlashAttribute("success", "El Tipo Espacio se ha guardado con éxito");
+        return "redirect:/tipoEspacios";
     }
 
     @PostMapping("/guardarConTarifa")
-    public String guardarTipoEspacioConTarifa(@ModelAttribute TipoEspacio tipoEspacio, @RequestParam(required = false) double precio, @RequestParam(required = false) String hoy) {
-        List<String> lista = tipoEspaciosServicio.listaCodigos();
-
-        for (String codigo : lista) {
-            if(Objects.equals(codigo, tipoEspacio.getCodigo())) {
-                tipoEspaciosServicio.guardar(tipoEspacio);
-                return "redirect:/tipoEspacios";
-            }
+    public String guardarTipoEspacioConTarifa(@ModelAttribute TipoEspacio tipoEspacio, @RequestParam(required = false) double precio, @RequestParam(required = false) String hoy, RedirectAttributes attribute) {
+        if (comprobacionCodigo(tipoEspacio)) {
+            attribute.addFlashAttribute("error", "Ese código para ese Tipo de Espacio ya existe");
+            return "redirect:/tipoEspacios";
         }
 
         tipoEspaciosServicio.guardar(tipoEspacio);
@@ -118,22 +102,23 @@ public class TipoEspaciosControlador {
             traduccionesTipoEspaciosServicio.guardar(traduccionTipoEspacio);
         }
 
+        attribute.addFlashAttribute("success", "El Tipo Espacio se ha guardado con éxito");
+        attribute.addFlashAttribute("warning", "Se ha generado la tarifa automáticamente. Guardada con éxito");
         return "redirect:/traduccionesTipoEspacios/" + tipoEspacio.getCodigo();
     }
 
-    @PostMapping("/comprobacionCodigo")
-    public String comprobacionCodigo(@ModelAttribute TipoEspacio tipoEspacio, Model model) {
+
+    private boolean comprobacionCodigo(TipoEspacio tipoEspacio) {
 
         List<String> listaCodigos = tipoEspaciosServicio.listaCodigos();
 
         for (String codigo : listaCodigos) {
             if (Objects.equals(tipoEspacio.getCodigo(), codigo)) {
-                model.addAttribute("errorCodigo", "Este codigo de Tipo Espacio '" + tipoEspacio.getCodigo() + "' ya existe.");
-                return "redirect:/tipoEspacios/crear";
+                return true;
             }
         }
 
-        return guardarTipoEspacio(tipoEspacio);
+        return false;
     }
 
     @GetMapping("/modificar/{codigo}")

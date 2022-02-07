@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -52,52 +53,55 @@ public class TarifasControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute Tarifa tarifa){
+    public String guardar(@ModelAttribute Tarifa tarifa, RedirectAttributes attribute){
 
-        tarifasServicio.guardar(tarifa);
+        if (existeCodigo(tarifa.getCodigo())){
+            if (comprobarSolapamientoFechasConCodigo(tarifa)) {
+                attribute.addFlashAttribute("success", "La Tarifa se ha guardado con éxito");
+                tarifasServicio.guardar(tarifa);
+                return "redirect:/tarifas";
+            }
+        }
+        if (comprobarSolapamientoFechas(tarifa)) {
+            attribute.addFlashAttribute("success", "La Tarifa se ha guardado con éxito");
+            tarifasServicio.guardar(tarifa);
+            return "redirect:/tarifas";
+        }
+
+        attribute.addFlashAttribute("error", "La Tarifa no se ha guaradado. Las fechas se solapan con otra Tarifa existente");
         return "redirect:/tarifas";
+
     }
 
-    /*@PostMapping("/guardarPorDefecto")
-    public String guardarPorDefecto(@ModelAttribute Integer codigo, @ModelAttribute double precio){
-
-        Tarifa tarifa = tarifasServicio.buscarPorId(codigo);
-        tarifa.setPrecio(precio);
-        tarifasServicio.guardar(tarifa);
-
-        return "redirect:/tarifas/";
-
-    }*/
+    //  CONTINUAR AQUÍ, FALTA REFACTORIZAR I PONER ALERTS!!
 
     @PostMapping("/guardarPorDefecto")
-    public String guardarPorDefecto(@ModelAttribute Tarifa tarifa){
+    public String guardarPorDefecto(@ModelAttribute Tarifa tarifa, RedirectAttributes attribute){
 
         Tarifa tarifaPrecioModificado = tarifasServicio.buscarPorCodigo(tarifa.getCodigo());
         tarifaPrecioModificado.setPrecio(tarifa.getPrecio());
         tarifasServicio.guardar(tarifaPrecioModificado);
+        attribute.addFlashAttribute("success", "La Tarifa se ha guardado con éxito");
 
         return "redirect:/tarifas/";
     }
 
-    @PostMapping("/comprobar")
-    public String comprobar (@ModelAttribute Tarifa tarifa){
-
-            if (tarifasServicio.comprobar(tarifa) == 0) {
-                return guardar(tarifa);
-            } else {
-                return "redirect:/tarifas/crear";
-            }
-
+    private boolean comprobarSolapamientoFechas (Tarifa tarifa){
+        return tarifasServicio.comprobar(tarifa) == 0;
     }
 
-    @PostMapping("/comprobarConCodigo")
-    public String comprobarConCodigo(@ModelAttribute Tarifa tarifa){
-
-        if (tarifasServicio.comprobarConCodigo(tarifa) == 0){
-            return guardar(tarifa);
-        }else {
-            return "redirect:/tarifas";
+    private boolean existeCodigo(Integer codigo) {
+        List<Tarifa> tarifas = tarifasServicio.verTodo();
+        for(Tarifa t : tarifas) {
+            if(t.getCodigo() == codigo) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    private boolean comprobarSolapamientoFechasConCodigo(Tarifa tarifa) {
+        return tarifasServicio.comprobarConCodigo(tarifa) == 0;
     }
 
     @GetMapping("/modificar/{codigo}")
