@@ -109,7 +109,7 @@ public class TarifasControlador {
         Tarifa tarifa = tarifasServicio.buscarPorCodigo(codigo);
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
-        model.addAttribute("titulo","Editar Tarifa");
+        model.addAttribute("titulo","Modificar Tarifa");
         model.addAttribute("tarifa", tarifa);
         model.addAttribute("listaTipoEspacio",listaTipoEspacio);
         return "tarifas/modificar";
@@ -120,7 +120,7 @@ public class TarifasControlador {
         Tarifa tarifa = tarifasServicio.buscarPorCodigo(codigo);
         List<TipoEspacio> listaTipoEspacio = tipoEspacioServicio.listaTipoEspacio();
 
-        model.addAttribute("titulo","Editar Tarifa por defecto");
+        model.addAttribute("titulo","Modificar Tarifa por defecto");
         model.addAttribute("tarifa", tarifa);
         model.addAttribute("listaTipoEspacio",listaTipoEspacio);
         return "/tarifas/modificarDefecto";

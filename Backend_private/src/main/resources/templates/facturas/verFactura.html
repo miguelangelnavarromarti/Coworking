@@ -52,7 +52,7 @@
     <!-- Contingut -->
 
     <div  class="container my-5 py-4 px-5  shadow bg-body rounded-3">
-        <div class="mt-5">
+        <div class="container mb-5">
             <h1 class="text-center">Ver <span th:text="${nombre}"></span></h1>
         </div>
         <form class="row my-5" th:action="@{/facturas/guardar}" th:object="${factura}" method="post">
