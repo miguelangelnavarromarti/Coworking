@@ -98,7 +98,7 @@ public class TipoEspaciosControlador {
 
         List<Idioma> idiomas = idiomasServicio.listaIdiomas();
         for (int i = 0; i < idiomas.size(); i++) {
-            TraduccionTipoEspacio traduccionTipoEspacio = new TraduccionTipoEspacio(tipoEspacio,idiomas.get(i),"");
+            TraduccionTipoEspacio traduccionTipoEspacio = new TraduccionTipoEspacio(tipoEspacio,idiomas.get(i),tipoEspacio.getNombre());
             traduccionesTipoEspaciosServicio.guardar(traduccionTipoEspacio);
         }
 
