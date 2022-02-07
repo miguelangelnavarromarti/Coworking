@@ -43,7 +43,7 @@ public class GestionOfertasControlador {
     @GetMapping("/modificar/{codigo}")
     public String editar(@PathVariable("codigo") Integer codigo, Model model){
         GestionOferta gestionOferta = gestionOfertasServicio.buscarPorCodigo(codigo);
-        model.addAttribute("titulo", "Editar Oferta");
+        model.addAttribute("titulo", "Modificar Oferta");
         model.addAttribute("oferta", gestionOferta);
         return "gestionOfertas/crear";
     }

@@ -28,7 +28,7 @@ public class GestionCancelacionesControlador {
     @GetMapping("/crear")
     public String crear (Model model){
         GestionCancelacion gestionCancelacion = new GestionCancelacion();
-        model.addAttribute("titulo","Cancelación");
+        model.addAttribute("titulo","Nueva Cancelación");
         model.addAttribute("cancelacion", gestionCancelacion);
         return "gestionCancelaciones/crear";
     }
@@ -43,7 +43,7 @@ public class GestionCancelacionesControlador {
     @GetMapping("/modificar/{codigo}")
     public String editar(@PathVariable("codigo") Integer codigo, Model model){
         GestionCancelacion gestionCancelacion = gestionCancelacionesServicio.buscarPorCodigo(codigo);
-        model.addAttribute("titulo","Editar Oferta");
+        model.addAttribute("titulo","Modificar Oferta");
         model.addAttribute("cancelacion",gestionCancelacion);
         return "gestionCancelaciones/crear";
     }
