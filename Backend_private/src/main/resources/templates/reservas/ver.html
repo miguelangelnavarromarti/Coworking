@@ -14,7 +14,6 @@
                 <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
             </ul>
 
-<<<<<<< HEAD
             <a class="text-center nav-link dropdown-toggle" type="button" id="disponibilidadDropDown"
                data-bs-toggle="dropdown" aria-expanded="false">Disponibilidad</a>
             <ul class="dropdown-menu" aria-labelledby="disponibilidadDropDown">
@@ -22,10 +21,7 @@
                 <li><a class="dropdown-item nav-link" th:href="@{/disponibilidad/}">Disponibilidad</a></li>
             </ul>
 
-            <a class="text-center nav-link active" aria-current="page"  th:href="@{/reservas/}">Reservas</a>
-=======
             <a class="text-center nav-link active" aria-current="page" th:href="@{/reservas/}">Reservas</a>
->>>>>>> 9e5a5ea2dca02041f914a64502a3d5cd8ce5be4b
 
             <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
                data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
@@ -40,11 +36,8 @@
                 <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
                 <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
             </ul>
-
-<<<<<<< HEAD
-=======
             <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
->>>>>>> 9e5a5ea2dca02041f914a64502a3d5cd8ce5be4b
+
             <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
             <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
 
@@ -106,7 +99,6 @@
 
 </main>
 
-<script type="text/javascript" th:replace="plantilla :: script1"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var nombre = $('h1 span').text();
@@ -126,5 +118,6 @@
         $("tbody tr td:nth-child(3)").append(":00");
     } );
 </script>
+<script type="text/javascript" th:replace="plantilla :: script1"></script>
 </body>
 </html>
