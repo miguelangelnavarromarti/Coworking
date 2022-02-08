@@ -22,9 +22,9 @@ Route::get('/conexion', function () {
     return view('conexion');
 });
 
-Route::get('/facturas', [FacturasController::class, 'index']);
+Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
 Route::post('/facturas', [FacturasController::class, 'crear']);
-Route::get('/facturas/{codigo}', [FacturasController::class, 'ver']);
+Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);
 
 /*
 Route::post('/facturas/canceladas/', [FacturasController::class, 'crear'], [GestionCancelacionController::class, 'ver'])->middleware(usuari);
