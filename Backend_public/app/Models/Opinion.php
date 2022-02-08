@@ -5,23 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Factura extends Model
+class Opinion extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'codigo',
         'codigoCliente',
-        'diaFactura',
-        'precioTotal',
-        'minimoHoraOferta',
-        'descuentoOferta'
+        'codigoReserva',
+        'titulo',
+        'opinion',
+        'puntuacion'
     ];
 
-    protected $table = 'facturas';
+    protected $table = 'opiniones';
     protected $primaryKey = 'codigo';
-
-    public $timestamps = false;
-
-
 }
