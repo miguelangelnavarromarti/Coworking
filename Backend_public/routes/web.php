@@ -1,6 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DisponibilidadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/config', function () {
+    return view('connection');
+});
+
+Route::get('/horario', [DisponibilidadController::class, 'getHorario']);
+
+Route::get('/reservas', [DisponibilidadController::class, 'getReservas']);
+
+Route::get('/bloqueos', [DisponibilidadController::class, 'getBloqueos']);
+
+Route::get('/reservas/{dia}', [DisponibilidadController::class, 'getDisponibilidadPorDia']);
+
+Route::get('/disponibilidad/{dia}/{codigoEspacio}', [DisponibilidadController::class, 'getDisponibilidad']);
