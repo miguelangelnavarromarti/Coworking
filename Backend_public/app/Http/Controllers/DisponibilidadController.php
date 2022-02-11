@@ -26,37 +26,10 @@ class DisponibilidadController extends Controller
     }
 
     public function getDisponibilidad($dia, $codigoEspacio) {
-        $horario = Horario::All();
-        $reservas = Reserva::where([
-            ['dia', $dia],
-            ['codigoEspacio', $codigoEspacio]
-        ])->get();
-        $bloqueos = Bloqueo::where([
-            ['diaBloqueo', $dia],
-            ['codigoEspacio', $codigoEspacio]
-        ])->get();
-
-        $arrayHorario = $horario->toArray();
-        $disponibilidad = array();
-
-        foreach ($arrayHorario as $dispo) {
-            foreach ($dispo as $hora) {
-                $disponibilidad[$hora] = "VACIO";
-            }
-        }
-
-        
-        
-        dump($disponibilidad);
-
-        foreach($reservas as $reserva) {
-            $disponibilidad[$reserva->hora] = $reserva->codigoCliente;
-        }
-
-        echo "<br>";
-
-        dump($disponibilidad);
-
-        return $arrayHorario;
+        return Horario::whereNotIn('hora', function($query) use($dia, $codigoEspacio) {
+            $query->select('hora')->from('RESERVAS')->where([['dia', '=', $dia], ['codigoEspacio', '=', $codigoEspacio]]);
+        })->whereNotIn('hora', function($query) use($dia, $codigoEspacio) {
+            $query->select('hora')->from('BLOQUEOS_ESPACIOS_HORAS')->where([['diaBloqueo', '=', $dia,], ['codigoEspacio', '=', $codigoEspacio]]);
+        })->get();
     }
 }
