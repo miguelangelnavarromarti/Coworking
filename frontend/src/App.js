@@ -13,6 +13,7 @@ class App extends React.Component {
       datos: [],
       reservas: [],
       bloqueos: [],
+      disponibilidad: [],
       isLoading: false,
       error: null,
     };
@@ -60,10 +61,23 @@ class App extends React.Component {
         error,
         isLoading: false
       }));
+
+      axios.get(API + "/disponibilidad/2022-03-24/2")
+      .then(result => {
+        const disponibilidad = result.data;
+        this.setState({
+          disponibilidad: disponibilidad,
+          isLoading: false
+        })
+      })
+      .catch(error => this.setState({
+        error,
+        isLoading: false
+      }));
   }
 
   render() {
-    const { datos, reservas, bloqueos, isLoading, error } = this.state;
+    const { datos, reservas, bloqueos, disponibilidad, isLoading, error } = this.state;
 
     if (error) {
       return <p>{error.message}</p>;
@@ -139,6 +153,28 @@ class App extends React.Component {
               ))}
             </tbody>
           </table>
+
+
+
+          <table className="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {disponibilidad.map((dispo, key) => (
+                <tr key={key}>
+                  <td>{dispo.hora}</td>
+                  <td>{dispo.estado}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+
+
         </div>
       </div>
     );
