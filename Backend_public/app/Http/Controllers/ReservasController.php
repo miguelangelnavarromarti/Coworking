@@ -19,4 +19,18 @@ class ReservasController extends Controller
         $reservas = Reserva::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         return response()->json($reservas, 200);
     }
+
+    public function crear (Request $request){
+        $reservaObject = json_decode($request);
+        $newReserva = new Reserva;
+        $newReserva->codigoCliente = $reservaObject->codigoCliente;
+        $newReserva->hora = $reservaObject->hora;
+        $newReserva->codigoEspacio = $reservaObject->codigoEspacio;
+        $newReserva->estado = $reservaObject->estado;
+        $newReserva->dia = $reservaObject->dia;
+        $newReserva->precio = $reservaObject->precio;
+        $newReserva->diaHoraCreacion = $reservaObject->diaHoraCreacion;
+
+        $newReserva->save();
+    }
 }

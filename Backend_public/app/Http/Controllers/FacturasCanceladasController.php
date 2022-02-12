@@ -18,4 +18,20 @@ class FacturasCanceladasController extends Controller
         $factura = FacturaCancelada::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         return response()->json($factura, 200);
     }
+
+    public function crear(Request $request){
+
+        $requestObject = json_decode($request);
+
+        $newFacturaCancelada = new FacturaCancelada;
+        $newFacturaCancelada->codigoFactura = $requestObject->codigoFactura;
+        $newFacturaCancelada->codigoCliente = $requestObject->codigoCliente;
+        $newFacturaCancelada->devolucion = $requestObject->devolucion;
+        $newFacturaCancelada->diasAntelacionCancelacion = $requestObject->diasAntelacionCancelacion;
+        $newFacturaCancelada->descuentoCancelacion = $requestObject->descuentoCancelacion;
+        $newFacturaCancelada->diaHoraCancelacion = $requestObject->diaHoraCancelacion;
+
+        $newFacturaCancelada->save();
+        
+    }
 }

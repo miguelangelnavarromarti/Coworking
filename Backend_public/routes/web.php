@@ -37,11 +37,11 @@ Route::get('/conexion', function () {
 
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
 Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);
-//Route::post('/facturas', [FacturasController::class, 'crear']);
+Route::post('/facturas', [FacturasController::class, 'crear']);
 
 Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index']);
 Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasController::class, 'ver']);
-//Route::post('/facturas/canceladas/', [FacturasController::class, 'crear'], [GestionCancelacionController::class, 'ver'])->middleware(usuari);
+//Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasController::class, 'crear'], [GestionCancelacionController::class, 'ver'])->middleware(usuari);
 
 
 Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver']);
@@ -52,9 +52,10 @@ Route::get('/datosClientes/{codigo}/password', [DatosClientesController::class, 
 
 Route::get('/opiniones/{codigoCliente}', [OpinionesController::class, 'index']);
 Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);
-//Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear']);
+Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear']);
 //Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar']);
 //Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar']);
 
 Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
 Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
+Route::post('/reservas', [ReservasController::class, 'crear']);

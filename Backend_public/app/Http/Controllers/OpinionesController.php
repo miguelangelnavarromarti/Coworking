@@ -18,7 +18,18 @@ class OpinionesController extends Controller
         return response()->json($opinion, 200);
     }
 
-    public function crear(Request $request){}
+    public function crear(Request $request){
+        $opinionObject = json_decode($request);
+
+        $newOpinion = new Opinion;
+        $newOpinion->codigoCliente = $opinionObject->codigoCliente;
+        $newOpinion->codigoReserva = $opinionObject->codigoReserva;
+        $newOpinion->titulo = $opinionObject->titulo;
+        $newOpinion->opinion = $opinionObject->opinion;
+        $newOpinion->puntuacion = $opinionObject->puntuacion;
+
+        $newOpinion->save();
+    }
 
     public function modificar($codigoCliente, $codigo){}
 

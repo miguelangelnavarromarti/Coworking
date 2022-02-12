@@ -22,5 +22,20 @@ class DatosClientesController extends Controller
 
     public function modificarPassword($codigo){}
 
-    
+    public function crear(Request $request){
+        $clienteObject = json_decode($request);
+        $newCliente = new Cliente;
+        $newCliente->nombreUsuario = $clienteObject->nombreUsuario;
+        $newCliente->password = $clienteObject->password;
+        $newCliente->nombre = $clienteObject->nombre;
+        $newCliente->apellido1 = $clienteObject->apellido1;
+        $newCliente->apellido2 = $clienteObject->apellido2;
+        $newCliente->telefono = $clienteObject->telefono;
+        $newCliente->email = $clienteObject->email;
+        $newCliente->rol = $clienteObject->rol;
+        $newCliente->alta = $clienteObject->alta;
+
+        $newCliente->save();
+
+    }
 }
