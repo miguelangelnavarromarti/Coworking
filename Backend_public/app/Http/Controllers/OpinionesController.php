@@ -31,7 +31,24 @@ class OpinionesController extends Controller
         $newOpinion->save();
     }
 
-    public function modificar($codigoCliente, $codigo){}
+    public function modificar(Request $request, $codigoCliente, $codigo){
+        $opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
 
-    public function eliminar($codigoCliente, $codigo){}
+        $opinion->titulo = $request->titulo;
+        $opinion->opinion = $request->opinion;
+        $opinion->puntuacion = $request->puntuacion;
+
+        $opinion->update();
+    }
+
+    public function eliminar($codigoCliente, $codigo){
+
+        $opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+
+        $opinion->delete();
+    }
 }
+
+
+
+//https://www.fundaofwebit.com/laravel-8/how-to-insert-data-in-laravel-8

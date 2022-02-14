@@ -19,6 +19,7 @@ class FacturasCanceladasController extends Controller
         return response()->json($factura, 200);
     }
 
+    //NO ESTA COMPLET
     public function crear(Request $request){
 
         $requestObject = json_decode($request);

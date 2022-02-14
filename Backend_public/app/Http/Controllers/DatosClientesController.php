@@ -14,13 +14,18 @@ class DatosClientesController extends Controller
     }
     
 
-    public function verPassword($codigo){
-        //Fa falta aquest??
+    public function modificar(Request $request, $codigo){
+        $cliente = Cliente::all()->where('codigo',$codigo);
+
+        $cliente->password = $request->password;
+        $cliente->nombre = $request->nombre;
+        $cliente->apellido1 = $request->apellido1;
+        $cliente->apellido2 = $request->apellido2;
+        $cliente->telefono = $request->telefono;
+        $cliente->email = $request->email;
+        $cliente->update();
     }
 
-    public function modificar($codigo){}
-
-    public function modificarPassword($codigo){}
 
     public function crear(Request $request){
         $clienteObject = json_decode($request);

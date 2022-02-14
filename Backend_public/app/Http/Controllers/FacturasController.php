@@ -14,16 +14,7 @@ class FacturasController extends Controller
     }
     
     public function crear(Request $request){
-        
-        $json = '{
-            "codigoCliente": 7,
-            "diaFactura": "2022-01-27",
-            "minimoHoraOferta": 7,
-            "descuentoOferta":7,
-            "precioTotal":77}';//Json
-        $requestObject = json_decode($json);  //Aixo es amb s'exemple, es bo es s'altre
-
-        //$requestObject = json_decode($request); //Tenc un objecte ara
+        $requestObject = json_decode($request); //Tenc un objecte ara
 
         $novaFactura = new Factura;
         $novaFactura->codigoCliente = $requestObject->codigoCliente;

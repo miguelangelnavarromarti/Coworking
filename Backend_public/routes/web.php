@@ -14,6 +14,7 @@ use App\Http\Controllers\DatosClientesController;
 use App\Http\Controllers\OpinionesController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\FacturasCanceladasController;
+use App\Http\Controllers\GestionCancelacionesController;
 
 
 /*
@@ -41,20 +42,19 @@ Route::post('/facturas', [FacturasController::class, 'crear']);
 
 Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index']);
 Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasController::class, 'ver']);
-//Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasController::class, 'crear'], [GestionCancelacionController::class, 'ver'])->middleware(usuari);
+
+//Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasCanceladasController::class, 'crear'], [GestionCancelacionesController::class, 'ver']);
 
 
 Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver']);
-Route::get('/datosClientes/{codigo}/password', [DatosClientesController::class, 'verPassword']);
+Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar']);
 
-//Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar']);
-//Route::put('/datosClientes/{codigo}/modificarPassword', [DatosClientesController::class, 'modificarPassword']);
 
 Route::get('/opiniones/{codigoCliente}', [OpinionesController::class, 'index']);
 Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);
 Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear']);
-//Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar']);
-//Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar']);
+Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar']);
+Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar']);
 
 Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
 Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
