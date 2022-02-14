@@ -5,7 +5,7 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 import dateFnsFormat from 'date-fns/format';
-import { Input } from 'reactstrap';
+import { Button, Card, CardBody, CardTitle, Col, Container, Input, Row } from 'reactstrap';
 const API = 'http://localhost:8000';
 const REQUEST = '/disponibilidad/';
 const ESPACIOS = '/espacios';
@@ -49,17 +49,17 @@ class Selectable extends React.Component {
 
         if (this.state.selectedEspacio !== null) {
             axios.get(API + REQUEST + this.state.requestDay + "/" + this.state.selectedEspacio)
-            .then(result => {
-                const disponibilidad = result.data;
-                this.setState({
-                    disponibilidad: disponibilidad,
-                    isLoading: false
+                .then(result => {
+                    const disponibilidad = result.data;
+                    this.setState({
+                        disponibilidad: disponibilidad,
+                        isLoading: false
+                    })
                 })
-            })
-            .catch(error => this.setState({
-                error,
-                isLoading: false
-            }));
+                .catch(error => this.setState({
+                    error,
+                    isLoading: false
+                }));
         }
 
         axios.get(API + ESPACIOS)
@@ -80,7 +80,7 @@ class Selectable extends React.Component {
         if (this.state.selectedEspacio !== null) {
             if (this.state.requestDay !== prevState.requestDay || this.state.selectedEspacio !== prevState.selectedEspacio) {
                 this.setState({ isLoading: true });
-    
+
                 axios.get(API + REQUEST + this.state.requestDay + "/" + this.state.selectedEspacio)
                     .then(result => {
                         const disponibilidad = result.data;
@@ -110,50 +110,64 @@ class Selectable extends React.Component {
 
         return (
 
-            <div>
-                <h1>Disponibilidad</h1>
+            <Container>
+                <Row>
+                    <Col>
+                        <h1>Disponibilidad</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Input
+                            id='select'
+                            name='select'
+                            type='select'
+                            onChange={this.handleInputChange}
+                            value={this.state.selectedEspacio}
+                        >
+                            <option selected='selected' disabled='disabled'>Selecciona un espacio</option>
+                            {espacios.map((espacio) => (
+                                <option key={espacio.codigo} value={espacio.codigo}>
+                                    {espacio.nombre}
+                                </option>
+                            ))}
 
-                <DayPicker
-                    month={new Date(requestDay.split('-')[0], requestDay.split('-')[1] - 1)}
-                    selectedDays={selectedDay}
-                    onDayClick={this.handleDayClick}
-                />
-                <p>
-                    {requestDay}
-                </p>
+                        </Input>
+                        <DayPicker
+                            month={new Date(requestDay.split('-')[0], requestDay.split('-')[1] - 1)}
+                            selectedDays={selectedDay}
+                            onDayClick={this.handleDayClick}
+                        />
+                        <p>
+                            Día seleccionado: {requestDay}
+                        </p>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <CardBody>
+                                <CardTitle tag='h2'>
+                                    Horas disponibles
+                                </CardTitle>
+                                <Row xs='3'>
+                                    {disponibilidad.map((dispo) => (
 
-                <Input
-                    id='select'
-                    name='select'
-                    type='select'
-                    onChange={this.handleInputChange}
-                    value={this.state.selectedEspacio}
-                >
-                    <option selected='selected' disabled='disabled'>Selecciona un espacio</option>
-                    {espacios.map((espacio) => (
-                            <option key={espacio.codigo} value={espacio.codigo}>
-                                {espacio.nombre}
-                            </option>
-                        ))}
+                                        <Col>
+                                            <Button
+                                                key={dispo.hora}
+                                                color='primary'
+                                                href='#'
+                                                className='m-2'
+                                            >
+                                                {dispo.hora}
+                                            </Button></Col>
 
-                </Input>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {disponibilidad.map((dispo) => (
-                            <tr key={dispo.hora}>
-                                <td>{dispo.hora}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-            </div>
+                                    ))}
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
 
         );
     }
