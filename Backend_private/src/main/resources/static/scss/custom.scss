@@ -45,8 +45,15 @@ $colors-personalitzats: (
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $colors-personalitzats);
 $theme-colors-rgb: map-merge($theme-colors-rgb, $colors-personalitzats);
-$utilities-bg-colors: map-merge($utilities-bg-colors, $colors-personalitzats);
-$utilities-text-colors: map-merge($utilities-text-colors, $colors-personalitzats);
+//$utilities-bg-colors: map-merge($utilities-bg-colors, $colors-personalitzats);
+//$utilities-text-colors: map-merge($utilities-text-colors, $colors-personalitzats);
+
+/*map-get($utilities, "background-color"),
+(values: map-merge(map-get(map-get($utilities, "background-color"), "values"), $your_awsome_colors,
+)
+*/
+
+//https://getbootstrap.com/docs/5.0/utilities/api/#using-the-api
 
 
 
