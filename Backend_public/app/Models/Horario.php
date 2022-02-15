@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reserva extends Model
+class Horario extends Model
 {
     use HasFactory;
 
-    protected $table = 'RESERVAS';
+    protected $table = 'HORARIOS_DISPONIBLES';
 
-    protected $primaryKey = 'codigo';
+    protected $primaryKey = 'hora';
+
+    public $incrementing = false;
 
     public $timestamps = false;
 }

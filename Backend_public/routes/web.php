@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
@@ -8,6 +9,7 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DisponibilidadController;
 
 use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\DatosClientesController;
@@ -59,3 +61,18 @@ Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class
 Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
 Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
 Route::post('/reservas', [ReservasController::class, 'crear']);
+Route::get('/config', function () {
+    return view('connection');
+});
+
+Route::get('/horario', [DisponibilidadController::class, 'getHorario']);
+
+Route::get('/reservas', [DisponibilidadController::class, 'getReservas']);
+
+Route::get('/bloqueos', [DisponibilidadController::class, 'getBloqueos']);
+
+Route::get('/reservas/{dia}', [DisponibilidadController::class, 'getDisponibilidadPorDia']);
+
+Route::get('/espacios', [DisponibilidadController::class, 'getEspacios']);
+
+Route::get('/disponibilidad/{dia}/{codigoEspacio}', [DisponibilidadController::class, 'getDisponibilidad']);
