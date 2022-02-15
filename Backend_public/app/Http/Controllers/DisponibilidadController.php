@@ -6,6 +6,7 @@ use App\Models\Bloqueo;
 use Illuminate\Http\Request;
 use App\Models\Horario;
 use App\Models\Reserva;
+use App\Models\Espacio;
 
 class DisponibilidadController extends Controller
 {
@@ -23,6 +24,10 @@ class DisponibilidadController extends Controller
 
     public function getDisponibilidadPorDia($dia) {
         return response()->json(Reserva::where('dia', $dia)->get());
+    }
+
+    public function getEspacios() {
+        return response()->json(Espacio::orderBy('codigo', 'asc')->get(['codigo', 'nombre']));
     }
 
     public function getDisponibilidad($dia, $codigoEspacio) {
