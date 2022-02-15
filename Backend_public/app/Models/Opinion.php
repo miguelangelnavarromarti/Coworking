@@ -9,15 +9,6 @@ class Opinion extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'codigo',
-        'codigoCliente',
-        'codigoReserva',
-        'titulo',
-        'opinion',
-        'puntuacion'
-    ];
-
-    protected $table = 'opiniones';
+    protected $table = 'OPINIONES';
     protected $primaryKey = 'codigo';
 }

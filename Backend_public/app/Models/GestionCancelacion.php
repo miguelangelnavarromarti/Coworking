@@ -9,12 +9,6 @@ class GestionCancelacion extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'codigo',
-        'diasAntelacion',
-        'devolucion',
-    ];
-
     protected $table = 'GESTION_CANCELACIONES';
     protected $primaryKey = 'codigo';
 }

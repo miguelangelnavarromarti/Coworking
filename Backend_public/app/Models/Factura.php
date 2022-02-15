@@ -9,16 +9,9 @@ class Factura extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'codigo',
-        'codigoCliente',
-        'diaFactura',
-        'precioTotal',
-        'minimoHoraOferta',
-        'descuentoOferta'
-    ];
+   
 
-    protected $table = 'facturas';
+    protected $table = 'FACTURAS';
     protected $primaryKey = 'codigo';
 
     public $timestamps = false;

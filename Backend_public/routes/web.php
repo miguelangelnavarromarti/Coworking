@@ -38,6 +38,14 @@ Route::get('/conexion', function () {
     return view('conexion');
 });
 
+//BORRAR DSP
+Route::get('prueba',function(){
+    return "has entrat be a sa ruta";
+})->middleware('usuario');
+Route::get('no-autorizado', function(){
+    return 'No esttas autorizado';
+});
+
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
 Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);
 Route::post('/facturas', [FacturasController::class, 'crear']);
