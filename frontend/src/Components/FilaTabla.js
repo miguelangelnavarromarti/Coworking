@@ -10,7 +10,9 @@ class FilaTabla extends Component {
     render(){
         return(
             <React.Fragment>
-                <td></td>
+                <td nom={this.asasdkj,}>
+                    {this.prop.titol}
+                </td>
             </React.Fragment>
         );
     }

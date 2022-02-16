@@ -43,7 +43,7 @@ Route::get('prueba',function(){
     return "has entrat be a sa ruta";
 })->middleware('usuario');
 Route::get('no-autorizado', function(){
-    return 'No esttas autorizado';
+    return 'No estas autorizado';
 });
 
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);

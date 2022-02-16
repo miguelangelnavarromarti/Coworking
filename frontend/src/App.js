@@ -8,6 +8,8 @@ import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
 import { Row, Col, Container } from 'reactstrap';
 
+import Borrar from "./Components/Borrar";
+
 class App extends React.Component {
   render() {
     return (
@@ -23,11 +25,17 @@ class App extends React.Component {
             <Col className='text-center'>
               <Link to="/selectable">Selectable</Link>
             </Col>
+            <Col className='text-center'>
+              <Link to="/borrar">BORRAR</Link>
+            </Col>
           </Row>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/table" element={<Table />} />
             <Route path="/selectable" element={<Selectable />} />
+
+            <Route path="/borrar" element={<Borrar />} />
+
           </Routes>
         </Container>
       </Router>
