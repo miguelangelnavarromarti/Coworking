@@ -42,9 +42,12 @@ Route::get('/conexion', function () {
 Route::get('prueba',function(){
     return "has entrat be a sa ruta";
 })->middleware('usuario');
-Route::get('no-autorizado', function(){
+Route::get('noAutorizado', function(){
     return 'No estas autorizado';
 });
+
+//LOGIN
+Route::get('/login', [LoginController::class, 'login']);
 
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
 Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);

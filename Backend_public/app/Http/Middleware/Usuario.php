@@ -20,21 +20,26 @@ class Usuario
     {   
         $jsonX = '{
             "nombreUsuario": "jc777",
-            "password":"123456K"
+            "password":"123456"
             }';
         $Object = json_decode($jsonX);
 
         //$Object = json_decode($request);
 
         $cliente = Cliente::where('nombreUsuario', $Object->nombreUsuario)->get();
-        $clienteObjecto = json_encode($cliente);
-        $clienteObjecto2 = json_decode($clienteObjecto);
+        $clienteObjectoCodifi = json_encode($cliente);
+        $clienteObjectoDec = json_decode($clienteObjectoCodifi);
         
-        if(Hash::check($Object->password, $clienteObjecto2[0]->password)){
-            return $next($request);
-        }
-        else{
-            return redirect('no-autorizado');
+        if($clienteObjectoDec != null){   
+            //Aquest Hash encripta un i mira si es sa mateixa                        
+            if(Hash::check($Object->password, $clienteObjectoDec[0]->password)){
+                return $next($request);
+            }
+            else{
+                return redirect('login');
+            }
+        } else{
+            return redirect('login');
         }
 
     }
