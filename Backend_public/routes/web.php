@@ -47,7 +47,7 @@ Route::get('noAutorizado', function(){
 });
 
 //LOGIN
-Route::get('/login', [LoginController::class, 'login']);
+//Route::get('/login', [LoginController8888::class, 'login']);
 
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
 Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);

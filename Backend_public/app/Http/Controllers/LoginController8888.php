@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
-class LoginController extends Controller
+class LoginController8888 extends Controller
 {
     public function login(Request $request){
         
