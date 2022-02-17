@@ -18,6 +18,10 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${rutes.fotos}")
     String rutaProperties;
 
+    @Autowired
+    @Qualifier("Interceptor")
+    private HandlerInterceptor miInterceptor;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
@@ -25,12 +29,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations(rutaProperties);
     }
 
-    @Autowired
-    @Qualifier("Interceptor")
-    private HandlerInterceptor miInterceptor;
-
-    //@Override
-    public void addInterceptor(InterceptorRegistry registry){
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(miInterceptor).addPathPatterns(
                 "/main/**",
                 "/bloqueos/**",

@@ -21,7 +21,7 @@ class TitulosTabla extends Component {
                 </thead>
                 <tbody>            
                     Fer mapa  de TR amb FilaTabla dins
-                    <FilaTabla />
+                    
                 </tbody>
             </table>
         );

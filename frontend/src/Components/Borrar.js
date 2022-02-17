@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-import Home from "./Components/FilaTabla";
-import TitulosTabla from "./TitulosTabla";
+
 
 class Borrar extends Component {
 
@@ -10,7 +9,7 @@ class Borrar extends Component {
             <div>
                 <h2>BORRAR</h2>
                 <h1>Taula</h1>
-                <TitulosTabla  titulos={this.state.titulos}></TitulosTabla>/>
+                
 
                 
             </div>
