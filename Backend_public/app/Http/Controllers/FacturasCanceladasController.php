@@ -10,7 +10,7 @@ class FacturasCanceladasController extends Controller
 
     public function index($codigoCliente){
 
-        $facturasCanceladas = FacturaCancelada::all()->where('codigoCliente',$codigoCliente);
+        $facturasCanceladas = FacturaCancelada::where('codigoCliente',$codigoCliente)->get();
         return response()->json($facturasCanceladas, 200);
     }  
 

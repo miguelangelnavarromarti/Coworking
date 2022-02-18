@@ -1,6 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -46,8 +44,7 @@ Route::get('noAutorizado', function(){
     return 'No estas autorizado';
 });
 
-//LOGIN
-//Route::get('/login', [LoginController8888::class, 'login']);
+
 
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
 Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);

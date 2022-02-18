@@ -7,8 +7,11 @@ import Home from "./Components/Home";
 import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
 import { Row, Col, Container } from 'reactstrap';
+import Cliente from './Components/Cliente';
+import Reservas from './Components/Reservas';
+import Facturas from './Components/Facturas';
+import Opiniones from './Components/Opiniones';
 
-import Borrar from "./Components/Borrar";
 
 class App extends React.Component {
   render() {
@@ -26,15 +29,20 @@ class App extends React.Component {
               <Link to="/selectable">Selectable</Link>
             </Col>
             <Col className='text-center'>
-              <Link to="/borrar">BORRAR</Link>
+              <Link to="/cliente">Area Cliente</Link>
             </Col>
           </Row>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/table" element={<Table />} />
             <Route path="/selectable" element={<Selectable />} />
+            <Route path="/cliente" element={<Cliente />} />
 
-            <Route path="/borrar" element={<Borrar />} />
+            <Route path="/datosCliente" element={<Cliente />} />
+            <Route path="/reservas" element={<Reservas />} />
+            <Route path="/facturas" element={<Facturas />} />
+            <Route path="/opiniones" element={<Opiniones />} />
+            
 
           </Routes>
         </Container>

@@ -10,7 +10,7 @@ class ReservasController extends Controller
   
     public function index($codigoCliente){
         
-        $reservas = Reserva::all()->where('codigoCliente',$codigoCliente);
+        $reservas = Reserva::where('codigoCliente',$codigoCliente)->get();
         return response()->json($reservas, 200);
     }
 

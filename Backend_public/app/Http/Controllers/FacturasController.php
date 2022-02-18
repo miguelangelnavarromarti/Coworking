@@ -9,7 +9,7 @@ class FacturasController extends Controller
 {
     public function index($codigoCliente){
         
-        $facturas = Factura::all()->where('codigoCliente',$codigoCliente);
+        $facturas = Factura::where('codigoCliente',$codigoCliente)->get();
         return response()->json($facturas, 200);
     }
     

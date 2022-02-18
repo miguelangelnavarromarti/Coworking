@@ -9,7 +9,7 @@ class DatosClientesController extends Controller
 {
     public function ver($codigo){
         
-        $cliente = Cliente::all()->where('codigo',$codigo);
+        $cliente = Cliente::where('codigo',$codigo)->get();
         return response()->json($cliente, 200);
     }
     

@@ -9,7 +9,7 @@ class OpinionesController extends Controller
 {
     public function index($codigoCliente){
         
-        $opiniones = Opinion::all()->where('codigoCliente',$codigoCliente);
+        $opiniones = Opinion::where('codigoCliente',$codigoCliente)->get();
         return response()->json($opiniones, 200);
     }
     
