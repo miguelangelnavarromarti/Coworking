@@ -7,10 +7,11 @@ import Home from "./Components/Home";
 import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
 import { Row, Col, Container } from 'reactstrap';
-import Cliente from './Components/Cliente';
-import Reservas from './Components/Reservas';
-import Facturas from './Components/Facturas';
-import Opiniones from './Components/Opiniones';
+import Cliente from './Components/AreaCliente/Cliente';
+import FormCliente from './Components/AreaCliente/FormCliente';
+import Reservas from './Components/AreaCliente/Reservas';
+import Facturas from './Components/AreaCliente/Facturas';
+import Opiniones from './Components/AreaCliente/Opiniones';
 
 
 class App extends React.Component {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route path="/cliente" element={<Cliente />} />
 
             <Route path="/datosCliente" element={<Cliente />} />
+            <Route path="/formCliente" element={<FormCliente />} />
             <Route path="/reservas" element={<Reservas />} />
             <Route path="/facturas" element={<Facturas />} />
             <Route path="/opiniones" element={<Opiniones />} />

@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import { Navbar,NavItem, Collapse, Nav, NavbarToggler, NavLink} from 'reactstrap';
 
 class ClienteHeader extends Component {
     render(){
         return (
-            <div>
+            <React.Fragment>
                 <Navbar
                     color="light"
                     expand="sm"
@@ -32,7 +32,7 @@ class ClienteHeader extends Component {
                         </Nav>
                     </Collapse>           
                 </Navbar>
-            </div>
+            </React.Fragment>
         );
     }
 }

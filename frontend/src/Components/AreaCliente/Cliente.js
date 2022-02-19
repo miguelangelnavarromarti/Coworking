@@ -44,19 +44,6 @@ class Cliente extends React.Component {
         return <p>Loading ...</p>;
         }
 
-        {datosCliente.map(function(cliente,key){
-            return (
-            <tr key={key} className="text-center">
-                <td>{cliente.nombreUsuario}</td>                    
-                <td>{cliente.nombre}</td>                                        
-                <td>{cliente.apellido1}</td>
-                <td>{cliente.apellido2}</td>                    
-                <td>{cliente.telefono}</td>
-                <td>{cliente.email}</td>
-                <td>{cliente.codigoPostal}</td>
-            </tr>
-            )
-        })}
 
         return (
         
@@ -66,7 +53,8 @@ class Cliente extends React.Component {
             
                 <Col sm="8" className='m-auto'>
                     <Card className="my-5 py-4 px-5  shadow bg-body rounded-3"
-                        body
+                        body   
+                        color='primary'                     
                         >                
                         {datosCliente.map((datos)=>
                             <CardBody>
@@ -83,9 +71,9 @@ class Cliente extends React.Component {
                                 </CardText>
                                 <Button
                                     color="warning"
-                                    size=""
+                                    size=""                                    
                                 >
-                                    Modificar Datos
+                                    <a href='/formCliente' className='fw-normal text-decoration-none text-dark'>Modificar Datos</a>
                                 </Button>
                             </CardBody>
                         )}                        
