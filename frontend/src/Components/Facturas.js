@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Table, Button, Card, CardBody, CardTitle, Col, Container, Input, Row } from 'reactstrap';
 
+import ClienteHeader from "./ClienteHeader";
 const API = 'http://localhost:8000';
  
 class Facturas extends Component {
@@ -44,6 +45,7 @@ class Facturas extends Component {
     return (
      
         <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
+          <ClienteHeader/>
           <h1 className="text-center my-4">Todas las facturas</h1>
           <Table
             hover
