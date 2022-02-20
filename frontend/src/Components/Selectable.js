@@ -18,9 +18,11 @@ class Selectable extends React.Component {
 
         this.handleDayClick = this.handleDayClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleClickButton = this.handleClickButton.bind(this);
         this.state = {
             disponibilidad: [],
             espacios: [],
+            reservas: [],
             isLoading: false,
             error: null,
             requestDay: `${dateFnsFormat(new Date(), 'yyyy-MM-dd')}`,
@@ -40,6 +42,26 @@ class Selectable extends React.Component {
     handleInputChange(event) {
         this.setState({
             selectedEspacio: event.target.value,
+        });
+    }
+
+    handleClickButton(i) {
+        const reservas = this.state.reservas.slice();
+        const disponibilidad = this.state.disponibilidad.slice();
+        const horaBoton = i.target.text.split(":")[0];
+        var indexHora;
+
+        for (let i = 0; i < disponibilidad.length; i++) {
+            if (disponibilidad[i].hora === horaBoton) {
+                indexHora = i;
+            }
+        }
+
+        reservas.push(i.target.text);
+        disponibilidad.splice(indexHora, 1);
+        this.setState({
+            reservas: reservas,
+            disponibilidad: disponibilidad,
         });
     }
 
@@ -98,7 +120,7 @@ class Selectable extends React.Component {
     }
 
     render() {
-        const { disponibilidad, espacios, isLoading, error, requestDay, selectedDay } = this.state;
+        const { disponibilidad, espacios, reservas, isLoading, error, requestDay, selectedDay } = this.state;
 
         if (error) {
             return <p>{error.message}</p>;
@@ -112,12 +134,12 @@ class Selectable extends React.Component {
 
             <Container>
                 <Row>
-                    <Col>
+                    <Col className='text-center my-5'>
                         <h1>Disponibilidad</h1>
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col xs="3">
                         <Input
                             id='select'
                             name='select'
@@ -133,22 +155,21 @@ class Selectable extends React.Component {
                             ))}
 
                         </Input>
+                    </Col>
+                    <Col xs="3">
                         <DayPicker
                             month={new Date(requestDay.split('-')[0], requestDay.split('-')[1] - 1)}
                             selectedDays={selectedDay}
                             onDayClick={this.handleDayClick}
                         />
-                        <p>
-                            Día seleccionado: {requestDay}
-                        </p>
                     </Col>
                     <Col>
                         <Card>
                             <CardBody>
-                                <CardTitle tag='h2'>
-                                    Horas disponibles
+                                <CardTitle tag='h4'>
+                                    Horas disponibles del {requestDay} de {this.state.selectedEspacio}
                                 </CardTitle>
-                                <Row xs='3'>
+                                <Row xs='4'>
                                     {disponibilidad.map((dispo) => (
 
                                         <Col>
@@ -157,14 +178,27 @@ class Selectable extends React.Component {
                                                 color='primary'
                                                 href='#'
                                                 className='m-2'
+                                                onClick={this.handleClickButton}
                                             >
-                                                {dispo.hora}
-                                            </Button></Col>
+                                                {dispo.hora}:00
+                                            </Button>
+                                        </Col>
 
                                     ))}
                                 </Row>
                             </CardBody>
                         </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {reservas.map((reserva) => (
+                                <p
+                                    key={reserva}
+                                >
+                                    {reserva}
+                                </p>
+                        ))}
                     </Col>
                 </Row>
             </Container>
