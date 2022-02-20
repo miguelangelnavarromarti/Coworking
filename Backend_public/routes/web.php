@@ -61,7 +61,7 @@ Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modifica
 
 
 Route::get('/opiniones/{codigoCliente}', [OpinionesController::class, 'index']);
-Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);
+Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);     //NO FA FALTA JA, BORRAR
 Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear']);
 Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar']);
 Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar']);

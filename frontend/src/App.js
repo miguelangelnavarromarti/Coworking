@@ -12,6 +12,7 @@ import FormCliente from './Components/AreaCliente/FormCliente';
 import Reservas from './Components/AreaCliente/Reservas';
 import Facturas from './Components/AreaCliente/Facturas';
 import Opiniones from './Components/AreaCliente/Opiniones';
+import FormCrearOpinion from './Components/AreaCliente/FormCrearOpinion';
 
 
 class App extends React.Component {
@@ -44,6 +45,7 @@ class App extends React.Component {
             <Route path="/reservas" element={<Reservas />} />
             <Route path="/facturas" element={<Facturas />} />
             <Route path="/opiniones" element={<Opiniones />} />
+            <Route path='/formCrearOpinion' element={<FormCrearOpinion />}/>
             
 
           </Routes>

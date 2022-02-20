@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Table, Button, Card, CardBody, CardTitle, Col, CardText, Input, Row, CardGroup, CardSubtitle } from 'reactstrap';
+import { Table, Button, Card, CardBody, CardTitle, Col, CardText, Input, Row, CardGroup, FormGroup, Form, Label, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
 
@@ -14,14 +14,12 @@ class Opiniones extends Component {
           opiniones: [],
           isLoading: false,
           error: null,
+          modalInsertar: false,
         };
       }
-    componentDidMount() {
 
-
-    this.setState({ isLoading: true });
-
-    axios.get(API + "/opiniones/1")  // MODIFICAR I AGAFAR ID CLIENT
+    peticionGet=()=>{
+        axios.get(API + "/opiniones/1")  // MODIFICAR I AGAFAR ID CLIENT
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
@@ -30,6 +28,18 @@ class Opiniones extends Component {
         error,
         isLoading: false
         }));
+    }
+
+    modalInsertar=()=>{ //Me passa de true a false i de false a true
+        this.setState({modalInsertar: !this.state.modalInsertar});
+    }
+
+    componentDidMount() {
+
+    this.setState({ isLoading: true });
+    this.peticionGet();
+
+    
     }
 
     render() {
@@ -47,37 +57,39 @@ class Opiniones extends Component {
      
         <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
             <ClienteHeader/>    
-          <h1 className="text-center my-4">Todas las opiniones</h1>        
-
-          <CardGroup>
-          {opiniones.map((opinion)=>
-            <Col sm="5" className="m-auto">
-                <Card className="my-5 py-4 px-5  shadow bg-body rounded-3"
-                    body
-                    >                                     
-                        <CardBody>
-                            <CardTitle key={opinion.codigo} tag="h3" className='text-center mb-4'>
-                            {opinion.titulo}
-                            </CardTitle>
-                            <CardText>
-                                <Row>
-                                    <p className='fs-5'>Opinión: </p>
-                                    <p className='fs-6'>{opinion.opinion}</p>
-                                    <p className='fs-5'>Puntuación: {opinion.puntuacion}</p>                                    
-                                </Row>
-                            </CardText>
-                            <Button
-                                color="warning"
-                                size=""
-                            >
-                                Modificar Opinión
-                            </Button>
-                        </CardBody>                                            
-                </Card>
-              </Col>
-              )}
-          </CardGroup>    
-
+            <h1 className="text-center my-4">Todas las opiniones</h1>        
+            <Button
+            color="primary">
+                <a href="/formCrearOpinion" className='text-light fw-normal text-decoration-none'>Nueva Opinion</a>
+            </Button>
+            <CardGroup>
+            {opiniones.map((opinion)=>
+                <Col sm="5" className="m-auto">
+                    <Card className="my-5 py-4 px-5  shadow bg-body rounded-3"
+                        body
+                        >                                     
+                            <CardBody>
+                                <CardTitle key={opinion.codigo} tag="h3" className='text-center mb-4'>
+                                {opinion.titulo}
+                                </CardTitle>
+                                <CardText>
+                                    <Row>
+                                        <p className='fs-5'>Opinión: </p>
+                                        <p className='fs-6'>{opinion.opinion}</p>
+                                        <p className='fs-5'>Puntuación: {opinion.puntuacion}</p>                                    
+                                    </Row>
+                                </CardText>
+                                <Button
+                                    color="warning"
+                                    size=""
+                                >
+                                    Modificar Opinión
+                                </Button>
+                            </CardBody>                                            
+                    </Card>
+                </Col>
+                )}
+            </CardGroup>                               
         </div>
     );
   }

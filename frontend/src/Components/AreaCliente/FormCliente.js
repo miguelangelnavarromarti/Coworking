@@ -17,12 +17,9 @@ class FormCliente extends React.Component {
           error: null,
         };
       }
-    componentDidMount() {
 
-
-    this.setState({ isLoading: true });
-
-    axios.get(API + "/datosClientes/1")  // MODIFICAR I AGAFAR ID CLIENT
+    peticionGet=()=>{
+      axios.get(API + "/datosClientes/1")  // MODIFICAR I AGAFAR ID CLIENT
         .then(result => this.setState({
             datosCliente: result.data,
             isLoading: false
@@ -31,6 +28,14 @@ class FormCliente extends React.Component {
         error,
         isLoading: false
         }));
+    }
+
+    componentDidMount() {
+
+    this.setState({ isLoading: true });
+    this.peticionGet();
+        
+    
     }
 
     render() {
@@ -149,12 +154,18 @@ class FormCliente extends React.Component {
                                             />
                                         </FormGroup>
                                     </div> 
-                                     <Col>
+                                     <Col sm={2}>
                                         <Button
                                             color='success'>
                                             Guardar
+                                        </Button>                                       
+                                    </Col>    
+                                    <Col sm={2}>
+                                        <Button
+                                                color='danger'>
+                                                <a href='/cliente' className='text-decoration-none text-light'>Cancelar</a>
                                         </Button>
-                                    </Col>                             
+                                    </Col>                         
                             </Form>
                         )}                        
                     </div>

@@ -15,7 +15,7 @@ class DatosClientesController extends Controller
     
 
     public function modificar(Request $request, $codigo){
-        $cliente = Cliente::all()->where('codigo',$codigo);
+        $cliente = Cliente::where('codigo',$codigo)->get();
 
         $cliente->password = $request->password;
         $cliente->nombre = $request->nombre;
