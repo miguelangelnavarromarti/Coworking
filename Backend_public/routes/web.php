@@ -69,6 +69,7 @@ Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class
 Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
 Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
 Route::post('/reservas', [ReservasController::class, 'crear']);
+
 Route::get('/config', function () {
     return view('connection');
 });

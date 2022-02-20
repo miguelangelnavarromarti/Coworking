@@ -54,6 +54,10 @@ class Reservas extends Component {
         <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
             <ClienteHeader/>
           <h1 className="text-center my-4">Todas las reservas</h1>
+          <Button
+            color="primary">
+              <a href="#" className='text-decoration-none text-light'>Hacer Nueva Reserva</a>
+            </Button>
           <Table
             hover
             responsive

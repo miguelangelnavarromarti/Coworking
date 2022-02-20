@@ -60,7 +60,7 @@ class Opiniones extends Component {
             <h1 className="text-center my-4">Todas las opiniones</h1>        
             <Button
             color="primary">
-                <a href="/formCrearOpinion" className='text-light fw-normal text-decoration-none'>Nueva Opinion</a>
+                <a href="/formCrearOpinion" className='text-light fw-normal text-decoration-none'>Nueva Opinion? Ho posam aqui?</a>
             </Button>
             <CardGroup>
             {opiniones.map((opinion)=>
@@ -79,12 +79,24 @@ class Opiniones extends Component {
                                         <p className='fs-5'>Puntuación: {opinion.puntuacion}</p>                                    
                                     </Row>
                                 </CardText>
+                            <div className="row">
+                            <Col>
                                 <Button
                                     color="warning"
                                     size=""
                                 >
                                     Modificar Opinión
                                 </Button>
+                            </Col>
+                            <Col>
+                                <Button
+                                    color="danger"
+                                    size=""
+                                    >
+                                    Eliminar Opinión
+                                </Button>
+                            </Col>
+                            </div>
                             </CardBody>                                            
                     </Card>
                 </Col>

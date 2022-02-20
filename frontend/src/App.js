@@ -2,11 +2,13 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Row, Col, Container } from 'reactstrap';
 
 import Home from "./Components/Home";
 import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
-import { Row, Col, Container } from 'reactstrap';
+import Login from './Components/Login';
+import Registro from './Components/Registro';
 import Cliente from './Components/AreaCliente/Cliente';
 import FormCliente from './Components/AreaCliente/FormCliente';
 import Reservas from './Components/AreaCliente/Reservas';
@@ -46,6 +48,10 @@ class App extends React.Component {
             <Route path="/facturas" element={<Facturas />} />
             <Route path="/opiniones" element={<Opiniones />} />
             <Route path='/formCrearOpinion' element={<FormCrearOpinion />}/>
+
+            <Route path='/login' element={<Login />}/>
+            <Route path='/registro' element={<Registro />}/>
+            
             
 
           </Routes>
