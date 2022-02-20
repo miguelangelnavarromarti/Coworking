@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Horario;
 use App\Models\Reserva;
 use App\Models\Espacio;
+use App\Models\TipoEspacio;
 
 class DisponibilidadController extends Controller
 {
@@ -26,8 +27,16 @@ class DisponibilidadController extends Controller
         return response()->json(Reserva::where('dia', $dia)->get());
     }
 
-    public function getEspacios() {
-        return response()->json(Espacio::orderBy('codigo', 'asc')->get(['codigo', 'nombre']));
+    public function getEspacios($codigo) {
+        return response()->json(Espacio::where('codigo', $codigo)->get(['nombre', 'descripcion']));
+    }
+
+    public function getEspaciosPorTipoEspacio($tipoEspacios) {
+        return response()->json(Espacio::where('codigoTipoEspacio', $tipoEspacios)->orderBy('codigo', 'asc')->get(['codigo', 'nombre']));
+    }
+
+    public function getTipoEspacios() {
+        return response()->json(TipoEspacio::orderBy('codigo', 'asc')->get(['codigo', 'nombre']));
     }
 
     public function getDisponibilidad($dia, $codigoEspacio) {

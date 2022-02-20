@@ -73,6 +73,10 @@ Route::get('/bloqueos', [DisponibilidadController::class, 'getBloqueos']);
 
 Route::get('/reservas/{dia}', [DisponibilidadController::class, 'getDisponibilidadPorDia']);
 
-Route::get('/espacios', [DisponibilidadController::class, 'getEspacios']);
+Route::get('/tipoEspacios', [DisponibilidadController::class, 'getTipoEspacios']);
+
+Route::get('/espacio/{codigo}', [DisponibilidadController::class, 'getEspacios']);
+
+Route::get('/espacios/{tipoEspacio}', [DisponibilidadController::class, 'getEspaciosPorTipoEspacio']);
 
 Route::get('/disponibilidad/{dia}/{codigoEspacio}', [DisponibilidadController::class, 'getDisponibilidad']);
