@@ -47,7 +47,7 @@ Route::get('noAutorizado', function(){
 
 
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
-Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);
+Route::get('/facturas/{codigoCliente}/{codigo}', [FacturasController::class, 'ver']);
 Route::post('/facturas', [FacturasController::class, 'crear']);
 
 Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index']);
@@ -68,6 +68,8 @@ Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class
 
 Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
 Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
+Route::get('/reservasFactura/{codigoFactura}', [ReservasController::class, 'reservasFactura']);
+
 Route::post('/reservas', [ReservasController::class, 'crear']);
 
 Route::get('/config', function () {

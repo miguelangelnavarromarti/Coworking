@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Table, Button, Card, CardBody, CardTitle, Col, CardText, Input, Row, CardGroup, FormGroup, Form, Label, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Button, Col, Input, FormGroup, Form, Label,} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
 
 const API = 'http://localhost:8000';
  
-class FormCrearOpinion extends Component {
+class FormModificarOpinion extends Component {
     constructor(props) {
         super(props);
     
@@ -19,7 +19,7 @@ class FormCrearOpinion extends Component {
       }
 
     peticionGet=()=>{
-        axios.get(API + "/opiniones/1")  // MODIFICAR I AGAFAR ID CLIENT
+        axios.get(API + "/opiniones/1/1")  // MODIFICAR I AGAFAR ID CLIENT i ID OPINION
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
@@ -57,12 +57,13 @@ class FormCrearOpinion extends Component {
      
         <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
             <ClienteHeader/>    
-            <h1 className="text-center my-4">Nueva opinión</h1>        
+            <h1 className="text-center my-4">Modificar opinión</h1>        
             <Col sm="8" className='m-auto'>
                 <div className="my-5 py-4 px-5  shadow bg-body rounded-3"
                     body   
                     color='primary'                     
                 >
+                    {opiniones.map((datos)=>
                     <Form className="row">
                         <div className='col-12'>
                             <FormGroup>
@@ -71,7 +72,8 @@ class FormCrearOpinion extends Component {
                                 </Label>
                                 <Input
                                     id="titulo"
-                                    name="titulo"                                
+                                    name="titulo"
+                                    placeholder={datos.titulo}                                
                                     type="text"
                                 />  
                             </FormGroup>
@@ -83,7 +85,8 @@ class FormCrearOpinion extends Component {
                                 </Label>
                                 <Input
                                     id="descripcion"
-                                    name="descripcion"                                
+                                    name="descripcion"
+                                    placeholder={datos.opinion}                                                                
                                     type="textarea"
                                 />  
                             </FormGroup>
@@ -95,7 +98,8 @@ class FormCrearOpinion extends Component {
                                 </Label>
                                 <Input
                                     id="puntuacion"
-                                    name="puntuacion"                                
+                                    name="puntuacion"
+                                    placeholder={datos.puntuacion}                                
                                     type="number"
                                 />  
                             </FormGroup>
@@ -114,7 +118,7 @@ class FormCrearOpinion extends Component {
                             </Button>
                         </Col>    
                     </Form>    
-             
+                )}
                     
                 </div>
             </Col>
@@ -130,4 +134,4 @@ class FormCrearOpinion extends Component {
   }
 }
  
-export default FormCrearOpinion;
+export default FormModificarOpinion;

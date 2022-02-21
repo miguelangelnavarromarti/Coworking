@@ -29,6 +29,9 @@ class ClienteHeader extends Component {
                         <NavItem>
                             <NavLink href="/facturas" className='text-dark mx-5'>Facturas</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href="/facturasCanceladas" className='text-dark mx-5'>Facturas Canceladas</NavLink>
+                        </NavItem>
                         </Nav>
                     </Collapse>           
                 </Navbar>

@@ -6,7 +6,7 @@ import ClienteHeader from './ClienteHeader';
 
 const API = 'http://localhost:8000';
 
-class FormCliente extends React.Component {
+class FormModificarCliente extends React.Component {
 
     constructor(props) {
         super(props);
@@ -176,4 +176,4 @@ class FormCliente extends React.Component {
 }
 
 
-export default FormCliente;
+export default FormModificarCliente;

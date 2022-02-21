@@ -10,12 +10,14 @@ import Selectable from './Components/Selectable';
 import Login from './Components/Login';
 import Registro from './Components/Registro';
 import Cliente from './Components/AreaCliente/Cliente';
-import FormCliente from './Components/AreaCliente/FormCliente';
+import FormCliente from './Components/AreaCliente/FormModificarCliente';
 import Reservas from './Components/AreaCliente/Reservas';
 import Facturas from './Components/AreaCliente/Facturas';
 import Opiniones from './Components/AreaCliente/Opiniones';
 import FormCrearOpinion from './Components/AreaCliente/FormCrearOpinion';
-
+import FormModificarOpinion from './Components/AreaCliente/FormModificarOpinion';
+import FacturasCanceladas from './Components/AreaCliente/FacturasCanceladas';
+import FacturaCompleta from './Components/AreaCliente/FacturaCompleta';
 
 class App extends React.Component {
   render() {
@@ -46,8 +48,11 @@ class App extends React.Component {
             <Route path="/formCliente" element={<FormCliente />} />
             <Route path="/reservas" element={<Reservas />} />
             <Route path="/facturas" element={<Facturas />} />
+            <Route path="/facturaCompleta/:id" element={<FacturaCompleta />} />
+            <Route path="/facturasCanceladas" element={<FacturasCanceladas />} />
             <Route path="/opiniones" element={<Opiniones />} />
             <Route path='/formCrearOpinion' element={<FormCrearOpinion />}/>
+            <Route path='/formModificarOpinion' element={<FormModificarOpinion />}/>
 
             <Route path='/login' element={<Login />}/>
             <Route path='/registro' element={<Registro />}/>

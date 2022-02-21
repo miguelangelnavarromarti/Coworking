@@ -57,19 +57,15 @@ class Opiniones extends Component {
      
         <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
             <ClienteHeader/>    
-            <h1 className="text-center my-4">Todas las opiniones</h1>        
-            <Button
-            color="primary">
-                <a href="/formCrearOpinion" className='text-light fw-normal text-decoration-none'>Nueva Opinion? Ho posam aqui?</a>
-            </Button>
+            <h1 className="text-center my-4">Todas las opiniones</h1>                    
             <CardGroup>
             {opiniones.map((opinion)=>
-                <Col sm="5" className="m-auto">
+                <Col key={opinion.codigo} sm="5" className="m-auto">
                     <Card className="my-5 py-4 px-5  shadow bg-body rounded-3"
                         body
                         >                                     
                             <CardBody>
-                                <CardTitle key={opinion.codigo} tag="h3" className='text-center mb-4'>
+                                <CardTitle  tag="h3" className='text-center mb-4'>
                                 {opinion.titulo}
                                 </CardTitle>
                                 <CardText>
@@ -85,7 +81,7 @@ class Opiniones extends Component {
                                     color="warning"
                                     size=""
                                 >
-                                    Modificar Opinión
+                                <a href="/formModificarOpinion" className='text-decoration-none text-dark'>Modificar Opinión</a>
                                 </Button>
                             </Col>
                             <Col>
