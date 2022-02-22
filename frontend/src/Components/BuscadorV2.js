@@ -5,6 +5,7 @@ import CardEspacio from './CardEspacio';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import dateFnsFormat from 'date-fns/format';
 import styles from '../styles.css';
+import ConfirmationButton from './ConfirmationButton';
 
 
 import { Button, Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
@@ -36,6 +37,15 @@ class BuscadorV2 extends React.Component {
             selectedEspacio: null,
             espacios: [],
             reservas: [],
+            reserva: {
+                codigoCliente: 1,
+                hora: [
+                    8,9
+                ],
+                codigoEspacio: 1,
+                estado: 'confirmado',
+                dia: '2022-12-31',
+            },
             isLoading: false,
             error: null,
             requestDay: `${dateFnsFormat(new Date(), 'yyyy-MM-dd')}`,
@@ -43,6 +53,7 @@ class BuscadorV2 extends React.Component {
             format: 'yyyy-MM-dd',
         };
     }
+    
 
     handleDayChange(day) {
         this.setState({
@@ -91,16 +102,6 @@ class BuscadorV2 extends React.Component {
         const hora = i.target.text.split(":")[0];
         const objectHora = {hora: hora.toString()};
 
-        var indexDispo;
-        for (let i = 0; i < disponibilidad.length; i++) {
-            if (disponibilidad[i].hora > hora) {
-                indexDispo = i;
-                break;
-            } else {
-                indexDispo = disponibilidad.length;
-            }
-        }
-
         var indexReserva;
         for (let i = 0; i < reservas.length; i++) {
             if (reservas[i].split(":")[0] == hora) {
@@ -117,6 +118,8 @@ class BuscadorV2 extends React.Component {
             reservas: reservas,
             disponibilidad: disponibilidad,
         })
+
+        console.log(this.state.reserva);
     }
 
     componentDidMount() {
@@ -206,7 +209,7 @@ class BuscadorV2 extends React.Component {
     }
 
     render() {
-        const { disponibilidad, espacios, tipoEspacios, reservas, isLoading, error, requestDay, selectedDay } = this.state;
+        const { disponibilidad, espacios, tipoEspacios, reservas, reserva, isLoading, error, requestDay, selectedDay } = this.state;
         const FORMAT = 'yyyy-MM-dd';
 
         if (error) {
@@ -333,7 +336,7 @@ class BuscadorV2 extends React.Component {
                                 </div>
 
                             </div>
-                            <Button color='primary' className='w-100 mt-2'>Reservar</Button>
+                            <ConfirmationButton texto='Reservar' objeto={reserva}/>
                         </div>
                     </Col>
                 </Row>
