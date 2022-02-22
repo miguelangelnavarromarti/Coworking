@@ -9,16 +9,6 @@ class FacturaCancelada extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'codigo',
-        'codigoFactura',
-        'codigoCliente',
-        'devolucion',
-        'diasAntelacionCancelacion',
-        'descuentoCancelacion',
-        'diaHoraCancelacion'
-    ];
-
     protected $table = 'FACTURAS_CANCELACIONES';
     protected $primaryKey = 'codigo';
 }

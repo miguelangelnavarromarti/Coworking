@@ -1,6 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -38,8 +36,18 @@ Route::get('/conexion', function () {
     return view('conexion');
 });
 
+//BORRAR DSP
+Route::get('prueba',function(){
+    return "has entrat be a sa ruta";
+})->middleware('usuario');
+Route::get('noAutorizado', function(){
+    return 'No estas autorizado';
+});
+
+
+
 Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
-Route::get('/facturas/{codigo}/{codigoCliente}', [FacturasController::class, 'ver']);
+Route::get('/facturas/{codigoCliente}/{codigo}', [FacturasController::class, 'ver']);
 Route::post('/facturas', [FacturasController::class, 'crear']);
 
 Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index']);
@@ -47,20 +55,22 @@ Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasCo
 
 //Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasCanceladasController::class, 'crear'], [GestionCancelacionesController::class, 'ver']);
 
-
 Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver']);
 Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar']);
 
 
 Route::get('/opiniones/{codigoCliente}', [OpinionesController::class, 'index']);
-Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);
+Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);     //NO FA FALTA JA, BORRAR
 Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear']);
 Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar']);
 Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar']);
 
 Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
 Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
+Route::get('/reservasFactura/{codigoFactura}', [ReservasController::class, 'reservasFactura']);
+
 Route::post('/reservas', [ReservasController::class, 'crear']);
+
 Route::get('/config', function () {
     return view('connection');
 });

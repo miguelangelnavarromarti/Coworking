@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reserva;
+use App\Models\ReservaFactura;
 
 class ReservasController extends Controller
 {
   
     public function index($codigoCliente){
         
-        $reservas = Reserva::all()->where('codigoCliente',$codigoCliente);
+        $reservas = Reserva::where('codigoCliente',$codigoCliente)->get();
         return response()->json($reservas, 200);
     }
 
@@ -18,6 +19,13 @@ class ReservasController extends Controller
         
         $reservas = Reserva::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         return response()->json($reservas, 200);
+    }
+
+    public function reservasFactura($codigoFactura){                
+// SELECT * from RESERVAS where codigo in (SELECT codigoReserva from FACTURAS_RESERVAS where codigoFactura = $codigoFactura);
+        return Reserva::whereIn('codigo', function($query) use ($codigoFactura) {
+        $query->select('codigoReserva')->from('FACTURAS_RESERVAS')->where('codigoFactura', '=', $codigoFactura);
+        })->get();
     }
 
     public function crear (Request $request){

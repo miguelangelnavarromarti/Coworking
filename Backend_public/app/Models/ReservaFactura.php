@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Factura extends Model
+class ReservaFactura extends Model
 {
     use HasFactory;
 
-   
+    protected $table = 'FACTURAS_RESERVAS';
 
-    protected $table = 'FACTURAS';
-    protected $primaryKey = 'codigo';
+    protected $primaryKey = 'codigoReserva';
 
     public $timestamps = false;
-
-
 }
