@@ -90,3 +90,5 @@ Route::get('/espacio/{codigo}', [DisponibilidadController::class, 'getEspacios']
 Route::get('/espacios/{tipoEspacio}', [DisponibilidadController::class, 'getEspaciosPorTipoEspacio']);
 
 Route::get('/disponibilidad/{dia}/{codigoEspacio}', [DisponibilidadController::class, 'getDisponibilidad']);
+
+Route::post('/postReserva', [DisponibilidadController::class, 'store']);
