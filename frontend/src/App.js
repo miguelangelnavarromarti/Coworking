@@ -9,7 +9,6 @@ import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
 import Buscador from './Components/Buscador';
 import BuscadorV2 from './Components/BuscadorV2';
-import { Row, Col, Container } from 'reactstrap';
 import Login from './Components/Login';
 import Registro from './Components/Registro';
 import Cliente from './Components/AreaCliente/Cliente';
@@ -21,8 +20,16 @@ import FormCrearOpinion from './Components/AreaCliente/FormCrearOpinion';
 import FormModificarOpinion from './Components/AreaCliente/FormModificarOpinion';
 import FacturasCanceladas from './Components/AreaCliente/FacturasCanceladas';
 import FacturaCompleta from './Components/AreaCliente/FacturaCompleta';
+import IconoLogin from './Components/IconoLogin';
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      login : true,
+    };
+  }
   render() {
     return (
       <Router>
@@ -41,8 +48,13 @@ class App extends React.Component {
               <Link to="/buscador">Buscador</Link>
             </Col>
             <Col className='text-center'>
-              <Link to="/buscadorV2">Buscador v2</Link>
+              <Link to="/buscadorV2">Buscador v2</Link>              
+            </Col>
+            <Col className='text-center'>
               <Link to="/cliente">Area Cliente</Link>
+            </Col>
+            <Col>
+              <IconoLogin login={this.state.login}/>
             </Col>
           </Row>
           <Routes>
