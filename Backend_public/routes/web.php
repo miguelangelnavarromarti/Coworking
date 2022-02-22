@@ -55,7 +55,6 @@ Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasCo
 
 //Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasCanceladasController::class, 'crear'], [GestionCancelacionesController::class, 'ver']);
 
-
 Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver']);
 Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar']);
 

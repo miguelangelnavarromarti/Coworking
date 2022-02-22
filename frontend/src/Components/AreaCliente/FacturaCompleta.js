@@ -28,7 +28,7 @@ class FacturaCompleta extends Component {
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/facturas/1")  // MODIFICAR I AGAFAR ID CLIENT
+    axios.get(API + "/facturas/1/1")  // MODIFICAR I AGAFAR ID CLIENT
         .then(result => this.setState({
             facturas: result.data,
             isLoading: false
@@ -53,7 +53,7 @@ class FacturaCompleta extends Component {
     
 
     render() {
-        const { reservas, isLoading, error } = this.state;
+        const { reservas, facturas, isLoading, error } = this.state;
         
 
         if (error) {
@@ -68,7 +68,18 @@ class FacturaCompleta extends Component {
      
         <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
              <ClienteHeader/>
-          <h1 className="text-center my-4">Factura Detallada</h1>
+          <h1 className="text-center my-4">Factura Detallada</h1>          
+          {facturas.map(function(factura){
+                return (
+                <Col key={factura.codigo} className="text-center row mb-5">
+                    <div className="col-2 fw-bold mx-auto">Codigo factura: {factura.codigo}</div>
+                    <div className="col-3 fw-bold mx-auto">Dia de Factura: {factura.diaFactura}</div>
+                    <div className="col-2 fw-bold mx-auto">Precio Total: {factura.precioTotal} €</div>
+                    <div className="col-2 fw-bold mx-auto">Min. Horas Oferta: {factura.minimoHoraOferta}h</div>
+                    <div className="col-2 fw-bold mx-auto">Desc. Oferta: {factura.descuentoOferta}</div>
+                </Col>
+            )})}
+
           <Table
             hover
             responsive
