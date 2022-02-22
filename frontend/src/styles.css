@@ -23,6 +23,26 @@
 .searcher {
     width: 70%;
     padding: 5px;
-    background-color: blue;
+    background-color: lightskyblue;
     border-radius: 5px;
+}
+
+.searcherV2 {
+    width: 100%;
+    padding: 5px;
+    background-color: lightskyblue;
+    border-radius: 5px;
+}
+
+.w-45 {
+    width: 45%;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.border-dispo {
+    border: 5px solid lightskyblue;
+    border-radius: 10px;
 }

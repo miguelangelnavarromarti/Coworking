@@ -7,6 +7,7 @@ import Home from "./Components/Home";
 import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
 import Buscador from './Components/Buscador';
+import BuscadorV2 from './Components/BuscadorV2';
 import { Row, Col, Container } from 'reactstrap';
 
 class App extends React.Component {
@@ -27,12 +28,16 @@ class App extends React.Component {
             <Col className='text-center'>
               <Link to="/buscador">Buscador</Link>
             </Col>
+            <Col className='text-center'>
+              <Link to="/buscadorV2">Buscador v2</Link>
+            </Col>
           </Row>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/table" element={<Table />} />
             <Route path="/selectable" element={<Selectable />} />
             <Route path="/buscador" element={<Buscador />} />
+            <Route path="/buscadorV2" element={<BuscadorV2 />} />
           </Routes>
         </Container>
       </Router>
