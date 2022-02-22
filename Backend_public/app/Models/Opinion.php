@@ -11,4 +11,7 @@ class Opinion extends Model
 
     protected $table = 'OPINIONES';
     protected $primaryKey = 'codigo';
+    protected $fillable =['codigoCliente','codigoReserva','titulo','opinion','puntuacion'];
+    public $timestamps = false;
+
 }

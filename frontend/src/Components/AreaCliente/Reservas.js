@@ -80,7 +80,7 @@ class Reservas extends Component {
                     <td>{reserva.diaHoraCreacion}</td>
                     <td>{reserva.estado}</td>
                     <td>                    
-                      <IconoCondicionalOpinion reservaEstado={reserva.estado}/>                      
+                      <IconoCondicionalOpinion reservaEstado={reserva.estado} codigoReserva ={reserva.codigo}/>                      
                     </td>
                   </tr>
                 )

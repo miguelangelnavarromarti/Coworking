@@ -72,7 +72,7 @@ class App extends React.Component {
             <Route path="/facturaCompleta/:id" element={<FacturaCompleta />} />
             <Route path="/facturasCanceladas" element={<FacturasCanceladas />} />
             <Route path="/opiniones" element={<Opiniones />} />
-            <Route path='/formCrearOpinion' element={<FormCrearOpinion />}/>
+            <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion />}/>
             <Route path='/formModificarOpinion' element={<FormModificarOpinion />}/>
 
             <Route path='/login' element={<Login />}/>

@@ -11,6 +11,8 @@ class Cliente extends Model
 
     protected $table = 'CLIENTES';
     protected $primaryKey = 'codigo';
+    protected $fillable =['codigo','nombreUsuario','nombre','apellido1','apellido2','telefono','email','codigoPostal','password'];
+    public $timestamps = false;
 
 
 }

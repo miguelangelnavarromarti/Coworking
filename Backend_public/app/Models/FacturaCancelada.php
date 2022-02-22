@@ -11,4 +11,6 @@ class FacturaCancelada extends Model
 
     protected $table = 'FACTURAS_CANCELACIONES';
     protected $primaryKey = 'codigo';
+    protected $fillable =['codigoFactura','codigoCliente','devolucion','diasAntelacionCancelacion','descuentoCancelacion','diaHoraCancelacion'];
+    public $timestamps = false;
 }

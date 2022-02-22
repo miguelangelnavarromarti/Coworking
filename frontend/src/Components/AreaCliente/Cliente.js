@@ -66,7 +66,7 @@ class Cliente extends React.Component {
                                         <p className='fs-5'>Nombre: {datos.nombre} {datos.apellido1} {datos.apellido2}</p>
                                         <p className='fs-5'>Telefono: {datos.telefono}</p>
                                         <p className='fs-5'>Email: {datos.email}</p>
-                                        <p className='fs-5'>Codigo Postal: {datos.codigoPostal}</p>
+                                        <p className='fs-5'>Codigo Postal: {datos.codigoPostal}</p>                                        
                                     </Row>
                                 </CardText>
                                 <Button

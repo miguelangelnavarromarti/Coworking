@@ -29,6 +29,7 @@ class ReservasController extends Controller
     }
 
     public function crear (Request $request){
+/*
         $reservaObject = json_decode($request);
         $newReserva = new Reserva;
         $newReserva->codigoCliente = $reservaObject->codigoCliente;
@@ -38,7 +39,18 @@ class ReservasController extends Controller
         $newReserva->dia = $reservaObject->dia;
         $newReserva->precio = $reservaObject->precio;
         $newReserva->diaHoraCreacion = $reservaObject->diaHoraCreacion;
-
         $newReserva->save();
+*/
+
+        $newReserva = Reserva::create([
+            'codigoCliente' => $request['codigoCliente'],
+            'hora' => $request['hora'],
+            'codigoEspacio' => $request['codigoEspacio'],
+            'estado' => $request['estado'],
+            'dia' => $request['dia'],
+            'precio' => $request['precio'],
+            'diaHoraCreacion' => ['diaHoraCreacion'],
+        ]);
+        return "S'ha pujat";
     }
 }

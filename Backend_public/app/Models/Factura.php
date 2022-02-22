@@ -13,7 +13,7 @@ class Factura extends Model
 
     protected $table = 'FACTURAS';
     protected $primaryKey = 'codigo';
-
+    protected $fillable =['codigoCliente','diaFactura','minimoHoraOferta','descuentoOferta','precioTotal'];
     public $timestamps = false;
 
 

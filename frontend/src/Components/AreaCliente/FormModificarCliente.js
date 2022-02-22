@@ -16,6 +16,8 @@ class FormModificarCliente extends React.Component {
           isLoading: false,
           error: null,
           form:{
+              codigo:'',
+              nombreUsuario:'',
               nombre:'',
               apellido1:'',
               apellido2:'',
@@ -23,7 +25,7 @@ class FormModificarCliente extends React.Component {
               telefono:'',
               email:'',
               password:'',
-          }
+          },          
         };
       }
 
@@ -39,12 +41,24 @@ class FormModificarCliente extends React.Component {
         }));
     }
 
+    
+
+    peticionPut=()=>{
+        axios.put(API+"/datosClientes/"+this.state.form.codigo, this.state.form)
+        .then(response=>{            
+            console.log("Enviat!");
+            window.location.href = "http://localhost:3000/datosCliente";       //Modifica sa url i me redirigeix aixi    
+        })
+    }
+
     handleChange=async e=>{
         e.persist();
         await this.setState({
             form:{
                 ...this.state.form,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
+                codigo: document.querySelector('#codigo').value,
+                nombreUsuario: document.querySelector('#nombreUsuario').value,                
             }
         });
         console.log(this.state.form);
@@ -68,6 +82,7 @@ class FormModificarCliente extends React.Component {
         if (isLoading) {
         return <p>Loading ...</p>;
         }
+        
 
 
         return (
@@ -83,7 +98,9 @@ class FormModificarCliente extends React.Component {
                         >                
                         {datosCliente.map((datos)=>
                             <Form key={datos.codigo} className="row">
-                                
+                                    <input type="hidden" id="codigo" name="codigo" value={datos.codigo} />
+                                    <input type="hidden" id="nombreUsuario" name="nombreUsuario" value={datos.nombreUsuario} />
+
                                     <div className='col-12'>                                        
                                         <FormGroup>
                                             <Label for="nombre">
@@ -93,6 +110,7 @@ class FormModificarCliente extends React.Component {
                                             id="nombre"
                                             name="nombre"
                                             placeholder={datos.nombreUsuario}
+                                            
                                             type="text"
                                             onChange={this.handleChange}
                                             />
@@ -183,7 +201,8 @@ class FormModificarCliente extends React.Component {
                                     </div> 
                                      <Col sm={2}>
                                         <Button
-                                            color='success'>
+                                            color='success'
+                                            onClick={()=>this.peticionPut()}>
                                             Guardar
                                         </Button>                                       
                                     </Col>    

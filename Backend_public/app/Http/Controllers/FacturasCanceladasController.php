@@ -21,9 +21,8 @@ class FacturasCanceladasController extends Controller
 
     //NO ESTA COMPLET
     public function crear(Request $request){
-
+/*
         $requestObject = json_decode($request);
-
         $newFacturaCancelada = new FacturaCancelada;
         $newFacturaCancelada->codigoFactura = $requestObject->codigoFactura;
         $newFacturaCancelada->codigoCliente = $requestObject->codigoCliente;
@@ -31,8 +30,16 @@ class FacturasCanceladasController extends Controller
         $newFacturaCancelada->diasAntelacionCancelacion = $requestObject->diasAntelacionCancelacion;
         $newFacturaCancelada->descuentoCancelacion = $requestObject->descuentoCancelacion;
         $newFacturaCancelada->diaHoraCancelacion = $requestObject->diaHoraCancelacion;
-
         $newFacturaCancelada->save();
-        
+*/
+        $newFacturaCancelada = FacturaCancelada::create([
+            'codigoFactura' => $request['codigoFactura'],
+            'codigoCliente' => $request['codigoCliente'],
+            'devolucion' => $request['devolucion'],
+            'diasAntelacionCancelacion' => $request['diasAntelacionCancelacion'],
+            'descuentoCancelacion' => $request['descuentoCancelacion'],
+            'diaHoraCancelacion' => $request['diaHoraCancelacion'],
+        ]);        
+        return "S'ha pujat";
     }
 }

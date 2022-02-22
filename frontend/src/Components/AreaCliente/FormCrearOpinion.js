@@ -14,11 +14,15 @@ class FormCrearOpinion extends Component {
           opiniones: [],
           isLoading: false,
           error: null,
+          url : window.location.href,
           form:{
+              codigoCliente:1,  //Aquest 1 ha de ser s'id des client
+              codigoReserva: '',
               titulo:'',
-              descripcion:'',
+              opinion:'',
               puntuacion:'',
-          }
+          }, 
+
         }; 
       }
 
@@ -34,10 +38,12 @@ class FormCrearOpinion extends Component {
         }));    
     }
 
-    peticionPost=async()=>{
-        await axios.post(API+"/opiniones/1",this.state.form)
+    peticionPost=()=>{
+        axios.post(API+"/opiniones/1",this.state.form)      //MODIFICAR ID CLIENT
         .then(response=>{
-            this.peticionGet();
+            this.peticionGet();  
+            console.log("Enviat!");
+            window.location.href = "http://localhost:3000/opiniones";       //Modifica sa url i me redirigeix aixi                      
         })
         .catch(error => this.setState({
             error,
@@ -50,7 +56,8 @@ class FormCrearOpinion extends Component {
         await this.setState({
             form:{
                 ...this.state.form,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
+                codigoReserva: document.querySelector('#codigoReserva').value
             }
         });
         console.log(this.state.form);
@@ -68,8 +75,9 @@ class FormCrearOpinion extends Component {
     }
 
     render() {
-        const { form, isLoading, error } = this.state;
-
+        const { form, isLoading, error, url } = this.state;
+        const urlBona = url.split("/").splice(-1)[0];        
+        
         if (error) {
         return <p>{error.message}</p>;
         }
@@ -87,9 +95,10 @@ class FormCrearOpinion extends Component {
                 <div className="my-5 py-4 px-5  shadow bg-body rounded-3"
                     body   
                     color='primary'                     
-                >
+                >                    
                     <Form className="row">                        
                         <div className='col-12'>
+                            <input type="hidden" id="codigoReserva" name="codigoReserva" value={urlBona} />
                             <FormGroup>
                                 <Label for="titulo">
                                     Titulo
@@ -105,15 +114,15 @@ class FormCrearOpinion extends Component {
                         </div>
                         <div className='col-12'>
                             <FormGroup>
-                                <Label for="descripcion">
-                                    Descripción
+                                <Label for="opinion">
+                                    Opinión
                                 </Label>
                                 <Input
-                                    id="descripcion"
-                                    name="descripcion"                                
+                                    id="opinion"
+                                    name="opinion"                                
                                     type="textarea"
                                     onChange={this.handleChange}
-                                    value={form.descripcion}
+                                    value={form.opinion}
                                 />  
                             </FormGroup>
                         </div> 

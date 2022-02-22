@@ -19,16 +19,27 @@ class OpinionesController extends Controller
     }
 
     public function crear(Request $request){
-        $opinionObject = json_decode($request);
+        //$opinionObject = json_decode($request);
 
+        $nuevaOpinion= Opinion::create([
+            'codigoCliente' => $request['codigoCliente'],
+            'codigoReserva' => $request['codigoReserva'],
+            'titulo' => $request['titulo'],
+            'opinion' => $request['opinion'],
+            'puntuacion' => $request['puntuacion'],
+            
+        ]);
+        return "S'ha pujat";
+/*
         $newOpinion = new Opinion;
         $newOpinion->codigoCliente = $opinionObject->codigoCliente;
         $newOpinion->codigoReserva = $opinionObject->codigoReserva;
         $newOpinion->titulo = $opinionObject->titulo;
         $newOpinion->opinion = $opinionObject->opinion;
         $newOpinion->puntuacion = $opinionObject->puntuacion;
-
-        $newOpinion->save();
+        $nuevaOpinion->save();
+*/        
+        
     }
 
     public function modificar(Request $request, $codigoCliente, $codigo){
