@@ -9,7 +9,7 @@ import Table from "./Components/Table";
 import Selectable from './Components/Selectable';
 import Buscador from './Components/Buscador';
 import BuscadorV2 from './Components/BuscadorV2';
-import { Row, Col, Container } from 'reactstrap';
+
 import Login from './Components/Login';
 import Registro from './Components/Registro';
 import Cliente from './Components/AreaCliente/Cliente';
@@ -42,6 +42,8 @@ class App extends React.Component {
             </Col>
             <Col className='text-center'>
               <Link to="/buscadorV2">Buscador v2</Link>
+            </Col>
+            <Col className='text-center'>
               <Link to="/cliente">Area Cliente</Link>
             </Col>
           </Row>
@@ -60,14 +62,11 @@ class App extends React.Component {
             <Route path="/facturaCompleta/:id" element={<FacturaCompleta />} />
             <Route path="/facturasCanceladas" element={<FacturasCanceladas />} />
             <Route path="/opiniones" element={<Opiniones />} />
-            <Route path='/formCrearOpinion' element={<FormCrearOpinion />}/>
-            <Route path='/formModificarOpinion' element={<FormModificarOpinion />}/>
+            <Route path='/formCrearOpinion' element={<FormCrearOpinion />} />
+            <Route path='/formModificarOpinion' element={<FormModificarOpinion />} />
 
-            <Route path='/login' element={<Login />}/>
-            <Route path='/registro' element={<Registro />}/>
-            
-            
-
+            <Route path='/login' element={<Login />} />
+            <Route path='/registro' element={<Registro />} />
           </Routes>
         </Container>
       </Router>
