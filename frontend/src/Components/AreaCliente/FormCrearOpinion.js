@@ -14,8 +14,12 @@ class FormCrearOpinion extends Component {
           opiniones: [],
           isLoading: false,
           error: null,
-          modalInsertar: false,
-        };
+          form:{
+              titulo:'',
+              descripcion:'',
+              puntuacion:'',
+          }
+        }; 
       }
 
     peticionGet=()=>{
@@ -27,23 +31,44 @@ class FormCrearOpinion extends Component {
         .catch(error => this.setState({
         error,
         isLoading: false
+        }));    
+    }
+
+    peticionPost=async()=>{
+        await axios.post(API+"/opiniones/1",this.state.form)
+        .then(response=>{
+            this.peticionGet();
+        })
+        .catch(error => this.setState({
+            error,
+            isLoading: false
         }));
     }
 
-    modalInsertar=()=>{ //Me passa de true a false i de false a true
-        this.setState({modalInsertar: !this.state.modalInsertar});
-    }
+    handleChange=async e=>{
+        e.persist();
+        await this.setState({
+            form:{
+                ...this.state.form,
+                [e.target.name]: e.target.value
+            }
+        });
+        console.log(this.state.form);
+    };
+    
+    
 
     componentDidMount() {
 
     this.setState({ isLoading: true });
     this.peticionGet();
+    
 
     
     }
 
     render() {
-        const { opiniones, isLoading, error } = this.state;
+        const { form, isLoading, error } = this.state;
 
         if (error) {
         return <p>{error.message}</p>;
@@ -63,7 +88,7 @@ class FormCrearOpinion extends Component {
                     body   
                     color='primary'                     
                 >
-                    <Form className="row">
+                    <Form className="row">                        
                         <div className='col-12'>
                             <FormGroup>
                                 <Label for="titulo">
@@ -73,6 +98,8 @@ class FormCrearOpinion extends Component {
                                     id="titulo"
                                     name="titulo"                                
                                     type="text"
+                                    onChange={this.handleChange}
+                                    value={form.titulo}
                                 />  
                             </FormGroup>
                         </div>
@@ -85,6 +112,8 @@ class FormCrearOpinion extends Component {
                                     id="descripcion"
                                     name="descripcion"                                
                                     type="textarea"
+                                    onChange={this.handleChange}
+                                    value={form.descripcion}
                                 />  
                             </FormGroup>
                         </div> 
@@ -97,13 +126,16 @@ class FormCrearOpinion extends Component {
                                     id="puntuacion"
                                     name="puntuacion"                                
                                     type="number"
+                                    onChange={this.handleChange}
+                                    value={form.puntuacion}
                                 />  
                             </FormGroup>
                         </div>                      
 
                         <Col sm={2}>
                             <Button
-                                color='success'>
+                                color='success' 
+                                onClick={()=>this.peticionPost()}>
                                 Guardar
                             </Button>                                       
                         </Col>    
@@ -117,13 +149,7 @@ class FormCrearOpinion extends Component {
              
                     
                 </div>
-            </Col>
-                
-                    
-                  
-                  
-           
-
+            </Col>           
             
         </div>
     );

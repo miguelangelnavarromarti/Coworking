@@ -15,6 +15,15 @@ class FormModificarCliente extends React.Component {
           datosCliente: [],
           isLoading: false,
           error: null,
+          form:{
+              nombre:'',
+              apellido1:'',
+              apellido2:'',
+              codigoPostal:'',
+              telefono:'',
+              email:'',
+              password:'',
+          }
         };
       }
 
@@ -28,6 +37,17 @@ class FormModificarCliente extends React.Component {
         error,
         isLoading: false
         }));
+    }
+
+    handleChange=async e=>{
+        e.persist();
+        await this.setState({
+            form:{
+                ...this.state.form,
+                [e.target.name]: e.target.value
+            }
+        });
+        console.log(this.state.form);
     }
 
     componentDidMount() {
@@ -74,6 +94,7 @@ class FormModificarCliente extends React.Component {
                                             name="nombre"
                                             placeholder={datos.nombreUsuario}
                                             type="text"
+                                            onChange={this.handleChange}
                                             />
                                         </FormGroup>                                        
                                     </div>
@@ -87,6 +108,7 @@ class FormModificarCliente extends React.Component {
                                             name="apellido1"
                                             placeholder={datos.apellido1}
                                             type="text"
+                                            onChange={this.handleChange}
                                             />
                                         </FormGroup>                                        
                                     </div>
@@ -100,6 +122,7 @@ class FormModificarCliente extends React.Component {
                                                 name="apellido2"
                                                 placeholder={datos.apellido2}
                                                 type="text"
+                                                onChange={this.handleChange}
                                                 />
                                         </FormGroup>
                                     </div>
@@ -113,6 +136,7 @@ class FormModificarCliente extends React.Component {
                                             name="codigoPostal"
                                             placeholder={datos.codigoPostal}
                                             type='number'
+                                            onChange={this.handleChange}
                                             />
                                         </FormGroup>
                                     </div>
@@ -126,6 +150,7 @@ class FormModificarCliente extends React.Component {
                                             name="telefono"
                                             placeholder={datos.telefono}
                                             type="number"
+                                            onChange={this.handleChange}
                                             />
                                         </FormGroup>
                                     </div>
@@ -139,6 +164,7 @@ class FormModificarCliente extends React.Component {
                                             name="email"
                                             placeholder={datos.email}
                                             type="email"
+                                            onChange={this.handleChange}
                                             />
                                         </FormGroup>
                                     </div>                                    
@@ -151,6 +177,7 @@ class FormModificarCliente extends React.Component {
                                             id="password"
                                             name="password"                                            
                                             type="password"
+                                            onChange={this.handleChange}
                                             />
                                         </FormGroup>
                                     </div> 
