@@ -43,20 +43,22 @@ class OpinionesController extends Controller
     }
 
     public function modificar(Request $request, $codigoCliente, $codigo){
-        $opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
-
+        //$opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+        $opinion = Opinion::findOrFail($codigo);
         $opinion->titulo = $request->titulo;
         $opinion->opinion = $request->opinion;
         $opinion->puntuacion = $request->puntuacion;
 
-        $opinion->update();
+        $opinion->save();
+        return "MODIFICAT";
     }
 
     public function eliminar($codigoCliente, $codigo){
 
-        $opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
-
+        //$opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+        $opinion = Opinion::findOrFail($codigo);
         $opinion->delete();
+        return "ELIMINAT";
     }
 }
 

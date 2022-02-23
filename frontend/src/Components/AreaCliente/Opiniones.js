@@ -13,8 +13,7 @@ class Opiniones extends Component {
         this.state = {
           opiniones: [],
           isLoading: false,
-          error: null,
-          modalInsertar: false,
+          error: null,         
         };
       }
 
@@ -30,20 +29,33 @@ class Opiniones extends Component {
         }));
     }
 
-    modalInsertar=()=>{ //Me passa de true a false i de false a true
-        this.setState({modalInsertar: !this.state.modalInsertar});
+    redirectModificar=()=>{
+        window.location.href= "http://localhost:3000/formModificarOpinion";
     }
+
+    peticionDelete=()=>{        // SI POS UNA RUTA HO BORRA AUTOMATICAMENT SENSE FER CLICK
+        axios.delete(API + "/opiniones/1/51")
+        .then(response=>{
+            this.peticionGet();
+        })
+    }
+
+
 
     componentDidMount() {
 
     this.setState({ isLoading: true });
     this.peticionGet();
 
+    console.log(this.state.opiniones);
+
     
     }
 
     render() {
         const { opiniones, isLoading, error } = this.state;
+
+        console.log(this.state.opiniones);
 
         if (error) {
         return <p>{error.message}</p>;
@@ -80,14 +92,15 @@ class Opiniones extends Component {
                                 <Button
                                     color="warning"
                                     size=""
-                                >
-                                <a href="/formModificarOpinion" className='text-decoration-none text-dark'>Modificar Opinión</a>
+                                    onClick={()=>this.redirectModificar()}>                                                
+                                    Modificar Opinión
                                 </Button>
                             </Col>
                             <Col>
                                 <Button
                                     color="danger"
                                     size=""
+                                    onClick={()=>this.peticionDelete()}
                                     >
                                     Eliminar Opinión
                                 </Button>

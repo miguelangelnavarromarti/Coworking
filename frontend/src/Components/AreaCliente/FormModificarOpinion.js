@@ -14,7 +14,14 @@ class FormModificarOpinion extends Component {
           opiniones: [],
           isLoading: false,
           error: null,
-          modalInsertar: false,
+          form:{
+            codigo:'',
+            codigoCliente:'',
+            codigoReserva:'',
+            titulo:'',
+            opinion:'',
+            puntuacion:''
+            },
         };
       }
 
@@ -30,9 +37,33 @@ class FormModificarOpinion extends Component {
         }));
     }
 
-    modalInsertar=()=>{ //Me passa de true a false i de false a true
-        this.setState({modalInsertar: !this.state.modalInsertar});
+    peticionPut=()=>{
+        axios.put(API+"/opiniones/" + this.state.form.codigoCliente + "/" + this.state.form.codigo, this.state.form)
+        .then(response=>{            
+            console.log("Enviat!");
+            window.location.href = "http://localhost:3000/opiniones";       //Modifica sa url i me redirigeix aixi    
+        })
     }
+
+    redirectCancelar=()=>{
+        window.location.href= "http://localhost:3000/cliente";
+    }
+
+    handleChange=async e=>{
+        e.persist();
+        await this.setState({
+            form:{
+                ...this.state.form,
+                [e.target.name]: e.target.value,
+                codigoReserva: document.querySelector('#codigoReserva').value,
+                codigoCliente: document.querySelector('#codigoCliente').value,
+                codigo: document.querySelector('#codigo').value,                
+            }
+        });
+        console.log(this.state.form);
+    }
+
+    
 
     componentDidMount() {
 
@@ -66,6 +97,9 @@ class FormModificarOpinion extends Component {
                     {opiniones.map((datos)=>
                     <Form className="row">
                         <div className='col-12'>
+                            <input type="hidden" id="codigo" name="codigo" value={datos.codigo}/>
+                            <input type="hidden" id="codigoReserva" name="codigoReserva" value={datos.codigoReserva}/>
+                            <input type="hidden" id="codigoCliente" name="codigoCliente" value={datos.codigoCliente}/>
                             <FormGroup>
                                 <Label for="titulo">
                                     Titulo
@@ -73,21 +107,23 @@ class FormModificarOpinion extends Component {
                                 <Input
                                     id="titulo"
                                     name="titulo"
-                                    placeholder={datos.titulo}                                
+                                    placeholder={datos.titulo}
+                                    onChange={this.handleChange}                                    
                                     type="text"
                                 />  
                             </FormGroup>
                         </div>
                         <div className='col-12'>
                             <FormGroup>
-                                <Label for="descripcion">
+                                <Label for="opinion">
                                     Descripción
                                 </Label>
                                 <Input
-                                    id="descripcion"
-                                    name="descripcion"
+                                    id="opinion"
+                                    name="opinion"
                                     placeholder={datos.opinion}                                                                
                                     type="textarea"
+                                    onChange={this.handleChange}
                                 />  
                             </FormGroup>
                         </div> 
@@ -101,13 +137,15 @@ class FormModificarOpinion extends Component {
                                     name="puntuacion"
                                     placeholder={datos.puntuacion}                                
                                     type="number"
+                                    onChange={this.handleChange}
                                 />  
                             </FormGroup>
                         </div>                      
 
                         <Col sm={2}>
                             <Button
-                                color='success'>
+                                color='success'
+                                onClick={()=>this.peticionPut()}>
                                 Guardar
                             </Button>                                       
                         </Col>    

@@ -14,7 +14,7 @@ class IconoCondicionalOpinion extends Component {
 
     render() {
 
-    const { reservaConfirmada, reservaEstado } = this.props;
+    const { reservaEstado } = this.props;
 
     if(reservaEstado == 'confirmado'){
     return  (<React.Fragment>

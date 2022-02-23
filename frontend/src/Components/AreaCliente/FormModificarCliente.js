@@ -51,6 +51,10 @@ class FormModificarCliente extends React.Component {
         })
     }
 
+    redirectCancelar=()=>{
+        window.location.href= "http://localhost:3000/cliente";
+    }
+
     handleChange=async e=>{
         e.persist();
         await this.setState({
@@ -208,8 +212,9 @@ class FormModificarCliente extends React.Component {
                                     </Col>    
                                     <Col sm={2}>
                                         <Button
-                                                color='danger'>
-                                                <a href='/cliente' className='text-decoration-none text-light'>Cancelar</a>
+                                                color='danger'
+                                                onClick={()=>this.redirectCancelar()}>                                                
+                                                Cancelar
                                         </Button>
                                     </Col>                         
                             </Form>

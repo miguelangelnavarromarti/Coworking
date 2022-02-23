@@ -28,6 +28,7 @@ class App extends React.Component {
 
     this.state = {
       login : true,
+      id: 1,
     };
   }
   render() {
@@ -63,17 +64,17 @@ class App extends React.Component {
             <Route path="/selectable" element={<Selectable />} />
             <Route path="/buscador" element={<Buscador />} />
             <Route path="/buscadorV2" element={<BuscadorV2 />} />
-            <Route path="/cliente" element={<Cliente />} />
+            <Route path="/cliente" element={<Cliente id={this.state.id} login={this.state.login}/>} />
 
-            <Route path="/datosCliente" element={<Cliente />} />
-            <Route path="/formCliente" element={<FormCliente />} />
-            <Route path="/reservas" element={<Reservas />} />
-            <Route path="/facturas" element={<Facturas />} />
-            <Route path="/facturaCompleta/:id" element={<FacturaCompleta />} />
-            <Route path="/facturasCanceladas" element={<FacturasCanceladas />} />
-            <Route path="/opiniones" element={<Opiniones />} />
-            <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion />}/>
-            <Route path='/formModificarOpinion' element={<FormModificarOpinion />}/>
+            <Route path="/datosCliente" element={<Cliente id ={this.state.id} login={this.state.login}/>} />
+            <Route path="/formCliente" element={<FormCliente id={this.state.id} login={this.state.login}/>} />
+            <Route path="/reservas" element={<Reservas id={this.state.id} login={this.state.login}/>} />
+            <Route path="/facturas" element={<Facturas id={this.state.id} login={this.state.login}/>} />
+            <Route path="/facturaCompleta/:id" element={<FacturaCompleta id={this.state.id} login={this.state.login}/>} />
+            <Route path="/facturasCanceladas" element={<FacturasCanceladas id={this.state.id} login={this.state.login}/>} />
+            <Route path="/opiniones" element={<Opiniones id={this.state.id} login={this.state.login}/>} />
+            <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion id={this.state.id} login={this.state.login}/>}/>
+            <Route path='/formModificarOpinion' element={<FormModificarOpinion id={this.state.id} login={this.state.login}/>}/>
 
             <Route path='/login' element={<Login />}/>
             <Route path='/registro' element={<Registro />}/>

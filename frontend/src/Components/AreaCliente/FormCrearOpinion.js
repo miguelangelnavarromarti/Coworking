@@ -43,12 +43,16 @@ class FormCrearOpinion extends Component {
         .then(response=>{
             this.peticionGet();  
             console.log("Enviat!");
-            window.location.href = "http://localhost:3000/opiniones";       //Modifica sa url i me redirigeix aixi                      
+            window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
         })
         .catch(error => this.setState({
             error,
             isLoading: false
         }));
+    }
+
+    redirectCancelar=()=>{
+        window.location.href= "http://localhost:3000/reservas";
     }
 
     handleChange=async e=>{
@@ -150,8 +154,9 @@ class FormCrearOpinion extends Component {
                         </Col>    
                         <Col sm={2}>
                             <Button
-                                color='danger'>
-                                <a href='/opiniones' className='text-decoration-none text-light'>Cancelar</a>
+                                color='danger'
+                                onClick={()=>this.redirectCancelar()}>                                                
+                                Cancelar
                             </Button>
                         </Col>    
                     </Form>    
