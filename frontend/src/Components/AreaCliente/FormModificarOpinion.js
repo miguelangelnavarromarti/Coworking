@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Col, Input, FormGroup, Form, Label,} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
+import Login from "../Login";
 
 const API = 'http://localhost:8000';
  
@@ -24,18 +25,6 @@ class FormModificarOpinion extends Component {
             },
         };
       }
-
-    peticionGet=()=>{
-        axios.get(API + "/opiniones/1/1")  // MODIFICAR I AGAFAR ID CLIENT i ID OPINION
-        .then(result => this.setState({
-            opiniones: result.data,
-            isLoading: false
-        }))
-        .catch(error => this.setState({
-        error,
-        isLoading: false
-        }));
-    }
 
     peticionPut=()=>{
         axios.put(API+"/opiniones/" + this.state.form.codigoCliente + "/" + this.state.form.codigo, this.state.form)
@@ -63,18 +52,36 @@ class FormModificarOpinion extends Component {
         console.log(this.state.form);
     }
 
+    peticionGet=(codigoOpinion)=>{
+        axios.get(API + "/opiniones/"+this.props.id + "/" + codigoOpinion)  // MODIFICAR I AGAFAR ID OPINION
+        .then(result => this.setState({
+            opiniones: result.data,
+            isLoading: false
+        }))
+        .catch(error => this.setState({
+        error,
+        isLoading: false
+        }));
+    }
     
 
     componentDidMount() {
 
     this.setState({ isLoading: true });
-    this.peticionGet();
+
+    let url = window.location.href;
+    const codigoOpinion = url.split("/").splice(-1)[0];
+
+    
+    this.peticionGet(codigoOpinion);
 
     
     }
 
     render() {
         const { opiniones, isLoading, error } = this.state;
+
+        if(this.props.login){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -159,16 +166,15 @@ class FormModificarOpinion extends Component {
                 )}
                     
                 </div>
-            </Col>
-                
-                    
-                  
-                  
-           
-
-            
+            </Col>            
         </div>
     );
+    }
+    else {
+        return (
+            <Login/>
+        );
+    }
   }
 }
  

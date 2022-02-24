@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Button, Card, CardBody, CardTitle, Col, Container, Input, Row } from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
+import Login from "../Login";
 const API = 'http://localhost:8000';
  
 class FacturasCanceladas extends Component {
@@ -20,7 +21,7 @@ class FacturasCanceladas extends Component {
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/facturasCanceladas/1")  // MODIFICAR I AGAFAR ID CLIENT
+    axios.get(API + "/facturasCanceladas/"+this.props.id)
         .then(result => this.setState({
             facturasCanceladas: result.data,
             isLoading: false
@@ -33,6 +34,8 @@ class FacturasCanceladas extends Component {
 
     render() {
         const { facturasCanceladas, isLoading, error } = this.state;
+
+        if(this.props.login){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -79,6 +82,12 @@ class FacturasCanceladas extends Component {
           </Table>      
         </div>
     );
+  }
+  else {
+      return (
+          <Login/>
+      );
+  }
   }
 }
  

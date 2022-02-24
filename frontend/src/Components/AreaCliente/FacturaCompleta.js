@@ -4,6 +4,7 @@ import { Table, Button, Card, CardBody, CardTitle, Col, Container, Input, Row } 
 import {Accordion,AccordionItem, AccordionHeader,} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
+import Login from "../Login";
 const API = 'http://localhost:8000';
  
 class FacturaCompleta extends Component {
@@ -16,6 +17,7 @@ class FacturaCompleta extends Component {
           isLoading: false,
           error: null,
           desplegar: false,
+          codigoFactura:'',
         };
       }
 
@@ -25,10 +27,12 @@ class FacturaCompleta extends Component {
 
     componentDidMount() {
    
-
     this.setState({ isLoading: true });
 
-    axios.get(API + "/facturas/1/1")  // MODIFICAR I AGAFAR ID CLIENT
+    let url = window.location.href;
+    const codigoFactura = url.split("/").splice(-1)[0];
+    
+    axios.get(API + "/facturas/"+this.props.id + "/" + codigoFactura)
         .then(result => this.setState({
             facturas: result.data,
             isLoading: false
@@ -38,7 +42,7 @@ class FacturaCompleta extends Component {
         isLoading: false
         }));
 
-        axios.get(API + "/reservasFactura/1")  // MODIFICAR I AGAFAR ID CLIENT
+        axios.get(API + "/reservasFactura/" + codigoFactura)
         .then(result => this.setState({
             reservas: result.data,
             isLoading: false
@@ -55,7 +59,7 @@ class FacturaCompleta extends Component {
     render() {
         const { reservas, facturas, isLoading, error } = this.state;
         
-
+        if(this.props.login){
         if (error) {
         return <p>{error.message}</p>;
         }
@@ -74,9 +78,8 @@ class FacturaCompleta extends Component {
                 <Col key={factura.codigo} className="text-center row mb-5">
                     <div className="col-2 fw-bold mx-auto">Codigo factura: {factura.codigo}</div>
                     <div className="col-3 fw-bold mx-auto">Dia de Factura: {factura.diaFactura}</div>
-                    <div className="col-2 fw-bold mx-auto">Precio Total: {factura.precioTotal} €</div>
-                    <div className="col-2 fw-bold mx-auto">Min. Horas Oferta: {factura.minimoHoraOferta}h</div>
-                    <div className="col-2 fw-bold mx-auto">Desc. Oferta: {factura.descuentoOferta}</div>
+                    <div className="col-2 fw-bold mx-auto">Precio Total: {factura.precioTotal} €</div>                    
+                    <div className="col-2 fw-bold mx-auto">Desc. Oferta: {factura.descuentoOferta}%</div>
                 </Col>
             )})}
 
@@ -109,7 +112,13 @@ class FacturaCompleta extends Component {
             </tbody>
           </Table>    
         </div>
-    );
+      );
+    }
+    else {
+      return (
+          <Login/>
+      );
+  }
   }
 }
  

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Button, Card, CardBody, CardTitle, Col, CardText, Input, Row, CardGroup, FormGroup, Form, Label, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
+import Login from "../Login";
 
 const API = 'http://localhost:8000';
  
@@ -18,7 +19,7 @@ class Opiniones extends Component {
       }
 
     peticionGet=()=>{
-        axios.get(API + "/opiniones/1")  // MODIFICAR I AGAFAR ID CLIENT
+        axios.get(API + "/opiniones/"+this.props.id)
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
@@ -29,12 +30,12 @@ class Opiniones extends Component {
         }));
     }
 
-    redirectModificar=()=>{
-        window.location.href= "http://localhost:3000/formModificarOpinion";
+    redirectModificar=(codigoOpinion)=>{
+        window.location.href= "http://localhost:3000/formModificarOpinion/" + codigoOpinion;
     }
 
-    peticionDelete=()=>{        // SI POS UNA RUTA HO BORRA AUTOMATICAMENT SENSE FER CLICK
-        axios.delete(API + "/opiniones/1/51")
+    peticionDelete=(codigoOpinion)=>{        // SI POS UNA RUTA HO BORRA AUTOMATICAMENT SENSE FER CLICK
+        axios.delete(API + "/opiniones/1/" + codigoOpinion)
         .then(response=>{
             this.peticionGet();
         })
@@ -57,6 +58,7 @@ class Opiniones extends Component {
 
         console.log(this.state.opiniones);
 
+        if(this.props.login){
         if (error) {
         return <p>{error.message}</p>;
         }
@@ -82,6 +84,7 @@ class Opiniones extends Component {
                                 </CardTitle>
                                 <CardText>
                                     <Row>
+                                        <p className='fs-5'>Reserva: {opinion.codigoReserva} </p>
                                         <p className='fs-5'>Opinión: </p>
                                         <p className='fs-6'>{opinion.opinion}</p>
                                         <p className='fs-5'>Puntuación: {opinion.puntuacion}</p>                                    
@@ -92,7 +95,7 @@ class Opiniones extends Component {
                                 <Button
                                     color="warning"
                                     size=""
-                                    onClick={()=>this.redirectModificar()}>                                                
+                                    onClick={()=>this.redirectModificar(opinion.codigo)}>                                                
                                     Modificar Opinión
                                 </Button>
                             </Col>
@@ -100,7 +103,8 @@ class Opiniones extends Component {
                                 <Button
                                     color="danger"
                                     size=""
-                                    onClick={()=>this.peticionDelete()}
+                                    //onClick={()=>this.peticionDelete()}
+                                    onClick={()=>{this.peticionDelete(opinion.codigo)}}
                                     >
                                     Eliminar Opinión
                                 </Button>
@@ -112,8 +116,15 @@ class Opiniones extends Component {
                 )}
             </CardGroup>                               
         </div>
-    );
+        );
+    } else{
+        return (
+            <Login/>
+        );
+    }
   }
+  
+  
 }
  
 export default Opiniones;

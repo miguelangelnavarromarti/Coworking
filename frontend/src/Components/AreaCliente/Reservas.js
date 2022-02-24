@@ -4,6 +4,7 @@ import { Table, Button, Card, CardBody, CardTitle, Col, Container, Input, Row } 
 
 import ClienteHeader from "./ClienteHeader";
 import IconoCondicionalOpinion from "./IconoCondicionalOpinion";
+import Login from "../Login";
 
 const API = 'http://localhost:8000';
  
@@ -22,7 +23,7 @@ class Reservas extends Component {
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/reservas/1")  // MODIFICAR I AGAFAR ID CLIENT
+    axios.get(API + "/reservas/"+this.props.id)
         .then(result => this.setState({
             reservas: result.data,
             isLoading: false
@@ -35,6 +36,8 @@ class Reservas extends Component {
 
     render() {
         const { reservas, isLoading, error, reservaConfirmada } = this.state;
+
+        if(this.props.login){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -89,6 +92,12 @@ class Reservas extends Component {
           </Table>      
         </div>
     );
+    }
+    else {
+        return (
+            <Login/>
+        );
+    }
   }
 }
  

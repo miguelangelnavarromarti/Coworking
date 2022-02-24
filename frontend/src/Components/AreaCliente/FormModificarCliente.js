@@ -3,6 +3,7 @@ import axios from "axios";
 import { FormGroup, Button, Form, Label, Input, Col, Row } from 'reactstrap';
 
 import ClienteHeader from './ClienteHeader';
+import Login from '../Login';
 
 const API = 'http://localhost:8000';
 
@@ -30,7 +31,7 @@ class FormModificarCliente extends React.Component {
       }
 
     peticionGet=()=>{
-      axios.get(API + "/datosClientes/1")  // MODIFICAR I AGAFAR ID CLIENT
+      axios.get(API + "/datosClientes/"+this.props.id)
         .then(result => this.setState({
             datosCliente: result.data,
             isLoading: false
@@ -78,6 +79,8 @@ class FormModificarCliente extends React.Component {
 
     render() {
         const { datosCliente, isLoading, error } = this.state;
+
+        if(this.props.login){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -223,6 +226,12 @@ class FormModificarCliente extends React.Component {
                 </Col>      
             </div>
         );
+    }
+    else {
+        return (
+            <Login/>
+        );
+    }
     }
 }
 

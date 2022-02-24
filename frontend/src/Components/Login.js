@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { FormGroup, Button, Form, Label, Input, Col, } from 'reactstrap';
 
 class Login extends Component {
+    constructor(props) {
+        super(props);   
+        
+    }
+    
     render() {
         return (
             <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">            

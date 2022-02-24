@@ -4,6 +4,7 @@ import { Table, Button, Card, CardBody, CardTitle, Col, Container, Input, Row } 
 import {Accordion,AccordionItem, AccordionHeader,} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
+import Login from "../Login";
 const API = 'http://localhost:8000';
  
 class Facturas extends Component {
@@ -29,7 +30,7 @@ class Facturas extends Component {
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/facturas/1")  // MODIFICAR I AGAFAR ID CLIENT
+    axios.get(API + "/facturas/"+this.props.id)
         .then(result => this.setState({
             facturas: result.data,
             isLoading: false
@@ -44,6 +45,7 @@ class Facturas extends Component {
     render() {
         const { facturas, isLoading, error } = this.state;
         
+        if(this.props.login){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -97,6 +99,12 @@ class Facturas extends Component {
           </Table>      
         </div>
     );
+  }
+  else {
+      return (
+          <Login/>
+      );
+  }
   }
 }
  

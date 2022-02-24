@@ -51,9 +51,7 @@ class App extends React.Component {
             <Col className='text-center'>
               <Link to="/buscadorV2">Buscador v2</Link>              
             </Col>
-            <Col className='text-center'>
-              <Link to="/cliente">Area Cliente</Link>
-            </Col>
+           
             <Col>
               <IconoLogin login={this.state.login}/>
             </Col>
@@ -74,7 +72,7 @@ class App extends React.Component {
             <Route path="/facturasCanceladas" element={<FacturasCanceladas id={this.state.id} login={this.state.login}/>} />
             <Route path="/opiniones" element={<Opiniones id={this.state.id} login={this.state.login}/>} />
             <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion id={this.state.id} login={this.state.login}/>}/>
-            <Route path='/formModificarOpinion' element={<FormModificarOpinion id={this.state.id} login={this.state.login}/>}/>
+            <Route path='/formModificarOpinion/:codigoReserva' element={<FormModificarOpinion id={this.state.id} login={this.state.login}/>}/>
 
             <Route path='/login' element={<Login />}/>
             <Route path='/registro' element={<Registro />}/>

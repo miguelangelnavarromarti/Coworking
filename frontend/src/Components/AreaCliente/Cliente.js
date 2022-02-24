@@ -23,7 +23,7 @@ class Cliente extends React.Component {
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/datosClientes/"+this.props.id)  // MODIFICAR I AGAFAR ID CLIENT
+    axios.get(API + "/datosClientes/"+this.props.id)
         .then(result => this.setState({
             datosCliente: result.data,
             isLoading: false

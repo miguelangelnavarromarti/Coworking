@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Button, Card, CardBody, CardTitle, Col, CardText, Input, Row, CardGroup, FormGroup, Form, Label, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
+import Login from "../Login";
 
 const API = 'http://localhost:8000';
  
@@ -27,7 +28,7 @@ class FormCrearOpinion extends Component {
       }
 
     peticionGet=()=>{
-        axios.get(API + "/opiniones/1")  // MODIFICAR I AGAFAR ID CLIENT
+        axios.get(API + "/opiniones/"+this.props.id)
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
@@ -39,7 +40,7 @@ class FormCrearOpinion extends Component {
     }
 
     peticionPost=()=>{
-        axios.post(API+"/opiniones/1",this.state.form)      //MODIFICAR ID CLIENT
+        axios.post(API+"/opiniones/"+this.props.id , this.state.form)
         .then(response=>{
             this.peticionGet();  
             console.log("Enviat!");
@@ -82,6 +83,8 @@ class FormCrearOpinion extends Component {
         const { form, isLoading, error, url } = this.state;
         const urlBona = url.split("/").splice(-1)[0];        
         
+        if(this.props.login){
+
         if (error) {
         return <p>{error.message}</p>;
         }
@@ -167,6 +170,12 @@ class FormCrearOpinion extends Component {
             
         </div>
     );
+    }
+    else {
+        return (
+            <Login/>
+        );
+    }
   }
 }
  

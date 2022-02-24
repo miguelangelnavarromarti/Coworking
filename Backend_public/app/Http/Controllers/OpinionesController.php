@@ -13,7 +13,7 @@ class OpinionesController extends Controller
         return response()->json($opiniones, 200);
     }
     
-    public function ver($codigo,$codigoCliente){
+    public function ver($codigoCliente,$codigo){
         $opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         return response()->json($opinion, 200);
     }
