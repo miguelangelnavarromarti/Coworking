@@ -34,20 +34,7 @@ class DatosClientesController extends Controller
 
 
     public function crear(Request $request){
-/*        
-        $clienteObject = json_decode($request);
-        $newCliente = new Cliente;
-        $newCliente->nombreUsuario = $clienteObject->nombreUsuario;
-        $newCliente->password = $clienteObject->password;
-        $newCliente->nombre = $clienteObject->nombre;
-        $newCliente->apellido1 = $clienteObject->apellido1;
-        $newCliente->apellido2 = $clienteObject->apellido2;
-        $newCliente->telefono = $clienteObject->telefono;
-        $newCliente->email = $clienteObject->email;
-        $newCliente->rol = $clienteObject->rol;
-        $newCliente->alta = $clienteObject->alta;
-        $newCliente->save();
-*/
+
         $newCliente = Cliente::create([
             'nombreUsuario' => $request['nombreUsuario'],
             'password' => $request['password'],
