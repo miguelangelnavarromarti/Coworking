@@ -17,6 +17,11 @@ use App\Http\Controllers\FacturasCanceladasController;
 use App\Http\Controllers\GestionCancelacionesController;
 
 
+
+
+use App\Http\Controllers\LoginController8888;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +48,8 @@ Route::get('prueba',function(){
 Route::get('noAutorizado', function(){
     return 'No estas autorizado';
 });
+
+Route::get('/login', [LoginController8888::class, 'login']);
 
 
 

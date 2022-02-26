@@ -7,12 +7,21 @@ namespace App\Http\Controllers;
     use Illuminate\Support\Facades\Validator;
     use JWTAuth;
     use Tymon\JWTAuth\Exceptions\JWTException;
+    use App\Models\Cliente;
+    use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function authenticate(Request $request)
     {
-    $credentials = $request->only('email', 'password');
+    $codigo = Cliente ::where('email', $request->email)->value('codigo');
+
+    $json = ['codigo'=> $codigo, 'password'=> $request->password];
+    
+    $credentials = $json;
+    
+    //$credentials = $request->only('codigo', 'password');
+
     try {
         if (! $token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'invalid_credentials'], 400);
