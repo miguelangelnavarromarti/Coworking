@@ -44,7 +44,7 @@ class FormCrearOpinion extends Component {
         .then(response=>{
             this.peticionGet();  
             console.log("Enviat!");
-            window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
+            window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aqui                      
         })
         .catch(error => this.setState({
             error,

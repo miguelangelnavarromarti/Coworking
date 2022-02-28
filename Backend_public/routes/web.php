@@ -42,9 +42,9 @@ Route::get('/conexion', function () {
 });
 
 //BORRAR DSP
-Route::get('prueba',function(){
+Route::post('prueba',function(){
     return "has entrat be a sa ruta";
-})->middleware('usuario');
+})->middleware('jwt.verify');
 Route::get('noAutorizado', function(){
     return 'No estas autorizado';
 });

@@ -7,6 +7,9 @@ use App\Models\Cliente;
 
 class LoginController8888 extends Controller
 {
+    //                  B O R R A R                //
+
+
     public function login(Request $request){
         $email = "admin@admin.com";
         $password = "admin";

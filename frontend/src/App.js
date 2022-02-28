@@ -21,6 +21,8 @@ import FormModificarOpinion from './Components/AreaCliente/FormModificarOpinion'
 import FacturasCanceladas from './Components/AreaCliente/FacturasCanceladas';
 import FacturaCompleta from './Components/AreaCliente/FacturaCompleta';
 import IconoLogin from './Components/IconoLogin';
+import Footer from './Components/Footer';
+
 
 class App extends React.Component {
   constructor(props){
@@ -81,6 +83,8 @@ class App extends React.Component {
 
           </Routes>
         </Container>
+        
+        <Footer/>
       </Router>
     );
   }
