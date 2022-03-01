@@ -1,3 +1,33 @@
+.bg-blauFort{
+    background-color: #397691;
+} 
+.bg-blauFluix{
+    background-color: #7ED0F1;
+}
+.text-blauFluix{
+    color: #7ED0F1;
+}
+.bg-groc{
+    background-color: #FBD14F;
+}
+.bg-negre{
+    background-color: #101010;
+}
+.bg-gris{
+    background-color: #E4E4E4;
+}
+.bg-degradat{
+    background: rgb(42,49,55);
+    background: linear-gradient(180deg, rgba(42,49,55,1) 0%, rgba(48,107,137,1) 41%, rgba(177,195,205,1) 100%);
+}
+.bg-degradatInvertit{
+    background: rgb(72,92,108);
+    background: linear-gradient(0deg, rgba(72,92,108,1) 0%, rgba(57,118,145,1) 50%, rgba(72,92,108,1) 100%);
+}
+
+
+
+
 .DayPickerInput > input{
     display: block;
     padding: auto 0;

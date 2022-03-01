@@ -93,7 +93,7 @@ class FormModificarOpinion extends Component {
 
     return (
      
-        <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
+        <div className="container my-1 py-1 px-4 pb-5">
             <ClienteHeader/>    
             <h1 className="text-center my-4">Modificar opinión</h1>        
             <Col sm="8" className='m-auto'>

@@ -50,19 +50,18 @@ class Cliente extends React.Component {
 
             return (
             
-                <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
+                <div className="container my-1 py-1 px-4 pb-5">
                 <ClienteHeader/>
                 <h1 className="text-center my-4">Datos Personales</h1>
                 
                     <Col sm="8" className='m-auto'>
-                        <Card className="my-5 py-4 px-5  shadow bg-body rounded-3"
-                            body   
-                            color='primary'                     
+                        <Card className="my-5 py-4 px-5  shadow bg-body rounded-3 bg-degradatInvertit text-white border-2 border-warning"
+                            body                                                    
                             >                
                             {datosCliente.map((datos)=>
                                 <CardBody>
-                                    <CardTitle key={datos.codigo} tag="h3" className='text-center mb-4'>
-                                    Usuario {datos.nombreUsuario}
+                                    <CardTitle key={datos.codigo} className='text-center mb-4'>
+                                    <h3>Usuario {datos.nombreUsuario}</h3>
                                     </CardTitle>
                                     <CardText>
                                         <Row>

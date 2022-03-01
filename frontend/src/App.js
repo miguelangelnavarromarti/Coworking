@@ -36,22 +36,22 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Container>
-          <Row className='my-4'>
-            <Col className='text-center'>
-              <Link to="/">Home</Link>
+        <Container className='bg-white'>
+          <Row className='mb-4'>
+            <Col className='text-center mt-3'>
+              <Link className='text-decoration-none text-dark' to="/">Home</Link>
             </Col>
-            <Col className='text-center'>
-              <Link to="/table">Table</Link>
+            <Col className='text-center mt-3'>
+              <Link className='text-decoration-none text-dark' to="/table">Table</Link>
             </Col>
-            <Col className='text-center'>
-              <Link to="/selectable">Selectable</Link>
+            <Col className='text-center mt-3'>
+              <Link className='text-decoration-none text-dark' to="/selectable">Selectable</Link>
             </Col>
-            <Col className='text-center'>
-              <Link to="/buscador">Buscador</Link>
+            <Col className='text-center mt-3'>
+              <Link className='text-decoration-none text-dark' to="/buscador">Buscador</Link>
             </Col>
-            <Col className='text-center'>
-              <Link to="/buscadorV2">Buscador v2</Link>              
+            <Col className='text-center mt-3'>
+              <Link className='text-decoration-none text-dark' to="/buscadorV2">Buscador v2</Link>              
             </Col>
            
             <Col>

@@ -69,13 +69,13 @@ class Opiniones extends Component {
 
     return (
      
-        <div className="container my-5 py-4 px-5  shadow bg-body rounded-3">
+        <div className="container my-1 py-1 px-4 pb-5">
             <ClienteHeader/>    
             <h1 className="text-center my-4">Todas las opiniones</h1>                    
             <CardGroup>
             {opiniones.map((opinion)=>
                 <Col key={opinion.codigo} sm="5" className="m-auto">
-                    <Card className="my-5 py-4 px-5  shadow bg-body rounded-3"
+                    <Card className="my-5 py-4 px-5  shadow bg-body rounded-3 bg-degradatInvertit text-white border-2 border-warning"
                         body
                         >                                     
                             <CardBody>
@@ -93,7 +93,8 @@ class Opiniones extends Component {
                             <div className="row">
                             <Col>
                                 <Button
-                                    color="warning"
+                                    className="bg-groc"
+                                    color="black"
                                     size=""
                                     onClick={()=>this.redirectModificar(opinion.codigo)}>                                                
                                     Modificar Opinión
@@ -102,8 +103,7 @@ class Opiniones extends Component {
                             <Col>
                                 <Button
                                     color="danger"
-                                    size=""
-                                    //onClick={()=>this.peticionDelete()}
+                                    size=""                                    
                                     onClick={()=>{this.peticionDelete(opinion.codigo)}}
                                     >
                                     Eliminar Opinión
