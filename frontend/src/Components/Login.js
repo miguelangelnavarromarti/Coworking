@@ -18,18 +18,24 @@ class Login extends Component {
         };
         
     }
+
+
     peticionPost=()=>{
         //axios.post(API+"api/login", this.state.form)
         axios.post(API+"/api/login", this.state.form)
         .then(response=>{ 
             console.log(response);           
             console.log("Enviat!");
-            window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
+            localStorage.setItem("token",response.data.token);
+            console.log(response.data.token); //  T O K E N
+            console.log(localStorage.getItem("token")); //  Guardar T O K E N
+            //window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
         })
         .catch(error => this.setState({
             error,
             isLoading: false
         }));
+        
     }
 
     

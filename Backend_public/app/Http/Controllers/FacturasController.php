@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Factura;
+use App\Http\Controllers\UserController;
+use JWTAuth;
+
 
 class FacturasController extends Controller
 {
-    public function index($codigoCliente){
-        
+    public function index(Request $request, $codigoCliente){
+        $header = $request->header('authorization');    // T O K E N
+
+       
+//-------------------------------------------------------
         $facturas = Factura::where('codigoCliente',$codigoCliente)->get();
         return response()->json($facturas, 200);
     }

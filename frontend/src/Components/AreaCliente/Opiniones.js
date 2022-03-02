@@ -79,7 +79,7 @@ class Opiniones extends Component {
                         body
                         >                                     
                             <CardBody>
-                                <CardTitle  tag="h3" className='text-center mb-4'>
+                                <CardTitle  tag="h2" className='text-center mb-4 fs-4'>
                                 {opinion.titulo}
                                 </CardTitle>
                                 <CardText>

@@ -1,14 +1,24 @@
 .bg-blauFort{
     background-color: #397691;
 } 
+.border-blauFort{
+    border-color: #397691 !important;
+}
 .bg-blauFluix{
     background-color: #7ED0F1;
 }
 .text-blauFluix{
     color: #7ED0F1;
 }
+.border-blauFluix{
+    border-color: #7ED0F1 !important;
+}
+
 .bg-groc{
     background-color: #FBD14F;
+}
+.border-groc{
+    border-color: #FBD14F !important;
 }
 .bg-negre{
     background-color: #101010;

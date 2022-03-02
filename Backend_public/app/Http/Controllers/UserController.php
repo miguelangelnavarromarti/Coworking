@@ -51,7 +51,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-            $validator = Validator::make($request->all(), [
+        /*    $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -60,14 +60,27 @@ class UserController extends Controller
         if($validator->fails()){
                 return response()->json($validator->errors()->toJson(), 400);
         }
-
-        $user = User::create([
+*/
+        /*$user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
-        ]);
+        ]);*/
 
-        $token = JWTAuth::fromUser($user);
+        $newCliente = Cliente::create([
+            'nombreUsuario' => $request['nombreUsuario'],
+            'password' => $request['password'],
+            'nombre' => $request['nombre'],
+            'apellido1' => $request['apellido1'],
+            'apellido2' => $request['apellido2'],
+            'telefono' => $request['telefono'],
+            'email' => $request['email'],
+            'rol' => $request['rol'],
+            'alta' => $request['alta'],
+        ]); 
+
+        //$token = JWTAuth::fromUser($user);
+        $token = JWTAuth::fromUser($newCliente);
 
         return response()->json(compact('user','token'),201);
     }

@@ -60,8 +60,8 @@ class Cliente extends React.Component {
                             >                
                             {datosCliente.map((datos)=>
                                 <CardBody>
-                                    <CardTitle key={datos.codigo} className='text-center mb-4'>
-                                    <h3>Usuario {datos.nombreUsuario}</h3>
+                                    <CardTitle key={datos.codigo} tag="h2" className='text-center mb-4 fs-4'>
+                                    Usuario {datos.nombreUsuario}
                                     </CardTitle>
                                     <CardText>
                                         <Row>
