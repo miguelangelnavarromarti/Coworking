@@ -10,13 +10,23 @@ use JWTAuth;
 
 class FacturasController extends Controller
 {
-    public function index(Request $request, $codigoCliente){
+    public function index(Request $request){
         $header = $request->header('authorization');    // T O K E N
-
         
-       
-//-------------------------------------------------------
-        $facturas = Factura::where('codigoCliente',$codigoCliente)->get();
+        $user = auth()->user();
+        
+        //getplains
+        /* https://jwt-auth.readthedocs.io/en/develop/auth-guard/#payload
+        payload()
+        Get the raw JWT payload
+
+        $payload = auth()->payload();
+
+        // then you can access the claims directly e.g.
+        $payload->get('sub'); // = 123
+        */
+
+        $facturas = Factura::where('codigoCliente', $user->codigo)->get();
         return response()->json($facturas, 200);
     }
     
@@ -34,6 +44,7 @@ class FacturasController extends Controller
 
 
     public function ver($codigo,$codigoCliente){
+        
         $factura = Factura::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         return response()->json($factura, 200);
     }

@@ -25,11 +25,13 @@ class Login extends Component {
         axios.post(API+"/api/login", this.state.form)
         .then(response=>{ 
             console.log(response);           
-            console.log("Enviat!");
-            localStorage.setItem("token",response.data);
+            console.log("Enviat!");                        
+            localStorage.removeItem("token");                       
+            console.log("BORRAT!");
+            localStorage.setItem("token",response.data.token);
             console.log(response.data.token); //  T O K E N
             console.log(localStorage.getItem("token")); //  Guardar T O K E N
-            //window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
+            window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
         })
         .catch(error => this.setState({
             error,

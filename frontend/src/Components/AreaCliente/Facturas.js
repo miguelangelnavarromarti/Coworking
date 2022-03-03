@@ -30,8 +30,8 @@ class Facturas extends Component {
     this.desplegarAccordion();
 
     this.setState({ isLoading: true });    
-    //console.log(token);
-    axios.get(API + "/facturas/"+this.props.id, {
+    console.log(this.props.token);
+    axios.get(API + "/facturas", {
       headers: {
           'authorization':'Bearer ' + this.props.token,
           'Accept' : 'application/json',

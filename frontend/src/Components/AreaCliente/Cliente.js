@@ -23,7 +23,7 @@ class Cliente extends React.Component {
 
     this.setState({ isLoading: true });
     //const token = localStorage.getItem("token");
-    axios.get(API + "/datosClientes/"+this.props.id,{
+    axios.get(API + "/datosClientes",{
         headers: {
             'authorization':'Bearer ' + this.props.token,
             'Accept' : 'application/json',

@@ -32,6 +32,7 @@ class App extends React.Component {
       login : true,
       id: 1,
       token : localStorage.getItem("token")
+      //token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY0NjMyNjQ1NiwiZXhwIjoxNjQ2MzMwMDU2LCJuYmYiOjE2NDYzMjY0NTYsImp0aSI6IllQUFU3c1BlYld1UnJiUmoiLCJzdWIiOjE5LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.KqdC0Hhqu7XNFqw3ASw4Z243M0IgYhEdlhGdPLri9qE"
     };
   }
   render() {

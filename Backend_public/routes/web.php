@@ -54,8 +54,8 @@ Route::get('noAutorizado', function(){
 
 
 
-Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index'])->middleware('jwt.verify');
-Route::get('/facturas/{codigoCliente}/{codigo}', [FacturasController::class, 'ver'])->middleware('jwt.verify');
+Route::get('/facturas', [FacturasController::class, 'index'])->middleware('jwt.verify');
+Route::get('/facturas/{codigo}', [FacturasController::class, 'ver'])->middleware('jwt.verify');
 Route::post('/facturas', [FacturasController::class, 'crear'])->middleware('jwt.verify');
 
 Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index'])->middleware('jwt.verify');
@@ -63,7 +63,7 @@ Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasCo
 
 //Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasCanceladasController::class, 'crear'], [GestionCancelacionesController::class, 'ver']);
 
-Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver'])->middleware('jwt.verify');
+Route::get('/datosClientes', [DatosClientesController::class, 'ver'])->middleware('jwt.verify');
 Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar'])->middleware('jwt.verify');
 
 

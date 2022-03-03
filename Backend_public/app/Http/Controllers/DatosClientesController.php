@@ -7,10 +7,12 @@ use App\Models\Cliente;
 
 class DatosClientesController extends Controller
 {
-    public function ver(Request $request, $codigo){
-        $header = $request->header('authorization');    // T O K E N
+    public function ver(Request $request){
+        //$header = $request->header('authorization');    // T O K E N
         
-        $cliente = Cliente::where('codigo',$codigo)->get();
+        $user = auth()->user();
+
+        $cliente = Cliente::where('codigo',$user->codigo)->get();
         return response()->json($cliente, 200);
     }
     

@@ -9,9 +9,10 @@ use App\Models\ReservaFactura;
 class ReservasController extends Controller
 {
   
-    public function index($codigoCliente){
+    public function index(Request $request){
+        $user = auth()->user();
         
-        $reservas = Reserva::where('codigoCliente',$codigoCliente)->get();
+        $reservas = Reserva::where('codigoCliente',$user->codigo)->get();
         return response()->json($reservas, 200);
     }
 
