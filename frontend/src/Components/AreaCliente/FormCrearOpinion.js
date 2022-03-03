@@ -40,7 +40,13 @@ class FormCrearOpinion extends Component {
     }
 
     peticionPost=()=>{
-        axios.post(API+"/opiniones/"+this.props.id , this.state.form)
+        axios.post(API+"/opiniones/"+this.props.id , this.state.form,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(response=>{
             this.peticionGet();  
             console.log("Enviat!");

@@ -19,7 +19,13 @@ class Opiniones extends Component {
       }
 
     peticionGet=()=>{
-        axios.get(API + "/opiniones/"+this.props.id)
+        axios.get(API + "/opiniones/"+this.props.id,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
@@ -35,7 +41,13 @@ class Opiniones extends Component {
     }
 
     peticionDelete=(codigoOpinion)=>{        // SI POS UNA RUTA HO BORRA AUTOMATICAMENT SENSE FER CLICK
-        axios.delete(API + "/opiniones/1/" + codigoOpinion)
+        axios.delete(API + "/opiniones/1/" + codigoOpinion,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(response=>{
             this.peticionGet();
         })

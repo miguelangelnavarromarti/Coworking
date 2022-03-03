@@ -32,7 +32,13 @@ class FacturaCompleta extends Component {
     let url = window.location.href;
     const codigoFactura = url.split("/").splice(-1)[0];
     
-    axios.get(API + "/facturas/"+this.props.id + "/" + codigoFactura)
+    axios.get(API + "/facturas/"+this.props.id + "/" + codigoFactura,{
+      headers: {
+          'authorization':'Bearer ' + this.props.token,
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      }
+    })
         .then(result => this.setState({
             facturas: result.data,
             isLoading: false
@@ -42,7 +48,13 @@ class FacturaCompleta extends Component {
         isLoading: false
         }));
 
-        axios.get(API + "/reservasFactura/" + codigoFactura)
+        axios.get(API + "/reservasFactura/" + codigoFactura,{
+          headers: {
+              'authorization':'Bearer ' + this.props.token,
+              'Accept' : 'application/json',
+              'Content-Type': 'application/json'
+          }
+      })
         .then(result => this.setState({
             reservas: result.data,
             isLoading: false

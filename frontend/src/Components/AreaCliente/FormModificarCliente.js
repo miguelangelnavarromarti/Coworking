@@ -31,7 +31,13 @@ class FormModificarCliente extends React.Component {
       }
 
     peticionGet=()=>{
-      axios.get(API + "/datosClientes/"+this.props.id)
+      axios.get(API + "/datosClientes/"+this.props.id,{
+        headers: {
+            'authorization':'Bearer ' + this.props.token,
+            'Accept' : 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
         .then(result => this.setState({
             datosCliente: result.data,
             isLoading: false
@@ -45,7 +51,13 @@ class FormModificarCliente extends React.Component {
     
 
     peticionPut=()=>{
-        axios.put(API+"/datosClientes/"+this.state.form.codigo, this.state.form)
+        axios.put(API+"/datosClientes/"+this.state.form.codigo, this.state.form,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(response=>{            
             console.log("Enviat!");
             window.location.href = "http://localhost:3000/datosCliente";       //Modifica sa url i me redirigeix aixi    

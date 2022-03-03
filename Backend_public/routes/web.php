@@ -53,28 +53,29 @@ Route::get('noAutorizado', function(){
 
 
 
-Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index']);
-Route::get('/facturas/{codigoCliente}/{codigo}', [FacturasController::class, 'ver']);
-Route::post('/facturas', [FacturasController::class, 'crear']);
 
-Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index']);
-Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasController::class, 'ver']);
+Route::get('/facturas/{codigoCliente}', [FacturasController::class, 'index'])->middleware('jwt.verify');
+Route::get('/facturas/{codigoCliente}/{codigo}', [FacturasController::class, 'ver'])->middleware('jwt.verify');
+Route::post('/facturas', [FacturasController::class, 'crear'])->middleware('jwt.verify');
+
+Route::get('/facturasCanceladas/{codigoCliente}', [FacturasCanceladasController::class, 'index'])->middleware('jwt.verify');
+Route::get('/facturasCanceladas/{codigoCliente}/{codigo}', [FacturasCanceladasController::class, 'ver'])->middleware('jwt.verify');
 
 //Route::post('/facturasCanceladas/{codigoCliente}/', [FacturasCanceladasController::class, 'crear'], [GestionCancelacionesController::class, 'ver']);
 
-Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver']);
-Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar']);
+Route::get('/datosClientes/{codigo}', [DatosClientesController::class, 'ver'])->middleware('jwt.verify');
+Route::put('/datosClientes/{codigo}', [DatosClientesController::class, 'modificar'])->middleware('jwt.verify');
 
 
-Route::get('/opiniones/{codigoCliente}', [OpinionesController::class, 'index']);
-Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver']);     //NO FA FALTA JA, BORRAR
-Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear']);
-Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar']);
-Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar']);
+Route::get('/opiniones/{codigoCliente}', [OpinionesController::class, 'index'])->middleware('jwt.verify');
+Route::get('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'ver'])->middleware('jwt.verify');     //NO FA FALTA JA, BORRAR
+Route::post('/opiniones/{codigoCliente}', [OpinionesController::class, 'crear'])->middleware('jwt.verify');
+Route::put('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'modificar'])->middleware('jwt.verify');
+Route::delete('/opiniones/{codigoCliente}/{codigo}', [OpinionesController::class, 'eliminar'])->middleware('jwt.verify');
 
-Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index']);
-Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver']);
-Route::get('/reservasFactura/{codigoFactura}', [ReservasController::class, 'reservasFactura']);
+Route::get('/reservas/{codigoCliente}', [ReservasController::class, 'index'])->middleware('jwt.verify');
+Route::get('/reservas/{codigoCliente}/{codigo}', [ReservasController::class, 'ver'])->middleware('jwt.verify');
+Route::get('/reservasFactura/{codigoFactura}', [ReservasController::class, 'reservasFactura'])->middleware('jwt.verify');
 
 Route::post('/reservas', [ReservasController::class, 'crear']);
 

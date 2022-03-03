@@ -26,7 +26,7 @@ class Login extends Component {
         .then(response=>{ 
             console.log(response);           
             console.log("Enviat!");
-            localStorage.setItem("token",response.data.token);
+            localStorage.setItem("token",response.data);
             console.log(response.data.token); //  T O K E N
             console.log(localStorage.getItem("token")); //  Guardar T O K E N
             //window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      

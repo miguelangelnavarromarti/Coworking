@@ -29,12 +29,11 @@ class Facturas extends Component {
     componentDidMount() {
     this.desplegarAccordion();
 
-    this.setState({ isLoading: true });
-    const token = localStorage.getItem("token");
+    this.setState({ isLoading: true });    
     //console.log(token);
     axios.get(API + "/facturas/"+this.props.id, {
       headers: {
-          'authorization':'Bearer ' + token,
+          'authorization':'Bearer ' + this.props.token,
           'Accept' : 'application/json',
           'Content-Type': 'application/json'
       }

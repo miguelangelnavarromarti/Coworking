@@ -21,7 +21,13 @@ class FacturasCanceladas extends Component {
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/facturasCanceladas/"+this.props.id)
+    axios.get(API + "/facturasCanceladas/"+this.props.id,{
+      headers: {
+          'authorization':'Bearer ' + this.props.token,
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      }
+    })
         .then(result => this.setState({
             facturasCanceladas: result.data,
             isLoading: false

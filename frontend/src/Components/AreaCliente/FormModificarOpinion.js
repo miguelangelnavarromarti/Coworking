@@ -27,7 +27,13 @@ class FormModificarOpinion extends Component {
       }
 
     peticionPut=()=>{
-        axios.put(API+"/opiniones/" + this.state.form.codigoCliente + "/" + this.state.form.codigo, this.state.form)
+        axios.put(API+"/opiniones/" + this.state.form.codigoCliente + "/" + this.state.form.codigo, this.state.form,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(response=>{            
             console.log("Enviat!");
             window.location.href = "http://localhost:3000/opiniones";       //Modifica sa url i me redirigeix aixi    
@@ -53,7 +59,13 @@ class FormModificarOpinion extends Component {
     }
 
     peticionGet=(codigoOpinion)=>{
-        axios.get(API + "/opiniones/"+this.props.id + "/" + codigoOpinion)  // MODIFICAR I AGAFAR ID OPINION
+        axios.get(API + "/opiniones/"+this.props.id + "/" + codigoOpinion,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })  // MODIFICAR I AGAFAR ID OPINION
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
