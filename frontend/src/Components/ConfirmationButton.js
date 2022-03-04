@@ -1,15 +1,31 @@
+import React from 'react';
 import { useState } from 'react';
 import { Button } from 'reactstrap';
+import { BrowserRouter as Router, Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 
 function ConfirmationButton(props) {
-    
+
     const [codigoCliente, setCodigoCliente] = useState(props.objeto.codigoCliente);
-    const [hora, setHora] = useState(props.objeto.hora);
+    const [hora, setHora] = useState(props.horas);
     const [codigoEspacio, setCodigoEspacio] = useState(props.objeto.codigoEspacio);
     const [estado, setEstado] = useState(props.objeto.estado);
     const [dia, setDia] = useState(props.objeto.dia);
-    const [message, setMessage] = useState("");
+
+    const history = useNavigate();
+
+    const routeChange = (res) => {
+        const { localizador } = res
+        let path = '/resumen/' + localizador;
+        history(path, {
+            state: {
+                cliente: codigoCliente,
+                horas: props.horas,
+                espacio: codigoEspacio,
+                dia: dia
+            }
+        });
+    }
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,26 +34,18 @@ function ConfirmationButton(props) {
                 method: "POST",
                 body: JSON.stringify({
                     codigoCliente: codigoCliente,
-                    hora: hora,
+                    hora: props.horas,
                     codigoEspacio: codigoEspacio,
                     estado: estado,
                     dia: dia,
                 }),
             });
-            /*let resJson = await res.json();
-            if (res.status === 200) {
-                setCodigoCliente("");
-                setHora("");
-                setCodigoEspacio("");
-                setEstado("");
-                setDia("");
-                setMessage("Reserva generada correctamente");
-            } else {
-                setMessage("Ha ocurrido algún error");
-            }*/
+            let jsonres = await res.json()
+            routeChange(jsonres);
         } catch (err) {
             console.log(err);
         }
+
     };
 
     return (

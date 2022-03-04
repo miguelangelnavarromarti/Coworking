@@ -12,6 +12,7 @@ import { Button, Col, Container, Input, InputGroup, InputGroupText, Row } from '
 
 const API = 'http://localhost:8000';
 const REQUEST = '/disponibilidad/';
+const ESPACIO = '/espacio/';
 const ESPACIOS = '/espacios/';
 const TIPOESPACIOS = '/tipoEspacios';
 
@@ -36,15 +37,14 @@ class BuscadorV2 extends React.Component {
             tipoEspacios: [],
             selectedEspacio: null,
             espacios: [],
+            espacio: [],
+            tipoEspacio: [],
             reservas: [],
             reserva: {
                 codigoCliente: 1,
-                hora: [
-                    8,9
-                ],
-                codigoEspacio: 1,
+                codigoEspacio: null,
                 estado: 'confirmado',
-                dia: '2022-12-31',
+                dia: `${dateFnsFormat(new Date(), 'yyyy-MM-dd')}`,
             },
             isLoading: false,
             error: null,
@@ -53,19 +53,26 @@ class BuscadorV2 extends React.Component {
             format: 'yyyy-MM-dd',
         };
     }
-    
+
 
     handleDayChange(day) {
-        this.setState({
+        this.setState(prevState => ({
             requestDay: `${dateFnsFormat(day, this.state.format)}`,
-            selectedDay: day
-        });
+            selectedDay: day,
+            reservas: [],
+            reserva: {
+                ...prevState.reserva, dia: `${dateFnsFormat(day, this.state.format)}`
+            },
+        }));
     }
 
     handleInputChangeEspacio(event) {
-        this.setState({
+        this.setState(prevState => ({
             selectedEspacio: event.target.value,
-        });
+            reserva: {
+                ...prevState.reserva, codigoEspacio: event.target.value
+            },
+        }));
     }
 
     handleInputChangeTipoEspacio(event) {
@@ -74,7 +81,7 @@ class BuscadorV2 extends React.Component {
         });
     }
 
-    handleClickButton(i) {
+    async handleClickButton(i) {
         const reservas = this.state.reservas.slice();
         const disponibilidad = this.state.disponibilidad.slice();
         const horaBoton = i.target.text.split(":")[0];
@@ -86,40 +93,38 @@ class BuscadorV2 extends React.Component {
             }
         }
 
-        reservas.push(i.target.text);
-        reservas.sort((a,b) => parseInt(a.split(":")[0])-parseInt(b.split(":")[0]));
+        reservas.push(horaBoton);
+        reservas.sort((a, b) => parseInt(a) - parseInt(b));
         disponibilidad.splice(indexHora, 1);
-        
-        this.setState({
+
+        await this.setState({
             reservas: reservas,
             disponibilidad: disponibilidad,
         });
     }
 
-    handleClickButtonReverse(i) {
+    async handleClickButtonReverse(i) {
         const reservas = this.state.reservas.slice();
         const disponibilidad = this.state.disponibilidad.slice();
         const hora = i.target.text.split(":")[0];
-        const objectHora = {hora: hora.toString()};
+        const objectHora = { hora: hora.toString() };
 
         var indexReserva;
         for (let i = 0; i < reservas.length; i++) {
-            if (reservas[i].split(":")[0] == hora) {
+            if (reservas[i] == hora) {
                 indexReserva = i;
                 break;
             }
         }
-        
+
         reservas.splice(indexReserva, 1);
         disponibilidad.push(objectHora);
-        disponibilidad.sort((a,b) => (a.hora)-(b.hora));
+        disponibilidad.sort((a, b) => parseInt(a.hora) - parseInt(b.hora));
 
-        this.setState({
+        await this.setState({
             reservas: reservas,
             disponibilidad: disponibilidad,
-        })
-
-        console.log(this.state.reserva);
+        });
     }
 
     componentDidMount() {
@@ -168,6 +173,36 @@ class BuscadorV2 extends React.Component {
                 error,
                 isLoading: false
             }));
+
+        if (this.state.selectedTipoEspacio !== null) {
+            axios.get(API + TIPOESPACIOS + "/" + this.state.selectedTipoEspacio)
+                .then(result => {
+                    const tipoEspacio = result.data;
+                    this.setState({
+                        tipoEspacio: tipoEspacio,
+                        isLoading: false
+                    })
+                })
+                .catch(error => this.setState({
+                    error,
+                    isLoading: false
+                }));
+        }
+
+        if (this.state.selectedEspacio !== null) {
+            axios.get(API + ESPACIO + this.state.selectedEspacio)
+                .then(result => {
+                    const espacio = result.data;
+                    this.setState({
+                        espacio: espacio,
+                        isLoading: false
+                    })
+                })
+                .catch(error => this.setState({
+                    error,
+                    isLoading: false
+                }));
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -206,10 +241,40 @@ class BuscadorV2 extends React.Component {
                     isLoading: false
                 }));
         }
+
+        if (this.state.selectedTipoEspacio !== prevState.selectedTipoEspacio) {
+            axios.get(API + TIPOESPACIOS + "/" + this.state.selectedTipoEspacio)
+                .then(result => {
+                    const tipoEspacio = result.data;
+                    this.setState({
+                        tipoEspacio: tipoEspacio,
+                        isLoading: false
+                    })
+                })
+                .catch(error => this.setState({
+                    error,
+                    isLoading: false
+                }));
+        }
+
+        if (this.state.selectedEspacio !== prevState.selectedEspacio) {
+            axios.get(API + ESPACIO + this.state.selectedEspacio)
+                .then(result => {
+                    const espacio = result.data;
+                    this.setState({
+                        espacio: espacio,
+                        isLoading: false
+                    })
+                })
+                .catch(error => this.setState({
+                    error,
+                    isLoading: false
+                }));
+        }
     }
 
     render() {
-        const { disponibilidad, espacios, tipoEspacios, reservas, reserva, isLoading, error, requestDay, selectedDay } = this.state;
+        const { disponibilidad, espacio, espacios, tipoEspacio, tipoEspacios, reservas, reserva, isLoading, error, requestDay, selectedDay } = this.state;
         const FORMAT = 'yyyy-MM-dd';
 
         if (error) {
@@ -241,11 +306,12 @@ class BuscadorV2 extends React.Component {
                                 id='selectTipoEspacio'
                                 name='selectTipoEspacio'
                                 type='select'
+                                defaultValue={'DEFAULT'}
                                 onChange={this.handleInputChangeTipoEspacio}
                                 value={this.state.selectedTipoEspacio}
                             >
-                                <option selected='selected' disabled='disabled'>¿Qué tipo de espacio quieres reservar?</option>
-                                {tipoEspacios.map((tipoEspacio) => (
+                                <option value='DEFAULT' disabled='disabled'>¿Qué tipo de espacio quieres reservar?</option>
+                                {tipoEspacios && tipoEspacios.map((tipoEspacio) => (
                                     <option key={tipoEspacio.codigo} value={tipoEspacio.codigo}>
                                         {tipoEspacio.nombre}
                                     </option>
@@ -266,11 +332,12 @@ class BuscadorV2 extends React.Component {
                                 id='selectTipoEspacio'
                                 name='selectTipoEspacio'
                                 type='select'
+                                defaultValue={'DEFAULT'}
                                 onChange={this.handleInputChangeEspacio}
                                 value={this.state.selectedEspacio}
                             >
-                                <option selected='selected' disabled='disabled'>¿Qué espacio quieres reservar?</option>
-                                {espacios.map((espacio) => (
+                                <option value='DEFAULT' disabled='disabled'>¿Qué espacio quieres reservar?</option>
+                                {espacios && espacios.map((espacio) => (
                                     <option key={espacio.codigo} value={espacio.codigo}>
                                         {espacio.nombre}
                                     </option>
@@ -288,9 +355,34 @@ class BuscadorV2 extends React.Component {
                             selectedDays={selectedDay}
                             onDayChange={this.handleDayChange}
                             className={styles}
+                            dayPickerProps={{
+                                disabledDays: [
+                                    {
+                                        before: new Date()
+                                    }
+                                ]
+                            }}
                         />
                     </Col>
                 </div>
+                <Row>
+                    <Col xs='6'>
+                        {tipoEspacio.tipoEspacio && tipoEspacio.tipoEspacio.map((tipoEspacio, key) => (
+                            <div key={key}>
+                                <h5 className="card-title">{tipoEspacio.nombre}</h5>
+                            </div>
+                        ))}
+                        <p className="card-text">{tipoEspacio.precio}</p>
+                    </Col>
+                    <Col xs='6'>
+                        {espacio.espacio && espacio.espacio.map((espacio, key) => (
+                            <div key={key}>
+                                <h5 className="card-title">{espacio.nombre}</h5>
+                                <p className="card-text">{espacio.descripcion}</p>
+                            </div>
+                        ))}
+                    </Col>
+                </Row>
                 <Row className='my-3'>
                     <Col className='d-flex align-items-center'>
                         <div className='w-45 d-flex flex-wrap border-dispo justify-content-between'>
@@ -330,13 +422,13 @@ class BuscadorV2 extends React.Component {
                                             className='m-2'
                                             onClick={this.handleClickButtonReverse}
                                         >
-                                            {reserva}
+                                            {reserva}:00
                                         </Button>
                                     ))}
                                 </div>
 
                             </div>
-                            <ConfirmationButton texto='Reservar' objeto={reserva}/>
+                            <ConfirmationButton texto='Reservar' objeto={reserva} horas={reservas} />
                         </div>
                     </Col>
                 </Row>

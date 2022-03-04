@@ -21,6 +21,7 @@ import FormCrearOpinion from './Components/AreaCliente/FormCrearOpinion';
 import FormModificarOpinion from './Components/AreaCliente/FormModificarOpinion';
 import FacturasCanceladas from './Components/AreaCliente/FacturasCanceladas';
 import FacturaCompleta from './Components/AreaCliente/FacturaCompleta';
+import Resumen from './Components/Resumen';
 
 class App extends React.Component {
   render() {
@@ -54,6 +55,7 @@ class App extends React.Component {
             <Route path="/buscador" element={<Buscador />} />
             <Route path="/buscadorV2" element={<BuscadorV2 />} />
             <Route path="/cliente" element={<Cliente />} />
+            <Route path="/resumen/:localizador" element={<Resumen />} />
 
             <Route path="/datosCliente" element={<Cliente />} />
             <Route path="/formCliente" element={<FormCliente />} />
