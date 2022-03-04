@@ -5,8 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col, Container } from 'reactstrap';
 
 import Home from "./Components/Home";
-import Table from "./Components/Table";
-import Selectable from './Components/Selectable';
 import Buscador from './Components/Buscador';
 import BuscadorV2 from './Components/BuscadorV2';
 import Login from './Components/Login';
@@ -32,6 +30,15 @@ class App extends React.Component {
       token : localStorage.getItem("token")    
     };
   }
+/*
+  tokenReload=()=>{
+    this.setState({ token: localStorage.getItem("token") })
+  }
+
+  componentDidMount() {
+    this.tokenReload();
+  }
+*/
   render() {
     return (
       <Router>
@@ -39,13 +46,7 @@ class App extends React.Component {
           <Row className='mb-4'>
             <Col className='text-center mt-3'>
               <Link className='text-decoration-none text-dark' to="/">Home</Link>
-            </Col>
-            <Col className='text-center mt-3'>
-              <Link className='text-decoration-none text-dark' to="/table">Table</Link>
-            </Col>
-            <Col className='text-center mt-3'>
-              <Link className='text-decoration-none text-dark' to="/selectable">Selectable</Link>
-            </Col>
+            </Col>            
             <Col className='text-center mt-3'>
               <Link className='text-decoration-none text-dark' to="/buscador">Buscador</Link>
             </Col>
@@ -58,9 +59,7 @@ class App extends React.Component {
             </Col>
           </Row>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/table" element={<Table />} />
-            <Route path="/selectable" element={<Selectable />} />
+            <Route path="/" element={<Home />} />            
             <Route path="/buscador" element={<Buscador />} />
             <Route path="/buscadorV2" element={<BuscadorV2 />} />
             <Route path="/cliente" element={<Cliente token ={this.state.token}/>} />
