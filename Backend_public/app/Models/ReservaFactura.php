@@ -14,4 +14,6 @@ class ReservaFactura extends Model
     protected $primaryKey = 'codigoReserva';
 
     public $timestamps = false;
+
+    protected $fillable = ['codigoReserva', 'codigoFactura'];
 }

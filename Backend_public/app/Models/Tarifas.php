@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reserva extends Model
+class Tarifas extends Model
 {
     use HasFactory;
 
-    protected $table = 'RESERVAS';
+    protected $table = 'TARIFAS';
 
     protected $primaryKey = 'codigo';
 
     public $timestamps = false;
     
-    protected $fillable = ['localizador', 'codigoCliente', 'hora', 'codigoEspacio', 'estado', 'dia', 'precio'];
+    protected $fillable = ['codigoTipoEspacio', 'precio', 'dataInicio', 'dataFin', 'porDefecto'];
 }
