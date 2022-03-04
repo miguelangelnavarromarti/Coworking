@@ -8,13 +8,13 @@ use App\Models\FacturaCancelada;
 class FacturasCanceladasController extends Controller
 {
 
-    public function index($codigoCliente){
-
-        $facturasCanceladas = FacturaCancelada::where('codigoCliente',$codigoCliente)->get();
+    public function index(Request $request){
+        $user = auth()->user();
+        $facturasCanceladas = FacturaCancelada::where('codigoCliente',$user->codigo)->get();
         return response()->json($facturasCanceladas, 200);
     }  
 
-    public function ver($codigoCliente, $codigo){
+    public function ver($codigoCliente, $codigo){       //Borrar
         $factura = FacturaCancelada::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         return response()->json($factura, 200);
     }

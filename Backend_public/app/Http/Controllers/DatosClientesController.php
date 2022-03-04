@@ -17,10 +17,10 @@ class DatosClientesController extends Controller
     }
     
 
-    public function modificar(Request $request, $codigo){
+    public function modificar(Request $request){
+        $user = auth()->user();
         
-        //$cliente = Cliente::where('codigo',$codigo)->get();
-        $cliente = Cliente::findOrFail($codigo);
+        $cliente = Cliente::findOrFail($user->codigo);
 
         $password = bcrypt($request->password); //Encripta sa password
         $cliente->password = $password; //La guarda encriptada

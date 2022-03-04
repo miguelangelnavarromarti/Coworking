@@ -43,9 +43,9 @@ class FacturasController extends Controller
     }
 
 
-    public function ver($codigo,$codigoCliente){
-        
-        $factura = Factura::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+    public function ver(Request $request, $codigo){
+        $user = auth()->user();
+        $factura = Factura::where([['codigoCliente', $user->codigo] ,['codigo',$codigo]])->get();
         return response()->json($factura, 200);
     }
 }

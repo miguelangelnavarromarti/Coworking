@@ -31,7 +31,7 @@ class FormModificarCliente extends React.Component {
       }
 
     peticionGet=()=>{
-      axios.get(API + "/datosClientes/"+this.props.id,{
+      axios.get(API + "/datosClientes",{
         headers: {
             'authorization':'Bearer ' + this.props.token,
             'Accept' : 'application/json',
@@ -51,7 +51,7 @@ class FormModificarCliente extends React.Component {
     
 
     peticionPut=()=>{
-        axios.put(API+"/datosClientes/"+this.state.form.codigo, this.state.form,{
+        axios.put(API+"/datosClientes", this.state.form,{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
                 'Accept' : 'application/json',
@@ -92,7 +92,7 @@ class FormModificarCliente extends React.Component {
     render() {
         const { datosCliente, isLoading, error } = this.state;
 
-        if(this.props.login){
+        if(this.props.token != null){
 
         if (error) {
         return <p>{error.message}</p>;

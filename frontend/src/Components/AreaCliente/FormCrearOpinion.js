@@ -17,7 +17,7 @@ class FormCrearOpinion extends Component {
           error: null,
           url : window.location.href,
           form:{
-              codigoCliente:1,  //Aquest 1 ha de ser s'id des client
+              codigoCliente:'',
               codigoReserva: '',
               titulo:'',
               opinion:'',
@@ -28,7 +28,13 @@ class FormCrearOpinion extends Component {
       }
 
     peticionGet=()=>{
-        axios.get(API + "/opiniones/"+this.props.id)
+        axios.get(API + "/opiniones",{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(result => this.setState({
             opiniones: result.data,
             isLoading: false
@@ -40,7 +46,7 @@ class FormCrearOpinion extends Component {
     }
 
     peticionPost=()=>{
-        axios.post(API+"/opiniones/"+this.props.id , this.state.form,{
+        axios.post(API+"/opiniones" , this.state.form,{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
                 'Accept' : 'application/json',
@@ -89,7 +95,7 @@ class FormCrearOpinion extends Component {
         const { form, isLoading, error, url } = this.state;
         const urlBona = url.split("/").splice(-1)[0];        
         
-        if(this.props.login){
+        if(this.props.token != null){
 
         if (error) {
         return <p>{error.message}</p>;

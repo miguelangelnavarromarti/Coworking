@@ -27,7 +27,7 @@ class FormModificarOpinion extends Component {
       }
 
     peticionPut=()=>{
-        axios.put(API+"/opiniones/" + this.state.form.codigoCliente + "/" + this.state.form.codigo, this.state.form,{
+        axios.put(API+"/opiniones/"+ this.state.form.codigo, this.state.form,{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
                 'Accept' : 'application/json',
@@ -59,7 +59,7 @@ class FormModificarOpinion extends Component {
     }
 
     peticionGet=(codigoOpinion)=>{
-        axios.get(API + "/opiniones/"+this.props.id + "/" + codigoOpinion,{
+        axios.get(API + "/opiniones/" + codigoOpinion,{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
                 'Accept' : 'application/json',
@@ -93,7 +93,7 @@ class FormModificarOpinion extends Component {
     render() {
         const { opiniones, isLoading, error } = this.state;
 
-        if(this.props.login){
+        if(this.props.token != null){
 
         if (error) {
         return <p>{error.message}</p>;

@@ -18,12 +18,18 @@ class Reservas extends Component {
           error: null,  
         };
       }
+
+      sortMovies(reserva1, reserva2){
+        return parseFloat(reserva2.codigo) - parseFloat(reserva1.codigo);
+      }
+
+
     componentDidMount() {
 
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/reservas/"+this.props.id,{
+    axios.get(API + "/reservas",{
       headers: {
           'authorization':'Bearer ' + this.props.token,
           'Accept' : 'application/json',
@@ -38,12 +44,14 @@ class Reservas extends Component {
         error,
         isLoading: false
         }));
+
+        
     }
 
     render() {
-        const { reservas, isLoading, error, reservaConfirmada } = this.state;
-
-        if(this.props.login){
+        const { reservas, isLoading, error } = this.state;
+        console.log(reservas);    //Borrar
+        if(this.props.token != null){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -80,7 +88,9 @@ class Reservas extends Component {
               </tr>
             </thead>
             <tbody>
-              {reservas.map(function(reserva,key){
+              {reservas
+              .sort( (reserva1, reserva2) => this.sortMovies(reserva1, reserva2))
+              .map(function(reserva,key){
                 return (
                   <tr key={key} className="text-center">
                     <td>{reserva.codigo}</td>                                                                                      

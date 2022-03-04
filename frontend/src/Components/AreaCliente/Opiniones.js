@@ -17,9 +17,13 @@ class Opiniones extends Component {
           error: null,         
         };
       }
+      
+      sortMovies(opinion1, opinion2){
+        return parseFloat(opinion2.codigo) - parseFloat(opinion1.codigo);
+      }
 
     peticionGet=()=>{
-        axios.get(API + "/opiniones/"+this.props.id,{
+        axios.get(API + "/opiniones",{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
                 'Accept' : 'application/json',
@@ -41,7 +45,7 @@ class Opiniones extends Component {
     }
 
     peticionDelete=(codigoOpinion)=>{        // SI POS UNA RUTA HO BORRA AUTOMATICAMENT SENSE FER CLICK
-        axios.delete(API + "/opiniones/1/" + codigoOpinion,{
+        axios.delete(API + "/opiniones/" + codigoOpinion,{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
                 'Accept' : 'application/json',
@@ -70,7 +74,7 @@ class Opiniones extends Component {
 
         console.log(this.state.opiniones);
 
-        if(this.props.login){
+        if(this.props.token != null){
         if (error) {
         return <p>{error.message}</p>;
         }
@@ -85,7 +89,9 @@ class Opiniones extends Component {
             <ClienteHeader/>    
             <h1 className="text-center my-4">Todas las opiniones</h1>                    
             <CardGroup>
-            {opiniones.map((opinion)=>
+            {opiniones
+            .sort( (opinion1, opinion2) => this.sortMovies(opinion1, opinion2))
+            .map((opinion)=>
                 <Col key={opinion.codigo} sm="5" className="m-auto">
                     <Card className="my-5 py-4 px-5  shadow bg-body rounded-3 bg-degradatInvertit text-white border-2 border-warning"
                         body

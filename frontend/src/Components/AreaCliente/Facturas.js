@@ -19,7 +19,9 @@ class Facturas extends Component {
         };
         
       }
-
+    sortMovies(facturas1, facturas2){
+      return parseFloat(facturas2.codigo) - parseFloat(facturas1.codigo);
+    }
     desplegarAccordion=()=>{ //Me passa de true a false i de false a true
       this.setState({desplegar: !this.state.desplegar});
     }
@@ -50,9 +52,8 @@ class Facturas extends Component {
   
 
     render() {
-        const { facturas, isLoading, error } = this.state;
-        console.log(facturas); //Borrar
-        if(this.props.login){
+        const { facturas, isLoading, error } = this.state;        
+        if(this.props.token != null){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -84,7 +85,9 @@ class Facturas extends Component {
               </tr>
             </thead>
             <tbody>
-              {facturas.map(function(factura){
+              {facturas
+              .sort( (facturas1, facturas2) => this.sortMovies(facturas1, facturas2))
+              .map(function(factura){
                 return (
                   <tr key={factura.codigo} className="text-center">              
                     <td>{factura.codigo}</td>                    

@@ -16,12 +16,17 @@ class FacturasCanceladas extends Component {
           error: null,
         };
       }
+
+      sortMovies(facturas1, facturas2){
+        return parseFloat(facturas2.codigo) - parseFloat(facturas1.codigo);
+      }
+
     componentDidMount() {
 
 
     this.setState({ isLoading: true });
 
-    axios.get(API + "/facturasCanceladas/"+this.props.id,{
+    axios.get(API + "/facturasCanceladas",{
       headers: {
           'authorization':'Bearer ' + this.props.token,
           'Accept' : 'application/json',
@@ -41,7 +46,7 @@ class FacturasCanceladas extends Component {
     render() {
         const { facturasCanceladas, isLoading, error } = this.state;
 
-        if(this.props.login){
+        if(this.props.token != null){
 
         if (error) {
         return <p>{error.message}</p>;
@@ -72,7 +77,9 @@ class FacturasCanceladas extends Component {
               </tr>
             </thead>
             <tbody>
-              {facturasCanceladas.map(function(factura){
+              {facturasCanceladas
+              .sort( (facturas1, facturas2) => this.sortMovies(facturas1, facturas2))
+              .map(function(factura){
                 return (
                   <tr key={factura.codigo} className="text-center">
                     <td>{factura.codigo}</td>                    

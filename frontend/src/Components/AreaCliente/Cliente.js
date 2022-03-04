@@ -42,7 +42,7 @@ class Cliente extends React.Component {
 
     render() {
 
-        if(this.props.login){
+        if(this.props.token != null){
             const { datosCliente, isLoading, error } = this.state;
 
             if (error) {

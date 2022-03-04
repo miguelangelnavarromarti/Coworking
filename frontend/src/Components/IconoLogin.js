@@ -13,9 +13,9 @@ class IconoLogin extends Component {
 
     render() {
 
-    const { login } = this.props;
+    const { token } = this.props;
 
-    if(login){
+    if(token != null){
     return  (<React.Fragment>              
                     <Col className='text-center mt-3'>
                       <Link className='text-decoration-none text-dark' to="/cliente">Area Cliente</Link>

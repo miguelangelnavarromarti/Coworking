@@ -7,22 +7,23 @@ use App\Models\Opinion;
 
 class OpinionesController extends Controller
 {
-    public function index($codigoCliente){
-        
-        $opiniones = Opinion::where('codigoCliente',$codigoCliente)->get();
+    public function index(Request $request){
+        $user = auth()->user();
+        $opiniones = Opinion::where('codigoCliente',$user->codigo)->get();
         return response()->json($opiniones, 200);
     }
     
-    public function ver($codigoCliente,$codigo){
-        $opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+    public function ver(Request $request,$codigo){
+        $user = auth()->user();
+        $opinion = Opinion::where([['codigoCliente', $user->codigo] ,['codigo',$codigo]])->get();
         return response()->json($opinion, 200);
     }
 
     public function crear(Request $request){
         //$opinionObject = json_decode($request);
-
+        $user = auth()->user();
         $nuevaOpinion= Opinion::create([
-            'codigoCliente' => $request['codigoCliente'],
+            'codigoCliente' => $user->codigo,
             'codigoReserva' => $request['codigoReserva'],
             'titulo' => $request['titulo'],
             'opinion' => $request['opinion'],
@@ -42,8 +43,9 @@ class OpinionesController extends Controller
         
     }
 
-    public function modificar(Request $request, $codigoCliente, $codigo){
+    public function modificar(Request $request,$codigo){
         //$opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+        $user = auth()->user();
         $opinion = Opinion::findOrFail($codigo);
         $opinion->titulo = $request->titulo;
         $opinion->opinion = $request->opinion;
@@ -53,8 +55,8 @@ class OpinionesController extends Controller
         return "MODIFICAT";
     }
 
-    public function eliminar($codigoCliente, $codigo){
-
+    public function eliminar(Request $request, $codigo){
+        $user = auth()->user();
         //$opinion = Opinion::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
         $opinion = Opinion::findOrFail($codigo);
         $opinion->delete();

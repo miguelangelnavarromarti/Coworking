@@ -28,11 +28,8 @@ class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      login : true,
-      id: 1,
-      token : localStorage.getItem("token")
-      //token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY0NjMyNjQ1NiwiZXhwIjoxNjQ2MzMwMDU2LCJuYmYiOjE2NDYzMjY0NTYsImp0aSI6IllQUFU3c1BlYld1UnJiUmoiLCJzdWIiOjE5LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.KqdC0Hhqu7XNFqw3ASw4Z243M0IgYhEdlhGdPLri9qE"
+    this.state = {      
+      token : localStorage.getItem("token")    
     };
   }
   render() {
@@ -57,7 +54,7 @@ class App extends React.Component {
             </Col>
            
             <Col>
-              <IconoLogin login={this.state.login}/>
+              <IconoLogin token={this.state.token}/>
             </Col>
           </Row>
           <Routes>
@@ -66,17 +63,17 @@ class App extends React.Component {
             <Route path="/selectable" element={<Selectable />} />
             <Route path="/buscador" element={<Buscador />} />
             <Route path="/buscadorV2" element={<BuscadorV2 />} />
-            <Route path="/cliente" element={<Cliente token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
+            <Route path="/cliente" element={<Cliente token ={this.state.token}/>} />
 
-            <Route path="/datosCliente" element={<Cliente token ={this.state.token} id ={this.state.id} login={this.state.login}/>} />
-            <Route path="/formCliente" element={<FormCliente token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
-            <Route path="/reservas" element={<Reservas token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
-            <Route path="/facturas" element={<Facturas token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
-            <Route path="/facturaCompleta/:id" element={<FacturaCompleta token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
-            <Route path="/facturasCanceladas" element={<FacturasCanceladas token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
-            <Route path="/opiniones" element={<Opiniones token ={this.state.token} id={this.state.id} login={this.state.login}/>} />
-            <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion token ={this.state.token} id={this.state.id} login={this.state.login}/>}/>
-            <Route path='/formModificarOpinion/:codigoReserva' element={<FormModificarOpinion token ={this.state.token} id={this.state.id} login={this.state.login}/>}/>
+            <Route path="/datosCliente" element={<Cliente token ={this.state.token}/>} />
+            <Route path="/formCliente" element={<FormCliente token ={this.state.token}/>} />
+            <Route path="/reservas" element={<Reservas token ={this.state.token}/>} />
+            <Route path="/facturas" element={<Facturas token ={this.state.token}/>} />
+            <Route path="/facturaCompleta/:id" element={<FacturaCompleta token ={this.state.token}/>} />
+            <Route path="/facturasCanceladas" element={<FacturasCanceladas token ={this.state.token}/>} />
+            <Route path="/opiniones" element={<Opiniones token ={this.state.token}/>} />
+            <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion token ={this.state.token}/>}/>
+            <Route path='/formModificarOpinion/:codigoReserva' element={<FormModificarOpinion token ={this.state.token}/>}/>
 
             <Route path='/login' element={<Login />}/>
             <Route path='/registro' element={<Registro />}/>

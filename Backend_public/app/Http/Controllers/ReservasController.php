@@ -13,12 +13,13 @@ class ReservasController extends Controller
         $user = auth()->user();
         
         $reservas = Reserva::where('codigoCliente',$user->codigo)->get();
+        
         return response()->json($reservas, 200);
     }
 
-    public function ver($codigoCliente,$codigo){
-        
-        $reservas = Reserva::where([['codigoCliente', $codigoCliente] ,['codigo',$codigo]])->get();
+    public function ver(Request $request, $codigo){
+        $user = auth()->user();
+        $reservas = Reserva::where([['codigoCliente', $user->codigo] ,['codigo',$codigo]])->get();
         return response()->json($reservas, 200);
     }
 

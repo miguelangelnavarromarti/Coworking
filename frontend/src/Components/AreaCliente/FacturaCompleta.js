@@ -32,7 +32,7 @@ class FacturaCompleta extends Component {
     let url = window.location.href;
     const codigoFactura = url.split("/").splice(-1)[0];
     
-    axios.get(API + "/facturas/"+this.props.id + "/" + codigoFactura,{
+    axios.get(API + "/facturas/" + codigoFactura,{
       headers: {
           'authorization':'Bearer ' + this.props.token,
           'Accept' : 'application/json',
@@ -71,7 +71,7 @@ class FacturaCompleta extends Component {
     render() {
         const { reservas, facturas, isLoading, error } = this.state;
         
-        if(this.props.login){
+        if(this.props.token != null){
         if (error) {
         return <p>{error.message}</p>;
         }
