@@ -8,6 +8,7 @@ import { Row, Col, Container } from 'reactstrap';
 import Home from "./Components/Home";
 import Buscador from './Components/Buscador';
 import BuscadorV2 from './Components/BuscadorV2';
+
 import Login from './Components/Login';
 import Registro from './Components/Registro';
 import Cliente from './Components/AreaCliente/Cliente';
@@ -22,6 +23,7 @@ import FacturaCompleta from './Components/AreaCliente/FacturaCompleta';
 import IconoLogin from './Components/IconoLogin';
 import Footer from './Components/Footer';
 
+import Resumen from './Components/Resumen';
 
 class App extends React.Component {
   constructor(props){
@@ -74,11 +76,10 @@ class App extends React.Component {
             <Route path="/opiniones" element={<Opiniones token ={this.state.token}/>} />
             <Route path='/formCrearOpinion/:codigoReserva' element={<FormCrearOpinion token ={this.state.token}/>}/>
             <Route path='/formModificarOpinion/:codigoReserva' element={<FormModificarOpinion token ={this.state.token}/>}/>
+            <Route path="/resumen/:localizador" element={<Resumen token ={this.state.token}/>} />
 
             <Route path='/login' element={<Login />}/>
             <Route path='/registro' element={<Registro />}/>
-            
-            
 
           </Routes>
         </Container>

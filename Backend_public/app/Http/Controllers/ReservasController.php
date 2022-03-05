@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reserva;
 use App\Models\ReservaFactura;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ReservasController extends Controller
 {

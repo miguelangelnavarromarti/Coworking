@@ -15,7 +15,7 @@ use App\Http\Controllers\OpinionesController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\FacturasCanceladasController;
 use App\Http\Controllers\GestionCancelacionesController;
-
+use App\Http\Controllers\RedsysController;
 
 
 
@@ -93,8 +93,23 @@ Route::get('/reservas/{dia}', [DisponibilidadController::class, 'getDisponibilid
 
 Route::get('/tipoEspacios', [DisponibilidadController::class, 'getTipoEspacios']);
 
-Route::get('/espacio/{codigo}', [DisponibilidadController::class, 'getEspacios']);
+Route::get('/codigoEspacio/{codigo}', [DisponibilidadController::class, 'getEspacios']);
+Route::get('/espacio/{codigo}', [DisponibilidadController::class, 'getDatosEspacio']);
 
 Route::get('/espacios/{tipoEspacio}', [DisponibilidadController::class, 'getEspaciosPorTipoEspacio']);
 
+Route::get('/tipoEspacios/{codigo}', [DisponibilidadController::class, 'getTipoEspacioPorCodigo']);
+
+Route::get('/espacio/{codigo}', [DisponibilidadController::class, 'getEspacioPorCodigo']);
+
 Route::get('/disponibilidad/{dia}/{codigoEspacio}', [DisponibilidadController::class, 'getDisponibilidad']);
+
+Route::post('/postReserva', [DisponibilidadController::class, 'store']);
+
+Route::get('/localizador/{localizador}', [DisponibilidadController::class, 'verReservasPorLocalizador']);
+
+Route::get('/pagar/{localizador}' , [RedsysController::class, 'index']);
+
+Route::get('/respuestaOK', [RedsysController::class, 'respuestaOK']);
+
+Route::get('/respuestaKO', [RedsysController::class, 'respuestaKO']);

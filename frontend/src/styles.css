@@ -57,7 +57,7 @@
 }
 
 .DayPicker-Day--disabled {
-    color: green;
+    color: lightgray;
 }
 
 .searcher {
@@ -84,5 +84,10 @@
 
 .border-dispo {
     border: 5px solid lightskyblue;
+    border-radius: 10px;
+}
+
+.border-resumen {
+    border: 1px solid lightgrey;
     border-radius: 10px;
 }
