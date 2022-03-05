@@ -44,7 +44,7 @@ class Opiniones extends Component {
         window.location.href= "http://localhost:3000/formModificarOpinion/" + codigoOpinion;
     }
 
-    peticionDelete=(codigoOpinion)=>{        // SI POS UNA RUTA HO BORRA AUTOMATICAMENT SENSE FER CLICK
+    peticionDelete=(codigoOpinion)=>{
         axios.delete(API + "/opiniones/" + codigoOpinion,{
             headers: {
                 'authorization':'Bearer ' + this.props.token,
@@ -62,17 +62,13 @@ class Opiniones extends Component {
     componentDidMount() {
 
     this.setState({ isLoading: true });
-    this.peticionGet();
-
-    console.log(this.state.opiniones);
-
+    this.peticionGet();   
     
     }
 
     render() {
         const { opiniones, isLoading, error } = this.state;
 
-        console.log(this.state.opiniones);
 
         if(this.props.token != null){
         if (error) {

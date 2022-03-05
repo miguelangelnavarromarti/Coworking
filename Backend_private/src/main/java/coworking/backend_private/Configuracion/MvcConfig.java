@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
-
+    //Ruta de'n Miki  "file:/Users/joangalmesriera/Downloads/photos/"     ("file:/opt/files/") https://www.baeldung.com/spring-mvc-static-resources
     @Value("${rutes.fotos}")
     String rutaProperties;
 

@@ -5,8 +5,48 @@
 </head>
     <body>
         <main>
-            <div class="container my-3 p-2 shadow bg-body rounded-3">
-                <h1 class="text-center">Imagenes Disponibles</h1>
+            <div class="container my-2 p-2 shadow bg-body rounded-3">
+                <nav class="nav nav-pills nav-fill">
+                    <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+                       data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+                    <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+                    </ul>
+
+                    <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+                    <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+                       data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+                    <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+                    </ul>
+
+                    <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="espaciosDropDown"
+                       data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+                    <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+                    </ul>
+
+                    <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
+                    <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+                    <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+                    <a class="text-center nav-link dropdown-toggle" type="button"
+                       id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+                    <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+                <div class="container mb-5">
+                    <h1 class="text-center">Imagenes Disponibles</h1>
+                </div>
                 <a class="btn btn-primary mt-3" th:href="@{/imagenes/formulario}">Subir Imagen</a>
                 <br><br>
                 <hr>

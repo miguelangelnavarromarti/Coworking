@@ -50,7 +50,7 @@ class Reservas extends Component {
 
     render() {
         const { reservas, isLoading, error } = this.state;
-        console.log(reservas);    //Borrar
+                
         if(this.props.token != null){
 
         if (error) {
