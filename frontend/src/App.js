@@ -55,8 +55,7 @@ class App extends React.Component {
             </Col>                        
             <Col className='text-center mt-3'>
               <Link className='text-decoration-none text-dark' to="/buscadorV2">Buscador v2</Link>              
-            </Col>
-           
+            </Col>           
             <Col>
               <IconoLogin token={this.state.token}/>
             </Col>

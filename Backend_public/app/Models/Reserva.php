@@ -12,8 +12,8 @@ class Reserva extends Model
     protected $table = 'RESERVAS';
 
     protected $primaryKey = 'codigo';
-    protected $fillable =['codigoCliente','hora','codigoEspacio','estado','dia','precio','diaHoraCreacion'];
+    protected $fillable = ['localizador', 'codigoCliente', 'hora', 'codigoEspacio', 'estado', 'dia', 'precio'];
     public $timestamps = false;
     
-    protected $fillable = ['localizador', 'codigoCliente', 'hora', 'codigoEspacio', 'estado', 'dia', 'precio'];
+    
 }
