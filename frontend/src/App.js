@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './logo1.png';
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,13 +44,13 @@ class App extends React.Component {
     return (
       <Router>
         <Container className='bg-white'>
-          <Row className='mb-4'>
+          <Row className='mb-4'>   
+            <Col>
+              <img src={logo} height="30" width="40"></img>         
+            </Col>
             <Col className='text-center mt-3'>
               <Link className='text-decoration-none text-dark' to="/">Home</Link>
-            </Col>            
-            <Col className='text-center mt-3'>
-              <Link className='text-decoration-none text-dark' to="/buscador">Buscador</Link>
-            </Col>
+            </Col>                        
             <Col className='text-center mt-3'>
               <Link className='text-decoration-none text-dark' to="/buscadorV2">Buscador v2</Link>              
             </Col>
