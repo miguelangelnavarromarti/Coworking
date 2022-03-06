@@ -63,7 +63,7 @@
         <table class="table nowrap" id="visualizationTable">
             <thead class="table">
             <tr>
-                <th scope="col" class="text-center" style="box-shadow: 5px 0 5px -5px #333;">Código</th>
+                <th scope="col" class="text-center" style="box-shadow: 5px 0 5px -5px #333;">Localizador</th>
                 <th scope="col" class="text-center">Código Cliente</th>
                 <th scope="col" class="text-center">Hora</th>
                 <th scope="col" class="text-center">Código Espacio</th>
@@ -76,7 +76,7 @@
             </thead>
             <tbody>
             <tr th:each="rv:${reservas}">
-                <th scope="row" th:text="${rv.codigo}" class="py-3 text-center align-middle bg-light" style="box-shadow: 5px 0 5px -5px #333;"></th>
+                <th scope="row" th:text="${rv.localizador}" class="py-3 text-center align-middle bg-light" style="box-shadow: 5px 0 5px -5px #333;"></th>
                 <td th:text="${rv.cliente.getNombre()}" class="py-3 text-center align-middle bg-white fw-bold"></td>
                 <td th:text="${rv.horarioDisponible.getHora()}" class="py-3 text-center align-middle bg-white"></td>
                 <td th:text="${rv.espacio.getNombre()}" class="py-3 text-center align-middle bg-white"></td>

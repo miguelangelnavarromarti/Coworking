@@ -15,6 +15,7 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer codigo;
+    String localizador;
     @ManyToOne(optional = false)
     @JoinColumn(name="codigoCliente")
     Cliente cliente;
