@@ -7,7 +7,6 @@ import { Row, Col, Container } from 'reactstrap';
 
 import Home from "./Components/Home";
 import Buscador from './Components/Buscador';
-import BuscadorV2 from './Components/BuscadorV2';
 
 import Login from './Components/Login';
 import Registro from './Components/Registro';
@@ -33,37 +32,26 @@ class App extends React.Component {
       token : localStorage.getItem("token")    
     };
   }
-/*
-  tokenReload=()=>{
-    this.setState({ token: localStorage.getItem("token") })
-  }
 
-  componentDidMount() {
-    this.tokenReload();
-  }
-*/
   render() {
     return (
       <Router>
         <Container className='bg-white'>
           <Row className='mb-4'>   
-            <Col>
-              <img src={logo} height="30" width="40"></img>         
+            <Col sm={4} className='text-center mt-3'>
+              <img src={logo} height="40" width="75"></img>         
             </Col>
-            <Col className='text-center mt-3'>
+            <Col sm={4} className='text-center mt-3'>
               <Link className='text-decoration-none text-dark' to="/">Home</Link>
-            </Col>                        
-            <Col className='text-center mt-3'>
-              <Link className='text-decoration-none text-dark' to="/buscadorV2">Buscador v2</Link>              
-            </Col>           
-            <Col>
+            </Col>                                              
+            <Col sm={4} >
               <IconoLogin token={this.state.token}/>
             </Col>
           </Row>
           <Routes>
             <Route path="/" element={<Home />} />            
-            <Route path="/buscador" element={<Buscador />} />
-            <Route path="/buscadorV2" element={<BuscadorV2 />} />
+            
+            <Route path="/buscador" element={<Buscador token ={this.state.token}/>} />
             <Route path="/cliente" element={<Cliente token ={this.state.token}/>} />
 
             <Route path="/datosCliente" element={<Cliente token ={this.state.token}/>} />
