@@ -3,55 +3,96 @@
 <html lang="en" xmlns:th ="http://www.thymeleaf.org">
 <head th:replace="plantilla :: head">
 </head>
-<body>
-<div class="container">
-    <br>
-    <h1 class="text-center my-3">Introducir Imagen</h1>
-    <form th:action="@{/imagenes/subir}" th:object="${imagen}" class="row my-5" enctype="multipart/form-data" method="post">
+    <body>
+        <main>
+            <div class="container my-2 p-2 shadow bg-body rounded-3">
+                <nav class="nav nav-pills nav-fill">
+                    <a class="text-center nav-link dropdown-toggle" type="button" id="clientesDropDown"
+                       data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+                    <ul class="dropdown-menu" aria-labelledby="clientesDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/clientes/}">Clientes</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/opiniones/}">Opiniones</a></li>
+                    </ul>
 
-        <div class="mb-3 col-6">
-            <label for="codigoTipoEspacio" class="form-label">Tipo de Espacio *</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
-                      <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                      <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
-                    </svg>
-                </span>
-                <select id="codigoTipoEspacio" class="form-select" name="codigoTipoEspacio" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
-                    <option value="G">Generico</option>
-                    <option
-                            th:each="tipoEspacio:${listaTipoEspacio}"
-                            th:value="${tipoEspacio.codigo}"
-                            th:text="${tipoEspacio.nombre}"></option>
-                </select>
+                    <a class="text-center nav-link" th:href="@{/reservas/}">Reservas</a>
+
+                    <a class="text-center nav-link dropdown-toggle" type="button" id="facturasDropDown"
+                       data-bs-toggle="dropdown" aria-expanded="false">Facturas</a>
+                    <ul class="dropdown-menu" aria-labelledby="facturasDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/facturas/}">Facturas</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/facturasCanceladas/}">Facturas Canceladas</a></li>
+                    </ul>
+
+                    <a class="text-center nav-link dropdown-toggle active" aria-current="page" type="button" id="espaciosDropDown"
+                       data-bs-toggle="dropdown" aria-expanded="false">Espacios</a>
+                    <ul class="dropdown-menu" aria-labelledby="espaciosDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/tipoEspacios/}">Tipos Espacio</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/espacios/}">Espacios</a></li>
+                    </ul>
+
+                    <a class="text-center nav-link" th:href="@{/bloqueos/}">Bloqueos</a>
+                    <a class="text-center nav-link" th:href="@{/tarifas/}">Tarifas</a>
+                    <a class="text-center nav-link" th:href="@{/idiomas/}">Idiomas</a>
+
+                    <a class="text-center nav-link dropdown-toggle" type="button"
+                       id="gestionDropDown" data-bs-toggle="dropdown" aria-expanded="false">Gestión</a>
+                    <ul class="dropdown-menu" aria-labelledby="gestionDropDown">
+                        <li><a class="dropdown-item nav-link" th:href="@{/gestionOfertas/}">Ofertas</a></li>
+                        <li><a class="dropdown-item nav-link" th:href="@{/gestionCancelaciones/}">Cancelaciones</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-        <div class="mb-3 col-6">
-            <label for="file" class="form-label">Introduce el nombre del archivo *</label>
-            <div class="input-group">
+
+            <div class="container my-5 py-4 px-5  shadow bg-body rounded-3">
+                <div class="mt-3">
+                    <h1 class="text-center my-3">Introducir Imagen</h1>
+                </div>
+                <form th:action="@{/imagenes/subir}" th:object="${imagen}" class="row my-5" enctype="multipart/form-data" method="post">
+
+                    <div class="mb-3 col-6">
+                        <label for="codigoTipoEspacio" class="form-label">Tipo de Espacio *</label>
+                        <div class="input-group">
                     <span class="input-group-text">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
-                          <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                          <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+                          <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                          <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
                         </svg>
                     </span>
-                <input type="file" id="file" name="file" class="form-label" accept="image/png, image/jpeg, image/jpg">
-            </div>
-            <div id="fileHelp" class="form-text">Introduce el archivo que quiere subir</div>
-        </div>
+                            <select id="codigoTipoEspacio" class="form-select" name="codigoTipoEspacio" aria-label="Default select example" aria-describedby="codigoTipoEspacioHelp" required>
+                                <option value="G">Generico</option>
+                                <option
+                                        th:each="tipoEspacio:${listaTipoEspacio}"
+                                        th:value="${tipoEspacio.codigo}"
+                                        th:text="${tipoEspacio.nombre}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="file" class="form-label">Introduce el archivo *</label>
+                        <div class="input-group">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                              <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                              <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"/>
+                            </svg>
+                        </span>
+                            <input type="file" id="file" name="file" class="form-label" accept="image/png, image/jpeg, image/jpg">
+                        </div>
+                        <div id="fileHelp" class="form-text">Introduce el archivo que quiere subir</div>
+                    </div>
 
-        <div class="mb-3 col-1">
-            <br>
-            <input type="submit" class="btn btn-primary" th:value="Insertar">
-        </div>
-        <div class="mb-3 col-1">
-            <br>
-            <a th:href="@{/imagenes/}" class="btn btn-danger">Volver</a>
-        </div>
-    </form>
-</div>
-</body>
+                    <div class="mb-3 col-1">
+                        <br>
+                        <input type="submit" class="btn btn-primary" th:value="Insertar">
+                    </div>
+                    <div class="mb-3 col-1">
+                        <br>
+                        <a th:href="@{/imagenes/}" class="btn btn-danger">Volver</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
 </html>
 
 

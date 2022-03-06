@@ -119,6 +119,27 @@
             });
         });
 
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            weekHeader: 'Sm',
+
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
+
+
         var dateDia = new Date(dia);
         dt = $("#datepicker").datepicker({
             dateformat: "yyyy-mm-dd",
@@ -136,11 +157,12 @@
                     window.location.href = urlComplete;
                 }
             },
+
             onChangeMonthYear: function(year, month, inst) {
                 $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
                 <!-- Barra superior -->
                 $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
-                $("#datepicker div div div").addClass("bg-warning text-dark");
+                $("#datepicker div div div").addClass("bg-info text-dark");
                 <!-- Hoy -->
                 $(".ui-state-highlight").removeClass("ui-state-highlight");
                 $(".ui-state-active").addClass("bg-info text-dark border-dark");
@@ -148,6 +170,7 @@
                 $(".ui-datepicker-week-end a").addClass("text-danger");
             }
         });
+
 
         <!-- Select Espacio -->
         $("#espacios option[value=" + codigoEspacio + "]").attr("selected",true);
@@ -164,7 +187,7 @@
         $("#disponibilidadEspacio").text(" de " + nombreEspacio);
 
 
-        /*
+
 
                 <!-- Calendari -->
                 $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
@@ -187,7 +210,7 @@
                     $("#datepicker div").css("width", "80%").addClass("m-auto border-dark");
                     <!-- Barra superior -->
                     $("#datepicker div div").addClass("w-100 bg-info border-dark text-dark");
-                    $("#datepicker div div div").addClass("bg-warning text-dark");
+                    $("#datepicker div div div").addClass("bg-info text-dark");
                     <!-- Hoy -->
                     $(".ui-state-highlight").removeClass("ui-state-highlight");
                     $(".ui-state-active").addClass("bg-info text-dark border-dark");
@@ -195,7 +218,7 @@
                     $(".ui-datepicker-week-end a").addClass("text-danger");
                 });
 
-        */
+
         $("#datapicker").datepicker("refresh");
 
     });

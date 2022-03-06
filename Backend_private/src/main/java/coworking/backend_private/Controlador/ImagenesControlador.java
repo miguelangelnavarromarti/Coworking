@@ -50,7 +50,7 @@ public class ImagenesControlador {
         InputStream is = img.getInputStream();
 
         int contador = imagenesServicio.numImagenes(codigoTipoEspacio) +1;
-        String nombreImagen = codigoTipoEspacio + "-" + contador + ".jpg";
+        String nombreImagen = codigoTipoEspacio + "-" + contador + ".webp";
 
         imagen.setNombreImagen(nombreImagen);
         imagen.setCodigoTipoEspacio(codigoTipoEspacio);

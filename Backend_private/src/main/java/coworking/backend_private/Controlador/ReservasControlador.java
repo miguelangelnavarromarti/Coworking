@@ -30,7 +30,7 @@ public class ReservasControlador {
     @Autowired
     private FacturasServicioImpl facturasServicio;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String getReservas(Model model){
         List<Reserva> verReservas = reservasServicio.verReservas();
 
