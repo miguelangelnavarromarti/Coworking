@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Button } from 'reactstrap';
+import ClienteHeader from './AreaCliente/ClienteHeader';
 
 
 function Resumen(props) {
@@ -22,7 +23,13 @@ function Resumen(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(API + REQUEST + localizador)
+    axios.get(API + REQUEST + localizador,{
+      headers: {
+          'authorization':'Bearer ' + props.token,
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      }
+  })
       .then(result => {
         const localizadorReserva = result.data.localizador;
         const nombreEspacio = result.data.nombreEspacio.nombre;
@@ -54,9 +61,10 @@ function Resumen(props) {
   }
 
   return (
-    <div className='d-flex flex-column gap-3 align-items-center mt-5'>
-      <h2 className='text-center'>Ver los detalles del pedido</h2>
-      <div className='border-resumen mt-2 p-4 d-flex flex-column gap-3 w-50'>
+    <div className='d-flex flex-column gap-3 align-items-center mt-1 pb-5'>
+      <ClienteHeader/>
+      <h2 className='text-center my-4'>Ver los detalles del pedido</h2>
+      <div className='shadow bg-blauFort border-groc border-2 rounded-3 text-white mt-2 p-4 d-flex flex-column gap-3 w-50'>
         <div className='d-flex'>
           <span className='fw-light w-50'>Localitzador nº</span>
           <span className='w-50'>{localizadorReserva}</span>
@@ -89,7 +97,7 @@ function Resumen(props) {
         </div>
       </div>
 
-      <a className='my-1 mx-auto w-50' href={"http://localhost:8000/pagar/" + localizador}><Button className='w-100' color='primary'>PAGAR</Button></a>
+      <a className='my-1 mx-auto w-50' href={"http://localhost:8000/pagar/" + localizador}><Button className='w-100 shadow bg-blauFort border-groc border-2 rounded-3'>PAGAR</Button></a>
 
     </div>
   );

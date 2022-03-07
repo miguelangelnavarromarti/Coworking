@@ -51,7 +51,7 @@ class DisponibilidadController extends Controller
     public function getTipoEspacioPorCodigo($codigo)
     {
         $tipoEspacio = TipoEspacio::where('codigo', $codigo)->get();
-        $precio = Tarifas::where([['codigoTipoEspacio', '=', $codigo],['porDefecto', '=', 'true']])->get('precio')[0]->precio;
+        $precio = Tarifas::where([['codigoTipoEspacio', '=', $codigo]])->get('precio')[0]->precio;
         return response()->json([
             'tipoEspacio' => $tipoEspacio,
             'precio' => $precio.' € per hora'
@@ -82,14 +82,17 @@ class DisponibilidadController extends Controller
 
     public function store(Request $request)
     {
+
+        $codigoCliente = auth()->user()->codigo;
         $objeto = json_decode($request->getContent());
-        $precio = Espacio::where('codigo', $objeto->codigoEspacio)->get('codigo')[0]->codigo;
+        $codigoTipoEspacio = Espacio::where('codigo', $objeto->codigoEspacio)->get('codigoTipoEspacio')[0]->codigoTipoEspacio;
+        $precio = Tarifas::where('codigoTipoEspacio', $codigoTipoEspacio)->get('precio')[0]->precio;
 
         $localizador = strval(rand(10000, 99999));
 
         for ($i = 0; $i < count((array)$objeto->hora); $i++) {
             $nuevaReserva = Reserva::create([
-                'codigoCliente' => $objeto->codigoCliente,
+                'codigoCliente' => $codigoCliente,
                 'localizador' => $localizador,
                 'hora' => $objeto->hora[$i],
                 'codigoEspacio' => $objeto->codigoEspacio,

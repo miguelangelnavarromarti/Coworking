@@ -32,6 +32,11 @@ function ConfirmationButton(props) {
         try {
             let res = await fetch("http://localhost:8000/postReserva", {
                 method: "POST",
+                headers: {
+                    'authorization': 'Bearer ' + props.token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     codigoCliente: codigoCliente,
                     hora: props.horas,
@@ -49,7 +54,7 @@ function ConfirmationButton(props) {
     };
 
     return (
-        <Button color='primary' className='w-100' onClick={handleSubmit}>{props.texto}</Button>
+        <Button  className='w-100 bg-blauFort border-groc border-2 rounded-3 shadow' onClick={handleSubmit}>{props.texto}</Button>
     );
 }
 export default ConfirmationButton;
