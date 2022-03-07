@@ -106,10 +106,12 @@ Route::get('/disponibilidad/{dia}/{codigoEspacio}', [DisponibilidadController::c
 
 Route::post('/postReserva', [DisponibilidadController::class, 'store']);
 
-Route::get('/localizador/{localizador}', [DisponibilidadController::class, 'verReservasPorLocalizador']);
+Route::get('/localizador/{localizador}', [DisponibilidadController::class, 'verReservasPorLocalizador'])->middleware('jwt.verify');
 
 Route::get('/pagar/{localizador}' , [RedsysController::class, 'index']);
 
 Route::get('/respuestaOK', [RedsysController::class, 'respuestaOK']);
 
 Route::get('/respuestaKO', [RedsysController::class, 'respuestaKO']);
+
+Route::post('cancelarFactura/{codigo}', [FacturasCanceladasController::class, 'create']);
