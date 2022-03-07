@@ -1,6 +1,8 @@
+import googleMapReact from "google-map-react";
 import React, { Component } from "react";
 import {Carousel, CarouselItem, CarouselIndicators, CarouselCaption, CarouselControl,Col,} from 'reactstrap';
-
+import logo from '../logoBandera.png';
+import GoogleMapReact from 'google-map-react';
 
 //          POSAR SES NOSTRES FOTOS
 const items = [
@@ -73,9 +75,20 @@ class Home extends Component {
 				</CarouselItem>
 			);
 		});
+		const center = {
+			lat: 39.56734932417211,
+			lng: 3.2167678392753696
+		  }
+		const greatPlaceStyle = {
+			position: 'absolute',
+			tranform: 'translate(-50%, -50%)'
+		}
+		const Marker = props => {
+			return (<img style={greatPlaceStyle} className={"marker-map"} height= '80px' width='100px' src={logo} alt={"Localitzación"} />)
+		}
 
 		return (
-			<div className="bg-white">				
+			<div className="bg-white">								
                 <Col sm={9} className="mx-auto my-3">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>			
@@ -100,6 +113,15 @@ class Home extends Component {
 					<CarouselControl direction='prev' directionText='Previous' onClickHandler={this.previous} />
 					<CarouselControl direction='next' directionText='Next' onClickHandler={this.next} />
 				</Carousel>
+				<div className={'my-5'} style={{height: '300px', width: '100%'}}>
+					<GoogleMapReact
+						bootrstrapURLKey={{ key: "AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k"}}	
+						center={center}
+						zoom={18}
+						>
+							<Marker lat='39.56742413987475' lng='3.2167855623012747' iconAnchor ={[17,46]}/>
+						</GoogleMapReact>
+				</div>
 			</div>
 		);
 	}
