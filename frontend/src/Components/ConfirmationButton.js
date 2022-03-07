@@ -54,7 +54,7 @@ function ConfirmationButton(props) {
     };
 
     return (
-        <Button color='primary' className='w-100' onClick={handleSubmit}>{props.texto}</Button>
+        <Button  className='w-100 bg-blauFort border-groc border-2 rounded-3 shadow' onClick={handleSubmit}>{props.texto}</Button>
     );
 }
 export default ConfirmationButton;

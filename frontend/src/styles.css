@@ -4,6 +4,9 @@
 .border-blauFort{
     border-color: #397691 !important;
 }
+.text-blauFort{
+    color: #397691;
+}
 .bg-blauFluix{
     background-color: #7ED0F1;
 }
@@ -25,6 +28,9 @@
 }
 .bg-gris{
     background-color: #E4E4E4;
+}
+.bg-blanc{
+    background-color: white;
 }
 .bg-degradat{
     background: rgb(42,49,55);
@@ -63,15 +69,15 @@
 .searcher {
     width: 70%;
     padding: 5px;
-    background-color: lightskyblue;
-    border-radius: 5px;
+    border: 2px solid #FBD14F;
+    border-radius: 2px;
 }
 
 .searcherV2 {
     width: 100%;
     padding: 5px;
-    background-color: lightskyblue;
-    border-radius: 5px;
+    border: 2px solid #FBD14F;
+    border-radius: 2px;
 }
 
 .w-45 {
@@ -83,11 +89,14 @@
 }
 
 .border-dispo {
-    border: 5px solid lightskyblue;
+    border: 2px solid #FBD14F;
     border-radius: 10px;
 }
 
 .border-resumen {
     border: 1px solid lightgrey;
     border-radius: 10px;
+}
+.fullScreen{
+    min-height: 100vh;
 }

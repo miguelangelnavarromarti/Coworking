@@ -11,7 +11,7 @@ class Footer extends React.Component {
 
   render() {
     return (                                //POSAR FONDO COLOR DE FONDO GENERAL
-      <Container className='mt-4 bg-dark' fluid>      
+      <Container className='bg-dark' fluid>      
          <div class="container p-4">
         <ul class="nav justify-content-center border-bottom border-blauFluix pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-2 text-blauFluix">Inicio</a></li>
@@ -39,13 +39,13 @@ class Footer extends React.Component {
             </form>
         </section>
 
-        <section class="d-flex justify-content-between border-top border-blauFluix pt-3">
+        <section class="d-flex justify-content-between border-top border-blauFluix pt-3 flex-wrap">
             <div class="text-blauFluix">
                 © 2020 Copyright:
                 <a class="text-blauFluix text-decoration-none" href="https://www.google.com/"> www.coworking.com</a>
             </div>
-            <div> 
-                <ul class="list-unstyled d-flex">
+            <div class=''> 
+                <ul class="list-unstyled d-flex flex-wrap">
                     <li class="ms-3">   
                         <a class="btn border-groc btn-floating m-1" href="https://www.facebook.com" role="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -23,6 +23,9 @@ class Reservas extends Component {
         return parseFloat(reserva2.codigo) - parseFloat(reserva1.codigo);
       }
 
+      redirectDispo=()=>{
+        window.location.href= "http://localhost:3000/buscador";
+    }
 
     componentDidMount() {
 
@@ -69,8 +72,9 @@ class Reservas extends Component {
             <ClienteHeader/>
           <h1 className="text-center my-4">Todas las reservas</h1>
           <Button
-            color="primary">
-              <a href="#" className='text-decoration-none text-light'>Hacer Nueva Reserva</a>
+            className="border-2 border-groc bg-blauFort"
+            onClick={()=>this.redirectDispo()}>   
+              Hacer Nueva Reserva
             </Button>
           <Table
             hover
@@ -80,7 +84,7 @@ class Reservas extends Component {
             <thead>
               <tr className="text-center">
                 <th>Codigo Reserva</th>                
-                <th>Dia Factura</th>
+                <th>Dia Reservado</th>
                 <th>Hora</th>
                 <th>Creación Reserva</th>
                 <th>Estado Reserva</th>
