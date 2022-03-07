@@ -54,7 +54,7 @@
         <div class="container mb-5">
             <h1 class="text-center">Crear nuevo <span th:text="${nombre}"></span></h1>
         </div>
-        <form class="row my-5" th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
+        <form class="row my-5 needs-validation" th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" novalidate>
             <div class="mb-3 col-6">
                 <label for="nombreUsuario" class="form-label">Nombre Usuario *</label>
                 <div class="input-group">
@@ -64,6 +64,12 @@
                         </svg>
                     </span>
                     <input type="text" th:field="*{nombreUsuario}" class="form-control" id="nombreUsuario" aria-describedby="nombreUsuarioHelp" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="nombreUsuarioHelp" class="form-text">Escribe tu nombre de usuario</div>
             </div>
@@ -76,7 +82,13 @@
                             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                         </svg>
                     </span>
-                    <input type="password" th:field="*{password}" class="form-control" id="password" aria-describedby="passwordHelp" required>
+                    <input type="password" th:field="*{password}" class="form-control" id="password" aria-describedby="passwordHelp" minlength="4" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Mínimo 4 caracteres!
+                    </div>
                 </div>
                 <div id="passwordHelp" class="form-text">Escribe tu contraseña</div>
             </div>
@@ -90,6 +102,12 @@
                         </svg>
                     </span>
                     <input type="text" th:field="*{nombre}" class="form-control" id="nombre" aria-describedby="nombreHelp" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="nombreHelp" class="form-text">Escribe tu nombre</div>
             </div>
@@ -103,6 +121,12 @@
                         </svg>
                     </span>
                     <input type="text" th:field="*{apellido1}" class="form-control" id="primerApellido" aria-describedby="primerApellidoHelp" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="primerApellidoHelp" class="form-text">Escribe tu primer apellido</div>
             </div>
@@ -116,6 +140,12 @@
                         </svg>
                     </span>
                     <input type="text" th:field="*{apellido2}" class="form-control" id="segundoApellido" aria-describedby="segundoApellidoHelp">
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="segundoApellidoHelp" class="form-text">Escribe tu segundo apellido</div>
             </div>
@@ -129,6 +159,12 @@
                         </svg>
                     </span>
                     <input type="tel" th:field="*{telefono}" class="form-control" id="telefono" aria-describedby="telefonoHelp" pattern="[0-9]{9}" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="telefonoHelp" class="form-text">Escribe tu número de teléfono. Ejemplo: 971555453</div>
             </div>
@@ -142,6 +178,12 @@
                         </svg>
                     </span>
                     <input type="email" th:field="*{email}" class="form-control" id="email" aria-describedby="emailHelp" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="emailHelp" class="form-text">Escribe tu email</div>
             </div>
@@ -154,7 +196,13 @@
                             <path d="M7 1.414V4H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v6h2v-6h3.532a1 1 0 0 0 .768-.36l1.933-2.32a.5.5 0 0 0 0-.64L13.3 4.36a1 1 0 0 0-.768-.36H9V1.414a1 1 0 0 0-2 0zM12.532 5l1.666 2-1.666 2H2V5h10.532z"/>
                         </svg>
                     </span>
-                    <input type="number" th:field="*{codigoPostal}" class="form-control" id="codigoPostal" aria-describedby="codigoPostalHelp" pattern="[0-9]{5}" required>
+                    <input type="text" th:field="*{codigoPostal}" class="form-control" id="codigoPostal" aria-describedby="codigoPostalHelp" pattern="[0-9]{5}" minlength="5" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Formato incorrecto!
+                    </div>
                 </div>
                 <div id="codigoPostalHelp" class="form-text">Escribe tu código postal. Ejemplo: 07500</div>
             </div>
@@ -173,7 +221,25 @@
 
 <!--footer th:replace="plantilla :: footer"></footer-->
 <script>
+    (function () {
+        'use strict'
 
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 </body>
 </html>
