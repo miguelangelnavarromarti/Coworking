@@ -11,7 +11,7 @@ class Footer extends React.Component {
 
   render() {
     return (                                //POSAR FONDO COLOR DE FONDO GENERAL
-      <Container className='mt-4 bg-dark' fluid>      
+      <Container className='bg-dark' fluid>      
          <div class="container p-4">
         <ul class="nav justify-content-center border-bottom border-blauFluix pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-2 text-blauFluix">Inicio</a></li>
