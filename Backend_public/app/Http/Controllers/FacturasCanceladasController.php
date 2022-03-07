@@ -37,7 +37,7 @@ class FacturasCanceladasController extends Controller
         $newFacturaCancelada->descuentoCancelacion = $requestObject->descuentoCancelacion;
         $newFacturaCancelada->diaHoraCancelacion = $requestObject->diaHoraCancelacion;
         $newFacturaCancelada->save();
-*/
+        */
         $newFacturaCancelada = FacturaCancelada::create([
             'codigoFactura' => $request['codigoFactura'],
             'codigoCliente' => $request['codigoCliente'],
