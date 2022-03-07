@@ -84,7 +84,7 @@ class Reservas extends Component {
             <thead>
               <tr className="text-center">
                 <th>Codigo Reserva</th>                
-                <th>Dia Factura</th>
+                <th>Dia Reservado</th>
                 <th>Hora</th>
                 <th>Creación Reserva</th>
                 <th>Estado Reserva</th>

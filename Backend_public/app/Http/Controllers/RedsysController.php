@@ -152,15 +152,16 @@ class RedsysController extends Controller
                     $reservaFactura->codigoReserva = $reservas[$r]->codigo;
                     $reservaFactura->save();
                 }
-
-                return redirect()->route('facturas', ['codigo' => $factura->codigo]);
+                $url = "http://localhost:3000/facturaCompleta/" . $factura->codigo;
+                return redirect($url);
+                                
             } else {
                 echo "FIRMA KO";
             }
         }
     }
 
-    public function respuestaKO()
+    public function respuestaKO()   //No he pagat, anar a reservas
     {
         $miObj = new RedsysAPI;
 
@@ -187,6 +188,8 @@ class RedsysController extends Controller
                 }
 
                 //return redirect()->route('facturas', ['codigo' => $factura->codigo]);
+                $url = "http://localhost:3000/buscador";
+                return redirect($url);
 
                 return response()->json([
                     'reservas' => $reservas,
