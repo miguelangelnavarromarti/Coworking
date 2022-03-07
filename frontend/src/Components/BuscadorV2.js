@@ -41,7 +41,7 @@ class BuscadorV2 extends React.Component {
             tipoEspacio: [],
             reservas: [],
             reserva: {
-                codigoCliente: 1,
+                codigoCliente: props.token,
                 codigoEspacio: null,
                 estado: 'confirmado',
                 dia: `${dateFnsFormat(new Date(), 'yyyy-MM-dd')}`,
@@ -161,7 +161,13 @@ class BuscadorV2 extends React.Component {
                 }));
         }
 
-        axios.get(API + TIPOESPACIOS)
+        axios.get(API + TIPOESPACIOS,{
+            headers: {
+                'authorization':'Bearer ' + this.props.token,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
             .then(result => {
                 const tipoEspacios = result.data;
                 this.setState({
@@ -428,7 +434,7 @@ class BuscadorV2 extends React.Component {
                                 </div>
 
                             </div>
-                            <ConfirmationButton texto='Reservar' objeto={reserva} horas={reservas} />
+                            <ConfirmationButton texto='Reservar' objeto={reserva} horas={reservas} token={this.props.token}/>
                         </div>
                     </Col>
                 </Row>

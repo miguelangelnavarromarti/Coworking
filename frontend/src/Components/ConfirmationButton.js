@@ -32,6 +32,11 @@ function ConfirmationButton(props) {
         try {
             let res = await fetch("http://localhost:8000/postReserva", {
                 method: "POST",
+                headers: {
+                    'authorization': 'Bearer ' + props.token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     codigoCliente: codigoCliente,
                     hora: props.horas,

@@ -63,7 +63,7 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Home />} />            
             <Route path="/buscador" element={<Buscador />} />
-            <Route path="/buscadorV2" element={<BuscadorV2 />} />
+            <Route path="/buscadorV2" element={<BuscadorV2 token={this.state.token}/>} />
             <Route path="/cliente" element={<Cliente token ={this.state.token}/>} />
 
             <Route path="/datosCliente" element={<Cliente token ={this.state.token}/>} />

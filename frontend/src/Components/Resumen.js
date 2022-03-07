@@ -22,7 +22,13 @@ function Resumen(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(API + REQUEST + localizador)
+    axios.get(API + REQUEST + localizador,{
+      headers: {
+          'authorization':'Bearer ' + props.token,
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      }
+  })
       .then(result => {
         const localizadorReserva = result.data.localizador;
         const nombreEspacio = result.data.nombreEspacio.nombre;
