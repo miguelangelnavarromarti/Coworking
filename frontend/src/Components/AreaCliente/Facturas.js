@@ -76,8 +76,8 @@ class Facturas extends Component {
           >
             <thead>
               <tr className="text-center">
-                <th>Codigo</th>                
-                <th>Dia Factura</th>
+                <th>Código</th>                
+                <th>Día Factura</th>
                 <th>Precio Total</th>
                 <th>Min. Horas Oferta</th>
                 <th>Desc. Oferta</th>

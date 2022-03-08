@@ -121,7 +121,7 @@ class FormModificarOpinion extends Component {
                             <input type="hidden" id="codigoCliente" name="codigoCliente" value={datos.codigoCliente}/>
                             <FormGroup>
                                 <Label for="titulo">
-                                    Titulo
+                                    Título
                                 </Label>
                                 <Input
                                     id="titulo"
