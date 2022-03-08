@@ -35,26 +35,11 @@ public class TipoEspaciosControlador {
     public String getTipoEspacios(Model model){
         List<TipoEspacio> verTipoEspacios = tipoEspaciosServicio.listaTipoEspacio();
 
-        model.addAttribute("nombre", "TipoEspacios");
+        model.addAttribute("nombre", "Tipo Espacios");
         model.addAttribute("tipoEspacios", verTipoEspacios);
 
         return "tipoEspacios/ver";
     }
-    /*
-    @GetMapping("/{codigo}")
-    public String getTipoEspacio(@PathVariable("codigo") String codigo, Model model){
-
-        model.addAttribute("nombre", "TipoEspacios");
-        model.addAttribute("codigo", codigo);
-
-        TipoEspacio tipoEspacio = tipoEspaciosServicio.verTipoEspacio(codigo);
-        model.addAttribute("tipoEspacio", tipoEspacio);
-
-        List<TraduccionTipoEspacio> verTraduccionesTipoEspacios = traduccionesTipoEspaciosServicio.verTraduccionesPorCodigoTipoEspacio(codigo);
-        model.addAttribute("traduccionTipoEspacio", verTraduccionesTipoEspacios);
-
-        return "tipoEspacios/ficha";
-    }*/
 
     @GetMapping("/crear")
     public String crearTipoEspacio(Model model) {

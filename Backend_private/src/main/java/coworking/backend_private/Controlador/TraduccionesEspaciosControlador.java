@@ -31,7 +31,7 @@ public class TraduccionesEspaciosControlador {
         List<TraduccionEspacio> verTraduccionesEspacios = traduccionesEspaciosServicio.verTraduccionesPorCodigoEspacio(codigoEspacio);
 
 
-        model.addAttribute("nombre", "TraduccionesEspacios");
+        model.addAttribute("nombre", "Traducciones Espacios");
 
         Espacio espacio = espaciosServicio.verEspacio(codigoEspacio);
         model.addAttribute("espacio", espacio.getNombre());
