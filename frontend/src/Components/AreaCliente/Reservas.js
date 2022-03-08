@@ -83,7 +83,8 @@ class Reservas extends Component {
           >
             <thead>
               <tr className="text-center">
-                <th>Codigo Reserva</th>                
+                <th>Código Reserva</th>
+                <th>Código Espacio</th>                
                 <th>Dia Reservado</th>
                 <th>Hora</th>
                 <th>Creación Reserva</th>
@@ -97,7 +98,8 @@ class Reservas extends Component {
               .map(function(reserva,key){
                 return (
                   <tr key={key} className="text-center">
-                    <td>{reserva.codigo}</td>                                                                                      
+                    <td>{reserva.codigo}</td> 
+                    <td>{reserva.codigoEspacio}</td>                                                                                     
                     <td>{reserva.dia}</td>                    
                     <td>{reserva.hora}h</td>
                     <td>{reserva.diaHoraCreacion}</td>

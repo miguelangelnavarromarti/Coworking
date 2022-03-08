@@ -17,6 +17,7 @@ class FacturaCompleta extends Component {
 
     this.state = {
       facturas: [],
+      nombreEspacio: null,
       reservas: [],
       isLoading: false,
       error: null,
@@ -68,7 +69,8 @@ class FacturaCompleta extends Component {
       }
     })
       .then(result => this.setState({
-        facturas: result.data,
+        facturas: result.data.factura,
+        nombreEspacio: result.data.nombreEspacio,
         isLoading: false,
         codigoFactura: codigoFactura
       }))
@@ -98,7 +100,7 @@ class FacturaCompleta extends Component {
 
 
   render() {
-    const { reservas, facturas, isLoading, error } = this.state;
+    const { reservas, facturas, nombreEspacio, isLoading, error } = this.state;
 
     if (this.props.token != null) {
       if (error) {
@@ -114,18 +116,24 @@ class FacturaCompleta extends Component {
         <div className="container my-1 py-1 px-4 pb-5">
           <ClienteHeader />
           <h1 className="text-center my-4">Factura Detallada</h1>
-          {facturas.map(function (factura) {
+          <Row>
+            <Col xs='3' className="fw-bold mx-auto text-center">Espacio reservado: {nombreEspacio}</Col>
+            <Col>
+            {facturas.map(function (factura) {
             return (
-              <Col key={factura.codigo} className="text-center row mb-5">
-                <div className="col-2 fw-bold mx-auto">Codigo factura: {factura.codigo}</div>
-                <div className="col-3 fw-bold mx-auto">Dia de Factura: {factura.diaFactura}</div>
-                <div className="col-2 fw-bold mx-auto">Precio Total: {factura.precioTotal} €</div>
-                <div className="col-2 fw-bold mx-auto">Desc. Oferta: {factura.descuentoOferta}%</div>
-              </Col>
+              <Row key={factura.codigo} className="text-center row mb-5">
+                <Col xs='2' className="fw-bold mx-auto">Código factura: {factura.codigo}</Col>
+                <Col xs='3' className="fw-bold mx-auto">Día de Factura: {factura.diaFactura}</Col>
+                <Col xs='2' className="fw-bold mx-auto">Precio Total: {factura.precioTotal} €</Col>
+                <Col xs='2' className="fw-bold mx-auto">Desc. Oferta: {factura.descuentoOferta}%</Col>
+              </Row>
             )
           })}
+            </Col>
+          </Row>
+          
 
-          <Button color='primary' className='w-100' onClick={this.handleClickButton}>Cancelar Factura</Button>
+          <Button className='w-25 bg-blauFort border-2 border-groc' onClick={this.handleClickButton}>Cancelar Factura</Button>
 
           <Table
             hover
@@ -134,8 +142,8 @@ class FacturaCompleta extends Component {
           >
             <thead>
               <tr className="text-center">
-                <th>Codigo Reserva</th>
-                <th>Dia Reserva</th>
+                <th>Código Reserva</th>
+                <th>Día Reserva</th>
                 <th>Hora</th>
                 <th>Creación Reserva</th>
                 <th>Estado Reserva</th>
