@@ -7,6 +7,8 @@ import styles from '../styles.css';
 import ConfirmationButton from './ConfirmationButton';
 import Login from './Login';
 
+import 'react-day-picker/lib/style.css';
+
 
 import { Button, Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
 import ClienteHeader from './AreaCliente/ClienteHeader';

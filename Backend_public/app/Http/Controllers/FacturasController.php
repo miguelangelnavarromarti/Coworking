@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Factura;
 use App\Http\Controllers\UserController;
+use App\Models\Espacio;
+use App\Models\Reserva;
+use App\Models\ReservaFactura;
 use JWTAuth;
 
 
@@ -14,17 +17,6 @@ class FacturasController extends Controller
         $header = $request->header('authorization');    // T O K E N
         
         $user = auth()->user();
-        
-        //getplains
-        /* https://jwt-auth.readthedocs.io/en/develop/auth-guard/#payload
-        payload()
-        Get the raw JWT payload
-
-        $payload = auth()->payload();
-
-        // then you can access the claims directly e.g.
-        $payload->get('sub'); // = 123
-        */
 
         $facturas = Factura::where('codigoCliente', $user->codigo)->get();
         return response()->json($facturas, 200);
@@ -46,6 +38,11 @@ class FacturasController extends Controller
     public function ver(Request $request, $codigo){
         $user = auth()->user();
         $factura = Factura::where([['codigoCliente', $user->codigo] ,['codigo',$codigo]])->get();
-        return response()->json($factura, 200);
+        $codigoFactura = Factura::where('codigo', $codigo)->get('codigo')[0]->codigo;
+        $codigoReserva = ReservaFactura::where('codigoFactura', $codigoFactura)->get('codigoReserva')[0]->codigoReserva;
+        $codigoEspacio = Reserva::where('codigo', $codigoReserva)->get('codigoEspacio')[0]->codigoEspacio;
+        $nombreEspacio = Espacio::where('codigo', $codigoEspacio)->get('nombre')[0]->nombre;
+
+        return response()->json(['factura' => $factura, 'nombreEspacio' => $nombreEspacio], 200);
     }
 }

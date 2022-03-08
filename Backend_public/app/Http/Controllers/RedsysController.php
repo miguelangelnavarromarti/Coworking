@@ -47,7 +47,7 @@ class RedsysController extends Controller
         $urlOK = "http://localhost:8000/respuestaOK";
         $urlKO = "http://localhost:8000/respuestaKO";
         $id = $localizador;
-        $amount = $precioTotal * 100;
+        $amount = round($precioTotal * 100, 2);
 
         // Se Rellenan los campos
         $miObj->setParameter("DS_MERCHANT_AMOUNT", $amount);

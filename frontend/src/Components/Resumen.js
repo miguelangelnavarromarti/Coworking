@@ -42,7 +42,7 @@ function Resumen(props) {
         setDescuento(descuento);
         setHoras(horas);
         setPrecioTotal(precioTotal);
-        setPrecioFinal(precioTotal - (precioTotal * (descuento / 100)));
+        setPrecioFinal(Math.round(((precioTotal - (precioTotal * (descuento / 100))) + Number.EPSILON) * 100) / 100);
         setIsLoading(false);
       })
       .catch((error) => {
