@@ -66,7 +66,7 @@
                 <tbody>
                 <tr th:each="go:${tabla}">
                     <th scope="row" th:text="${go.codigo}" class="py-3 text-center align-middle bg-white fw-bold"></th>
-                    <td th:text="${go.diasAntelacion} + ' dias'" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
+                    <td th:text="${go.diasAntelacion} + ' días'" class="py-3 text-center align-middle bg-white" style="box-shadow: -5px 0 5px -5px #333;"></td>
                     <td th:text="${go.devolucion}  + ' %'" class="py-3 text-center align-middle bg-white"></td>
                     <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
                         <a class="btn btn-warning text-dark" th:href="@{/gestionCancelaciones/modificar/} + ${go.codigo}" title="Modificar Cancelación">
