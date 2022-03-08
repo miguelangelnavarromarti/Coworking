@@ -34,7 +34,7 @@ public class TraduccionesTipoEspaciosControlador {
         List<Idioma> idiomaList = idiomasServicio.listaIdiomas();
         model.addAttribute("listaIdiomas",idiomaList);
 
-        model.addAttribute("nombre", "TraduccionesTipoEspacios");
+        model.addAttribute("nombre", "Traducciones Tipo Espacios");
         model.addAttribute("codigoTipoEspacio", codigoTipoEspacio);
         model.addAttribute("traduccionesTipoEspacios", verTraduccionesTipoEspacios);
 

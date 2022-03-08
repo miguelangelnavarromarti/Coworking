@@ -41,7 +41,7 @@ public class FacturasCancelacionesControlador {
     public String getFacturasCanceladas(Model model){
         List<FacturaCancelacion> verFacturasCancelacion = facturasCancelacionesServicio.verFacturasCancelaciones();
 
-        model.addAttribute("nombre", "FacturasCancelacion");
+        model.addAttribute("nombre", "Facturas Cancelación");
         model.addAttribute("facturasCancelacion", verFacturasCancelacion);
 
         return "facturasCanceladas/ver";
@@ -96,7 +96,7 @@ public class FacturasCancelacionesControlador {
     @GetMapping("/verFactura/{codigo}")
     public String modificar (@PathVariable("codigo") Integer codigo, Model model){
         FacturaCancelacion facturaCancelacion = facturasCancelacionesServicio.verFacturaCanceladaPorCodigo(codigo);
-        model.addAttribute("nombre","FacturaCancelada");
+        model.addAttribute("nombre","Factura Cancelada");
         model.addAttribute("facturaCancelada", facturaCancelacion);
 
         return "facturasCanceladas/verFactura";
