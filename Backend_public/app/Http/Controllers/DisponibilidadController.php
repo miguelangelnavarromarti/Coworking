@@ -133,7 +133,7 @@ class DisponibilidadController extends Controller
             'nombreEspacio' => $nombreEspacio,
             'descuento' => $descuento,
             'horas' => $horas,
-            'precio' => $precioTotal,
+            'precio' => round($precioTotal, 2),
             'ofertas' => $ofertas
         ]);
     }

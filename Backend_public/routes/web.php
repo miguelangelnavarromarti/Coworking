@@ -85,8 +85,6 @@ Route::get('/config', function () {
 
 Route::get('/horario', [DisponibilidadController::class, 'getHorario']);
 
-Route::get('/reservas', [DisponibilidadController::class, 'getReservas']);
-
 Route::get('/bloqueos', [DisponibilidadController::class, 'getBloqueos']);
 
 Route::get('/reservas/{dia}', [DisponibilidadController::class, 'getDisponibilidadPorDia']);
