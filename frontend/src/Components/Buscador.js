@@ -166,8 +166,8 @@ class Buscador extends React.Component {
 
         axios.get(API + TIPOESPACIOS, {
             headers: {
-                'authorization':'Bearer ' + this.props.token,
-                'Accept' : 'application/json',
+                'authorization': 'Bearer ' + this.props.token,
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
@@ -285,171 +285,176 @@ class Buscador extends React.Component {
     render() {
         const { disponibilidad, espacio, espacios, tipoEspacio, tipoEspacios, reservas, reserva, isLoading, error, requestDay, selectedDay } = this.state;
         const FORMAT = 'yyyy-MM-dd';
-        if(this.props.token != null){
-        if (error) {
-            return <p>{error.message}</p>;
-        }
+        if (this.props.token != null) {
+            if (error) {
+                return <p>{error.message}</p>;
+            }
 
-        if (isLoading) {
-            return <p>Loading ...</p>;
-        }
+            if (isLoading) {
+                return <p>Loading ...</p>;
+            }
 
-        return (
+            return (
 
-            <Container className="container my-1 py-1 px-4 pb-5">
-                <ClienteHeader/> 
-                <Row>
-                    <Col className='text-center my-4'>
-                        <h1>Disponibilidad</h1>
-                    </Col>
-                </Row>
-                <div className='my-3 d-flex gap-1 align-self-center align-items-center searcherV2 bg-blauFort shadow'>
-                    <Col>
-                        <InputGroup>
-                            <InputGroupText className="bg-blauFort border-groc">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-open text-light" viewBox="0 0 16 16">
-                                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-                                    <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
-                                </svg>
-                            </InputGroupText>
-                            <Input
-                                id='selectTipoEspacio'
-                                name='selectTipoEspacio'
-                                type='select'
-                                defaultValue={'DEFAULT'}
-                                onChange={this.handleInputChangeTipoEspacio}
-                                value={this.state.selectedTipoEspacio}
-                            >
-                                <option value='DEFAULT' disabled='disabled'>¿Qué tipo de espacio quieres reservar?</option>
-                                {tipoEspacios && tipoEspacios.map((tipoEspacio) => (
-                                    <option key={tipoEspacio.codigo} value={tipoEspacio.codigo}>
-                                        {tipoEspacio.nombre}
-                                    </option>
+                <Container className="container my-1 py-1 px-4 pb-5">
+                    <ClienteHeader />
+                    <Row>
+                        <Col className='text-center my-4'>
+                            <h1>Disponibilidad</h1>
+                        </Col>
+                    </Row>
+                    <div className='my-3 d-flex gap-1 align-self-center align-items-center searcherV2 bg-blauFort shadow'>
+                        <Col>
+                            <InputGroup>
+                                <InputGroupText className="bg-blauFort border-groc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-open text-light" viewBox="0 0 16 16">
+                                        <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                                        <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
+                                    </svg>
+                                </InputGroupText>
+                                <Input
+                                    id='selectTipoEspacio'
+                                    name='selectTipoEspacio'
+                                    type='select'
+                                    defaultValue={'DEFAULT'}
+                                    onChange={this.handleInputChangeTipoEspacio}
+                                    value={this.state.selectedTipoEspacio}
+                                >
+                                    <option value='DEFAULT' disabled='disabled'>¿Qué tipo de espacio quieres reservar?</option>
+                                    {tipoEspacios && tipoEspacios.map((tipoEspacio) => (
+                                        <option key={tipoEspacio.codigo} value={tipoEspacio.codigo}>
+                                            {tipoEspacio.nombre}
+                                        </option>
+                                    ))}
+
+                                </Input>
+                            </InputGroup>
+                        </Col>
+                        <Col>
+                            <InputGroup>
+                                <InputGroupText className="bg-blauFort border-groc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-open text-light" viewBox="0 0 16 16">
+                                        <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                                        <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
+                                    </svg>
+                                </InputGroupText>
+                                <Input
+                                    id='selectTipoEspacio'
+                                    name='selectTipoEspacio'
+                                    type='select'
+                                    defaultValue={'DEFAULT'}
+                                    onChange={this.handleInputChangeEspacio}
+                                    value={this.state.selectedEspacio}
+                                >
+                                    <option value='DEFAULT' disabled='disabled'>¿Qué espacio quieres reservar?</option>
+                                    {espacios && espacios.map((espacio) => (
+                                        <option key={espacio.codigo} value={espacio.codigo}>
+                                            {espacio.nombre}
+                                        </option>
+                                    ))}
+
+                                </Input>
+                            </InputGroup>
+                        </Col>
+                        <Col xs="2">
+                            <DayPickerInput
+                                formatDate={formatDate}
+                                format={FORMAT}
+                                placeholder={requestDay}
+                                month={new Date(requestDay.split('-')[0], requestDay.split('-')[1] - 1)}
+                                selectedDays={selectedDay}
+                                onDayChange={this.handleDayChange}
+                                className={styles}
+                                dayPickerProps={{
+                                    disabledDays: [
+                                        {
+                                            before: new Date()
+                                        }
+                                    ]
+                                }}
+                            />
+                        </Col>
+                    </div>
+                    <Row>
+                        <Col xs='6'>
+                            <div className='border-dispo bg-blauFort shadow my-3 p-3 text-white'>
+                                {tipoEspacio.tipoEspacio && tipoEspacio.tipoEspacio.map((tipoEspacio, key) => (
+                                    <div key={key}>
+                                        <h5 className="card-title">{tipoEspacio.nombre}</h5>
+                                    </div>
                                 ))}
-
-                            </Input>
-                        </InputGroup>
-                    </Col>
-                    <Col>
-                        <InputGroup>
-                            <InputGroupText className="bg-blauFort border-groc">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-open text-light" viewBox="0 0 16 16">
-                                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-                                    <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
-                                </svg>
-                            </InputGroupText>
-                            <Input
-                                id='selectTipoEspacio'
-                                name='selectTipoEspacio'
-                                type='select'
-                                defaultValue={'DEFAULT'}
-                                onChange={this.handleInputChangeEspacio}
-                                value={this.state.selectedEspacio}
-                            >
-                                <option value='DEFAULT' disabled='disabled'>¿Qué espacio quieres reservar?</option>
-                                {espacios && espacios.map((espacio) => (
-                                    <option key={espacio.codigo} value={espacio.codigo}>
-                                        {espacio.nombre}
-                                    </option>
-                                ))}
-
-                            </Input>
-                        </InputGroup>
-                    </Col>
-                    <Col xs="2">
-                        <DayPickerInput
-                            formatDate={formatDate}
-                            format={FORMAT}
-                            placeholder={requestDay}
-                            month={new Date(requestDay.split('-')[0], requestDay.split('-')[1] - 1)}
-                            selectedDays={selectedDay}
-                            onDayChange={this.handleDayChange}
-                            className={styles}
-                            dayPickerProps={{
-                                disabledDays: [
-                                    {
-                                        before: new Date()
-                                    }
-                                ]
-                            }}
-                        />
-                    </Col>
-                </div>
-                <Row>
-                    <Col xs='6'>
-                        {tipoEspacio.tipoEspacio && tipoEspacio.tipoEspacio.map((tipoEspacio, key) => (
-                            <div key={key}>
-                                <h5 className="card-title">{tipoEspacio.nombre}</h5>
+                                <p className="card-text">{tipoEspacio.precio}</p>
                             </div>
-                        ))}
-                        <p className="card-text">{tipoEspacio.precio}</p>
-                    </Col>
-                    <Col xs='6'>
-                        {espacio.espacio && espacio.espacio.map((espacio, key) => (
-                            <div key={key}>
-                                <h5 className="card-title">{espacio.nombre}</h5>
-                                <p className="card-text">{espacio.descripcion}</p>
-                            </div>
-                        ))}
-                    </Col>
-                </Row>
-                <Row className='my-3'>
-                    <Col className='d-flex align-items-center'>
-                        <div className='w-45 d-flex flex-wrap border-dispo justify-content-between border-dispo bg-blauFort shadow'>
-                            <div className='border-bottom border-dark w-100 text-center text-white py-2'>
-                                Horas Disponibles
-                            </div>
-                            <div className='d-flex flex-wrap'>
-                                {disponibilidad.map((dispo) => (
-                                    <Button
-                                        key={dispo.hora}
-                                        color=''
-                                        href='#'
-                                        className='m-2 border-dispo bg-blanc'
-                                        onClick={this.handleClickButton}
-                                    >
-                                        {dispo.hora}:00
-                                    </Button>
+                        </Col>
+                        <Col xs='6'>
+                            <div className='border-dispo bg-blauFort shadow my-3 p-3 text-white'>
+                                {espacio.espacio && espacio.espacio.map((espacio, key) => (
+                                    <div key={key}>
+                                        <h5 className="card-title">{espacio.nombre}</h5>
+                                        <p className="card-text">{espacio.descripcion}</p>
+                                    </div>
                                 ))}
                             </div>
-                        </div>
-                        <p className='w-10 text-center'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-arrow-left-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z" />
-                            </svg>
-                        </p>
-                        <div className='w-45'>
-                            <div className='w-100 mb-2 d-flex flex-wrap border-dispo bg-blauFort shadow'>
-                                <div className='border-bottom border-groc w-100 text-center  py-2 text-white'>
-                                    Horas Reservades
+                        </Col>
+                    </Row>
+                    <Row className='my-3'>
+                        <Col className='d-flex align-items-center'>
+                            <div className='w-45 d-flex flex-wrap justify-content-between border-dispo bg-blauFort shadow'>
+                                <div className='border-bottom border-dark w-100 text-center text-white py-2'>
+                                    Horas Disponibles
                                 </div>
                                 <div className='d-flex flex-wrap'>
-                                    {reservas.map((reserva) => (
+                                    {disponibilidad.map((dispo) => (
                                         <Button
-                                            key={reserva}
-                                            color='light'
+                                            key={dispo.hora}
+                                            color=''
                                             href='#'
-                                            className='m-2 border-dispo'
-                                            onClick={this.handleClickButtonReverse}
+                                            className='m-2 border-dispo bg-blanc'
+                                            onClick={this.handleClickButton}
                                         >
-                                            {reserva}:00
+                                            {dispo.hora}:00
                                         </Button>
                                     ))}
                                 </div>
-
                             </div>
-                            <ConfirmationButton texto='Reservar' objeto={reserva} horas={reservas} token={this.props.token}/>
-                        </div>
-                    </Col>
-                </Row>
+                            <p className='w-10 text-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-arrow-left-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z" />
+                                </svg>
+                            </p>
+                            <div className='w-45'>
+                                <div className='w-100 mb-2 d-flex flex-wrap border-dispo bg-blauFort shadow'>
+                                    <div className='border-bottom border-groc w-100 text-center  py-2 text-white'>
+                                        Horas Reservades
+                                    </div>
+                                    <div className='d-flex flex-wrap'>
+                                        {reservas.map((reserva) => (
+                                            <Button
+                                                key={reserva}
+                                                color='light'
+                                                href='#'
+                                                className='m-2 border-dispo'
+                                                onClick={this.handleClickButtonReverse}
+                                            >
+                                                {reserva}:00
+                                            </Button>
+                                        ))}
+                                    </div>
 
-            </Container>
-        ); 
-    } else{
-        return (
-            <Login/>
-        );
-    }}
+                                </div>
+                                <ConfirmationButton texto='Reservar' objeto={reserva} horas={reservas} token={this.props.token} />
+                            </div>
+                        </Col>
+                    </Row>
+
+                </Container>
+            );
+        } else {
+            return (
+                <Login />
+            );
+        }
+    }
 }
 
 

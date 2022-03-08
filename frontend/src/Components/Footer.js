@@ -15,7 +15,7 @@ class Footer extends React.Component {
          <div className="container p-4">
         <ul className="nav justify-content-center border-bottom border-blauFluix pb-3 mb-3">
             <li className="nav-item"><a href="/" className="nav-link px-2 text-blauFluix">Inicio</a></li>
-            <li className="nav-item"><a href="#" className="nav-link px-2 text-blauFluix">Galeria</a></li>
+            <li className="nav-item"><a href="#" className="nav-link px-2 text-blauFluix">Galería</a></li>
             <li className="nav-item"><a href="#" className="nav-link px-2 text-blauFluix">Precios</a></li>
             <li className="nav-item"><a href="#" className="nav-link px-2 text-blauFluix">Contacto</a></li>
             <li className="nav-item"><a href="#" className="nav-link px-2 text-blauFluix">FAQs</a></li>
@@ -25,7 +25,7 @@ class Footer extends React.Component {
             <form action="submit">
                 <div className="row d-flex justify-content-center">
                     <div className="col-auto">
-                        <label htmlFor="subscribe" className="pt-2 text-blauFluix">Suscribete para mas novedades</label>
+                        <label htmlFor="subscribe" className="pt-2 text-blauFluix">Suscríbete para más novedades</label>
                     </div>
                     <div className="col-md-5 col-12">
                         <div className="form-outline form-white mb-4">

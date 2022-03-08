@@ -120,7 +120,7 @@ class FormCrearOpinion extends Component {
                             <input type="hidden" id="codigoReserva" name="codigoReserva" value={urlBona} />
                             <FormGroup>
                                 <Label for="titulo">
-                                    Titulo
+                                    Título
                                 </Label>
                                 <Input
                                     id="titulo"

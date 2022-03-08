@@ -68,12 +68,12 @@ class FacturasCanceladas extends Component {
           >
             <thead>
               <tr className="text-center">
-                <th>Codigo</th>                
-                <th>Codigo Factura</th>
+                <th>Código</th>                
+                <th>Código Factura</th>
                 <th>Devolución</th>
-                <th>Dias Antelación</th>
+                <th>Días Antelación</th>
                 <th>Descuento</th>
-                <th>Dia Cancelación</th>
+                <th>Día Cancelación</th>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +85,7 @@ class FacturasCanceladas extends Component {
                     <td>{factura.codigo}</td>                    
                     <td>{factura.codigoFactura}</td>                                        
                     <td>{factura.devolucion} €</td>
-                    <td>{factura.diasAntelacionCancelacion} dias</td>                    
+                    <td>{factura.diasAntelacionCancelacion} días</td>                    
                     <td>{factura.descuentoCancelacion}%</td>
                     <td>{factura.diaHoraCancelacion}</td>
                   </tr>
