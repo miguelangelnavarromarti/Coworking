@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use Illuminate\Http\Request;
 use App\Models\FacturaCancelada;
 use App\Models\GestionCancelacion;
+use App\Models\Reserva;
+use App\Models\ReservaFactura;
 use DateTime;
 use Illuminate\Support\Facades\Redirect;
 
@@ -64,7 +67,7 @@ class FacturasCanceladasController extends Controller
         $diasAntelacion = $intervalo->format('%a');
 
         $cancelaciones = GestionCancelacion::orderBy('diasAntelacion', 'asc')->get();
-        
+
         $descuentoCancelacion = 0;
 
         for ($i = 0; $i < count($cancelaciones); $i++) {
@@ -83,5 +86,15 @@ class FacturasCanceladasController extends Controller
             'diasAntelacionCancelacion' => $diasAntelacion,
             'descuentoCancelacion' => $descuentoCancelacion
         ]);
+
+        $codigoReserva = ReservaFactura::where('codigoFactura', $codigoFactura)->get('codigoReserva')[0]->codigoReserva;
+        $localizador = Reserva::where('codigo', $codigoReserva)->get('localizador')[0]->localizador;
+        $reservas = Reserva::where('localizador', $localizador)->get();
+
+        foreach ($reservas as $reserva) {
+            Reserva::where('codigo', $reserva->codigo)->update(
+                ['estado' => 'cancelado']
+            );
+        }
     }
 }
