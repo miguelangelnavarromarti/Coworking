@@ -1,0 +1,10 @@
+{
+  "cordova-plugin-camera": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/apache/cordova-plugin-camera.git"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

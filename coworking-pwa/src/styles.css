@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.bg-blauFort{
+    background-color: #397691;
+} 
+.border-blauFort{
+    border-color: #397691 !important;
+}
+.text-blauFort{
+    color: #397691;
+}
+.bg-blauFluix{
+    background-color: #7ED0F1;
+}
+.text-blauFluix{
+    color: #7ED0F1;
+}
+.border-blauFluix{
+    border-color: #7ED0F1 !important;
+}
+
+.bg-groc{
+    background-color: #FBD14F;
+}
+.border-groc{
+    border-color: #FBD14F !important;
+}
+.bg-negre{
+    background-color: #101010;
+}
+.bg-gris{
+    background-color: #E4E4E4;
+}
+.bg-blanc{
+    background-color: white;
+}
+.bg-degradat{
+    background: rgb(42,49,55);
+    background: linear-gradient(180deg, rgba(42,49,55,1) 0%, rgba(48,107,137,1) 41%, rgba(177,195,205,1) 100%);
+}
+.bg-degradatInvertit{
+    background: rgb(72,92,108);
+    background: linear-gradient(0deg, rgba(72,92,108,1) 0%, rgba(57,118,145,1) 50%, rgba(72,92,108,1) 100%);
+}
+
+
+
+
+.DayPickerInput > input{
+    display: block;
+    padding: auto 0;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: black;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+.DayPickerInput > input::placeholder {
+    color: black;
+}
+
+.DayPicker-Day--disabled {
+    color: lightgray;
+}
+
+.searcher {
+    width: 70%;
+    padding: 5px;
+    border: 2px solid #FBD14F;
+    border-radius: 2px;
+}
+
+.searcherV2 {
+    width: 100%;
+    padding: 5px;
+    border: 2px solid #FBD14F;
+    border-radius: 2px;
+}
+
+.w-45 {
+    width: 45%;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.border-dispo {
+    border: 2px solid #FBD14F;
+    border-radius: 10px;
+}
+
+.border-resumen {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+.fullScreen{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.typography {
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    white-space: normal;
+    letter-spacing: 0.8px;
+    font-size: 18px;
+}
+
+.flex-end {
+    align-self: flex-end;
+}
