@@ -75,7 +75,7 @@
                 <td th:text="${rv.espacio.getNombre()}" class="py-3 text-center align-middle bg-white"></td>
                 <td th:text="${rv.estado}" class="py-3 text-center align-middle bg-white"></td>
                 <td th:text="${rv.dia}" class="py-3 text-center align-middle bg-white"></td>
-                <td th:text="${rv.precio}" class="py-3 text-center align-middle bg-white"></td>
+                <td th:text="${rv.precio} + ' €'" class="py-3 text-center align-middle bg-white"></td>
                 <td th:text="${rv.diaHoraCreacion}" class="py-3 text-center align-middle bg-white"></td>
                 <td class="py-3 text-center bg-white" style="box-shadow: -5px 0 5px -5px #333;">
                     <a class="btn btn-warning text-dark" th:href="@{/reservas/reserva/} + ${rv.codigo}" title="Modificar Reserva">
