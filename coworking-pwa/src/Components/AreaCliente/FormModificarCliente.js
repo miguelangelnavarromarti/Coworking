@@ -5,7 +5,7 @@ import { FormGroup, Button, Form, Label, Input, Col, Row } from 'reactstrap';
 import ClienteHeader from './ClienteHeader';
 import Login from '../Login';
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 
 class FormModificarCliente extends React.Component {
 

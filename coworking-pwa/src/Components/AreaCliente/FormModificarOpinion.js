@@ -5,7 +5,7 @@ import { Button, Col, Input, FormGroup, Form, Label,} from 'reactstrap';
 import ClienteHeader from "./ClienteHeader";
 import Login from "../Login";
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
  
 class FormModificarOpinion extends Component {
     constructor(props) {

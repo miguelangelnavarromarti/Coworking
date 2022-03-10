@@ -5,7 +5,7 @@ import { Table, Button, Card, CardBody, CardTitle, CardSubtitle, CardText, Col, 
 import ClienteHeader from './ClienteHeader';
 import Login from '../Login';
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 
 class Cliente extends React.Component {
 

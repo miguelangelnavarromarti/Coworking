@@ -8,7 +8,7 @@ import ClienteHeader from './AreaCliente/ClienteHeader';
 function Resumen(props) {
   let { localizador } = useParams();
 
-  const API = 'http://localhost:8000';
+  const API = 'https://api.coworkingmiki.me';
   const REQUEST = '/localizador/'
 
   const [localizadorReserva, setLocalizadorReserva] = useState();
@@ -97,7 +97,7 @@ function Resumen(props) {
         </div>
       </div>
 
-      <a className='my-1 mx-auto w-50' href={"http://localhost:8000/pagar/" + localizador}><Button className='w-100 shadow bg-blauFort border-groc border-2 rounded-3'>PAGAR</Button></a>
+      <a className='my-1 mx-auto w-50' href={"https://api.coworkingmiki.me/pagar/" + localizador}><Button className='w-100 shadow bg-blauFort border-groc border-2 rounded-3'>PAGAR</Button></a>
 
     </div>
   );

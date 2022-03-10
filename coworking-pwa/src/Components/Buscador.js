@@ -13,7 +13,7 @@ import 'react-day-picker/lib/style.css';
 import { Button, Col, Container, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
 import ClienteHeader from './AreaCliente/ClienteHeader';
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 const REQUEST = '/disponibilidad/';
 const ESPACIO = '/espacio/';
 const ESPACIOS = '/espacios/';

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 
 class Table extends React.Component {
 

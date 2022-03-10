@@ -5,7 +5,7 @@ import { Button, Card, CardBody, CardFooter, CardImg, CardSubtitle, CardTitle, C
 
 import logo from '../logo.svg';
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 const ESPACIO = '/espacio/';
 
 class CardEspacio extends React.Component {

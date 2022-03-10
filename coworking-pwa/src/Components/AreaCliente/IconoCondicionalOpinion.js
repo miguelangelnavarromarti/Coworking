@@ -4,7 +4,7 @@ import { Table, Button, Card, CardBody, CardTitle, Col, Container, Input, Row } 
 
 import ClienteHeader from "./ClienteHeader";
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
  
 class IconoCondicionalOpinion extends Component {
     constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FormGroup, Button, Form, Label, Input, Col, } from 'reactstrap';
 import axios from "axios";
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 
 
 class Login extends Component {
@@ -25,7 +25,7 @@ class Login extends Component {
             .then(response => {
                 localStorage.removeItem("token");
                 localStorage.setItem("token", response.data.token);
-                window.location.href = "http://localhost:3000/reservas";       //Modifica sa url i me redirigeix aixi                      
+                window.location.href = "https://www.coworkingmiki.me/reservas";       //Modifica sa url i me redirigeix aixi                      
             })
             .catch(error => this.setState({
                 error,
@@ -36,7 +36,7 @@ class Login extends Component {
 
 
     redirectRegistros = () => {
-        window.location.href = "http://localhost:3000/registro";
+        window.location.href = "https://www.coworkingmiki.me/registro";
     }
 
     handleChange = async e => {

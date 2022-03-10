@@ -6,7 +6,7 @@ import 'react-day-picker/lib/style.css';
 
 import dateFnsFormat from 'date-fns/format';
 import { Button, Card, CardBody, CardTitle, Col, Container, Input, Row } from 'reactstrap';
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
 const REQUEST = '/disponibilidad/';
 const ESPACIOS = '/espacios';
 

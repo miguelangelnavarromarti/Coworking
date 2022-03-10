@@ -5,7 +5,7 @@ import {Accordion,AccordionItem, AccordionHeader,} from 'reactstrap';
 
 import ClienteHeader from "./ClienteHeader";
 import Login from "../Login";
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
  
 class Facturas extends Component {
     constructor(props) {

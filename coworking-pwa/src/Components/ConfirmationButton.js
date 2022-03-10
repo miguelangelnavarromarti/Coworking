@@ -30,7 +30,7 @@ function ConfirmationButton(props) {
     let handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let res = await fetch("http://localhost:8000/postReserva", {
+            let res = await fetch("https://api.coworkingmiki.me/postReserva", {
                 method: "POST",
                 headers: {
                     'authorization': 'Bearer ' + props.token,

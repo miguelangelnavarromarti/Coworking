@@ -6,7 +6,7 @@ import ClienteHeader from "./ClienteHeader";
 import IconoCondicionalOpinion from "./IconoCondicionalOpinion";
 import Login from "../Login";
 
-const API = 'http://localhost:8000';
+const API = 'https://api.coworkingmiki.me';
  
 class Reservas extends Component {
     constructor(props) {
